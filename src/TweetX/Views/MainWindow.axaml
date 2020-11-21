@@ -1,0 +1,19 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:TweetX.Views;assembly=TweetX"
+        xmlns:content="clr-namespace:TweetX.Views.Content"
+        xmlns:vm="clr-namespace:TweetX.ViewModels;assembly=TweetX"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+        x:Class="TweetX.Views.MainWindow"
+        ExtendClientAreaTitleBarHeightHint="1"
+        ExtendClientAreaToDecorationsHint="True"
+        DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:MainWindowViewModel}, Mode=OneTime}"
+        Title="TweetX">
+  <StackPanel>
+    <views:TitleBar />
+
+    <content:ContentView />
+  </StackPanel>
+</Window>

@@ -1,0 +1,11 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:converters="clr-namespace:TweetX.Converters;assembly=TweetX">
+
+  <Style>
+    <Style.Resources>
+      <converters:ViewModelLocator x:Key="VML" />
+    </Style.Resources>
+  </Style>
+</Styles>

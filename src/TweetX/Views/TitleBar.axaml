@@ -1,0 +1,48 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="25"
+             x:Class="TweetX.Views.TitleBar"
+             PointerPressed="BeginMoveDrag"
+             Background="{DynamicResource ThemeControlMidBrush}">
+  <Grid Margin="5 3">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <Image Source="../app.ico"
+           Grid.Column="0"
+           Width="18" />
+
+    <TextBlock Text="TweetX"
+               Grid.Column="1"
+               Padding="5 0 0 0" />
+
+    <Grid Grid.Column="2"
+          HorizontalAlignment="Right">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+
+      <TextBlock Text="—"
+                 PointerPressed="MinimizeApp"
+                 Grid.Column="0"
+                 HorizontalAlignment="Right"
+                 Cursor="Hand"
+                 TextAlignment="Center" />
+
+      <TextBlock Text="✕"
+                 PointerPressed="CloseApp"
+                 Grid.Column="1"
+                 Margin="5 0"
+                 Padding="10 0"
+                 HorizontalAlignment="Right"
+                 Cursor="Hand"
+                 TextAlignment="Center" />
+    </Grid>
+  </Grid>
+</UserControl>
