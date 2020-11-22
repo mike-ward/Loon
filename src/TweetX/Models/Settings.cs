@@ -8,9 +8,16 @@ using TweetX.Interfaces;
 
 namespace TweetX.Models
 {
-    internal sealed class Settings : ISettings
+    internal sealed class Settings : NotifyPropertyChanged, ISettings
     {
+        private string? accessToken;
+        private string? accessTokenSecret;
+        private string? screenName;
+
         public WindowLocation Location { get; set; } = new WindowLocation { X = 200, Y = 200, Width = 300, Height = 500 };
+        public string? AccessToken { get => accessToken; set => SetProperty(ref accessToken, value); }
+        public string? AccessTokenSecret { get => accessTokenSecret; set => SetProperty(ref accessTokenSecret, value); }
+        public string? ScreenName { get => screenName; set => SetProperty(ref screenName, value); }
 
         private string Profile { get; } = "tweetx";
 
@@ -27,6 +34,9 @@ namespace TweetX.Models
                 var settings = JsonSerializer.Deserialize<Settings>(json)!;
 
                 Location = settings.Location;
+                AccessToken = settings.AccessToken;
+                AccessTokenSecret = settings.AccessTokenSecret;
+                ScreenName = settings.ScreenName;
             }
             catch (Exception ex)
             {

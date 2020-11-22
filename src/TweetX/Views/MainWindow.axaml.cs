@@ -7,18 +7,18 @@ namespace TweetX.Views
 {
     internal class MainWindow : Window, IWindow
     {
-        private MainWindowViewModel ViewModel => (MainWindowViewModel)DataContext!;
-
         public MainWindow()
         {
             InitializeComponent();
-            Closing += delegate { ViewModel.Close(this); };
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            ViewModel.Initialize(this);
+
+            var vm = (MainWindowViewModel)DataContext!;
+            vm.Load(this);
+            Closing += delegate { vm.Save(this); };
         }
     }
 }

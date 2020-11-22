@@ -47,5 +47,8 @@
     <Compile Update="Views\Content\ContentView.axaml.cs">
       <DependentUpon>ContentView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Content\TimelineView.axaml.cs">
+      <DependentUpon>TimelineView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

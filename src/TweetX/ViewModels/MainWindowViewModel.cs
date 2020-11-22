@@ -7,18 +7,25 @@ namespace TweetX.ViewModels
     {
         private ISettings Settings { get; }
 
-        public MainWindowViewModel(ISettings settings)
+        public MainWindowViewModel(ITwitterService twitterService, ISettings settings)
         {
             Settings = settings;
+
+            Settings.PropertyChanged += delegate
+            {
+                twitterService.AuthenticationTokens(
+                    Settings.AccessToken,
+                    Settings.AccessTokenSecret);
+            };
         }
 
-        public void Initialize(IWindow window)
+        public void Load(IWindow window)
         {
             Settings.Load();
             SetWindowLocation(window);
         }
 
-        public void Close(IWindow window)
+        public void Save(IWindow window)
         {
             UpdateWindowLocation(window);
             Settings.Save();

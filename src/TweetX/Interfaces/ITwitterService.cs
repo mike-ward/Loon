@@ -9,7 +9,9 @@ namespace TweetX.Interfaces
     {
         ValueTask<OAuthTokens> GetPin();
 
-        ValueTask AuthenticateWithPinAsync(OAuthTokens requestTokens, string pin);
+        void AuthenticationTokens(string? accessToken, string? accessTokenSecret);
+
+        ValueTask<OAuthTokens> AuthenticateWithPinAsync(OAuthTokens requestTokens, string pin);
 
         ValueTask<IEnumerable<TwitterStatus>> GetHomeTimeline();
 

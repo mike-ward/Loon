@@ -28,10 +28,10 @@ namespace TweetX.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        public static Task<MessageBoxResult> Show(Window parent, string text, string title, MessageBoxButtons buttons)
+        public static async Task<MessageBoxResult> Show(Window parent, string text, string title, MessageBoxButtons buttons)
         {
             ContentControl? autoFocusControl = null;
-            var res = MessageBoxResult.Ok;
+            var messageBoxResult = MessageBoxResult.Ok;
 
             var msgbox = new MessageBox();
             msgbox.FindControl<TextBlock>("Title").Text = title;
@@ -41,50 +41,40 @@ namespace TweetX.Views
 
             if (buttons == MessageBoxButtons.Ok || buttons == MessageBoxButtons.OkCancel)
             {
-                AddButton("OK", MessageBoxResult.Ok, def: true);
+                AddButton("OK", MessageBoxResult.Ok, isDefaultButton: true);
             }
 
             if (buttons == MessageBoxButtons.YesNo || buttons == MessageBoxButtons.YesNoCancel)
             {
                 AddButton("Yes", MessageBoxResult.Yes);
-                AddButton("No", MessageBoxResult.No, def: true);
+                AddButton("No", MessageBoxResult.No, isDefaultButton: true);
             }
 
             if (buttons == MessageBoxButtons.OkCancel || buttons == MessageBoxButtons.YesNoCancel)
             {
-                AddButton("Cancel", MessageBoxResult.Cancel, def: true);
+                AddButton("Cancel", MessageBoxResult.Cancel, isDefaultButton: true);
             }
 
-            var tcs = new TaskCompletionSource<MessageBoxResult>();
-            msgbox.Closed += delegate { tcs.TrySetResult(res); };
-
-            if (parent is not null)
-            {
-                msgbox.ShowDialog(parent);
-            }
-            else
-            {
-                msgbox.Show();
-            }
+            await msgbox.ShowDialog(parent).ConfigureAwait(false);
 
             autoFocusControl?.Focus();
-            return tcs.Task;
+            return messageBoxResult;
 
-            void AddButton(string caption, MessageBoxResult r, bool def = false)
+            void AddButton(string caption, MessageBoxResult mbr, bool isDefaultButton = false)
             {
                 var btn = new Button { Content = caption };
 
-                btn.Click += (_, __) =>
+                btn.Click += delegate
                 {
-                    res = r;
+                    messageBoxResult = mbr;
                     msgbox.Close();
                 };
 
                 buttonPanel.Children.Add(btn);
 
-                if (def)
+                if (isDefaultButton)
                 {
-                    res = r;
+                    messageBoxResult = mbr;
                     autoFocusControl = btn;
                 }
             }

@@ -2,9 +2,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:signin="using:TweetX.Views.Content.SignIn"
+             xmlns:vm="clr-namespace:TweetX.ViewModels.Content"
+             xmlns:vw="clr-namespace:TweetX.Views.Content"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:ContentViewModel}, Mode=OneTime}"
              x:Class="TweetX.Views.Content.ContentView">
 
-  <signin:GetPinView />
+  <UserControl.Styles>
+    <Style Selector="TabControl">
+      <Setter Property="Margin" Value="5 0" />
+    </Style>
+
+    <Style Selector="TabItem">
+      <Setter Property="Width" Value="50" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="TabItem:selected">
+      <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+      <Setter Property="BorderThickness" Value="0 0 0 1" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid>
+    <vw:GetPinView Name="GetPinView" />
+
+    <TabControl IsVisible="{Binding SignedIn}">
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-home}" />
+        </TabItem.Header>
+        <vw:TimelineView />
+      </TabItem>
+
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-heart}" />
+        </TabItem.Header>
+      </TabItem>
+
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-search}" />
+        </TabItem.Header>
+      </TabItem>
+
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-settings}" />
+        </TabItem.Header>
+      </TabItem>
+
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-pen}" />
+        </TabItem.Header>
+      </TabItem>
+    </TabControl>
+  </Grid>
 </UserControl>

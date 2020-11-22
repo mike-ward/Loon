@@ -29,5 +29,10 @@ namespace TweetX
         {
             ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).Shutdown();
         }
+
+        public static string GetString(string name)
+        {
+            return Current.TryFindResource(name, out var value) ? (string)value! : "oops";
+        }
     }
 }

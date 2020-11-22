@@ -4,7 +4,7 @@
   xmlns:sys="clr-namespace:System;assembly=System.Runtime">
   <Style>
     <Style.Resources>
-      <sys:String x:Key="title">Tweetz</sys:String>
+      <sys:String x:Key="title">TweetX</sys:String>
 
       <!--  Get Pin  -->
 
@@ -13,6 +13,15 @@
       <sys:String x:Key="pin-get-pin">Get PIN</sys:String>
       <sys:String x:Key="pin-sign-in">Sign In</sys:String>
       <sys:String x:Key="pin-about">PINs can only be used once so there's no need to save them.</sys:String>
+      <sys:String x:Key="pin-error">Sign in error. Try again</sys:String>
+
+      <!--  Tabs  -->
+
+      <sys:String x:Key="tab-home">🏠</sys:String>
+      <sys:String x:Key="tab-heart">❤️</sys:String>
+      <sys:String x:Key="tab-search">🔎</sys:String>
+      <sys:String x:Key="tab-settings">⚙</sys:String>
+      <sys:String x:Key="tab-pen">✐</sys:String>
     </Style.Resources>
   </Style>
 </Styles>

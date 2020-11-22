@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace TweetX.Models
 {
-    internal class NotifiyPropertyChanged : INotifyPropertyChanged
+    public class NotifyPropertyChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

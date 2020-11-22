@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using TweetX.Interfaces;
 using TweetX.Models;
 using TweetX.ViewModels;
-using TweetX.ViewModels.Content.SignIn;
+using TweetX.ViewModels.Content;
 using TweetX.Views;
 
 namespace TweetX.Services
@@ -25,10 +25,15 @@ namespace TweetX.Services
 
             // View Models
             services.AddTransient<MainWindowViewModel>();
+            services.AddTransient<ContentViewModel>();
             services.AddTransient<GetPinViewModel>();
+            services.AddTransient<TimelineViewModel>();
 
             // Models
             services.AddSingleton<ISettings, Settings>();
+
+            // Services
+            services.AddSingleton<ITwitterService, TwitterService>();
         }
 
         public static object GetService(Type type)
