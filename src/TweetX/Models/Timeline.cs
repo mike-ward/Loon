@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Avalonia.Collections;
 using Avalonia.Threading;
 using TweetX.Extensions;
 using TweetX.Interfaces;
@@ -11,34 +11,36 @@ using Twitter.Models;
 
 namespace TweetX.Models
 {
-    internal class Timeline : NotifyPropertyChanged
+    public class Timeline : NotifyPropertyChanged
     {
-        private ISettings Settings { get; }
-
         private bool pendingStatusesAvailable;
         private string? exceptionMessage;
 
         private bool inUpdate;
         private readonly double intervalInMinutes = 1.1;
         private readonly DispatcherTimer updateTimer;
-        private readonly string timelineName = "Home";
-        private readonly List<Func<Timeline, ValueTask>> updateTasks = new();
 
-        private ISet<string> AlreadyAdded { get; } = new HashSet<string>(StringComparer.Ordinal);
-        private ObservableCollection<TwitterStatus> StatusCollection { get; } = new ObservableCollection<TwitterStatus>();
+        public string TimelineName { get; init; }
+        public IEnumerable<Func<Timeline, ValueTask>> UpdateTasks { get; init; }
+
+        public AvaloniaList<TwitterStatus> StatusCollection { get; } = new();
+        public ISet<string> AlreadyAdded { get; } = new HashSet<string>(StringComparer.Ordinal);
         public ISet<TwitterStatus> PendingStatusCollection { get; } = new HashSet<TwitterStatus>();
+        public bool IsScrolled { get; set; }
+        public ISettings Settings { get; }
         public bool PendingStatusesAvailable { get => pendingStatusesAvailable; set => SetProperty(ref pendingStatusesAvailable, value); }
-
         public string? ExceptionMessage { get => exceptionMessage; set => SetProperty(ref exceptionMessage, value); }
 
-        public Timeline(ISettings settings)
+        public Timeline(string name, IEnumerable<Func<Timeline, ValueTask>> updateTasks, ISettings settings)
         {
+            TimelineName = name;
+            UpdateTasks = updateTasks;
             Settings = settings;
 
             updateTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(intervalInMinutes) };
             updateTimer.Tick += async (_, __) => await UpdateAsync().ConfigureAwait(false);
 
-            Settings.PropertyChanged += OnAuthenticationChanged;
+            Settings.PropertyChanged += Start;
         }
 
         private async ValueTask UpdateAsync()
@@ -47,23 +49,23 @@ namespace TweetX.Models
             {
                 if (inUpdate)
                 {
-                    TraceService.Message($"{timelineName} inUpdate");
+                    TraceService.Message($"{TimelineName} inUpdate");
                     return;
                 }
 
                 inUpdate = true;
                 ExceptionMessage = null;
 
-                TraceService.Message($"{timelineName}: Updating");
+                TraceService.Message($"{TimelineName}: Updating");
 
-                foreach (var updateTask in updateTasks)
+                foreach (var updateTask in UpdateTasks)
                 {
                     await updateTask(this).ConfigureAwait(true);
                 }
             }
             catch (Exception ex)
             {
-                TraceService.Message($"{timelineName}: ${ex.Message}");
+                TraceService.Message($"{TimelineName}: ${ex.Message}");
                 ExceptionMessage = $"{ex.Message}";
             }
             finally
@@ -72,7 +74,7 @@ namespace TweetX.Models
             }
         }
 
-        private async void OnAuthenticationChanged(object? sender, PropertyChangedEventArgs e)
+        private async void Start(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.IsEqualTo(nameof(Settings.AccessToken)))
             {
@@ -96,11 +98,6 @@ namespace TweetX.Models
             updateTimer?.Stop();
             AlreadyAdded.Clear();
             StatusCollection.Clear();
-        }
-
-        public void AddUpdateTask(Func<Timeline, ValueTask> task)
-        {
-            updateTasks.Add(task);
         }
     }
 }

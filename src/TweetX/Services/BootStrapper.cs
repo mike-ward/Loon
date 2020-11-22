@@ -27,7 +27,7 @@ namespace TweetX.Services
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<ContentViewModel>();
             services.AddTransient<GetPinViewModel>();
-            services.AddTransient<TimelineViewModel>();
+            services.AddTransient<HomeTimelineViewModel>();
 
             // Models
             services.AddSingleton<ISettings, Settings>();

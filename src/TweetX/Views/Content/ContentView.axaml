@@ -33,12 +33,12 @@
         <TabItem.Header>
           <TextBlock Text="{DynamicResource tab-home}" />
         </TabItem.Header>
-        <vw:TimelineView />
+        <vw:TimelineView DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:HomeTimelineViewModel}, Mode=OneTime}" />
       </TabItem>
 
       <TabItem>
         <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-heart}" />
+          <TextBlock Text="{DynamicResource tab-like}" />
         </TabItem.Header>
       </TabItem>
 
