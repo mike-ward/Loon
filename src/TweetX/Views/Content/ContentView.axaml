@@ -8,57 +8,14 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:ContentViewModel}, Mode=OneTime}"
              x:Class="TweetX.Views.Content.ContentView">
 
-  <UserControl.Styles>
-    <Style Selector="TabControl">
-      <Setter Property="Margin" Value="5 0" />
-    </Style>
-
-    <Style Selector="TabItem">
-      <Setter Property="Width" Value="50" />
-      <Setter Property="HorizontalContentAlignment" Value="Center" />
-    </Style>
-
-    <Style Selector="TabItem:selected">
-      <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-      <Setter Property="BorderThickness" Value="0 0 0 1" />
-      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
-    </Style>
-  </UserControl.Styles>
-
   <Grid>
-    <vw:GetPinView Name="GetPinView" />
+    <!--  IsVisible="{Binding !SignedIn}"
+          not working in preview 6
+          See ContentView.axaml.cs
+    -->
+    <vw:GetPinView  Name="GetPinView"
+                    IsVisible="{Binding !SignedIn}" />
 
-    <TabControl IsVisible="{Binding SignedIn}">
-      <TabItem>
-        <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-home}" />
-        </TabItem.Header>
-        <vw:TimelineView DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:HomeTimelineViewModel}, Mode=OneTime}" />
-      </TabItem>
-
-      <TabItem>
-        <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-like}" />
-        </TabItem.Header>
-      </TabItem>
-
-      <TabItem>
-        <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-search}" />
-        </TabItem.Header>
-      </TabItem>
-
-      <TabItem>
-        <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-settings}" />
-        </TabItem.Header>
-      </TabItem>
-
-      <TabItem>
-        <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-pen}" />
-        </TabItem.Header>
-      </TabItem>
-    </TabControl>
+    <vw:TabView IsVisible="{Binding SignedIn}" />
   </Grid>
 </UserControl>

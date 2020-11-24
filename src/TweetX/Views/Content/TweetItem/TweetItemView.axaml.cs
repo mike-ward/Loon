@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace TweetX.Views.Content.TweetBlock
+namespace TweetX.Views.Content.TweetItem
 {
-    public class TweetBlockView : UserControl
+    public class TweetItemView : UserControl
     {
-        public TweetBlockView()
+        public TweetItemView()
         {
             InitializeComponent();
         }

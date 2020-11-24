@@ -1,0 +1,57 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TweetX.ViewModels.Content"
+             xmlns:vw="clr-namespace:TweetX.Views.Content"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TweetX.Views.Content.TabView">
+
+  <UserControl.Styles>
+    <Style Selector="TabItem">
+      <Setter Property="Margin" Value="5 0 0 0" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="TabItem:selected">
+      <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+      <Setter Property="BorderThickness" Value="0 0 0 1" />
+    </Style>
+  </UserControl.Styles>
+
+  <Grid HorizontalAlignment="Left">
+    <TabControl IsVisible="{Binding SignedIn}">
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-home}" />
+        </TabItem.Header>
+        <vw:TimelineView DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:HomeTimelineViewModel}, Mode=OneTime}" />
+      </TabItem>
+
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-like}" />
+        </TabItem.Header>
+      </TabItem>
+
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-search}" />
+        </TabItem.Header>
+      </TabItem>
+
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-settings}" />
+        </TabItem.Header>
+      </TabItem>
+
+      <TabItem>
+        <TabItem.Header>
+          <TextBlock Text="{DynamicResource tab-pen}" />
+        </TabItem.Header>
+      </TabItem>
+    </TabControl>
+  </Grid>
+</UserControl>

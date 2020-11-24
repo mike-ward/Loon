@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Avalonia.Collections;
 using Avalonia.Threading;
-using TweetX.Extensions;
 using TweetX.Interfaces;
 using TweetX.Services;
 using Twitter.Models;
@@ -19,11 +18,13 @@ namespace TweetX.Models
         private bool inUpdate;
         private readonly double intervalInMinutes = 1.1;
         private readonly DispatcherTimer updateTimer;
+        private string timelineName = string.Empty;
+        private AvaloniaList<TwitterStatus> statusCollection = new();
 
-        public string TimelineName { get; init; }
+        public string TimelineName { get => timelineName; set => SetProperty(ref timelineName, value); }
+        public AvaloniaList<TwitterStatus> StatusCollection { get => statusCollection; set => SetProperty(ref statusCollection, value); }
+
         public IEnumerable<Func<Timeline, ValueTask>> UpdateTasks { get; init; }
-
-        public AvaloniaList<TwitterStatus> StatusCollection { get; } = new();
         public ISet<string> AlreadyAdded { get; } = new HashSet<string>(StringComparer.Ordinal);
         public ISet<TwitterStatus> PendingStatusCollection { get; } = new HashSet<TwitterStatus>();
         public bool IsScrolled { get; set; }
@@ -40,7 +41,7 @@ namespace TweetX.Models
             updateTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(intervalInMinutes) };
             updateTimer.Tick += async (_, __) => await UpdateAsync().ConfigureAwait(false);
 
-            Settings.PropertyChanged += Start;
+            Settings.PropertyChanged += CheckAuthentication;
         }
 
         private async ValueTask UpdateAsync()
@@ -74,22 +75,25 @@ namespace TweetX.Models
             }
         }
 
-        private async void Start(object? sender, PropertyChangedEventArgs e)
+        private async void CheckAuthentication(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.IsEqualTo(nameof(Settings.AccessToken)))
+            if (Settings.AccessToken is not null &&
+                Settings.AccessTokenSecret is not null)
             {
-                if (Settings.AccessToken is not null)
-                {
-                    if (!updateTimer.IsEnabled)
-                    {
-                        updateTimer.Start();
-                        await UpdateAsync().ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    Stop();
-                }
+                await Start().ConfigureAwait(false);
+            }
+            else
+            {
+                Stop();
+            }
+        }
+
+        private async Task Start()
+        {
+            if (!updateTimer.IsEnabled)
+            {
+                updateTimer.Start();
+                await UpdateAsync().ConfigureAwait(false);
             }
         }
 

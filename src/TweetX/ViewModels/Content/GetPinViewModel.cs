@@ -5,7 +5,7 @@ using TweetX.Models;
 using TweetX.Views;
 using Twitter.Services;
 
-namespace TweetX.ViewModels
+namespace TweetX.ViewModels.Content
 {
     internal class GetPinViewModel : NotifyPropertyChanged
     {

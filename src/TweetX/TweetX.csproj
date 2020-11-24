@@ -14,6 +14,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Services\FlowContentService.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="app.ico" />
     <None Remove="Resources\Converters.xaml" />
     <None Remove="Resources\Strings.xaml" />
@@ -49,6 +52,12 @@
     </Compile>
     <Compile Update="Views\Content\TimelineView.axaml.cs">
       <DependentUpon>TimelineView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\TweetItem\TweetItemView.axaml.cs">
+      <DependentUpon>TweetItemView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\TabView.axaml.cs">
+      <DependentUpon>TabView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

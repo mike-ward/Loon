@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:TweetX.ViewModels"
+             xmlns:vm="clr-namespace:TweetX.ViewModels.Content"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TweetX.Views.Content.GetPinView"
              DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:GetPinViewModel}, Mode=OneTime}">

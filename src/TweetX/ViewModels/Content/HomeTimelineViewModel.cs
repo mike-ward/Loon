@@ -29,7 +29,7 @@ namespace TweetX.ViewModels.Content
         {
             return new Func<Timeline, ValueTask>[]
             {
-                tl => GetAndUpdateStatusesAsync(tl)
+                timeline => GetAndUpdateStatusesAsync(timeline),
             };
         }
 

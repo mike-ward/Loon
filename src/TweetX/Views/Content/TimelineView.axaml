@@ -3,15 +3,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:vm="clr-namespace:TweetX.ViewModels"
+             xmlns:vw="clr-namespace:TweetX.Views"
+             xmlns:ti="clr-namespace:TweetX.Views.Content.TweetItem"
              x:Class="TweetX.Views.Content.TimelineView">
 
-  <ItemsControl Items="{Binding Timeline.StatusCollection}">
+  <ScrollViewer HorizontalContentAlignment="Left">
+    <ItemsControl Items="{Binding Timeline.StatusCollection}"
+                  ClipToBounds="True"
+                  Width="{Binding Width, RelativeSource={RelativeSource AncestorType=vw:MainWindow}}">
 
-    <ItemsControl.ItemTemplate>
-      <DataTemplate>
-        <TextBlock DataContext="{Binding Mode=OneWay}" Text="{Binding Id, FallbackValue=Test}" />
-      </DataTemplate>
-    </ItemsControl.ItemTemplate>
-  </ItemsControl>
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <VirtualizingStackPanel Focusable="True" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <ti:TweetItemView Margin="5 0 20 0" />
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </ScrollViewer>
 </UserControl>
