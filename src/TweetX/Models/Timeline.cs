@@ -84,7 +84,7 @@ namespace TweetX.Models
             }
             else
             {
-                Stop();
+                await Stop().ConfigureAwait(false);
             }
         }
 
@@ -92,16 +92,23 @@ namespace TweetX.Models
         {
             if (!updateTimer.IsEnabled)
             {
-                updateTimer.Start();
-                await UpdateAsync().ConfigureAwait(false);
+                await Dispatcher.UIThread.InvokeAsync(async () =>
+                {
+                    updateTimer.Start();
+                    await UpdateAsync().ConfigureAwait(false);
+                })
+                .ConfigureAwait(false);
             }
         }
 
-        private void Stop()
+        private Task Stop()
         {
-            updateTimer?.Stop();
-            AlreadyAdded.Clear();
-            StatusCollection.Clear();
+            return Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                updateTimer?.Stop();
+                AlreadyAdded.Clear();
+                StatusCollection.Clear();
+            });
         }
     }
 }

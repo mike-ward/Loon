@@ -6,6 +6,7 @@
   <Style>
     <Style.Resources>
       <converters:ViewModelLocator x:Key="VML" />
+      <converters:HtmlDecodeConverter x:Key="HtmlDecode" />
     </Style.Resources>
   </Style>
 </Styles>

@@ -8,21 +8,14 @@
              x:Class="TweetX.Views.Content.TimelineView">
 
   <ScrollViewer HorizontalContentAlignment="Left">
-    <ItemsControl Items="{Binding Timeline.StatusCollection}"
-                  ClipToBounds="True"
-                  Width="{Binding Width, RelativeSource={RelativeSource AncestorType=vw:MainWindow}}">
+    <ItemsRepeater Items="{Binding Timeline.StatusCollection}"
+                   Width="{Binding Width, RelativeSource={RelativeSource AncestorType=vw:MainWindow}}">
 
-      <ItemsControl.ItemsPanel>
-        <ItemsPanelTemplate>
-          <VirtualizingStackPanel Focusable="True" />
-        </ItemsPanelTemplate>
-      </ItemsControl.ItemsPanel>
-
-      <ItemsControl.ItemTemplate>
+      <ItemsRepeater.ItemTemplate>
         <DataTemplate>
           <ti:TweetItemView Margin="5 0 20 0" />
         </DataTemplate>
-      </ItemsControl.ItemTemplate>
-    </ItemsControl>
+      </ItemsRepeater.ItemTemplate>
+    </ItemsRepeater>
   </ScrollViewer>
 </UserControl>

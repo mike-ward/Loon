@@ -1,13 +1,11 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:l="clr-namespace:TweetX.Views.Content.TweetItem"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="TweetX.Views.Content.TweetItem.TweetItemView">
+             x:Class="TweetX.Views.Content.TweetItem.TweetItemText">
 
-  <StackPanel Margin="0 0 0 10">
-    <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
-    <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
-  </StackPanel>
+  <TextBlock Text="{Binding FullText, Converter={StaticResource HtmlDecode}}"
+             Opacity="0.85"
+             TextWrapping="Wrap" />
 </UserControl>
