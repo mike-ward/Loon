@@ -12,5 +12,7 @@
 
     <TextBlock Text="@" Margin="5 0 0 0" />
     <TextBlock Text="{Binding User.Name}" />
+    <TextBlock Text="•" Margin="5 0" />
+    <TextBlock Text="{Binding CreatedDate, Converter={StaticResource TimeAgo}}" />
   </StackPanel>
 </UserControl>

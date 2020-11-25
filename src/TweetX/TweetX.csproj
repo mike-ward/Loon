@@ -19,12 +19,16 @@
   <ItemGroup>
     <None Remove="app.ico" />
     <None Remove="Resources\Converters.xaml" />
+    <None Remove="Resources\ScrollBar.xaml" />
     <None Remove="Resources\Strings.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaXaml Include="Resources\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
     <AvaloniaXaml Include="Resources\Strings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
@@ -37,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
+    <Folder Include="ViewModels\Content\TweetItem\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\Converters.xaml">

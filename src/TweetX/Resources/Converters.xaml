@@ -7,6 +7,7 @@
     <Style.Resources>
       <converters:ViewModelLocator x:Key="VML" />
       <converters:HtmlDecodeConverter x:Key="HtmlDecode" />
+      <converters:TimeAgoConverter x:Key="TimeAgo" />
     </Style.Resources>
   </Style>
 </Styles>
