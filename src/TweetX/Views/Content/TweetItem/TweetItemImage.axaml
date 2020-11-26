@@ -13,14 +13,14 @@
           <Image DataContext="{Binding MediaUrl}"
                  DataContextChanged="LoadMedia"
                  Stretch="UniformToFill"
-                 VerticalAlignment="Top" />
+                 Margin="0 5 5 2.5" />
         </Grid>
       </DataTemplate>
     </ItemsControl.ItemTemplate>
 
     <ItemsControl.ItemsPanel>
       <ItemsPanelTemplate>
-        <UniformGrid Margin="0 5" />
+        <UniformGrid Rows="1" />
       </ItemsPanelTemplate>
     </ItemsControl.ItemsPanel>
   </ItemsControl>

@@ -8,6 +8,6 @@
              x:Class="TweetX.Views.Content.TweetItem.TweetItemProfileImage">
 
   <Border CornerRadius="50" ClipToBounds="True">
-    <Image Name="Image" />
+    <Image DataContextChanged="UpdateImage" />
   </Border>
 </UserControl>

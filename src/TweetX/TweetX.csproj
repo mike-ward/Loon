@@ -41,6 +41,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0-preview6" />
     <PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview6" />
+    <PackageReference Include="BitFaster.Caching" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>

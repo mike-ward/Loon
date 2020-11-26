@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
 
 namespace TweetX.Views.Content.TweetItem
 {
@@ -20,18 +21,22 @@ namespace TweetX.Views.Content.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-        public async void LoadMedia(object? sender, EventArgs e)
+        public void LoadMedia(object? sender, EventArgs e)
         {
-            try
+            if (sender is Image image && image.DataContext is string uri)
             {
-                if (sender is Image image && image.DataContext is string uri)
+                try
                 {
-                    image.Source = await GetImage(uri).ConfigureAwait(true);
+                    Task.Factory.StartNew(async () =>
+                    {
+                        var bitmap = await GetImage(uri).ConfigureAwait(false);
+                        await Dispatcher.UIThread.InvokeAsync(() => image.Source = bitmap).ConfigureAwait(false);
+                    });
                 }
-            }
-            catch
-            {
-                // eat it for now
+                catch
+                {
+                    // eat it
+                }
             }
         }
 

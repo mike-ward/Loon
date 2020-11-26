@@ -10,11 +10,11 @@
 
   <UserControl.Styles>
     <Style Selector="TabItem">
-      <Setter Property="Margin" Value="0 0 0 3" />
-      <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />
-      <Setter Property="HorizontalContentAlignment" Value="Center" />
-      <Setter Property="Height" Value="38" />
       <Setter Property="Width" Value="{Binding Width, RelativeSource={RelativeSource AncestorType=mn:MainWindow}, Converter={StaticResource TabItemWidth}}" />
+      <Setter Property="Height" Value="38" />
+      <Setter Property="Margin" Value="0 0 0 3" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />
       <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
       <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
       <Setter Property="BorderThickness" Value="0 0 0 0.6" />

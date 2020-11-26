@@ -17,7 +17,9 @@
       <l:TweetItemRetweetedBy DataContext="{Binding}" IsVisible="{Binding IsRetweet}" />
       <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
       <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
-      <l:TweetItemImage DataContext="{Binding OriginatingStatus.ExtendedEntities}" />
+      <l:TweetItemImage DataContext="{Binding OriginatingStatus.ExtendedEntities}" Margin="0 5" />
+      <l:TweetItemRelated DataContext="{Binding RelatedLinkInfo}" />
+      <l:TweetItemActions DataContext="{Binding OriginatingStatus}" />
     </StackPanel>
   </Grid>
 </UserControl>

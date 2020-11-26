@@ -1,21 +1,24 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
+using TweetX.Services;
 using Twitter.Models;
 
 namespace TweetX.Views.Content.TweetItem
 {
     public class TweetItemProfileImage : UserControl
     {
+        private static readonly Func<string, ValueTask<IImage>> getMemoizedImage
+            = MemoizeService.Memoize<string, ValueTask<IImage>>(uri => GetImage(uri), capacity: 50);
+
         public TweetItemProfileImage()
         {
             InitializeComponent();
-            DataContextChanged += UpdateImage;
         }
 
         private void InitializeComponent()
@@ -23,43 +26,34 @@ namespace TweetX.Views.Content.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-        private async void UpdateImage(object? sender, EventArgs e)
+        public void UpdateImage(object? sender, EventArgs e)
         {
-            base.OnInitialized();
-
-            try
+            if (DataContext is TwitterStatus status && sender is Image image)
             {
-                var image = this.FindControl<Image>("Image");
-                image.Source = null;
-
-                if (DataContext is TwitterStatus status)
+                Task.Factory.StartNew(async () =>
                 {
-                    var uri = status.User.ProfileImageUrl;
-                    if (uri is not null)
+                    try
                     {
-                        image.Source = await GetImage(uri).ConfigureAwait(true);
+                        var uri = status.User.ProfileImageUrl;
+                        if (uri is not null)
+                        {
+                            var bitmap = await getMemoizedImage(uri).ConfigureAwait(false);
+                            await Dispatcher.UIThread.InvokeAsync(() => image.Source = bitmap).ConfigureAwait(false);
+                        }
                     }
-                }
-            }
-            catch
-            {
-                // eat it for now
+                    catch
+                    {
+                        // eat it
+                    }
+                });
             }
         }
 
-        private static readonly ConcurrentDictionary<string, IImage> imageCache = new(StringComparer.Ordinal);
-
         private static async ValueTask<IImage> GetImage(string uri)
         {
-            if (!imageCache.TryGetValue(uri, out var bitmap))
-            {
-                var response = await App.Http.GetAsync(uri, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
-                var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                bitmap = new Bitmap(stream);
-                imageCache.TryAdd(uri, bitmap);
-            }
-
-            return bitmap;
+            var response = await App.Http.GetAsync(uri, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            return new Bitmap(stream);
         }
     }
 }

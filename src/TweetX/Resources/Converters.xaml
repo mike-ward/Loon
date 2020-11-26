@@ -6,9 +6,11 @@
   <Style>
     <Style.Resources>
       <converters:ViewModelLocator x:Key="VML" />
+      <converters:CountConverter x:Key="CountConverter" />
       <converters:HtmlDecodeConverter x:Key="HtmlDecode" />
       <converters:TabItemWidthConverter x:Key="TabItemWidth" />
       <converters:TimeAgoConverter x:Key="TimeAgo" />
+      <converters:TrimTextConverter x:Key="TrimText" />
     </Style.Resources>
   </Style>
 </Styles>
