@@ -1,0 +1,12 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+  <Style>
+    <Style.Resources>
+      <sys:Double x:Key="Dim0">0.85</sys:Double>
+      <sys:Double x:Key="Dim1">0.75</sys:Double>
+    </Style.Resources>
+  </Style>
+</Styles>

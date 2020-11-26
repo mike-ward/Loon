@@ -6,13 +6,11 @@
              x:Class="TweetX.Views.Content.TweetItem.TweetItemAuthor">
 
   <StackPanel Orientation="Horizontal">
-    <TextBlock Text="{Binding User.ScreenName}"
-               Foreground="{DynamicResource ThemeAccentBrush}"
-               FontWeight="Bold" />
-
-    <TextBlock Text="@" Margin="5 0 0 0" />
-    <TextBlock Text="{Binding User.Name}" />
-    <TextBlock Text="•" Margin="5 0" />
-    <TextBlock Text="{Binding CreatedDate, Converter={StaticResource TimeAgo}}" />
+    <TextBlock Text="{Binding User.Name}" FontWeight="Bold" Opacity="{DynamicResource Dim0}" />
+    <TextBlock Text="✓" IsVisible="{Binding User.Verified}" FontWeight="Bold" Opacity="{DynamicResource Dim0}" Margin="5 0 0 0" />
+    <TextBlock Text="@" Margin="5 0 0 0" Opacity="{DynamicResource Dim1}" />
+    <TextBlock Text="{Binding User.ScreenName}" Opacity="{DynamicResource Dim1}" />
+    <TextBlock Text="•" Margin="5 0" Opacity="{DynamicResource Dim1}" />
+    <TextBlock Text="{Binding CreatedDate, Converter={StaticResource TimeAgo}}" Opacity="{DynamicResource Dim1}" />
   </StackPanel>
 </UserControl>

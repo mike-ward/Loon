@@ -9,13 +9,12 @@
              x:Class="TweetX.Views.Content.ContentView">
 
   <Grid>
-    <!--  IsVisible="{Binding !SignedIn}"
-          not working in preview 6
-          See ContentView.axaml.cs
-    -->
-    <vw:GetPinView  Name="GetPinView"
-                    IsVisible="{Binding !SignedIn}" />
+    <Border  IsVisible="{Binding !SignedIn}">
+      <vw:GetPinView />
+    </Border>
 
-    <vw:TabView IsVisible="{Binding SignedIn}" />
+    <Border  IsVisible="{Binding SignedIn}">
+      <vw:TabView />
+    </Border>
   </Grid>
 </UserControl>

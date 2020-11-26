@@ -1,0 +1,27 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TweetX.Views.Content.TweetItem.TweetItemImage">
+
+  <ItemsControl Items="{Binding Media}">
+
+    <ItemsControl.ItemTemplate>
+      <DataTemplate>
+        <Grid Height="200">
+          <Image DataContext="{Binding MediaUrl}"
+                 DataContextChanged="LoadMedia"
+                 Stretch="UniformToFill"
+                 VerticalAlignment="Top" />
+        </Grid>
+      </DataTemplate>
+    </ItemsControl.ItemTemplate>
+
+    <ItemsControl.ItemsPanel>
+      <ItemsPanelTemplate>
+        <UniformGrid Margin="0 5" />
+      </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
+  </ItemsControl>
+</UserControl>

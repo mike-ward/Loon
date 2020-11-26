@@ -4,52 +4,63 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:TweetX.ViewModels.Content"
              xmlns:vw="clr-namespace:TweetX.Views.Content"
+             xmlns:mn="clr-namespace:TweetX.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TweetX.Views.Content.TabView">
 
   <UserControl.Styles>
     <Style Selector="TabItem">
-      <Setter Property="Margin" Value="5 0 0 0" />
+      <Setter Property="Margin" Value="0 0 0 3" />
+      <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />
       <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="Height" Value="38" />
+      <Setter Property="Width" Value="{Binding Width, RelativeSource={RelativeSource AncestorType=mn:MainWindow}, Converter={StaticResource TabItemWidth}}" />
+      <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+      <Setter Property="BorderThickness" Value="0 0 0 0.6" />
     </Style>
 
     <Style Selector="TabItem:selected">
+      <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightHighBrush}" />
       <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
-      <Setter Property="BorderThickness" Value="0 0 0 1" />
+    </Style>
+
+    <Style Selector="TabItem:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
+      <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightHighBrush}" />
     </Style>
   </UserControl.Styles>
 
   <Grid HorizontalAlignment="Left">
-    <TabControl IsVisible="{Binding SignedIn}">
-      <TabItem>
+    <TabControl>
+      <TabItem Margin="5 0 0 3">
         <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-home}" />
+          <TextBlock Text="{DynamicResource HomeSymbol}" />
         </TabItem.Header>
         <vw:TimelineView DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:HomeTimelineViewModel}, Mode=OneTime}" />
       </TabItem>
 
       <TabItem>
         <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-like}" />
+          <TextBlock Text="{DynamicResource LikeSymbol}" />
         </TabItem.Header>
       </TabItem>
 
       <TabItem>
         <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-search}" />
+          <TextBlock Text="{DynamicResource SearchSymbol}" />
         </TabItem.Header>
       </TabItem>
 
       <TabItem>
         <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-settings}" />
+          <TextBlock Text="{DynamicResource SettingsSymbol}" />
         </TabItem.Header>
       </TabItem>
 
       <TabItem>
         <TabItem.Header>
-          <TextBlock Text="{DynamicResource tab-pen}" />
+          <TextBlock Text="{DynamicResource WriteSymbol}" />
         </TabItem.Header>
       </TabItem>
     </TabControl>

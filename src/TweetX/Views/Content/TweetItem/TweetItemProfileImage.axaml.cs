@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -13,7 +15,7 @@ namespace TweetX.Views.Content.TweetItem
         public TweetItemProfileImage()
         {
             InitializeComponent();
-            Initialized += OnInitialized;
+            DataContextChanged += UpdateImage;
         }
 
         private void InitializeComponent()
@@ -21,15 +23,23 @@ namespace TweetX.Views.Content.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-        private async void OnInitialized(object? sender, System.EventArgs e)
+        private async void UpdateImage(object? sender, EventArgs e)
         {
             base.OnInitialized();
+
             try
             {
-                var uri = ((TwitterStatus)DataContext!).User.ProfileImageUrl!;
-                var bitmap = await GetImage(uri).ConfigureAwait(true);
                 var image = this.FindControl<Image>("Image");
-                image.Source = bitmap;
+                image.Source = null;
+
+                if (DataContext is TwitterStatus status)
+                {
+                    var uri = status.User.ProfileImageUrl;
+                    if (uri is not null)
+                    {
+                        image.Source = await GetImage(uri).ConfigureAwait(true);
+                    }
+                }
             }
             catch
             {
@@ -37,12 +47,19 @@ namespace TweetX.Views.Content.TweetItem
             }
         }
 
+        private static readonly ConcurrentDictionary<string, IImage> imageCache = new(StringComparer.Ordinal);
+
         private static async ValueTask<IImage> GetImage(string uri)
         {
-            var http = new HttpClient();
-            var response = await http.GetAsync(uri, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
-            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            return new Bitmap(stream);
+            if (!imageCache.TryGetValue(uri, out var bitmap))
+            {
+                var response = await App.Http.GetAsync(uri, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
+                var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                bitmap = new Bitmap(stream);
+                imageCache.TryAdd(uri, bitmap);
+            }
+
+            return bitmap;
         }
     }
 }

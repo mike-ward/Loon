@@ -3,9 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="TweetX.Views.Content.TweetItem.TweetItemText">
-
-  <TextBlock Text="{Binding FullText, Converter={StaticResource HtmlDecode}}"
              Opacity="{DynamicResource Dim1}"
-             TextWrapping="Wrap" />
+             x:Class="TweetX.Views.Content.TweetItem.TweetItemRetweetedBy">
+
+  <StackPanel Orientation="Horizontal">
+    <TextBlock Text="{DynamicResource RetweetSymbol}" FontFamily="{DynamicResource SymbolFont}" />
+    <TextBlock Text="@" Margin="5 0 0 0" />
+    <TextBlock Text="{Binding User.ScreenName}" />
+    <TextBlock Text="{DynamicResource tweet-retweeted}" Margin="5 0 0 0" />
+  </StackPanel>
 </UserControl>

@@ -7,7 +7,7 @@
              xmlns:ti="clr-namespace:TweetX.Views.Content.TweetItem"
              x:Class="TweetX.Views.Content.TimelineView">
 
-  <ScrollViewer Margin="0 0 2 0"
+  <ScrollViewer Margin="0 0 5 0"
                 HorizontalContentAlignment="Left">
 
     <ItemsRepeater Items="{Binding Timeline.StatusCollection}"
