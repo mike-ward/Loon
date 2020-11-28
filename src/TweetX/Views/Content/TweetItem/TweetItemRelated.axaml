@@ -20,7 +20,7 @@
           BorderBrush="{DynamicResource ThemeForegroundLowBrush}">
 
     <StackPanel Margin="5 0" Spacing="5">
-      <l:TweetItemImage DataContext="{Binding ImageTwitterStatus.ExtendedEntities}" />
+      <l:TweetItemImage DataContext="{Binding ImageTwitterStatus.ExtendedEntities}" Name="TweetItemImage" />
       <TextBlock Text="{Binding Title, Converter={StaticResource HtmlDecode}}" FontWeight="Bold" />
       <TextBlock Text="{Binding Description, Converter={StaticResource TrimText}}" />
 

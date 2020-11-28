@@ -9,7 +9,10 @@
   <Grid ColumnDefinitions="Auto,*">
     <!--  Column 1  -->
 
-    <l:TweetItemProfileImage DataContext="{Binding OriginatingStatus}" Margin="0 0 7 0" VerticalAlignment="Top" />
+    <l:TweetItemProfileImage Name="TweetItemProfileImage"
+                             DataContext="{Binding OriginatingStatus}"
+                             Margin="0 0 7 0"
+                             VerticalAlignment="Top" />
 
     <!--  Column 2  -->
 
@@ -17,8 +20,8 @@
       <l:TweetItemRetweetedBy DataContext="{Binding}" IsVisible="{Binding IsRetweet}" />
       <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
       <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
-      <l:TweetItemImage DataContext="{Binding OriginatingStatus.ExtendedEntities}" Margin="0 5" />
-      <l:TweetItemRelated DataContext="{Binding RelatedLinkInfo}" />
+      <l:TweetItemImage DataContext="{Binding OriginatingStatus.ExtendedEntities}" Margin="0 5" Name="TweetItemImage" />
+      <l:TweetItemRelated DataContext="{Binding RelatedLinkInfo}" Name="TweetItemRelated" />
       <l:TweetItemActions DataContext="{Binding OriginatingStatus}" />
     </StackPanel>
   </Grid>

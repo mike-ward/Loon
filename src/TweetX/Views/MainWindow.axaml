@@ -13,7 +13,7 @@
         Title="TweetX">
 
   <Grid RowDefinitions="Auto,*">
-    <views:TitleBar Grid.Row="0" />
+    <views:TitleBar Name="TitleBar" />
     <content:ContentView  Grid.Row="1" />
   </Grid>
 </Window>

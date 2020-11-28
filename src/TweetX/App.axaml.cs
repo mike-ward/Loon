@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -35,7 +34,5 @@ namespace TweetX
         {
             return Current.TryFindResource(name, out var value) && value is string val ? val : "oops";
         }
-
-        public static HttpClient Http { get; } = new HttpClient();
     }
 }

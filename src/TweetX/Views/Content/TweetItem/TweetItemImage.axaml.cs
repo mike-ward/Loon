@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using Avalonia.Threading;
+using TweetX.Services;
 
 namespace TweetX.Views.Content.TweetItem
 {
     public class TweetItemImage : UserControl
     {
+        public bool Clearing { get; set; }
+
         public TweetItemImage()
         {
             InitializeComponent();
@@ -21,29 +22,39 @@ namespace TweetX.Views.Content.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-        public void LoadMedia(object? sender, EventArgs e)
+        public async void LoadMediaAsync(object? sender, EventArgs e)
         {
-            if (sender is Image image && image.DataContext is string uri)
+            try
             {
-                try
+                Clearing = false;
+
+                if (sender is Image image)
                 {
-                    Task.Factory.StartNew(async () =>
+                    image.Source = null;
+                    await Task.Delay(30).ConfigureAwait(true);
+                    if (Clearing) return;
+
+                    if (image.DataContext is string uri && uri.Length > 0)
                     {
-                        var bitmap = await GetImage(uri).ConfigureAwait(false);
-                        await Dispatcher.UIThread.InvokeAsync(() => image.Source = bitmap).ConfigureAwait(false);
-                    });
+                        image.Source = await GetImageAsync(uri).ConfigureAwait(true);
+                    }
                 }
-                catch
-                {
-                    // eat it
-                }
+            }
+            catch
+            {
+                // eat it.
             }
         }
 
-        private static async ValueTask<IImage> GetImage(string uri)
+        private async ValueTask<IImage?> GetImageAsync(string uri)
         {
-            var response = await App.Http.GetAsync(uri, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
-            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            if (Clearing) return null;
+            using var response = await HttpService.Http.GetAsync(uri).ConfigureAwait(false);
+
+            if (Clearing) return null;
+            using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            if (Clearing) return null;
             return new Bitmap(stream);
         }
     }

@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Net.Http;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using Avalonia.Threading;
+using Avalonia.Platform;
 using TweetX.Services;
 using Twitter.Models;
 
@@ -13,8 +13,12 @@ namespace TweetX.Views.Content.TweetItem
 {
     public class TweetItemProfileImage : UserControl
     {
-        private static readonly Func<string, ValueTask<IImage>> getMemoizedImage
-            = MemoizeService.Memoize<string, ValueTask<IImage>>(uri => GetImage(uri), capacity: 50);
+        public bool Clearing { get; set; }
+
+        private const int profileSize = 48; // Twitter's normal profile image size is 48x48
+
+        private static readonly Bitmap EmptyBitmap
+            = new WriteableBitmap(new PixelSize(profileSize, profileSize), new Vector(96, 96), PixelFormat.Bgra8888, AlphaFormat.Premul);
 
         public TweetItemProfileImage()
         {
@@ -26,33 +30,44 @@ namespace TweetX.Views.Content.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-        public void UpdateImage(object? sender, EventArgs e)
+        public async void UpdateImage(object? sender, EventArgs e)
         {
-            if (DataContext is TwitterStatus status && sender is Image image)
+            try
             {
-                Task.Factory.StartNew(async () =>
+                Clearing = false;
+
+                if (sender is Image image)
                 {
-                    try
+                    image.Source = EmptyBitmap;
+
+                    await Task.Delay(30).ConfigureAwait(true);
+                    if (Clearing) return;
+
+                    if (DataContext is TwitterStatus status)
                     {
                         var uri = status.User.ProfileImageUrl;
-                        if (uri is not null)
+                        if (uri is not null && uri.Length > 0 && !Clearing)
                         {
-                            var bitmap = await getMemoizedImage(uri).ConfigureAwait(false);
-                            await Dispatcher.UIThread.InvokeAsync(() => image.Source = bitmap).ConfigureAwait(false);
+                            image.Source = await GetImage(uri).ConfigureAwait(true);
                         }
                     }
-                    catch
-                    {
-                        // eat it
-                    }
-                });
+                }
+            }
+            catch
+            {
+                // eat it.
             }
         }
 
-        private static async ValueTask<IImage> GetImage(string uri)
+        private async ValueTask<IImage?> GetImage(string uri)
         {
-            var response = await App.Http.GetAsync(uri, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
-            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            if (Clearing) return null;
+            using var response = await HttpService.Http.GetAsync(uri).ConfigureAwait(false);
+
+            if (Clearing) return null;
+            using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            if (Clearing) return null;
             return new Bitmap(stream);
         }
     }

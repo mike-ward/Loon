@@ -9,7 +9,7 @@ namespace Twitter.Services
     {
         public static void Message(string msg, [CallerMemberName] string member = "", [CallerFilePath] string path = "", [CallerLineNumber] int line = 0)
         {
-            var message = $"tweetz: {msg} [{member}] {Path.GetFileName(path)}({line.ToString(CultureInfo.InvariantCulture)})";
+            var message = $"TweetX: {msg} [{member}] {Path.GetFileName(path)}({line.ToString(CultureInfo.InvariantCulture)})";
             Trace.WriteLine(message);
         }
     }

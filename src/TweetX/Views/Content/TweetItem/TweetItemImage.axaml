@@ -9,12 +9,14 @@
 
     <ItemsControl.ItemTemplate>
       <DataTemplate>
-        <Grid Height="200">
-          <Image DataContext="{Binding MediaUrl}"
-                 DataContextChanged="LoadMedia"
-                 Stretch="UniformToFill"
-                 Margin="0 5 5 2.5" />
-        </Grid>
+        <Image Height="200"
+               MaxWidth="300"
+               Margin="0 5 5 2.5"
+               Stretch="UniformToFill"
+               VerticalAlignment="Top"
+               DataContext="{Binding MediaUrl}"
+               DataContextChanged="LoadMediaAsync"
+               RenderOptions.BitmapInterpolationMode="LowQuality" />
       </DataTemplate>
     </ItemsControl.ItemTemplate>
 

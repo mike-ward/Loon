@@ -11,7 +11,8 @@
                 HorizontalContentAlignment="Left">
 
     <ItemsRepeater Items="{Binding Timeline.StatusCollection}"
-                   Width="{Binding Width, RelativeSource={RelativeSource AncestorType=vw:MainWindow}}">
+                   Width="{Binding Width, RelativeSource={RelativeSource AncestorType=vw:MainWindow}}"
+                   ElementClearing="OnElementClearing">
 
       <ItemsRepeater.ItemTemplate>
         <DataTemplate>

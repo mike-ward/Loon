@@ -12,7 +12,7 @@ namespace TweetX.Services
                 ? StringComparer.Ordinal as IEqualityComparer<TKey>
                 : EqualityComparer<TKey>.Default;
 
-            var cache = new ConcurrentLru<TKey, TResult>(Environment.ProcessorCount, 10, comparer);
+            var cache = new ConcurrentLru<TKey, TResult>(Environment.ProcessorCount, capacity, comparer);
             return key => cache.GetOrAdd(key, func);
         }
     }

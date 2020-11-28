@@ -20,6 +20,7 @@
     <None Remove="app.ico" />
     <None Remove="Resources\Converters.xaml" />
     <None Remove="Resources\ScrollBar.xaml" />
+    <None Remove="Resources\seguisym.ttf" />
     <None Remove="Resources\Settings.xaml" />
     <None Remove="Resources\Strings.xaml" />
   </ItemGroup>
@@ -37,6 +38,9 @@
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Resources\Converters.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Resources\seguisym.ttf" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0-preview6" />
