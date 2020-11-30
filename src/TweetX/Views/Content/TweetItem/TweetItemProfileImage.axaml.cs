@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -6,7 +8,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using TweetX.Services;
 using Twitter.Models;
 
 namespace TweetX.Views.Content.TweetItem
@@ -62,13 +63,17 @@ namespace TweetX.Views.Content.TweetItem
         private async ValueTask<IImage?> GetImage(string uri)
         {
             if (Clearing) return null;
-            using var response = await HttpService.Http.GetAsync(uri).ConfigureAwait(false);
+            var wc = WebRequest.Create(uri);
+            using var response = await wc.GetResponseAsync().ConfigureAwait(false);
 
             if (Clearing) return null;
-            using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var stream = response.GetResponseStream();
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms).ConfigureAwait(false);
 
             if (Clearing) return null;
-            return new Bitmap(stream);
+            ms.Position = 0;
+            return new Bitmap(ms);
         }
     }
 }
