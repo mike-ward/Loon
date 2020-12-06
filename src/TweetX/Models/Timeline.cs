@@ -16,7 +16,6 @@ namespace TweetX.Models
         private string? exceptionMessage;
 
         private bool inUpdate;
-        private readonly double intervalInMinutes = 1.1;
         private readonly DispatcherTimer updateTimer;
         private string timelineName = string.Empty;
         private AvaloniaList<TwitterStatus> statusCollection = new();
@@ -32,7 +31,7 @@ namespace TweetX.Models
         public bool PendingStatusesAvailable { get => pendingStatusesAvailable; set => SetProperty(ref pendingStatusesAvailable, value); }
         public string? ExceptionMessage { get => exceptionMessage; set => SetProperty(ref exceptionMessage, value); }
 
-        public Timeline(string name, IEnumerable<Func<Timeline, ValueTask>> updateTasks, ISettings settings)
+        public Timeline(string name, double intervalInMinutes, IEnumerable<Func<Timeline, ValueTask>> updateTasks, ISettings settings)
         {
             TimelineName = name;
             UpdateTasks = updateTasks;

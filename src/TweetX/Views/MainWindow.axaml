@@ -10,7 +10,8 @@
         ExtendClientAreaTitleBarHeightHint="1"
         ExtendClientAreaToDecorationsHint="True"
         DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:MainWindowViewModel}, Mode=OneTime}"
-        Title="TweetX">
+        UseLayoutRounding="true"
+        Title="{StaticResource title}">
 
   <Grid RowDefinitions="Auto,*">
     <views:TitleBar Name="TitleBar" />

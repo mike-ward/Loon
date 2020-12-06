@@ -1,0 +1,20 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:l="clr-namespace:TweetX.Views.Content.TweetItem"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TweetX.Views.Content.TweetItem.TweetItemQuoted">
+
+  <Border Margin="0 5"
+         Padding="10 0"
+         BorderThickness="0.6 0"
+         BorderBrush="{DynamicResource ThemeForegroundLowBrush}">
+
+    <StackPanel>
+      <l:TweetItemAuthor />
+      <l:TweetItemText />
+      <l:TweetItemImage DataContext="{Binding ExtendedEntities}"  Margin="0 5 5 5" Name="TweetItemImage" />
+    </StackPanel>
+  </Border>
+</UserControl>

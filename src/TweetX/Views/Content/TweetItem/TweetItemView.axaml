@@ -9,19 +9,39 @@
   <Grid ColumnDefinitions="Auto,*">
     <!--  Column 1  -->
 
-    <l:TweetItemProfileImage Name="TweetItemProfileImage"
-                             DataContext="{Binding OriginatingStatus}"
-                             Margin="0 0 7 0"
-                             VerticalAlignment="Top" />
+    <l:TweetItemProfileImage
+      Name="TweetItemProfileImage"
+      DataContext="{Binding OriginatingStatus}"
+      Margin="0 0 7 0"
+      VerticalAlignment="Top" />
 
     <!--  Column 2  -->
 
-    <StackPanel Grid.Column="1" Margin="0 0 0 10">
-      <l:TweetItemRetweetedBy DataContext="{Binding}" IsVisible="{Binding IsRetweet}" />
+    <StackPanel
+      Grid.Column="1"
+      Margin="0 0 0 10">
+
+      <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
+
       <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
+
       <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
-      <l:TweetItemImage DataContext="{Binding OriginatingStatus.ExtendedEntities}" Margin="0 5" Name="TweetItemImage" />
-      <l:TweetItemRelated DataContext="{Binding RelatedLinkInfo}" Name="TweetItemRelated" />
+
+      <l:TweetItemImage
+        Name="TweetItemImage"
+        DataContext="{Binding OriginatingStatus.ExtendedEntities}"
+        Margin="0 5 5 5" />
+
+      <l:TweetItemQuoted
+        Name="TweetItemQuoted"
+        DataContext="{Binding OriginatingStatus.QuotedStatus}"
+        IsVisible="{Binding, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
+
+      <l:TweetItemRelated
+        Name="TweetItemRelated"
+        DataContext="{Binding RelatedLinkInfo}"
+        IsVisible="{Binding, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
+
       <l:TweetItemActions DataContext="{Binding OriginatingStatus}" />
     </StackPanel>
   </Grid>

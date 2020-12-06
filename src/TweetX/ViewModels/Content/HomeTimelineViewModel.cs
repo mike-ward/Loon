@@ -22,7 +22,7 @@ namespace TweetX.ViewModels.Content
         {
             TwitterService = twitterService;
             var name = App.GetString("tab-home-name");
-            Timeline = new Timeline(name, Tasks(), settings);
+            Timeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()

@@ -17,8 +17,10 @@ namespace TweetX.Views.Content.TweetItem
 
         public void Clearing()
         {
+            // Stop image downloading when scrolling
             this.FindControl<TweetItemImage>(nameof(TweetItemImage)).Clearing = true;
             this.FindControl<TweetItemProfileImage>(nameof(TweetItemProfileImage)).Clearing = true;
+            this.FindControl<TweetItemQuoted>(nameof(TweetItemQuoted)).FindControl<TweetItemImage>(nameof(TweetItemImage)).Clearing = true;
             this.FindControl<TweetItemRelated>(nameof(TweetItemRelated)).FindControl<TweetItemImage>(nameof(TweetItemImage)).Clearing = true;
         }
     }

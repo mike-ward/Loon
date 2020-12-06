@@ -4,7 +4,6 @@
              xmlns:l="clr-namespace:TweetX.Views.Content.TweetItem"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             IsVisible="{Binding, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}"
              x:Class="TweetX.Views.Content.TweetItem.TweetItemRelated">
 
   <UserControl.Styles>
@@ -16,7 +15,7 @@
 
   <Border Margin="0 5"
           Padding="10 0"
-          BorderThickness="0.3 0"
+          BorderThickness="0.6 0"
           BorderBrush="{DynamicResource ThemeForegroundLowBrush}">
 
     <StackPanel Margin="5 0" Spacing="5">

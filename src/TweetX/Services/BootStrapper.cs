@@ -28,6 +28,7 @@ namespace TweetX.Services
             services.AddTransient<ContentViewModel>();
             services.AddTransient<GetPinViewModel>();
             services.AddTransient<HomeTimelineViewModel>();
+            services.AddTransient<LikesTimelineViewModel>();
 
             // Models
             services.AddSingleton<ISettings, Settings>();

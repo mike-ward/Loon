@@ -6,6 +6,8 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using TweetX.Models;
+using TweetX.Services;
 
 namespace TweetX.Views.Content.TweetItem
 {
@@ -37,13 +39,27 @@ namespace TweetX.Views.Content.TweetItem
 
                     if (image.DataContext is string uri && uri.Length > 0)
                     {
-                        image.Source = await GetImageAsync(uri).ConfigureAwait(true);
+                        try
+                        {
+                            image.Source = await GetImageAsync(uri).ConfigureAwait(true);
+                        }
+                        catch
+                        {
+                            try
+                            {
+                                image.Source = await GetImageAsync(uri).ConfigureAwait(true);
+                            }
+                            catch
+                            {
+                                image.Source = await GetImageAsync(uri).ConfigureAwait(true);
+                            }
+                        }
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // eat it.
+                TraceService.Message(ex.Message);
             }
         }
 
@@ -51,16 +67,18 @@ namespace TweetX.Views.Content.TweetItem
         {
             if (Clearing) return null;
             var wc = WebRequest.Create(uri);
+            wc.Timeout = Constants.WebRequestTimeout;
             using var response = await wc.GetResponseAsync().ConfigureAwait(false);
 
             if (Clearing) return null;
             using var stream = response.GetResponseStream();
-            using var ms = new MemoryStream();
+            using var ms = new MemoryStream(); // Bitmap constructor needs a seekable stream
             await stream.CopyToAsync(ms).ConfigureAwait(false);
 
             if (Clearing) return null;
             ms.Position = 0;
-            return new Bitmap(ms);
+            var height = (int)Constants.ImagePanelHeight;
+            return Bitmap.DecodeToHeight(ms, height, Avalonia.Visuals.Media.Imaging.BitmapInterpolationMode.LowQuality);
         }
     }
 }

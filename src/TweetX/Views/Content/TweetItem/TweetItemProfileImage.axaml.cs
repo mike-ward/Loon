@@ -8,6 +8,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using TweetX.Models;
 using Twitter.Models;
 
 namespace TweetX.Views.Content.TweetItem
@@ -16,7 +17,7 @@ namespace TweetX.Views.Content.TweetItem
     {
         public bool Clearing { get; set; }
 
-        private const int profileSize = 48; // Twitter's normal profile image size is 48x48
+        private const int profileSize = 73; // Twitter's bigger profile image size is 48x48
 
         private static readonly Bitmap EmptyBitmap
             = new WriteableBitmap(new PixelSize(profileSize, profileSize), new Vector(96, 96), PixelFormat.Bgra8888, AlphaFormat.Premul);
@@ -46,10 +47,24 @@ namespace TweetX.Views.Content.TweetItem
 
                     if (DataContext is TwitterStatus status)
                     {
-                        var uri = status.User.ProfileImageUrl;
+                        var uri = status.User.ProfileImageUrlBigger;
                         if (uri is not null && uri.Length > 0 && !Clearing)
                         {
-                            image.Source = await GetImage(uri).ConfigureAwait(true);
+                            try
+                            {
+                                image.Source = await GetImage(uri).ConfigureAwait(true);
+                            }
+                            catch
+                            {
+                                try
+                                {
+                                    image.Source = await GetImage(uri).ConfigureAwait(true);
+                                }
+                                catch
+                                {
+                                    image.Source = await GetImage(uri).ConfigureAwait(true);
+                                }
+                            }
                         }
                     }
                 }
@@ -64,6 +79,7 @@ namespace TweetX.Views.Content.TweetItem
         {
             if (Clearing) return null;
             var wc = WebRequest.Create(uri);
+            wc.Timeout = Constants.WebRequestTimeout;
             using var response = await wc.GetResponseAsync().ConfigureAwait(false);
 
             if (Clearing) return null;
@@ -73,7 +89,7 @@ namespace TweetX.Views.Content.TweetItem
 
             if (Clearing) return null;
             ms.Position = 0;
-            return new Bitmap(ms);
+            return Bitmap.DecodeToHeight(ms, profileSize);
         }
     }
 }

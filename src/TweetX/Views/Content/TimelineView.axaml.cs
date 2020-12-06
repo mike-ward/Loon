@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using TweetX.Views.Content.TweetItem;
 
@@ -21,6 +22,17 @@ namespace TweetX.Views.Content
             if (e.Element is TweetItemView ti)
             {
                 ti.Clearing();
+            }
+        }
+
+        protected override void OnPointerPressed(PointerPressedEventArgs e)
+        {
+            base.OnPointerPressed(e);
+
+            if (e.GetCurrentPoint(relativeTo: null).Properties.IsRightButtonPressed)
+            {
+                this.FindControl<ScrollViewer>("ScrollViewer")?.ScrollToHome();
+                e.Handled = true;
             }
         }
     }
