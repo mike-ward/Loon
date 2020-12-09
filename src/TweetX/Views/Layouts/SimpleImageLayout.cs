@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 
-namespace TweetX.Views.Layout
+namespace TweetX.Views.Layouts
 {
     /// <summary>
     /// Simple image panel designed specifically to display the 1-4 images

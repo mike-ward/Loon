@@ -6,7 +6,7 @@ using TweetX.ViewModels;
 
 namespace TweetX.Views
 {
-    internal class MainWindow : Window, IWindow
+    public class MainWindow : Window, IWindow
     {
         public MainWindow()
         {

@@ -5,33 +5,8 @@
              xmlns:vm="clr-namespace:TweetX.ViewModels.Content"
              xmlns:vw="clr-namespace:TweetX.Views.Content"
              xmlns:mn="clr-namespace:TweetX.Views"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              x:Class="TweetX.Views.Content.TabView">
-
-  <UserControl.Styles>
-    <Style Selector="TabItem">
-      <Setter Property="Width" Value="{Binding $parent[mn:MainWindow].Width, Converter={StaticResource TabItemWidth}}" />
-      <Setter Property="Height" Value="35" />
-      <Setter Property="Margin" Value="0 0 0 3" />
-      <Setter Property="Padding" Value="0 5 0 0" />
-      <Setter Property="HorizontalContentAlignment" Value="Center" />
-      <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />
-      <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightHighBrush}" />
-      <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-      <Setter Property="BorderBrush" Value="{DynamicResource ThemeForegroundLowBrush}" />
-      <Setter Property="BorderThickness" Value="0 0 0 0.6" />
-    </Style>
-
-    <Style Selector="TabItem:selected">
-      <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
-      <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-    </Style>
-
-    <Style Selector="TabItem:pointerover">
-      <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
-      <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightHighBrush}" />
-    </Style>
-  </UserControl.Styles>
 
   <Grid HorizontalAlignment="Left">
     <TabControl>

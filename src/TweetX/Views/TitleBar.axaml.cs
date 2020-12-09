@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace TweetX.Views
 {
-    internal class TitleBar : UserControl
+    public class TitleBar : UserControl
     {
         public TitleBar()
         {

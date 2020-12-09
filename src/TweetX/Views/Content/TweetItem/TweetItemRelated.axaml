@@ -3,13 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:l="clr-namespace:TweetX.Views.Content.TweetItem"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              x:Class="TweetX.Views.Content.TweetItem.TweetItemRelated">
 
   <Border Margin="0 5"
           Padding="10 0"
           BorderThickness="0.6 0"
-          BorderBrush="{DynamicResource ThemeForegroundLowBrush}">
+          BorderBrush="{DynamicResource ThemeBorderLowBrush}">
 
     <StackPanel Margin="5 0" Spacing="5">
       <l:TweetItemImage DataContext="{Binding ImageTwitterStatus.ExtendedEntities}" Name="TweetItemImage" />

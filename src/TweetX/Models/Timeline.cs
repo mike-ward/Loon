@@ -12,24 +12,21 @@ namespace TweetX.Models
 {
     public class Timeline : NotifyPropertyChanged
     {
-        private bool pendingStatusesAvailable;
         private string? exceptionMessage;
+        private bool pendingStatusesAvailable;
 
         private bool inUpdate;
         private readonly DispatcherTimer updateTimer;
-        private string timelineName = string.Empty;
-        private AvaloniaList<TwitterStatus> statusCollection = new();
 
-        public string TimelineName { get => timelineName; set => SetProperty(ref timelineName, value); }
-        public AvaloniaList<TwitterStatus> StatusCollection { get => statusCollection; set => SetProperty(ref statusCollection, value); }
-
-        public IEnumerable<Func<Timeline, ValueTask>> UpdateTasks { get; init; }
+        public string TimelineName { get; }
+        public ISettings Settings { get; }
+        public AvaloniaList<TwitterStatus> StatusCollection { get; } = new();
+        public IEnumerable<Func<Timeline, ValueTask>> UpdateTasks { get; }
         public ISet<string> AlreadyAdded { get; } = new HashSet<string>(StringComparer.Ordinal);
         public ISet<TwitterStatus> PendingStatusCollection { get; } = new HashSet<TwitterStatus>();
         public bool IsScrolled { get; set; }
-        public ISettings Settings { get; }
-        public bool PendingStatusesAvailable { get => pendingStatusesAvailable; set => SetProperty(ref pendingStatusesAvailable, value); }
         public string? ExceptionMessage { get => exceptionMessage; set => SetProperty(ref exceptionMessage, value); }
+        public bool PendingStatusesAvailable { get => pendingStatusesAvailable; set => SetProperty(ref pendingStatusesAvailable, value); }
 
         public Timeline(string name, double intervalInMinutes, IEnumerable<Func<Timeline, ValueTask>> updateTasks, ISettings settings)
         {
@@ -38,7 +35,7 @@ namespace TweetX.Models
             Settings = settings;
 
             updateTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(intervalInMinutes) };
-            updateTimer.Tick += async (_, __) => await UpdateAsync().ConfigureAwait(false);
+            updateTimer.Tick += async delegate { await UpdateAsync().ConfigureAwait(false); };
 
             Settings.PropertyChanged += CheckAuthentication;
         }

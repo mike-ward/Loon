@@ -13,8 +13,13 @@
         UseLayoutRounding="true"
         Title="{StaticResource title}">
 
-  <Grid RowDefinitions="Auto,*">
-    <views:TitleBar Name="TitleBar" />
-    <content:ContentView  Grid.Row="1" />
-  </Grid>
+  <Border
+    BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+    BorderThickness="0.6">
+
+    <Grid RowDefinitions="Auto,*">
+      <views:TitleBar Name="TitleBar" />
+      <content:ContentView  Grid.Row="1" />
+    </Grid>
+  </Border>
 </Window>

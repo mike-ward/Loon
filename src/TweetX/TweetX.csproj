@@ -18,41 +18,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="app.ico" />
-    <None Remove="Resources\Button.xaml" />
-    <None Remove="Resources\Converters.xaml" />
-    <None Remove="Resources\ScrollBar.xaml" />
-    <None Remove="Resources\seguisym.ttf" />
-    <None Remove="Resources\Separator.xaml" />
-    <None Remove="Resources\Settings.xaml" />
-    <None Remove="Resources\Strings.xaml" />
-    <None Remove="Resources\TextBlock.xaml" />
+    <None Remove="Assets\Accents.xaml" />
+    <None Remove="Assets\Button.xaml" />
+    <None Remove="Assets\Converters.xaml" />
+    <None Remove="Assets\ScrollBar.xaml" />
+    <None Remove="Assets\seguisym.ttf" />
+    <None Remove="Assets\Separator.xaml" />
+    <None Remove="Assets\Strings.xaml" />
+    <None Remove="Assets\TabItem.xaml" />
+    <None Remove="Assets\TextBlock.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaXaml Include="Resources\TextBlock.xaml">
+    <AvaloniaXaml Include="Assets\TabItem.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Resources\Separator.xaml">
+    <AvaloniaXaml Include="Assets\TextBlock.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Resources\Button.xaml">
+    <AvaloniaXaml Include="Assets\Separator.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Resources\Settings.xaml">
+    <AvaloniaXaml Include="Assets\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Resources\ScrollBar.xaml">
+    <AvaloniaXaml Include="Assets\Accents.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Resources\Strings.xaml">
+    <AvaloniaXaml Include="Assets\ScrollBar.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Resources\Converters.xaml" />
+    <AvaloniaXaml Include="Assets\Strings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Assets\Converters.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaResource Include="Resources\seguisym.ttf" />
+    <AvaloniaResource Include="Assets\seguisym.ttf" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0-preview6" />
@@ -65,7 +69,7 @@
     <Folder Include="ViewModels\Content\TweetItem\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\Converters.xaml">
+    <Page Include="Assets\Converters.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

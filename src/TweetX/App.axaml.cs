@@ -16,7 +16,12 @@ namespace TweetX
 
         public override void OnFrameworkInitializationCompleted()
         {
-            ((IClassicDesktopStyleApplicationLifetime)ApplicationLifetime).MainWindow = BootStrapper.GetService<MainWindow>();
+            // Need to check so designer works
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime app)
+            {
+                app.MainWindow = BootStrapper.GetService<MainWindow>();
+            }
+
             base.OnFrameworkInitializationCompleted();
         }
 

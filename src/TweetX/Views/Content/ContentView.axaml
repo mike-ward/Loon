@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:TweetX.ViewModels.Content"
              xmlns:vw="clr-namespace:TweetX.Views.Content"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:ContentViewModel}, Mode=OneTime}"
              x:Class="TweetX.Views.Content.ContentView">
 

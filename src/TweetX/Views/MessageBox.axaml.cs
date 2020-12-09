@@ -5,7 +5,7 @@ using Avalonia.Markup.Xaml;
 
 namespace TweetX.Views
 {
-    internal class MessageBox : Window
+    public class MessageBox : Window
     {
         public enum MessageBoxButtons
         {
