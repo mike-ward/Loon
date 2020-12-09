@@ -6,19 +6,13 @@
     <Description>A gadget-like desktop twitter client.</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>Enable</Nullable>
-    <PackageProjectUrl>https://github.com/mike-ward/tweetz</PackageProjectUrl>
-    <PublishReadyToRun>false</PublishReadyToRun>
-    <RepositoryUrl>https://github.com/mike-ward/tweetz</RepositoryUrl>
-    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
     <TargetFramework>net5.0</TargetFramework>
-    <TieredCompilation>true</TieredCompilation>
   </PropertyGroup>
 
   <PropertyGroup>
-    <AssemblyVersion>2.8.6</AssemblyVersion>
-    <FileVersion>2.8.6</FileVersion>
-    <Version>2.8.6</Version>    
+    <AssemblyVersion>0.0.1</AssemblyVersion>
+    <FileVersion>0.0.1</FileVersion>
+    <Version>0.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
