@@ -5,55 +5,34 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TweetX.Views.Content.TweetItem.TweetItemActions">
 
-  <UserControl.Styles>
-    <Style Selector="Button">
-      <Setter Property="Padding" Value="0" />
-      <Setter Property="BorderThickness" Value="0" />
-      <Setter Property="Opacity" Value="{DynamicResource Dim1}" />
-      <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-    </Style>
-
-    <Style Selector="Button:pointerover">
-      <Setter Property="Opacity" Value="1" />
-    </Style>
-
-    <Style Selector="TextBlock.symbol">
-      <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />
-    </Style>
-
-    <Style Selector="TextBlock.margin">
-      <Setter Property="Padding" Value="5 0 0 0" />
-    </Style>
-  </UserControl.Styles>
-
   <StackPanel Orientation="Horizontal" Spacing="15">
 
-    <Button>
+    <Button Classes="bare">
       <TextBlock Classes="symbol" Text="{DynamicResource ReplySymbol}" />
     </Button>
 
-    <Button>
+    <Button Classes="bare">
       <StackPanel Orientation="Horizontal">
         <TextBlock Classes="symbol" Text="{DynamicResource RetweetSymbol}" />
-        <TextBlock Classes="margin" Text="{Binding RetweetCount, Converter={StaticResource CountConverter}}" />
+        <TextBlock Classes="padleft" Text="{Binding RetweetCount, Converter={StaticResource CountConverter}}" />
       </StackPanel>
     </Button>
 
-    <Button>
+    <Button Classes="bare">
       <StackPanel Orientation="Horizontal">
         <TextBlock Classes="symbol" Text="{DynamicResource LikeSymbol}" />
-        <TextBlock Classes="margin" Text="{Binding FavoriteCount, Converter={StaticResource CountConverter}}" />
+        <TextBlock Classes="padleft" Text="{Binding FavoriteCount, Converter={StaticResource CountConverter}}" />
       </StackPanel>
     </Button>
 
-    <Button>
+    <Button Classes="bare">
       <TextBlock Classes="symbol" Text="{DynamicResource QuoteSymbol}" />
     </Button>
 
-    <Button>
+    <Button Classes="bare">
       <StackPanel Orientation="Horizontal">
-        <TextBlock Classes="symbol" Text="{DynamicResource AddFriendSymbol}" />
-        <TextBlock Classes="margin" Text="{Binding User.Followers, Converter={StaticResource CountConverter}}" />
+        <TextBlock Classes="symbol" Text="{DynamicResource AddFriendSymbol}" Foreground="{Binding User.IsFollowing, Converter={StaticResource IsFollowingBrush}}" />
+        <TextBlock Classes="padleft" Text="{Binding User.Followers, Converter={StaticResource CountConverter}}" />
       </StackPanel>
     </Button>
   </StackPanel>

@@ -77,8 +77,7 @@ namespace TweetX.Views.Content.TweetItem
 
             if (Clearing) return null;
             ms.Position = 0;
-            var height = (int)Constants.ImagePanelHeight;
-            return Bitmap.DecodeToHeight(ms, height, Avalonia.Visuals.Media.Imaging.BitmapInterpolationMode.LowQuality);
+            return new Bitmap(ms);
         }
     }
 }

@@ -6,13 +6,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TweetX.Views.Content.TweetItem.TweetItemRelated">
 
-  <UserControl.Styles>
-    <Style Selector="TextBlock">
-      <Setter Property="Opacity" Value="{DynamicResource Dim1}" />
-      <Setter Property="TextWrapping" Value="Wrap" />
-    </Style>
-  </UserControl.Styles>
-
   <Border Margin="0 5"
           Padding="10 0"
           BorderThickness="0.6 0"
@@ -20,13 +13,15 @@
 
     <StackPanel Margin="5 0" Spacing="5">
       <l:TweetItemImage DataContext="{Binding ImageTwitterStatus.ExtendedEntities}" Name="TweetItemImage" />
-      <TextBlock Text="{Binding Title, Converter={StaticResource HtmlDecode}}" FontWeight="Bold" />
-      <TextBlock Text="{Binding Description, Converter={StaticResource TrimText}}" />
+      <TextBlock Classes="normal" Text="{Binding Title, Converter={StaticResource HtmlDecode}}" FontWeight="Bold" />
+      <TextBlock Classes="normal" Text="{Binding Description, Converter={StaticResource TrimText}}" />
 
       <StackPanel Orientation="Horizontal">
-        <TextBlock Text="↗ " />
-        <TextBlock Text="{Binding SiteName}" />
+        <TextBlock Classes="normal" Text="↗ " />
+        <TextBlock Classes="normal" Text="{Binding SiteName}" />
       </StackPanel>
+
+      <l:TweetItemTranslate DataContext="{Binding ImageTwitterStatus}" />
     </StackPanel>
   </Border>
 </UserControl>

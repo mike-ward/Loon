@@ -7,6 +7,8 @@
     <Style.Resources>
       <sys:Double x:Key="Dim0">0.85</sys:Double>
       <sys:Double x:Key="Dim1">0.75</sys:Double>
+
+      <SolidColorBrush x:Key="TwitterBlueBrush">#1DA1F2</SolidColorBrush>
     </Style.Resources>
   </Style>
 </Styles>

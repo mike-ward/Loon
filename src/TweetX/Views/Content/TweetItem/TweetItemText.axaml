@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TweetX.Views.Content.TweetItem.TweetItemText">
 
-  <TextBlock Text="{Binding FullText, Converter={StaticResource HtmlDecode}}"
-             Opacity="{DynamicResource Dim1}"
-             TextWrapping="Wrap" />
+  <TextBlock
+    Classes="normal"
+    Text="{Binding FullText, Converter={StaticResource HtmlDecode}}" />
 </UserControl>

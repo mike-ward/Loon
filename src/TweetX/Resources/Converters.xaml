@@ -8,6 +8,7 @@
       <converters:ViewModelLocator x:Key="VML" />
       <converters:CountConverter x:Key="CountConverter" />
       <converters:HtmlDecodeConverter x:Key="HtmlDecode" />
+      <converters:IsFollowingBrushConverter x:Key="IsFollowingBrush" />
       <converters:TabItemWidthConverter x:Key="TabItemWidth" />
       <converters:TimeAgoConverter x:Key="TimeAgo" />
       <converters:TrimTextConverter x:Key="TrimText" />

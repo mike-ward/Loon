@@ -21,12 +21,15 @@ namespace Twitter.Models
         public string? ImageUrl { get; private set; }
         public string Description { get; private set; } = string.Empty;
         public string SiteName { get; private set; } = string.Empty;
+        public string Language { get; private set; } = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
         public TwitterStatus ImageTwitterStatus
         {
             get => new()
             {
                 Id = Guid.NewGuid().ToString(),
+                Language = Language,
+                FullText = Description,
                 ExtendedEntities = new Entities
                 {
                     Media = string.IsNullOrWhiteSpace(ImageUrl)
@@ -118,8 +121,11 @@ namespace Twitter.Models
             var document = new HtmlDocument();
             document.LoadHtml(html);
 
+            var language = document.DocumentNode.SelectSingleNode("//html")?.Attributes["lang"]?.Value
+                ?? CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+
             var metaTags = document.DocumentNode.SelectNodes("//meta");
-            var metaInfo = new RelatedLinkInfo { Url = url };
+            var metaInfo = new RelatedLinkInfo { Url = url, Language = Truncate(language, 2) };
 
             if (metaTags is not null)
             {
@@ -204,6 +210,15 @@ namespace Twitter.Models
         {
             // Twice to handle sequences like: "&amp;mdash;"
             return WebUtility.HtmlDecode(WebUtility.HtmlDecode(text)) ?? string.Empty;
+        }
+
+        private static string Truncate(string source, int length)
+        {
+            if (source.Length > length)
+            {
+                source = source.Substring(0, length);
+            }
+            return source;
         }
     }
 }

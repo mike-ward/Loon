@@ -6,15 +6,21 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TweetX.Views.Content.TweetItem.TweetItemQuoted">
 
-  <Border Margin="0 5"
-         Padding="10 0"
-         BorderThickness="0.6 0"
-         BorderBrush="{DynamicResource ThemeForegroundLowBrush}">
+  <Border
+    Margin="0 5"
+    Padding="10 0"
+    BorderThickness="0.6 0"
+    BorderBrush="{DynamicResource ThemeForegroundLowBrush}">
 
     <StackPanel>
       <l:TweetItemAuthor />
       <l:TweetItemText />
-      <l:TweetItemImage DataContext="{Binding ExtendedEntities}"  Margin="0 5 5 5" Name="TweetItemImage" />
+      <l:TweetItemTranslate />
+
+      <l:TweetItemImage
+        Name="TweetItemImage"
+        DataContext="{Binding ExtendedEntities}"
+        Margin="0 5 5 5" />
     </StackPanel>
   </Border>
 </UserControl>

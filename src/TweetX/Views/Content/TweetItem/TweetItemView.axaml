@@ -12,8 +12,8 @@
     <l:TweetItemProfileImage
       Name="TweetItemProfileImage"
       DataContext="{Binding OriginatingStatus}"
-      Margin="0 0 7 0"
-      VerticalAlignment="Top" />
+      VerticalAlignment="Top"
+      Margin="0 0 7 0" />
 
     <!--  Column 2  -->
 
@@ -26,6 +26,7 @@
       <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
 
       <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
+      <l:TweetItemTranslate DataContext="{Binding OriginatingStatus}" />
 
       <l:TweetItemImage
         Name="TweetItemImage"

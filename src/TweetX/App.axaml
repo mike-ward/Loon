@@ -8,6 +8,9 @@
     <StyleInclude Source="/Resources/Settings.xaml" />
     <StyleInclude Source="/Resources/Strings.xaml" />
     <StyleInclude Source="/Resources/Converters.xaml" />
+    <StyleInclude Source="/Resources/Button.xaml" />
     <StyleInclude Source="/Resources/ScrollBar.xaml" />
+    <StyleInclude Source="/Resources/Separator.xaml" />
+    <StyleInclude Source="/Resources/TextBlock.xaml" />
   </Application.Styles>
 </Application>

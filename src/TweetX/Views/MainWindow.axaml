@@ -9,7 +9,7 @@
         x:Class="TweetX.Views.MainWindow"
         ExtendClientAreaTitleBarHeightHint="1"
         ExtendClientAreaToDecorationsHint="True"
-        DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:MainWindowViewModel}, Mode=OneTime}"
+        DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:MainWindowViewModel}, Mode=OneTime}"
         UseLayoutRounding="true"
         Title="{StaticResource title}">
 

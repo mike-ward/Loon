@@ -1,0 +1,9 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Style Selector="Separator">
+    <Setter Property="BorderThickness" Value="0.6" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}" />
+  </Style>
+</Styles>

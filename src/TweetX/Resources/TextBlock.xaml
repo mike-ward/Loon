@@ -1,0 +1,17 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Style Selector="TextBlock.normal">
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Opacity" Value="{DynamicResource Dim1}" />
+  </Style>
+
+  <Style Selector="TextBlock.symbol">
+    <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />
+  </Style>
+
+  <Style Selector="TextBlock.padleft">
+    <Setter Property="Padding" Value="5 0 0 0" />
+  </Style>
+</Styles>

@@ -7,8 +7,10 @@
              HorizontalContentAlignment="Center"
              x:Class="TweetX.Views.Content.TweetItem.TweetItemProfileImage">
 
-  <Border CornerRadius="22.5"
-          ClipToBounds="True">
+  <Border
+    CornerRadius="22.5"
+    ClipToBounds="True">
+
     <Image DataContextChanged="UpdateImage" Width="45" />
   </Border>
 </UserControl>

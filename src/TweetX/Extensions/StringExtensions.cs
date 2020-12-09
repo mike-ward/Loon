@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace TweetX.Extensions
 {
@@ -14,6 +15,18 @@ namespace TweetX.Extensions
         public static bool IsNotEqualTo(this string? a, string? b)
         {
             return string.CompareOrdinal(a, b) != 0;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqualToIgnoreCase(this string? a, string? b)
+        {
+            return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotEqualToIgnoreCase(this string? a, string? b)
+        {
+            return !string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

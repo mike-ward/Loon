@@ -39,14 +39,14 @@
         <TabItem.Header>
           <TextBlock Text="{DynamicResource HomeSymbol}" />
         </TabItem.Header>
-        <vw:TimelineView DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:HomeTimelineViewModel}, Mode=OneTime}" />
+        <vw:TimelineView DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:HomeTimelineViewModel}, Mode=OneTime}" />
       </TabItem>
 
       <TabItem>
         <TabItem.Header>
           <TextBlock Text="{DynamicResource LikeSymbol}" />
         </TabItem.Header>
-        <vw:TimelineView DataContext="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource VML}, ConverterParameter={x:Type vm:LikesTimelineViewModel}, Mode=OneTime}" />
+        <vw:TimelineView DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:LikesTimelineViewModel}, Mode=OneTime}" />
       </TabItem>
 
       <TabItem>

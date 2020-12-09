@@ -1,0 +1,15 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Style Selector="Button.bare">
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Opacity" Value="{DynamicResource Dim1}" />
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+  </Style>
+
+  <Style Selector="Button.bare:pointerover">
+    <Setter Property="Opacity" Value="1" />
+  </Style>
+</Styles>

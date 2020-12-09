@@ -18,7 +18,7 @@
       <!--  Tabs  -->
 
       <sys:String x:Key="tab-home-name">Home</sys:String>
-      <sys:String x:Key="tab-like-name">Likes</sys:String>
+      <sys:String x:Key="tab-likes-name">Likes</sys:String>
       <sys:String x:Key="tab-search-name">Search</sys:String>
       <sys:String x:Key="tab-settings-name">Settings</sys:String>
       <sys:String x:Key="tab-pen-name">Compose</sys:String>
@@ -60,6 +60,11 @@
 
       <sys:String x:Key="Hourglass">&#x231B;</sys:String>
       <sys:String x:Key="WarningSign">&#x26A0;</sys:String>
+
+      <!--  Translate  -->
+
+      <sys:String x:Key="translate-text-label">↗ TRANSLATE</sys:String>
+      <sys:String x:Key="translate-text-working">working…</sys:String>
     </Style.Resources>
   </Style>
 </Styles>
