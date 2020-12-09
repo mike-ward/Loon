@@ -1,0 +1,60 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Loon.ViewModels.Content"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+             x:Class="Loon.Views.Content.GetPinView"
+             DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:GetPinViewModel}, Mode=OneTime}">
+
+  <Grid Margin="20">
+
+    <!--  Page 1  -->
+
+    <Grid IsVisible="{Binding !SecondPage}">
+      <StackPanel>
+        <TextBlock Text="{StaticResource pin-instructions-1}"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap" />
+
+        <Button Margin="20"
+                MaxWidth="100"
+                Command="{Binding GetPin}"
+                Content="{StaticResource pin-get-pin}" />
+      </StackPanel>
+    </Grid>
+
+    <!--  Page 2  -->
+
+    <Grid IsVisible="{Binding SecondPage}">
+      <StackPanel>
+        <TextBlock Text="{StaticResource pin-instructions-2}"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap" />
+
+        <TextBox x:Name="PinTextBox"
+                 Margin="20"
+                 MaxWidth="100"
+                 FontSize="14"
+                 FontWeight="Bold"
+                 TextAlignment="Center"
+                 Watermark="PIN"
+                 Text="{Binding Pin, Mode=TwoWay}" />
+
+        <Button Margin="20"
+                MaxWidth="100"
+                Command="{Binding SignIn}"
+                Content="{StaticResource pin-sign-in}" />
+
+        <TextBlock Text="{StaticResource pin-about}"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap" />
+
+        <Button Margin="20"
+                MaxWidth="100"
+                Command="{Binding GoBack}"
+                Content="&#x25c0;" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</UserControl>

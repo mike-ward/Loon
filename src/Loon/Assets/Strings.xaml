@@ -1,0 +1,70 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+  <Style>
+    <Style.Resources>
+      <sys:String x:Key="title">Loon</sys:String>
+
+      <!--  Get Pin  -->
+
+      <sys:String x:Key="pin-instructions-1">To get started, click the &quot;Get PIN&quot; button. This opens a Web page where you authorize access.</sys:String>
+      <sys:String x:Key="pin-instructions-2">Copy the PIN from the Web page to here and click &quot;Sign In&quot;</sys:String>
+      <sys:String x:Key="pin-get-pin">Get PIN</sys:String>
+      <sys:String x:Key="pin-sign-in">Sign In</sys:String>
+      <sys:String x:Key="pin-about">PINs can only be used once so there's no need to save them.</sys:String>
+      <sys:String x:Key="pin-error">Sign in error. Try again</sys:String>
+
+      <!--  Tabs  -->
+
+      <sys:String x:Key="tab-home-name">Home</sys:String>
+      <sys:String x:Key="tab-likes-name">Likes</sys:String>
+      <sys:String x:Key="tab-search-name">Search</sys:String>
+      <sys:String x:Key="tab-settings-name">Settings</sys:String>
+      <sys:String x:Key="tab-pen-name">Compose</sys:String>
+
+      <!--  TweetItem  -->
+
+      <sys:String x:Key="tweet-retweeted">retweeted</sys:String>
+
+      <!--  Symbols  -->
+
+      <FontFamily x:Key="SymbolFont">/Assets/#Segoe UI Symbol</FontFamily>
+
+      <sys:String x:Key="HomeSymbol">&#xE10F;</sys:String>
+      <sys:String x:Key="MentionsSymbol">&#xE168;</sys:String>
+      <sys:String x:Key="SearchSymbol">&#xE11A;</sys:String>
+      <sys:String x:Key="SettingsSymbol">&#xE115;</sys:String>
+      <sys:String x:Key="WriteSymbol">&#xE104;</sys:String>
+      <sys:String x:Key="AddFriendSymbol">&#xE1E2;</sys:String>
+      <sys:String x:Key="FontSizeSymbol">&#xE1C8;</sys:String>
+      <sys:String x:Key="QuoteSymbol">&#xE134;</sys:String>
+
+      <sys:String x:Key="ReplySymbol">&#x1F4AC;</sys:String>
+      <sys:String x:Key="RetweetSymbol">&#xE1CA;</sys:String>
+      <sys:String x:Key="LikeSymbol">&#xE0A5;</sys:String>
+      <sys:String x:Key="EllipsisSymbol">&#xE10C;</sys:String>
+
+      <sys:String x:Key="XSymbol">&#xE10A;</sys:String>
+      <sys:String x:Key="AddSymbol">&#xE109;</sys:String>
+      <sys:String x:Key="CheckSymbol">&#xE10B;</sys:String>
+
+      <sys:String x:Key="SkipBackSymbol">&#xE100;</sys:String>
+      <sys:String x:Key="TenSkipBackSymbol">&#xE112;</sys:String>
+      <sys:String x:Key="PauseSymbol">&#xE103;</sys:String>
+      <sys:String x:Key="PlaySymbol">&#xE102;</sys:String>
+      <sys:String x:Key="CopyUriClipboardSymbol">&#xE16F;</sys:String>
+      <sys:String x:Key="CopyImageClipboardSymbol">&#x1f304;</sys:String>
+
+      <!--  Standard font symbols  -->
+
+      <sys:String x:Key="Hourglass">&#x231B;</sys:String>
+      <sys:String x:Key="WarningSign">&#x26A0;</sys:String>
+
+      <!--  Translate  -->
+
+      <sys:String x:Key="translate-text-label">↗ TRANSLATE</sys:String>
+      <sys:String x:Key="translate-text-working">working…</sys:String>
+    </Style.Resources>
+  </Style>
+</Styles>

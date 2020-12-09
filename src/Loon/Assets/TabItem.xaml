@@ -1,0 +1,28 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mn="clr-namespace:Loon.Views">
+
+  <Style Selector="TabItem">
+    <Setter Property="Width" Value="{Binding $parent[mn:MainWindow].Width, Converter={StaticResource TabItemWidth}}" />
+    <Setter Property="Height" Value="35" />
+    <Setter Property="Margin" Value="0 0 0 3" />
+    <Setter Property="Padding" Value="0 5 0 0" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightHighBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}" />
+    <Setter Property="BorderThickness" Value="0 0 0 0.6" />
+  </Style>
+
+  <Style Selector="TabItem:selected">
+    <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+  </Style>
+
+  <Style Selector="TabItem:pointerover">
+    <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ThemeForegroundLowBrush}" />
+  </Style>
+</Styles>
