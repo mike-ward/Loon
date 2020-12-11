@@ -2,21 +2,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="210" d:DesignHeight="100"
+             xmlns:m="clr-namespace:Loon.Models"
+             mc:Ignorable="d" d:DesignWidth="210" d:DesignHeight="70"
              x:Class="Loon.Views.Content.AppSettings.SettingsInfo">
 
   <StackPanel
     Spacing="3"
     HorizontalAlignment="Center">
 
-    <TextBlock Text="version goes here" />
+    <TextBlock
+      Text="{x:Static m:VersionInfo.Version}"
+      HorizontalAlignment="Center" />
 
     <Button
       Classes="bare"
       Content="https://mike-ward.net"
       CommandParameter="https://mike-ward.net"
-      Command="{Binding $parent[UserControl].OpenWebsite}" />
+      Command="{Binding $parent[UserControl].OpenWebSite}" />
 
-    <TextBlock Text="Copyright goes here" />
+    <TextBlock Text="{x:Static m:VersionInfo.Copyright}" />
   </StackPanel>
 </UserControl>

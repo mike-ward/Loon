@@ -11,6 +11,7 @@
       <converters:DoubleFormatConverter x:Key="DoubleFormat" />
       <converters:HtmlDecodeConverter x:Key="HtmlDecode" />
       <converters:IsFollowingBrushConverter x:Key="IsFollowingBrush" />
+      <converters:MultiBoolConverter x:Key="MultiBool" />
       <converters:TabItemWidthConverter x:Key="TabItemWidth" />
       <converters:TimeAgoConverter x:Key="TimeAgo" />
       <converters:TrimTextConverter x:Key="TrimText" />

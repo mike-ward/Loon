@@ -1,6 +1,7 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:m="clr-namespace:Loon.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:l="clr-namespace:Loon.Views.Content.Timelines.TweetItem"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
@@ -20,6 +21,7 @@
       <l:TweetItemImage
         Name="TweetItemImage"
         DataContext="{Binding ExtendedEntities}"
+        IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideImages}"
         Margin="0 5 5 5" />
     </StackPanel>
   </Border>

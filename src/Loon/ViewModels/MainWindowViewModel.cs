@@ -5,7 +5,7 @@ namespace Loon.ViewModels
 {
     internal class MainWindowViewModel
     {
-        private ISettings Settings { get; }
+        public ISettings Settings { get; }
 
         public MainWindowViewModel(ITwitterService twitterService, ISettings settings)
         {

@@ -1,6 +1,7 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:m="clr-namespace:Loon.Views"
              xmlns:l="clr-namespace:Loon.Views.Content.Timelines.TweetItem"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
@@ -12,14 +13,14 @@
     <l:TweetItemProfileImage
       Name="TweetItemProfileImage"
       DataContext="{Binding OriginatingStatus}"
-      VerticalAlignment="Top"
-      Margin="0 0 7 0" />
+      IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideProfileImages}"
+      VerticalAlignment="Top" />
 
     <!--  Column 2  -->
 
     <StackPanel
       Grid.Column="1"
-      Margin="0 0 0 10">
+      Margin="7 0 0 10">
 
       <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
 
@@ -31,6 +32,7 @@
       <l:TweetItemImage
         Name="TweetItemImage"
         DataContext="{Binding OriginatingStatus.ExtendedEntities}"
+        IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideImages}"
         Margin="0 5 5 5" />
 
       <l:TweetItemQuoted
@@ -40,10 +42,20 @@
 
       <l:TweetItemRelated
         Name="TweetItemRelated"
-        DataContext="{Binding RelatedLinkInfo}"
-        IsVisible="{Binding, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
+        DataContext="{Binding OriginatingStatus.RelatedLinkInfo}">
+        <l:TweetItemImage.IsVisible>
+          <MultiBinding Converter="{StaticResource MultiBool}" FallbackValue="False">
+            <Binding Converter="{x:Static ObjectConverters.IsNotNull}" />
+            <Binding Path="!$parent[m:MainWindow].DataContext.Settings.HideExtendedContent" />
+          </MultiBinding>
+        </l:TweetItemImage.IsVisible>
+      </l:TweetItemRelated>
 
       <l:TweetItemActions DataContext="{Binding OriginatingStatus}" />
+
+      <Separator
+        Margin="0 10 0 0"
+        IsVisible="{Binding $parent[m:MainWindow].DataContext.Settings.HideProfileImages}" />
     </StackPanel>
   </Grid>
 </UserControl>

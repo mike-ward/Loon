@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ml="clr-namespace:Loon.Views"
              xmlns:in="clr-namespace:Loon.Interfaces"
              xmlns:vm="clr-namespace:Loon.ViewModels.Content.Timelines"
              xmlns:tl="clr-namespace:Loon.Views.Content.Timelines"
@@ -35,7 +36,7 @@
       <TabItem.Header>
         <TextBlock Text="{DynamicResource SettingsSymbol}" />
       </TabItem.Header>
-      <as:SettingsView DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type in:ISettings}, Mode=OneTime}}" />
+      <as:SettingsView DataContext="{Binding $parent[ml:MainWindow].DataContext.Settings}}" />
     </TabItem>
 
     <TabItem>

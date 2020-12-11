@@ -33,7 +33,8 @@ namespace Loon.Models
                     }
                     else
                     {
-                        timeline.StatusCollection.Insert(0, clonedStatus);
+                        if (timeline.StatusCollection.Count == 0) timeline.StatusCollection.Insert(0, new TwitterStatus());
+                        timeline.StatusCollection.Insert(1, clonedStatus);
                     }
                 }
             }
