@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Avalonia.Collections;
 using Avalonia.Threading;
+using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Services;
 using Twitter.Models;
@@ -73,14 +74,16 @@ namespace Loon.Models
 
         private async void CheckAuthentication(object? sender, PropertyChangedEventArgs e)
         {
-            if (Settings.AccessToken is not null &&
-                Settings.AccessTokenSecret is not null)
+            if (e.PropertyName.IsEqualTo(nameof(ISettings.IsAuthenticated)))
             {
-                await Start().ConfigureAwait(false);
-            }
-            else
-            {
-                await Stop().ConfigureAwait(false);
+                if (Settings.IsAuthenticated)
+                {
+                    await Start().ConfigureAwait(false);
+                }
+                else
+                {
+                    await Stop().ConfigureAwait(false);
+                }
             }
         }
 

@@ -1,10 +1,11 @@
 ﻿using System;
-using Microsoft.Extensions.DependencyInjection;
 using Loon.Interfaces;
 using Loon.Models;
 using Loon.ViewModels;
 using Loon.ViewModels.Content;
+using Loon.ViewModels.Content.Timelines;
 using Loon.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Loon.Services
 {
@@ -25,7 +26,6 @@ namespace Loon.Services
 
             // View Models
             services.AddTransient<MainWindowViewModel>();
-            services.AddTransient<ContentViewModel>();
             services.AddTransient<GetPinViewModel>();
             services.AddTransient<HomeTimelineViewModel>();
             services.AddTransient<LikesTimelineViewModel>();

@@ -6,7 +6,9 @@
   <Style>
     <Style.Resources>
       <converters:ViewModelLocator x:Key="VML" />
+      <converters:CompareToConverter x:Key="CompareTo" />
       <converters:CountConverter x:Key="CountConverter" />
+      <converters:DoubleFormatConverter x:Key="DoubleFormat" />
       <converters:HtmlDecodeConverter x:Key="HtmlDecode" />
       <converters:IsFollowingBrushConverter x:Key="IsFollowingBrush" />
       <converters:TabItemWidthConverter x:Key="TabItemWidth" />

@@ -65,6 +65,71 @@
 
       <sys:String x:Key="translate-text-label">↗ TRANSLATE</sys:String>
       <sys:String x:Key="translate-text-working">working…</sys:String>
+
+      <!--  Settings  -->
+
+      <sys:String x:Key="settings-title">Settings</sys:String>
+      <sys:String x:Key="hide-profile-images">Hide profile images</sys:String>
+      <sys:String x:Key="hide-images">Hide images</sys:String>
+      <sys:String x:Key="hide-extended-content">Hide extended content</sys:String>
+      <sys:String x:Key="hide-screen-name">Hide screen name in title bar</sys:String>
+      <sys:String x:Key="hide-possibly-sensiive">Hide tweets marked sensitive</sys:String>
+      <sys:String x:Key="run-on-startup">Run on startup</sys:String>
+      <sys:String x:Key="font-size-title">Font size</sys:String>
+      <sys:String x:Key="theme-title">Theme</sys:String>
+      <sys:String x:Key="theme-light">Light</sys:String>
+      <sys:String x:Key="theme-nord">Nord</sys:String>
+      <sys:String x:Key="theme-dark">Dark</sys:String>
+      <sys:String x:Key="donate">Donate</sys:String>
+      <sys:String x:Key="sign-out">Sign Out</sys:String>
+      <sys:String x:Key="open-settings-file">Open Settings...</sys:String>
+      <sys:String x:Key="show-in-system-tray">Show in system tray</sys:String>
+      <sys:String x:Key="always-on-top">Always on top</sys:String>
+      <sys:String x:Key="apply-grayscale-shader">Use grayscale shader</sys:String>
+      <sys:String x:Key="donated">Yes, I donated!</sys:String>
+      <sys:String x:Key="get-the-update">Get the Update</sys:String>
+      <sys:String x:Key="try-again">Try again?</sys:String>
+      <sys:String x:Key="my-tweet-color">My tweets color 🛈</sys:String>
+
+      <!--  <Tooltips  -->
+
+      <sys:String x:Key="home-tooltip">Home</sys:String>
+      <sys:String x:Key="likes-tooltip">Likes</sys:String>
+      <sys:String x:Key="search-tooltip">Search</sys:String>
+      <sys:String x:Key="settings-tooltip">Settings</sys:String>
+      <sys:String x:Key="reply-tooltip">Reply</sys:String>
+      <sys:String x:Key="retweet-tooltip">Retweet / Unretweet</sys:String>
+      <sys:String x:Key="like-tooltip">Like / Unlike</sys:String>
+      <sys:String x:Key="retweet-with-comment-tooltip">Retweet with comment</sys:String>
+      <sys:String x:Key="follow-tooltip">Follow / Unfollow</sys:String>
+      <sys:String x:Key="remove-tooltip">Remove</sys:String>
+      <sys:String x:Key="add-image-tooltip">Add 1 gif (*.gif) or 1 video (*.mp4) or up to 4 images (*.jpg, *.png, *.webp)</sys:String>
+      <sys:String x:Key="mentions-tooltip">Get mentions</sys:String>
+      <sys:String x:Key="new-version-available">Update available! Click here to get it.</sys:String>
+      <sys:String x:Key="copy-to-clipboard">Copy to clipboard</sys:String>
+      <sys:String x:Key="close-tooltip">Close</sys:String>
+      <sys:String x:Key="minimize-tooltip">Minimize</sys:String>
+      <sys:String x:Key="open-in-twitter-tooltip">Open this tweet in twitter</sys:String>
+      <sys:String x:Key="send-tweet-tooltip">Ctrl+Enter to Send</sys:String>
+      <sys:String x:Key="compose-tweet-tooltip">Write a new tweet</sys:String>
+      <sys:String x:Key="copy-uri-tooltip">Copy URL to clipboard</sys:String>
+      <sys:String x:Key="copy-image-tooltip">Copy image to clipboard</sys:String>
+      <sys:String x:Key="play-pause-tooltip">Play/Pause</sys:String>
+      <sys:String x:Key="skip-to-start-tooltip">Skip to start</sys:String>
+      <sys:String x:Key="go-back-ten-tooltip">Go back 10 seconds</sys:String>
+      <sys:String x:Key="new-tweets-arrived-tooltip">New tweets arrived</sys:String>
+      <sys:String x:Key="my-tweet-color-tooltip">Background color (e.g. blue, #fff, #abccef) of tweets mentioning you. Blank for default</sys:String>
+
+      <!--  Tips (in settings dialog)  -->
+
+      <sys:String x:Key="tips">Tips</sys:String>
+      <sys:String x:Key="tips-ctrl-n">New tweet (Ctrl+N)</sys:String>
+      <sys:String x:Key="tips-scroll">Right-click scrolls to top</sys:String>
+      <sys:String x:Key="tips-open">Click timestamp to open in Twitter</sys:String>
+      <sys:String x:Key="tips-font-size">Font size (Alt+Plus/Minus)</sys:String>
+      <sys:String
+        x:Key="tips-profiles"
+        xml:space="preserve">Specify an alternate profile on the command line or shortcut.&#x0a;(e.g. tweetz.core.exe account2)</sys:String>
     </Style.Resources>
   </Style>
 </Styles>

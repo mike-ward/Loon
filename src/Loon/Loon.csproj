@@ -24,9 +24,11 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  
   <ItemGroup>
     <Compile Remove="Services\FlowContentService.cs" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Remove="app.ico" />
     <None Remove="Assets\Accents.xaml" />
@@ -39,9 +41,12 @@
     <None Remove="Assets\TabItem.xaml" />
     <None Remove="Assets\TextBlock.xaml" />
   </ItemGroup>
+
   <ItemGroup>
     <AvaloniaResource Include="app.ico" />
+    <AvaloniaResource Include="Assets\seguisym.ttf" />
   </ItemGroup>
+  
   <ItemGroup>
     <AvaloniaXaml Include="Assets\TabItem.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -64,41 +69,20 @@
     <AvaloniaXaml Include="Assets\Strings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Assets\Converters.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AvaloniaResource Include="Assets\seguisym.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.0-preview6" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview6" />
-    <PackageReference Include="BitFaster.Caching" Version="1.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="ViewModels\Content\TweetItem\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Assets\Converters.xaml">
+    <AvaloniaXaml Include="Assets\Converters.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </AvaloniaXaml>
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.0-rc1" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0-rc1" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0-rc1" />
+    <PackageReference Include="BitFaster.Caching" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Twitter\Twitter.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Views\Content\ContentView.axaml.cs">
-      <DependentUpon>ContentView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Content\TimelineView.axaml.cs">
-      <DependentUpon>TimelineView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Content\TweetItem\TweetItemView.axaml.cs">
-      <DependentUpon>TweetItemView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Content\TabView.axaml.cs">
-      <DependentUpon>TabView.axaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 </Project>

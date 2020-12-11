@@ -1,0 +1,16 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:Loon.ViewModels.Content.TweetItem"
+             HorizontalContentAlignment="Center"
+             x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemProfileImage">
+
+  <Border
+    CornerRadius="22.5"
+    ClipToBounds="True">
+
+    <Image DataContextChanged="UpdateImage" Width="45" />
+  </Border>
+</UserControl>

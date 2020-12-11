@@ -121,8 +121,11 @@ namespace Twitter.Models
             var document = new HtmlDocument();
             document.LoadHtml(html);
 
-            var language = document.DocumentNode.SelectSingleNode("//html")?.Attributes["lang"]?.Value
-                ?? CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            var language = document.DocumentNode.SelectSingleNode("//html")?.Attributes["lang"]?.Value;
+            if (string.IsNullOrWhiteSpace(language) || language.Equals("und", StringComparison.OrdinalIgnoreCase))
+            {
+                language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            }
 
             var metaTags = document.DocumentNode.SelectNodes("//meta");
             var metaInfo = new RelatedLinkInfo { Url = url, Language = Truncate(language, 2) };

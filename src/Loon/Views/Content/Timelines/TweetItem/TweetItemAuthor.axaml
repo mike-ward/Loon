@@ -1,0 +1,22 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sv="clr-namespace:Loon.Services"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+             x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemAuthor">
+
+  <WrapPanel Orientation="Horizontal">
+    <TextBlock Text="{Binding User.Name}" FontWeight="Bold" Opacity="{DynamicResource Dim0}" />
+    <TextBlock Text="✓" IsVisible="{Binding User.Verified}" FontWeight="Bold" Opacity="{DynamicResource Dim0}" Margin="5 0 0 0" Foreground="{StaticResource TwitterBlueBrush}" />
+    <TextBlock Text="@" Margin="5 0 0 0" Opacity="{DynamicResource Dim1}" />
+    <TextBlock Text="{Binding User.ScreenName}" Opacity="{DynamicResource Dim1}" />
+    <TextBlock Text="•" Margin="5 0" Opacity="{DynamicResource Dim1}" />
+
+    <Button
+      Classes="bare"
+      Content="{Binding CreatedDate, Converter={StaticResource TimeAgo}}"
+      Command="{Binding $parent[UserControl].OpenInTwitter}"
+      CommandParameter="{Binding StatusLink}" />
+  </WrapPanel>
+</UserControl>

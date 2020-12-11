@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Loon.Interfaces;
@@ -11,6 +13,11 @@ namespace Loon.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            if (Debugger.IsAttached)
+            {
+                this.AttachDevTools();
+            }
         }
 
         private void InitializeComponent()
@@ -19,7 +26,6 @@ namespace Loon.Views
 
             if (OperatingSystem.IsLinux())
             {
-                // ExtendClientAreaToDecorationsHint not working in Linux at this time.
                 this.FindControl<TitleBar>("TitleBar").IsVisible = false;
                 ExtendClientAreaToDecorationsHint = false;
                 ExtendClientAreaTitleBarHeightHint = 0;

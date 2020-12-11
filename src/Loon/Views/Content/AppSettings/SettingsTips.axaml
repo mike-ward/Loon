@@ -1,0 +1,21 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:l="clr-namespace:Loon.Views.Content.AppSettings"
+             mc:Ignorable="d" d:DesignWidth="210" d:DesignHeight="450"
+             x:Class="Loon.Views.Content.AppSettings.SettingsTips">
+
+  <StackPanel>
+    <TextBlock
+      Margin="0,0,0,6"
+      FontWeight="Bold"
+      Text="{StaticResource tips}" />
+
+    <l:BulletItem BulletText="{StaticResource tips-scroll}" />
+    <l:BulletItem BulletText="{StaticResource tips-open}" />
+    <l:BulletItem BulletText="{StaticResource tips-font-size}" />
+    <l:BulletItem BulletText="{StaticResource tips-ctrl-n}" />
+    <l:BulletItem BulletText="{StaticResource tips-profiles}" />
+  </StackPanel>
+</UserControl>

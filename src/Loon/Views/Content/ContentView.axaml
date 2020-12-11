@@ -2,19 +2,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Loon.ViewModels.Content"
+             xmlns:i="clr-namespace:Loon.Interfaces"
              xmlns:vw="clr-namespace:Loon.Views.Content"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
-             DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:ContentViewModel}, Mode=OneTime}"
+             DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type i:ISettings}, Mode=OneTime}"
              x:Class="Loon.Views.Content.ContentView">
 
   <Grid>
-    <Border  IsVisible="{Binding !SignedIn}">
-      <vw:GetPinView />
-    </Border>
+    <vw:GetPinView IsVisible="{Binding !$parent[UserControl].DataContext.IsAuthenticated}, FallbackValue=False" />
 
-    <Border  IsVisible="{Binding SignedIn}">
-      <vw:TabView />
-    </Border>
+    <vw:TabView IsVisible="{Binding $parent[UserControl].DataContext.IsAuthenticated}, FallbackValue=False" />
   </Grid>
 </UserControl>

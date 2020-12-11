@@ -6,12 +6,13 @@
         xmlns:content="clr-namespace:Loon.Views.Content"
         xmlns:vm="clr-namespace:Loon.ViewModels"
         mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
-        x:Class="Loon.Views.MainWindow"
+        UseLayoutRounding="true"
+        Title="{StaticResource title}"
         ExtendClientAreaTitleBarHeightHint="1"
         ExtendClientAreaToDecorationsHint="True"
+        FontSize="{Binding Settings.FontSize, FallbackValue=12}"
         DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:MainWindowViewModel}, Mode=OneTime}"
-        UseLayoutRounding="true"
-        Title="{StaticResource title}">
+        x:Class="Loon.Views.MainWindow">
 
   <Border
     BorderBrush="{DynamicResource ThemeBorderLowBrush}"

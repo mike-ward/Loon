@@ -11,5 +11,6 @@
 
   <Style Selector="Button.bare:pointerover">
     <Setter Property="Opacity" Value="1" />
+    <Setter Property="Cursor" Value="Hand" />
   </Style>
 </Styles>

@@ -1,0 +1,29 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="210" d:DesignHeight="450"
+             x:Class="Loon.Views.Content.AppSettings.SettingsFontSize">
+
+  <StackPanel Spacing="5">
+    <TextBlock Text="{StaticResource font-size-title}" />
+
+    <Separator />
+
+    <DockPanel
+      VerticalAlignment="Center">
+
+      <TextBlock
+        Width="32"
+        DockPanel.Dock="Right"
+        Text="{Binding FontSize, Converter={StaticResource DoubleFormat}, ConverterParameter=N1, }"
+        TextAlignment="Right" />
+
+      <Slider
+        Maximum="18"
+        Minimum="10"
+        TickFrequency="0.1"
+        Value="{Binding FontSize, Mode=TwoWay}" />
+    </DockPanel>
+  </StackPanel>
+</UserControl>

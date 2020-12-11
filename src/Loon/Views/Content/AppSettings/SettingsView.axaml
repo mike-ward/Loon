@@ -1,0 +1,35 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:l="clr-namespace:Loon.Views.Content.AppSettings"
+             mc:Ignorable="d" d:DesignWidth="210" d:DesignHeight="850"
+             x:Class="Loon.Views.Content.AppSettings.SettingsView">
+
+  <UserControl.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+  </UserControl.Styles>
+
+  <ScrollViewer>
+    <StackPanel
+      Width="210"
+      Spacing="12">
+
+      <l:SettingsTitle />
+      <l:SettingsCheckboxes />
+      <l:SettingsFontSize />
+      <l:SettingsTheme />
+      <l:SettingsMyTweetColor />
+      <Separator />
+      <l:SettingsSignOut />
+      <l:SettingsDonate />
+      <l:SettingsOpenSettings />
+      <Separator />
+      <l:SettingsInfo HorizontalAlignment="Center" />
+      <Separator />
+      <l:SettingsTips />
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

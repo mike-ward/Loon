@@ -1,0 +1,29 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lt="clr-namespace:Loon.Views.Layouts"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="200"
+             x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemImage">
+
+  <ItemsControl Items="{Binding Media}">
+
+    <ItemsControl.ItemTemplate>
+      <DataTemplate>
+        <Image MaxWidth="300"
+               Margin="1"
+               Stretch="UniformToFill"
+               VerticalAlignment="Top"
+               DataContext="{Binding MediaUrl}"
+               DataContextChanged="LoadMediaAsync"
+               RenderOptions.BitmapInterpolationMode="LowQuality" />
+      </DataTemplate>
+    </ItemsControl.ItemTemplate>
+
+    <ItemsControl.ItemsPanel>
+      <ItemsPanelTemplate>
+        <lt:SimpleImageLayout />
+      </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
+  </ItemsControl>
+</UserControl>
