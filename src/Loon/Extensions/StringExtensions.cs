@@ -28,5 +28,10 @@ namespace Loon.Extensions
         {
             return !string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
         }
+
+        public static bool IsPopulated(this string? str)
+        {
+            return !string.IsNullOrWhiteSpace(str);
+        }
     }
 }

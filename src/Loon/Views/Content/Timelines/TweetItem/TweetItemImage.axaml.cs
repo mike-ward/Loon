@@ -1,13 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
-using Loon.Models;
 using Loon.Services;
+using Twitter.Models;
 
 namespace Loon.Views.Content.Timelines.TweetItem
 {
@@ -35,25 +32,17 @@ namespace Loon.Views.Content.Timelines.TweetItem
                 {
                     image.Source = null;
                     await Task.Delay(30).ConfigureAwait(true);
-                    if (Clearing) return;
 
-                    if (image.DataContext is string uri && uri.Length > 0)
+                    if (Clearing)
                     {
-                        try
-                        {
-                            image.Source = await GetImageAsync(uri).ConfigureAwait(true);
-                        }
-                        catch
-                        {
-                            try
-                            {
-                                image.Source = await GetImageAsync(uri).ConfigureAwait(true);
-                            }
-                            catch
-                            {
-                                image.Source = await GetImageAsync(uri).ConfigureAwait(true);
-                            }
-                        }
+                        return;
+                    }
+
+                    var media = image.DataContext as Media;
+
+                    if (media?.MediaUrl.Length > 0)
+                    {
+                        image.Source = await ImageService.GetImageAsync(media.MediaUrl, () => Clearing).ConfigureAwait(true);
                     }
                 }
             }
@@ -63,21 +52,14 @@ namespace Loon.Views.Content.Timelines.TweetItem
             }
         }
 
-        private async ValueTask<IImage?> GetImageAsync(string uri)
+        public void OpenInViewer(object? sender, PointerPressedEventArgs e)
         {
-            if (Clearing) return null;
-            var wc = WebRequest.Create(uri);
-            wc.Timeout = Constants.WebRequestTimeout;
-            using var response = await wc.GetResponseAsync().ConfigureAwait(false);
-
-            if (Clearing) return null;
-            using var stream = response.GetResponseStream();
-            using var ms = new MemoryStream(); // Bitmap constructor needs a seekable stream
-            await stream.CopyToAsync(ms).ConfigureAwait(false);
-
-            if (Clearing) return null;
-            ms.Position = 0;
-            return new Bitmap(ms);
+            if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed &&
+                sender is Grid grid &&
+                grid.Children[0] is Image image)
+            {
+                ImageService.OpenInViewer(image);
+            }
         }
     }
 }

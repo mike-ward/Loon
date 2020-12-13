@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:m="clr-namespace:Loon.Models"
+             xmlns:c="clr-namespace:Loon.Views.Content.Controls"
              mc:Ignorable="d" d:DesignWidth="210" d:DesignHeight="70"
              x:Class="Loon.Views.Content.AppSettings.SettingsInfo">
 
@@ -14,11 +15,9 @@
       Text="{x:Static m:VersionInfo.Version}"
       HorizontalAlignment="Center" />
 
-    <Button
-      Classes="bare"
-      Content="https://mike-ward.net"
-      CommandParameter="https://mike-ward.net"
-      Command="{Binding $parent[UserControl].OpenWebSite}" />
+    <c:Hyperlink
+      Text="https://mike-ward.net"
+      Link="https://mike-ward.net" />
 
     <TextBlock Text="{x:Static m:VersionInfo.Copyright}" />
   </StackPanel>

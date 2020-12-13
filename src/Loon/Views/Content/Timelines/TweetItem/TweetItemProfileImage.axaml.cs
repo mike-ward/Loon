@@ -1,14 +1,11 @@
 ﻿using System;
-using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using Loon.Models;
+using Loon.Services;
 using Twitter.Models;
 
 namespace Loon.Views.Content.Timelines.TweetItem
@@ -43,53 +40,25 @@ namespace Loon.Views.Content.Timelines.TweetItem
                     image.Source = EmptyBitmap;
 
                     await Task.Delay(30).ConfigureAwait(true);
-                    if (Clearing) return;
+                    if (Clearing)
+                    {
+                        return;
+                    }
 
                     if (DataContext is TwitterStatus status)
                     {
                         var uri = status.User.ProfileImageUrlBigger;
                         if (uri is not null && uri.Length > 0 && !Clearing)
                         {
-                            try
-                            {
-                                image.Source = await GetImage(uri).ConfigureAwait(true);
-                            }
-                            catch
-                            {
-                                try
-                                {
-                                    image.Source = await GetImage(uri).ConfigureAwait(true);
-                                }
-                                catch
-                                {
-                                    image.Source = await GetImage(uri).ConfigureAwait(true);
-                                }
-                            }
+                            image.Source = await ImageService.GetImageAsync(uri, () => Clearing).ConfigureAwait(true);
                         }
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // eat it.
+                TraceService.Message(ex.Message);
             }
-        }
-
-        private async ValueTask<IImage?> GetImage(string uri)
-        {
-            if (Clearing) return null;
-            var wc = WebRequest.Create(uri);
-            wc.Timeout = Constants.WebRequestTimeout;
-            using var response = await wc.GetResponseAsync().ConfigureAwait(false);
-
-            if (Clearing) return null;
-            using var stream = response.GetResponseStream();
-            using var ms = new MemoryStream();
-            await stream.CopyToAsync(ms).ConfigureAwait(false);
-
-            if (Clearing) return null;
-            ms.Position = 0;
-            return Bitmap.DecodeToHeight(ms, profileSize);
         }
     }
 }

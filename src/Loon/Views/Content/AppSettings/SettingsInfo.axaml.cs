@@ -14,10 +14,5 @@ namespace Loon.Views.Content.AppSettings
         {
             AvaloniaXamlLoader.Load(this);
         }
-
-        public void OpenWebSite(string link)
-        {
-            Services.OpenUrlService.Open(link);
-        }
     }
 }

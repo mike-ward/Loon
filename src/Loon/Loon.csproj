@@ -85,4 +85,16 @@
   <ItemGroup>
     <ProjectReference Include="..\Twitter\Twitter.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Views\Content\ImageViewer\ImageViewerWindow.axaml.cs">
+      <DependentUpon>ImageViewerWindow.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Assets\Windows\mpv.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

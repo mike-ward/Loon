@@ -14,5 +14,10 @@ namespace Loon.Views.Content.Timelines.TweetItem
         {
             AvaloniaXamlLoader.Load(this);
         }
+
+        public void OpenUrl(string link)
+        {
+            Services.OpenUrlService.Open(link);
+        }
     }
 }

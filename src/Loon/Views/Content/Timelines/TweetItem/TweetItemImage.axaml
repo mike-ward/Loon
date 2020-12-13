@@ -10,13 +10,39 @@
 
     <ItemsControl.ItemTemplate>
       <DataTemplate>
-        <Image MaxWidth="300"
-               Margin="1"
-               Stretch="UniformToFill"
-               VerticalAlignment="Top"
-               DataContext="{Binding MediaUrl}"
-               DataContextChanged="LoadMediaAsync"
-               RenderOptions.BitmapInterpolationMode="LowQuality" />
+        <Grid PointerPressed="OpenInViewer">
+          <Image
+            Name="Image"
+            Margin="1"
+            Cursor="Hand"
+            MaxHeight="300"
+            Stretch="UniformToFill"
+            DataContextChanged="LoadMediaAsync"
+            RenderOptions.BitmapInterpolationMode="LowQuality" />
+
+          <Border
+            Width="40"
+            Height="40"
+            CornerRadius="20"
+            BorderBrush="White"
+            BorderThickness="4"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Background="{DynamicResource TwitterBlueBrush}">
+
+            <Border.IsVisible>
+              <MultiBinding Converter="{StaticResource MultiBool}" FallbackValue="False">
+                <Binding Converter="{StaticResource MediaHasVideo}" />
+                <Binding Path="Source" ElementName="Image" Converter="{x:Static ObjectConverters.IsNotNull}" />
+              </MultiBinding>
+            </Border.IsVisible>
+
+            <TextBlock
+              Text="{DynamicResource PlaySymbol}"
+              FontSize="24"
+              FontFamily="{DynamicResource SymbolFont}" />
+          </Border>
+        </Grid>
       </DataTemplate>
     </ItemsControl.ItemTemplate>
 

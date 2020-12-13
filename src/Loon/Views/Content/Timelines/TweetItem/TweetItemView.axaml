@@ -5,9 +5,13 @@
              xmlns:l="clr-namespace:Loon.Views.Content.Timelines.TweetItem"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+             MinHeight="2"
              x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemView">
 
-  <Grid ColumnDefinitions="Auto,*">
+  <!--  Remove IsVisible binding when ItemsRepeater is fixed  -->
+  <Grid ColumnDefinitions="Auto,*"
+        IsVisible="{Binding Id, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+
     <!--  Column 1  -->
 
     <l:TweetItemProfileImage

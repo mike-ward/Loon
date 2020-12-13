@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:sv="clr-namespace:Loon.Services"
+             xmlns:c="clr-namespace:Loon.Views.Content.Controls"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemAuthor">
 
@@ -12,11 +13,6 @@
     <TextBlock Text="@" Margin="5 0 0 0" Opacity="{DynamicResource Dim1}" />
     <TextBlock Text="{Binding User.ScreenName}" Opacity="{DynamicResource Dim1}" />
     <TextBlock Text="•" Margin="5 0" Opacity="{DynamicResource Dim1}" />
-
-    <Button
-      Classes="bare"
-      Content="{Binding CreatedDate, Converter={StaticResource TimeAgo}}"
-      Command="{Binding $parent[UserControl].OpenInTwitter}"
-      CommandParameter="{Binding StatusLink}" />
+    <c:Hyperlink Text="{Binding CreatedDate, Converter={StaticResource TimeAgo}}" Link="{Binding StatusLink}" />
   </WrapPanel>
 </UserControl>

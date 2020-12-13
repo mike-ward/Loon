@@ -33,7 +33,9 @@ namespace Loon.Views.Content.Timelines.TweetItem
 
         protected override void OnDataContextChanged(System.EventArgs e)
         {
-            IsVisible = DataContext is TwitterStatus status && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
+            IsVisible = DataContext is TwitterStatus status
+                && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+                && status.FullText.IsPopulated();
         }
     }
 }

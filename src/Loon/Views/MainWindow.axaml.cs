@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -13,11 +12,9 @@ namespace Loon.Views
         public MainWindow()
         {
             InitializeComponent();
-
-            if (Debugger.IsAttached)
-            {
-                this.AttachDevTools();
-            }
+#if DEBUG
+            this.AttachDevTools();
+#endif
         }
 
         private void InitializeComponent()

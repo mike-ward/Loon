@@ -37,7 +37,9 @@ namespace Loon
 
         public static string GetString(string name)
         {
-            return Current.TryFindResource(name, out var value) && value is string val ? val : $"string resource not found: {name}";
+            return Current.TryFindResource(name, out var value) && value is string val
+                ? val
+                : $"string resource not found: {name}";
         }
     }
 }

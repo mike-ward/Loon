@@ -19,8 +19,7 @@
 
       <ItemsRepeater.ItemTemplate>
         <DataTemplate>
-          <ti:TweetItemView Margin="5 0 20 0"
-                            IsVisible="{Binding Id, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+          <ti:TweetItemView Margin="5 0 20 0" />
         </DataTemplate>
       </ItemsRepeater.ItemTemplate>
     </ItemsRepeater>
