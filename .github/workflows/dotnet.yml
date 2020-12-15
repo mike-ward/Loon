@@ -21,5 +21,3 @@ jobs:
       run: dotnet restore ./src/Loon.sln
     - name: Build
       run: dotnet build ./src/Loon.sln --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
