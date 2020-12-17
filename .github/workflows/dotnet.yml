@@ -1,0 +1,30 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.100
+    - name: Restore dependencies
+      run: dotnet restore ./src/Loon.sln
+    - name: Build
+      run: dotnet build ./src/Loon.sln --no-restore
+    - name: Run Infer#      
+      uses: microsoft/infersharpaction@v0.2
+      id: runinfersharp
+      with:
+        binary-path: './src/Loon/bin/Release/.net5.0'
+    - name: Infer# analysis results
+      run: echo "${{ steps.runinfersharp.outputs.results }}"
