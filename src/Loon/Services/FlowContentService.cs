@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Avalonia.Controls;
-using TweetX.Models;
+using Loon.Extensions;
+using Loon.Models;
 using Twitter.Models;
 
-namespace TweetX.Services
+namespace Loon.Services
 {
     public static class FlowContentService
     {
-        public static IEnumerable<Inline> FlowContentInlines(TwitterStatus twitterStatus)
+        // Best I can do until Avalonia supports Inlines
+        public static IEnumerable<Control> FlowContentInlines(TwitterStatus twitterStatus)
         {
             if (twitterStatus is null)
             {
@@ -96,7 +98,7 @@ namespace TweetX.Services
                 ?.Select(hashtag =>
                 (
                     FlowContentNodeType: FlowContentNodeType.HashTag,
-                    hashtag.Text,
+                    Text: hashtag.Text,
                     Start: hashtag.Indices[0],
                     End: hashtag.Indices[1]
                 ))
@@ -119,70 +121,41 @@ namespace TweetX.Services
                 .OrderBy(o => o.Start);
         }
 
-        private static Run Run(string text)
+        private static TextBlock Run(string text)
         {
-            return new Run(ConvertXmlEntities(text));
+            var textBlock = new TextBlock();
+            textBlock.Classes.Add("normal");
+            textBlock.Text = ConvertXmlEntities(text);
+            return textBlock;
         }
 
-        private static InlineUIContainer Link(string link)
+        private static Control Hyperlink(string text, string link)
         {
-            const int maxDisplayLength = 150;
+            var button = new Button();
+            button.Classes.Add("inline");
+            button.Click += delegate { OpenUrlService.Open(link); };
 
-            var hyperlink = new Hyperlink(new Run(link))
-            {
-                CommandParameter = link,
-                ToolTip = link,
-            };
+            var textBlock = new TextBlock();
+            textBlock.Classes.Add("hyperlink");
+            textBlock.Text = ConvertXmlEntities(text);
 
-            hyperlink.Click += (_, __) => OpenLinkCommand.Command.Execute(link, target: null);
-            hyperlink.ToolTipOpening += LongUrlService.HyperlinkToolTipOpeningHandler;
-
-            var textblock = new TextBlock(hyperlink)
-            {
-                MaxWidth = maxDisplayLength,
-                TextTrimming = TextTrimming.CharacterEllipsis,
-            };
-
-            return new InlineUIContainer(textblock);
+            button.Content = textBlock;
+            return button;
         }
 
-        private static Hyperlink Mention(string text)
+        private static Control Link(string link)
         {
-            var tooltip = new ToolTip();
-            var userProfile = new UserProfileBlockControl();
-
-            tooltip.Content = userProfile;
-            tooltip.Style = GetToolTipStyle();
-            userProfile.Tag = text;
-            var link = $"https://twitter.com/{text}";
-
-            var hyperlink = new Hyperlink(new Run("@" + text))
-            {
-                CommandParameter = link,
-                ToolTip = tooltip,
-            };
-
-            hyperlink.Click += (_, __) => OpenLinkCommand.Command.Execute(link, target: null);
-            return hyperlink;
+            return Hyperlink(link.TruncateWithEllipsis(25), link);
         }
 
-        private static Style? userProfileToolTipStyle;
-
-        private static Style GetToolTipStyle()
+        private static Control Mention(string text)
         {
-            return userProfileToolTipStyle ??= (Style)Application.Current.FindResource("ToolTipStyle");
+            return Hyperlink(text, $"https://twitter.com/{text}");
         }
 
-        private static Hyperlink Hashtag(string text)
+        private static Control Hashtag(string text)
         {
-            var tag = "#" + text;
-            var hyperlink = new Hyperlink(new Run(tag))
-            {
-                CommandParameter = tag,
-            };
-
-            hyperlink.Click += (_, __) => SearchCommand.Command.Execute(tag, target: null);
-            return hyperlink;
+            return Hyperlink(text, $"https://twitter.com/hashtag/{text}");
         }
 
         private static string ConvertXmlEntities(string text)

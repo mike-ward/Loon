@@ -26,10 +26,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <Compile Remove="Services\FlowContentService.cs" />
-  </ItemGroup>
-  
-  <ItemGroup>
     <None Remove="app.ico" />
     <None Remove="Assets\Accents.xaml" />
     <None Remove="Assets\Button.xaml" />

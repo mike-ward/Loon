@@ -14,9 +14,9 @@ namespace Loon.ViewModels.Content.Timelines
         private Timeline? timeline;
         private const int mentionsInterval = 60;
         private int mentionsCounter = mentionsInterval;
+        private ITwitterService TwitterService { get; }
 
         public Timeline? Timeline { get => timeline; set => SetProperty(ref timeline, value); }
-        private ITwitterService TwitterService { get; }
 
         public HomeTimelineViewModel(ISettings settings, ITwitterService twitterService)
         {

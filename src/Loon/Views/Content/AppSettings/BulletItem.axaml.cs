@@ -10,8 +10,8 @@ namespace Loon.Views.Content.AppSettings
 
         public string BulletText
         {
-            get { return GetValue(BulletTextProperty); }
-            set { SetValue(BulletTextProperty, value); }
+            get => GetValue(BulletTextProperty);
+            set => SetValue(BulletTextProperty, value);
         }
 
         public BulletItem()

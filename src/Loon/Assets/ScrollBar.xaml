@@ -97,7 +97,7 @@
     <Setter Property="Width" Value="10" />
   </Style>
   <Style Selector="ScrollBar:vertical /template/ Thumb#thumb">
-    <Setter Property="MinHeight" Value="{DynamicResource ScrollBarThickness}" />
+    <Setter Property="MinHeight" Value="30" />
     <Setter Property="Width" Value="{DynamicResource ScrollBarThumbThickness}" />
   </Style>
   <Style Selector="ScrollBar /template/ RepeatButton.repeat">

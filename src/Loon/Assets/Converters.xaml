@@ -9,6 +9,7 @@
       <converters:CompareToConverter x:Key="CompareTo" />
       <converters:CountConverter x:Key="CountConverter" />
       <converters:DoubleFormatConverter x:Key="DoubleFormat" />
+      <converters:FlowContentConverter x:Key="FlowContent" />
       <converters:HtmlDecodeConverter x:Key="HtmlDecode" />
       <converters:IsFollowingBrushConverter x:Key="IsFollowingBrush" />
       <converters:MediaHasVideoConverter x:Key="MediaHasVideo" />

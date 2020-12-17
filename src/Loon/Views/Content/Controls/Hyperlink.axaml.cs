@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.Controls
@@ -33,7 +32,7 @@ namespace Loon.Views.Content.Controls
             set => SetValue(LinkProperty, value);
         }
 
-        public void OnClick(object? sender, PointerPressedEventArgs e)
+        public void OnClick()
         {
             Services.OpenUrlService.Open(Link);
         }

@@ -14,4 +14,9 @@
   <Style Selector="TextBlock.padleft">
     <Setter Property="Padding" Value="5 0 0 0" />
   </Style>
+
+  <Style Selector="TextBlock.hyperlink">
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
+  </Style>
 </Styles>

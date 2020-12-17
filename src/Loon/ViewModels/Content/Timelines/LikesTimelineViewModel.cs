@@ -9,9 +9,9 @@ namespace Loon.ViewModels.Content.Timelines
     public class LikesTimelineViewModel : NotifyPropertyChanged
     {
         private Timeline? timeline;
+        private ITwitterService TwitterService { get; }
 
         public Timeline? Timeline { get => timeline; set => SetProperty(ref timeline, value); }
-        private ITwitterService TwitterService { get; }
 
         public LikesTimelineViewModel(ISettings settings, ITwitterService twitterService)
         {

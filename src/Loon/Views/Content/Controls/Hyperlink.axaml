@@ -3,18 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="30"
-             PointerPressed="OnClick"
-             Opacity="{StaticResource Dim1}"
+             HorizontalAlignment="Left"
              x:Class="Loon.Views.Content.Controls.Hyperlink">
 
-  <UserControl.Styles>
-    <Style Selector="TextBlock:pointerover">
-      <Setter Property="Cursor" Value="Hand" />
-      <Setter Property="TextDecorations" Value="Underline" />
-    </Style>
-  </UserControl.Styles>
+  <Button
+    Classes="inline"
+    Command="{Binding $parent[UserControl].OnClick}">
 
-  <TextBlock
-    Text="{Binding $parent[UserControl].Text}"
-    TextWrapping="Wrap" />
+    <TextBlock
+      TextWrapping="Wrap"
+      Text="{Binding $parent[UserControl].Text}" />
+  </Button>
 </UserControl>

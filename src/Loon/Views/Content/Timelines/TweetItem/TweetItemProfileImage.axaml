@@ -2,15 +2,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="45" d:DesignHeight="45"
              xmlns:vm="clr-namespace:Loon.ViewModels.Content.TweetItem"
              HorizontalContentAlignment="Center"
              x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemProfileImage">
 
-  <Border
-    CornerRadius="22.5"
-    ClipToBounds="True">
-
-    <Image DataContextChanged="UpdateImage" Width="45" />
-  </Border>
+  <Image
+    Width="44"
+    Height="44"
+    DataContextChanged="UpdateImage">
+    <Image.Clip>
+      <EllipseGeometry
+        RadiusX="22"
+        RadiusY="22"
+        Center="22,22" />
+    </Image.Clip>
+  </Image>
 </UserControl>

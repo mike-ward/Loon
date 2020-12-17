@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
-             xmlns:vw="clr-namespace:Loon.Views"
              xmlns:ti="clr-namespace:Loon.Views.Content.Timelines.TweetItem"
              x:Class="Loon.Views.Content.Timelines.TimelineView">
 
@@ -14,7 +13,7 @@
 
     <ItemsRepeater
       Items="{Binding Timeline.StatusCollection}"
-      Width="{Binding $parent[vw:MainWindow].Width}"
+      Width="{Binding $parent[Window].Width}"
       ElementClearing="OnElementClearing">
 
       <ItemsRepeater.ItemTemplate>

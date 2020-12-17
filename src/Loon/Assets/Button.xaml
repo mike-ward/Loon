@@ -2,20 +2,20 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-  <Style Selector="Button.bare">
+  <Style Selector="Button.inline">
     <Setter Property="Padding" Value="0" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Opacity" Value="{DynamicResource Dim1}" />
     <Setter Property="Background" Value="Transparent" />
   </Style>
 
-  <Style Selector="Button.bare:pointerover">
+  <Style Selector="Button.inline:pointerover">
     <Setter Property="Opacity" Value="1" />
     <Setter Property="Cursor" Value="Hand" />
     <Setter Property="Background" Value="Transparent" />
   </Style>
 
-  <Style Selector="Button.bare:pressed /template/ ContentPresenter">
+  <Style Selector="Button.inline:pressed /template/ ContentPresenter">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Opacity" Value="{DynamicResource Dim1}" />
   </Style>

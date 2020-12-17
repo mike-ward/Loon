@@ -5,9 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Loon.Extensions;
@@ -29,10 +27,12 @@ namespace Loon.Services
             {
                 try
                 {
+                    await Task.Delay(500).ConfigureAwait(true);
                     return await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
                 }
                 catch
                 {
+                    await Task.Delay(2000).ConfigureAwait(true);
                     return await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
                 }
             }
@@ -65,6 +65,11 @@ namespace Loon.Services
             }
 
             imageViewer.Hide();
+
+            process?.Kill();
+            process?.Close();
+            process = null;
+
             return imageViewer;
         }
 
@@ -72,17 +77,8 @@ namespace Loon.Services
         {
             if (Source is not null)
             {
-                var bitmap = (IBitmap)Source;
-                var rtb = new RenderTargetBitmap(bitmap.PixelSize, new Vector(96, 96));
-                using var ctxi = rtb.CreateDrawingContext(null);
-                using var ctx = new DrawingContext(ctxi, false);
-                var rect = new Rect(0, 0, bitmap.PixelSize.Width, bitmap.PixelSize.Height);
-
-                Source.Draw(ctx, rect, rect, Avalonia.Visuals.Media.Imaging.BitmapInterpolationMode.Default);
-                var dataobj = new DataObject();
-
-                dataobj.Set("DeviceIndependentBitmap", rtb);
-                App.Current.Clipboard.SetDataObjectAsync(dataobj);
+                // This space for rent
+                App.Current.Clipboard.SetTextAsync("bitmap copying not implemented");
             }
         }
 
@@ -108,29 +104,15 @@ namespace Loon.Services
                     return;
                 }
 
-                pi.Arguments = $"--ontop --no-border --window-scale=1.25 {videoUrl}";
+                pi.Arguments = $"--ontop --no-border --autofit-smaller=800x600 --keep-open --script-opts=osc-scalewindowed=2 {videoUrl}";
                 pi.CreateNoWindow = false;
-
-                process?.Kill();
-                process?.Close();
-                process = null;
-
                 process = Process.Start(pi);
             }
             else if (image.Source is not null)
             {
-                process?.Kill();
-                process?.Close();
-                process = null;
-
                 viewer.Source = image.Source;
                 viewer.Show(App.MainWindow);
             }
-        }
-
-        public static bool IsMp4(string? url)
-        {
-            return url.IsPopulated() && url!.Contains(".mp4", StringComparison.OrdinalIgnoreCase);
         }
 
         public static string VideoUrl(Media? media)

@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.VisualTree;
 using Loon.Views.Content.Timelines.TweetItem;
 
 namespace Loon.Views.Content.Timelines
@@ -31,8 +32,8 @@ namespace Loon.Views.Content.Timelines
 
             if (e.GetCurrentPoint(relativeTo: null).Properties.IsRightButtonPressed)
             {
-                this.FindControl<ScrollViewer>("ScrollViewer")?.ScrollToHome();
                 e.Handled = true;
+                this.FindDescendantOfType<ScrollViewer>()?.ScrollToHome();
             }
         }
     }

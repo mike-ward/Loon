@@ -1,0 +1,19 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Loon.Views.Content.UserProfile.UserProfileName">
+
+  <StackPanel Orientation="Horizontal">
+    <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+
+    <TextBlock
+      Text="✓"
+      IsVisible="{Binding User.Verified}"
+      FontWeight="Bold"
+      Opacity="{DynamicResource Dim0}"
+      Margin="5 0 0 0"
+      Foreground="{StaticResource TwitterBlueBrush}" />
+  </StackPanel>
+</UserControl>

@@ -8,7 +8,7 @@
 
   <StackPanel>
     <Button
-      Classes="bare"
+      Classes="inline"
       FontSize="9.5"
       Click="OnTranslateClick"
       HorizontalAlignment="Right"
