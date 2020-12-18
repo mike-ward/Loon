@@ -5,6 +5,7 @@ using System.Net;
 using Avalonia.Controls;
 using Loon.Extensions;
 using Loon.Models;
+using Loon.ViewModels;
 using Twitter.Models;
 
 namespace Loon.Services
@@ -129,11 +130,11 @@ namespace Loon.Services
             return textBlock;
         }
 
-        private static Control Hyperlink(string text, string link)
+        private static Control Hyperlink(string text, Action command)
         {
             var button = new Button();
             button.Classes.Add("inline");
-            button.Click += delegate { OpenUrlService.Open(link); };
+            button.Click += delegate { command(); };
 
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
@@ -145,17 +146,23 @@ namespace Loon.Services
 
         private static Control Link(string link)
         {
-            return Hyperlink(link.TruncateWithEllipsis(25), link);
+            return Hyperlink(
+                link.TruncateWithEllipsis(25),
+                () => OpenUrlService.Open(link));
         }
 
-        private static Control Mention(string text)
+        private static Control Mention(string screenName)
         {
-            return Hyperlink(text, $"https://twitter.com/{text}");
+            return Hyperlink(
+                "@" + screenName,
+                 () => (App.MainWindow.DataContext as MainWindowViewModel)?.SetUser(screenName));
         }
 
         private static Control Hashtag(string text)
         {
-            return Hyperlink(text, $"https://twitter.com/hashtag/{text}");
+            return Hyperlink(
+                "#" + text,
+                () => OpenUrlService.Open($"https://twitter.com/hashtag/{text}"));
         }
 
         private static string ConvertXmlEntities(string text)

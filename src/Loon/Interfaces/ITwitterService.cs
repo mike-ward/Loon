@@ -48,5 +48,7 @@ namespace Loon.Interfaces
         ValueTask<UploadMedia> UploadMediaFinalize(string mediaId);
 
         ValueTask<IEnumerable<UserConnection>> GetFriendships(string[] ids);
+
+        ValueTask<IEnumerable<TwitterStatus>> GetUserTimeline(string screenName);
     }
 }

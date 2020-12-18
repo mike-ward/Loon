@@ -26,6 +26,15 @@
       <!--  TweetItem  -->
 
       <sys:String x:Key="tweet-retweeted">retweeted</sys:String>
+      <sys:String x:Key="follow">Follow</sys:String>
+
+      <!--  Profile  -->
+
+      <sys:String x:Key="profile-joined">Joined</sys:String>
+      <sys:String x:Key="profile-following">Following</sys:String>
+      <sys:String x:Key="profile-followers">Followers</sys:String>
+      <sys:String x:Key="profile-not-following">Not Following</sys:String>
+      <sys:String x:Key="profile-follows-you">Follows You</sys:String>
 
       <!--  Symbols  -->
 

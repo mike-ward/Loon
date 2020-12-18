@@ -17,6 +17,7 @@
 
   <Style Selector="TextBlock.hyperlink">
     <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="VerticalAlignment" Value="Bottom" />
     <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
   </Style>
 </Styles>

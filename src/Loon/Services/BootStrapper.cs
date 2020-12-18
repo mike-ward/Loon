@@ -29,6 +29,7 @@ namespace Loon.Services
             services.AddTransient<GetPinViewModel>();
             services.AddTransient<HomeTimelineViewModel>();
             services.AddTransient<LikesTimelineViewModel>();
+            services.AddTransient<UserProfileTimelineViewModel>();
 
             // Models
             services.AddSingleton<ISettings, Settings>();

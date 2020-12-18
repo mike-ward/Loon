@@ -7,6 +7,7 @@
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Opacity" Value="{DynamicResource Dim1}" />
     <Setter Property="Background" Value="Transparent" />
+    <Setter Property="VerticalAlignment" Value="Bottom" />
   </Style>
 
   <Style Selector="Button.inline:pointerover">

@@ -31,7 +31,7 @@ namespace Loon.Views.Content.UserProfile
                         var uri = which switch
                         {
                             "profile" => user.ProfileImageUrlBigger,
-                            "banner" => user.ProfileBannerUrl,
+                            "banner" => user.ProfileBannerUrl + "/300x100",
                             _ => null
                         };
 

@@ -6,10 +6,20 @@
              Opacity="{DynamicResource Dim1}"
              x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemRetweetedBy">
 
-  <StackPanel Orientation="Horizontal">
-    <TextBlock Text="{DynamicResource RetweetSymbol}" FontFamily="{DynamicResource SymbolFont}" />
-    <TextBlock Text="@" Margin="5 0 0 0" />
-    <TextBlock Text="{Binding User.ScreenName}" />
-    <TextBlock Text="{DynamicResource tweet-retweeted}" Margin="5 0 0 0" />
+  <StackPanel
+    Orientation="Horizontal"
+    Spacing="3">
+
+    <TextBlock
+      Text="{DynamicResource RetweetSymbol}"
+      FontFamily="{DynamicResource SymbolFont}" />
+
+    <Button
+     Content="{Binding User.ScreenName, StringFormat='@{0}'}"
+     Classes="inline"
+     Command="{Binding $parent[Window].DataContext.SetUser}"
+     CommandParameter="{Binding User.ScreenName}" />
+
+    <TextBlock Text="{DynamicResource tweet-retweeted}" />
   </StackPanel>
 </UserControl>

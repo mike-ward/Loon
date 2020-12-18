@@ -250,5 +250,20 @@ namespace Twitter.Services
                        TwitterOptions.UserIds(ids),
                     });
         }
+
+        public async ValueTask<IEnumerable<TwitterStatus>> GetUserTimeline(string screenName)
+        {
+            return await oAuthApiRequest
+                .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/statuses/user_timeline.json",
+                    new[]
+                    {
+                        TwitterOptions.ScreenName(screenName),
+                        TwitterOptions.Count(50),
+                        TwitterOptions.IncludeEntities(),
+                        TwitterOptions.IncludeRetweets(),
+                        TwitterOptions.ExtendedTweetMode(),
+                    })
+                .ConfigureAwait(false);
+        }
     }
 }

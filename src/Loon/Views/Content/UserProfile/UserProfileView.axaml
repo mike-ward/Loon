@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
+             xmlns:co="clr-namespace:Loon.Views.Content.Controls"
+             xmlns:tl="clr-namespace:Loon.Views.Content.Timelines"
+             xmlns:tv="clr-namespace:Loon.ViewModels.Content.Timelines"
              DataContext="{Binding $parent[Window].DataContext.User}"
              x:Class="Loon.Views.Content.UserProfile.UserProfileView">
 
@@ -14,9 +17,26 @@
 
     <StackPanel Margin="15 10">
       <up:UserProfileName />
-      <TextBlock Text="{Binding ScreenName, StringFormat='@{0}'}" />
+      <TextBlock Text="{Binding ScreenName, StringFormat='@{0}'}" Classes="normal" />
 
       <TextBlock Text="{Binding Description}" Classes="normal" Margin="0 10 0 0" />
+
+      <StackPanel Margin="0 10 0 0">
+        <TextBlock Text="{Binding Location, StringFormat=🏠 {0}, FallbackValue=???}" />
+        <co:Hyperlink Text="{Binding Url, StringFormat=🔗 {0}}" Link="{Binding Url}" />
+        <TextBlock Text="{Binding MemberSince, StringFormat=📅 Joined {0}} " />
+      </StackPanel>
+
+      <Grid
+        Margin="0 10 0 0"
+        ColumnDefinitions="auto,auto,auto,auto">
+        <TextBlock Text="{Binding Friends, Converter={StaticResource CountConverter}}" Grid.Column="0" />
+        <TextBlock Text="{StaticResource profile-following}" Classes="normal" Grid.Column="1" Margin="3 0 0 0" />
+        <TextBlock Text="{Binding Followers, Converter={StaticResource CountConverter}}" Grid.Column="2" Margin="10 0 0 0" />
+        <TextBlock Text="{StaticResource profile-followers}" Classes="normal" Grid.Column="3" Margin="3 0 0 0" />
+      </Grid>
+
+      <tl:TimelineView DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type tv:UserProfileTimelineViewModel}}" />
     </StackPanel>
   </StackPanel>
 </UserControl>

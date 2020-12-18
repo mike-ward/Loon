@@ -104,7 +104,7 @@ namespace Loon.Services
                     return;
                 }
 
-                pi.Arguments = $"--ontop --no-border --autofit-smaller=800x600 --keep-open --script-opts=osc-scalewindowed=2 {videoUrl}";
+                pi.Arguments = $"--ontop --no-border --autofit-smaller=640x480 --keep-open --script-opts=osc-scalewindowed=3 {videoUrl}";
                 pi.CreateNoWindow = false;
                 process = Process.Start(pi);
             }
