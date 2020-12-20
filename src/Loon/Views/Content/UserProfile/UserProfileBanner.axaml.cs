@@ -1,6 +1,8 @@
 ﻿using System;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.VisualTree;
+using Loon.Extensions;
 using Loon.Services;
 using Twitter.Models;
 
@@ -8,6 +10,8 @@ namespace Loon.Views.Content.UserProfile
 {
     public class UserProfileBanner : UserControl
     {
+        public static readonly double BannerHeight = 150;
+
         public UserProfileBanner()
         {
             InitializeComponent();
@@ -28,16 +32,18 @@ namespace Loon.Views.Content.UserProfile
 
                     if (image.DataContext is User user && image.Tag is string which)
                     {
+                        CollapseHeightIfNoBanner(user);
+
                         var uri = which switch
                         {
                             "profile" => user.ProfileImageUrlBigger,
-                            "banner" => user.ProfileBannerUrl + "/300x100",
+                            "banner" => user.ProfileBannerUrlSmall,
                             _ => null
                         };
 
-                        if (uri is not null)
+                        if (uri.IsPopulated())
                         {
-                            image.Source = await ImageService.GetImageAsync(uri, () => false).ConfigureAwait(true);
+                            image.Source = await ImageService.GetImageAsync(uri!, () => false).ConfigureAwait(true);
                         }
                     }
                 }
@@ -45,6 +51,18 @@ namespace Loon.Views.Content.UserProfile
             catch (Exception ex)
             {
                 TraceService.Message(ex.Message);
+            }
+        }
+
+        private void CollapseHeightIfNoBanner(User user)
+        {
+            var grid = this.FindDescendantOfType<Grid>();
+
+            if (grid is not null)
+            {
+                grid.Height = user.ProfileBannerUrlSmall is not null
+                    ? BannerHeight
+                    : double.NaN;
             }
         }
     }

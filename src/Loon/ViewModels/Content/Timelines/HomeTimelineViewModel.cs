@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Avalonia.Collections;
 using Loon.Interfaces;
 using Loon.Models;
 using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    public class HomeTimelineViewModel : NotifyPropertyChanged
+    public class HomeTimelineViewModel
     {
-        private Timeline? timeline;
         private const int mentionsInterval = 60;
         private int mentionsCounter = mentionsInterval;
-        private ITwitterService TwitterService { get; }
 
-        public Timeline? Timeline { get => timeline; set => SetProperty(ref timeline, value); }
+        private Timeline Timeline { get; }
+        private ITwitterService TwitterService { get; }
+        public IAvaloniaList<TwitterStatus> StatusCollection { get => Timeline.StatusCollection; }
 
         public HomeTimelineViewModel(ISettings settings, ITwitterService twitterService)
         {

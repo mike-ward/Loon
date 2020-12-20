@@ -1,0 +1,32 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
+             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="50"
+             x:Class="Loon.Views.Content.UserProfile.UserProfileActions">
+
+  <StackPanel
+    Margin="10"
+    Spacing="15"
+    Orientation="Horizontal">
+
+    <Button
+      Classes="inline">
+      <Border
+        Width="28"
+        Height="28"
+        CornerRadius="30"
+        BorderThickness="2"
+        BorderBrush="{StaticResource TwitterBlueBrush}">
+        <TextBlock
+          Margin="0 3.4 0 0"
+          Text="{StaticResource EllipsisSymbol}"
+          FontFamily="{StaticResource SymbolFont}"
+          TextAlignment="Center" />
+      </Border>
+    </Button>
+
+    <up:UserProfileFollowButton />
+  </StackPanel>
+</UserControl>

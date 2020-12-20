@@ -10,10 +10,10 @@
         Title="{StaticResource title}"
         ExtendClientAreaTitleBarHeightHint="1"
         ExtendClientAreaToDecorationsHint="True"
-        ShowInTaskbar="{Binding !Settings.ShowInSystemTray, FallbackValue=True}"
         FontSize="{Binding Settings.FontSize, FallbackValue=12}"
         Topmost="{Binding Settings.AlwaysOnTop, FallbackValue=False}"
-        DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:MainWindowViewModel}, Mode=OneTime}"
+        ShowInTaskbar="{Binding !Settings.ShowInSystemTray, FallbackValue=True}"
+        DataContext="{Binding Source={x:Type vm:MainWindowViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
         x:Class="Loon.Views.MainWindow">
 
   <Border

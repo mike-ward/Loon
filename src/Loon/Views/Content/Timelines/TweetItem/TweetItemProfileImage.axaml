@@ -10,7 +10,9 @@
   <Image
     Width="44"
     Height="44"
-    DataContextChanged="UpdateImage">
+    Cursor="Hand"
+    DataContextChanged="UpdateImage"
+    PointerPressed="OnPointerPressed">
     <Image.Clip>
       <EllipseGeometry
         RadiusX="22"

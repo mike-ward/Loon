@@ -5,7 +5,7 @@
              xmlns:vm="clr-namespace:Loon.ViewModels.Content"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              x:Class="Loon.Views.Content.GetPinView"
-             DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:GetPinViewModel}, Mode=OneTime}">
+             DataContext="{Binding Source={x:Type vm:GetPinViewModel}, Converter={StaticResource VML}, Mode=OneTime}">
 
   <Grid Margin="20">
 

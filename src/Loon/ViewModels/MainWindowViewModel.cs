@@ -9,7 +9,7 @@ namespace Loon.ViewModels
     {
         private User? user;
 
-        private ITwitterService TwitterService { get; }
+        public ITwitterService TwitterService { get; }
 
         public User? User { get => user; set => SetProperty(ref user, value); }
 

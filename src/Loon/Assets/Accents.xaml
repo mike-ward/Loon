@@ -9,6 +9,7 @@
       <sys:Double x:Key="Dim1">0.75</sys:Double>
 
       <SolidColorBrush x:Key="TwitterBlueBrush">#1DA1F2</SolidColorBrush>
+      <SolidColorBrush x:Key="RedHoverBrush">IndianRed</SolidColorBrush>
     </Style.Resources>
   </Style>
 </Styles>

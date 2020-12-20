@@ -15,14 +15,14 @@
       <TabItem.Header>
         <TextBlock Text="{DynamicResource HomeSymbol}" />
       </TabItem.Header>
-      <tl:TimelineView DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:HomeTimelineViewModel}, Mode=OneTime}" />
+      <tl:TimelineView DataContext="{Binding Source={x:Type vm:HomeTimelineViewModel}, Converter={StaticResource VML}, Mode=OneTime}" />
     </TabItem>
 
     <TabItem>
       <TabItem.Header>
         <TextBlock Text="{DynamicResource LikeSymbol}" />
       </TabItem.Header>
-      <tl:TimelineView DataContext="{Binding $self, Converter={StaticResource VML}, ConverterParameter={x:Type vm:LikesTimelineViewModel}, Mode=OneTime}" />
+      <tl:TimelineView DataContext="{Binding Source={x:Type vm:LikesTimelineViewModel}, Converter={StaticResource VML}, Mode=OneTime}" />
     </TabItem>
 
     <TabItem>

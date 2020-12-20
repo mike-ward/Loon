@@ -9,7 +9,7 @@ namespace Loon.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var type = parameter as Type ?? throw new ArgumentNullException(nameof(parameter));
+            var type = value as Type ?? throw new ArgumentException("value is not type", nameof(value));
             return BootStrapper.GetService(type);
         }
 

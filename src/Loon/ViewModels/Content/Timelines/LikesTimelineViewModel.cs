@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Avalonia.Collections;
 using Loon.Interfaces;
 using Loon.Models;
+using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    public class LikesTimelineViewModel : NotifyPropertyChanged
+    public class LikesTimelineViewModel
     {
-        private Timeline? timeline;
+        private Timeline Timeline { get; }
         private ITwitterService TwitterService { get; }
-
-        public Timeline? Timeline { get => timeline; set => SetProperty(ref timeline, value); }
+        public IAvaloniaList<TwitterStatus> StatusCollection { get => Timeline.StatusCollection; }
 
         public LikesTimelineViewModel(ISettings settings, ITwitterService twitterService)
         {

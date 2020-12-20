@@ -1,15 +1,24 @@
-﻿using Avalonia.Collections;
-using Loon.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Avalonia.Collections;
+using Loon.Interfaces;
 using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    public class UserProfileTimelineViewModel : NotifyPropertyChanged
+    public class UserProfileTimelineViewModel
     {
-        private string? screenName;
+        private ITwitterService TwitterService { get; }
+        public IAvaloniaList<TwitterStatus> StatusCollection { get; } = new AvaloniaList<TwitterStatus>();
 
-        public string? ScreenName { get => screenName; set => SetProperty(ref screenName, value); }
+        public UserProfileTimelineViewModel(ITwitterService twitterService)
+        {
+            TwitterService = twitterService;
+        }
 
-        public AvaloniaList<TwitterStatus> StatusCollection { get; } = new();
+        public ValueTask<IEnumerable<TwitterStatus>> GetUserTimeline(string screenName)
+        {
+            return TwitterService.GetUserTimeline(screenName);
+        }
     }
 }

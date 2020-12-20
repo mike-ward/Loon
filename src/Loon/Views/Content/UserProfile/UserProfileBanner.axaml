@@ -2,10 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="250"
+             xmlns:l="clr-namespace:Loon.Views.Content.UserProfile"
              x:Class="Loon.Views.Content.UserProfile.UserProfileBanner">
-  <Grid
-    Height="150">
+
+  <Grid Height="{x:Static l:UserProfileBanner.BannerHeight}">
+
     <Image
       Height="100"
       Stretch="UniformToFill"
@@ -14,14 +16,15 @@
       Tag="banner" />
 
     <Border
-      Margin="10 0 0 0"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      CornerRadius="41"
       Width="82"
       Height="82"
+      Margin="10 0 0 0"
+      CornerRadius="41"
       BorderThickness="5"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Bottom"
       BorderBrush="{DynamicResource ThemeBorderLowBrush}">
+
       <Image
         Width="72"
         Height="72"
@@ -35,5 +38,9 @@
         </Image.Clip>
       </Image>
     </Border>
+
+    <l:UserProfileActions
+      VerticalAlignment="Bottom"
+      HorizontalAlignment="Right" />
   </Grid>
 </UserControl>

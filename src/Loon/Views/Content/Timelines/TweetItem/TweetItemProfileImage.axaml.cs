@@ -2,10 +2,13 @@
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Avalonia.VisualTree;
 using Loon.Services;
+using Loon.ViewModels;
 using Twitter.Models;
 
 namespace Loon.Views.Content.Timelines.TweetItem
@@ -58,6 +61,17 @@ namespace Loon.Views.Content.Timelines.TweetItem
             catch (Exception ex)
             {
                 TraceService.Message(ex.Message);
+            }
+        }
+
+        public void OnPointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            if (DataContext is TwitterStatus status &&
+                status.User.ScreenName is string screenName &&
+                this.FindAncestorOfType<Window>() is Window window &&
+                window.DataContext is MainWindowViewModel vm)
+            {
+                vm.SetUser(screenName);
             }
         }
     }
