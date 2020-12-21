@@ -27,15 +27,55 @@
   
   <ItemGroup>
     <None Remove="app.ico" />
+    <None Remove="App.xaml" />
     <None Remove="Assets\Accents.xaml" />
     <None Remove="Assets\Button.xaml" />
     <None Remove="Assets\Converters.xaml" />
     <None Remove="Assets\ScrollBar.xaml" />
     <None Remove="Assets\seguisym.ttf" />
     <None Remove="Assets\Separator.xaml" />
+    <None Remove="Assets\SplitView.xaml" />
     <None Remove="Assets\Strings.xaml" />
     <None Remove="Assets\TabItem.xaml" />
     <None Remove="Assets\TextBlock.xaml" />
+    <None Remove="Views\Content\AppSettings\BulletItem.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsCheckboxes.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsDonate.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsFontSize.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsInfo.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsMyTweetColor.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsOpenSettings.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsSignOut.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsTheme.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsTips.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsTitle.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsView.xaml" />
+    <None Remove="Views\Content\AppView.xaml" />
+    <None Remove="Views\Content\Controls\Hyperlink.xaml" />
+    <None Remove="Views\Content\GetPinView.xaml" />
+    <None Remove="Views\Content\MainView.xaml" />
+    <None Remove="Views\Content\Timelines\TimelineView.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemActions.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemAuthor.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemImage.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemProfileImage.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemQuoted.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemRelated.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemRetweetedBy.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemText.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemTranslate.xaml" />
+    <None Remove="Views\Content\Timelines\TweetItem\TweetItemView.xaml" />
+    <None Remove="Views\Content\UserProfile\UserProfileBackBar.xaml" />
+    <None Remove="Views\Content\UserProfile\UserProfileBanner.xaml" />
+    <None Remove="Views\Content\UserProfile\UserProfileFollowButton.xaml" />
+    <None Remove="Views\Content\UserProfile\UserProfileInfo.xaml" />
+    <None Remove="Views\Content\UserProfile\UserProfileMoreButton.xaml" />
+    <None Remove="Views\Content\UserProfile\UserProfileName.xaml" />
+    <None Remove="Views\Content\UserProfile\UserProfileTimeline.xaml" />
+    <None Remove="Views\Content\UserProfile\UserProfileView.xaml" />
+    <None Remove="Views\MainWindow.xaml" />
+    <None Remove="Views\MessageBox.xaml" />
+    <None Remove="Views\TitleBar.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +84,12 @@
   </ItemGroup>
   
   <ItemGroup>
+    <AvaloniaXaml Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Assets\SplitView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
     <AvaloniaXaml Include="Assets\TabItem.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
@@ -68,6 +114,123 @@
     <AvaloniaXaml Include="Assets\Converters.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\BulletItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsCheckboxes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsDonate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsFontSize.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsMyTweetColor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsOpenSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsSignOut.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsTips.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsTitle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Controls\Hyperlink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\GetPinView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Controls\ImageViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TimelineView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemActions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemAuthor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemProfileImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemQuoted.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemRelated.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemRetweetedBy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemText.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemTranslate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileBackBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileBanner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileFollowButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileMoreButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileName.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileTimeline.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\MessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\TitleBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
   </ItemGroup>
   
   <ItemGroup>
@@ -83,8 +246,125 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Update="Views\Content\ImageViewer\ImageViewerWindow.axaml.cs">
-      <DependentUpon>ImageViewerWindow.axaml</DependentUpon>
+    <Compile Update="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\BulletItem.xaml.cs">
+      <DependentUpon>BulletItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsCheckboxes.xaml.cs">
+      <DependentUpon>SettingsCheckboxes.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsDonate.xaml.cs">
+      <DependentUpon>SettingsDonate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsFontSize.xaml.cs">
+      <DependentUpon>SettingsFontSize.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsInfo.xaml.cs">
+      <DependentUpon>SettingsInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsMyTweetColor.xaml.cs">
+      <DependentUpon>SettingsMyTweetColor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsOpenSettings.xaml.cs">
+      <DependentUpon>SettingsOpenSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsSignOut.xaml.cs">
+      <DependentUpon>SettingsSignOut.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsTheme.xaml.cs">
+      <DependentUpon>SettingsTheme.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsTips.xaml.cs">
+      <DependentUpon>SettingsTips.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsTitle.xaml.cs">
+      <DependentUpon>SettingsTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppView.xaml.cs">
+      <DependentUpon>AppView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Controls\Hyperlink.xaml.cs">
+      <DependentUpon>Hyperlink.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\GetPinView.xaml.cs">
+      <DependentUpon>GetPinView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Controls\ImageViewer.xaml.cs">
+      <DependentUpon>ImageViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TimelineView.xaml.cs">
+      <DependentUpon>TimelineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemActions.xaml.cs">
+      <DependentUpon>TweetItemActions.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemAuthor.xaml.cs">
+      <DependentUpon>TweetItemAuthor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemImage.xaml.cs">
+      <DependentUpon>TweetItemImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemProfileImage.xaml.cs">
+      <DependentUpon>TweetItemProfileImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemQuoted.xaml.cs">
+      <DependentUpon>TweetItemQuoted.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemRelated.xaml.cs">
+      <DependentUpon>TweetItemRelated.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemRetweetedBy.xaml.cs">
+      <DependentUpon>TweetItemRetweetedBy.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemText.xaml.cs">
+      <DependentUpon>TweetItemText.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemTranslate.xaml.cs">
+      <DependentUpon>TweetItemTranslate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemView.xaml.cs">
+      <DependentUpon>TweetItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\UserProfile\UserProfileBackBar.xaml.cs">
+      <DependentUpon>UserProfileBackBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\UserProfile\UserProfileBanner.xaml.cs">
+      <DependentUpon>UserProfileBanner.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\UserProfile\UserProfileFollowButton.xaml.cs">
+      <DependentUpon>UserProfileFollowButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\UserProfile\UserProfileInfo.xaml.cs">
+      <DependentUpon>UserProfileInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\UserProfile\UserProfileMoreButton.xaml.cs">
+      <DependentUpon>UserProfileMoreButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\UserProfile\UserProfileName.xaml.cs">
+      <DependentUpon>UserProfileName.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\UserProfile\UserProfileTimeline.xaml.cs">
+      <DependentUpon>UserProfileTimeline.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\UserProfile\UserProfileView.xaml.cs">
+      <DependentUpon>UserProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MessageBox.xaml.cs">
+      <DependentUpon>MessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TitleBar.xaml.cs">
+      <DependentUpon>TitleBar.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   

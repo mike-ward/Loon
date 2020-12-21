@@ -10,7 +10,6 @@
     Padding="0 10"
     Classes="inline"
     HorizontalContentAlignment="Left"
-    Background="{DynamicResource ThemeAccentBrush4}"
     Command="{Binding $parent[Window].DataContext.SetUser}">
 
     <Grid ColumnDefinitions="Auto,*">
@@ -25,7 +24,7 @@
         <up:UserProfileName />
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="{Binding Tweets, Converter={StaticResource CountConverter}}" />
-          <TextBlock Text=" Tweets" />
+          <TextBlock Text="{StaticResource profile-tweets}" Margin="3 0 0 0" />
         </StackPanel>
       </StackPanel>
     </Grid>

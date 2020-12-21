@@ -1,0 +1,63 @@
+﻿<UserControl
+  x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemImage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:lt="clr-namespace:Loon.Views.Content.Layouts"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="200"
+  d:DesignWidth="300"
+  mc:Ignorable="d">
+
+  <ItemsControl Items="{Binding Media}">
+
+    <ItemsControl.ItemTemplate>
+      <DataTemplate>
+        <Grid PointerPressed="OpenInViewer">
+          <Image
+            Name="Image"
+            MaxHeight="300"
+            Margin="1"
+            Cursor="Hand"
+            DataContextChanged="LoadMediaAsync"
+            RenderOptions.BitmapInterpolationMode="LowQuality"
+            Stretch="UniformToFill" />
+
+          <Border
+            Width="40"
+            Height="40"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="{DynamicResource TwitterBlueBrush}"
+            BorderBrush="White"
+            BorderThickness="4"
+            CornerRadius="20">
+
+            <Border.IsVisible>
+              <MultiBinding
+                Converter="{StaticResource MultiBool}"
+                FallbackValue="False">
+                <Binding Converter="{StaticResource MediaHasVideo}" />
+                <Binding
+                  Converter="{x:Static ObjectConverters.IsNotNull}"
+                  ElementName="Image"
+                  Path="Source" />
+              </MultiBinding>
+            </Border.IsVisible>
+
+            <TextBlock
+              FontFamily="{DynamicResource SymbolFont}"
+              FontSize="24"
+              Text="{DynamicResource PlaySymbol}" />
+          </Border>
+        </Grid>
+      </DataTemplate>
+    </ItemsControl.ItemTemplate>
+
+    <ItemsControl.ItemsPanel>
+      <ItemsPanelTemplate>
+        <lt:SimpleImageLayout />
+      </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
+  </ItemsControl>
+</UserControl>

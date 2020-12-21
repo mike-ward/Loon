@@ -1,30 +1,34 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:m="clr-namespace:Loon.Views"
-             xmlns:l="clr-namespace:Loon.Views.Content.Timelines.TweetItem"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
-             MinHeight="2"
-             x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemView">
+﻿<UserControl
+  x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemView"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:l="clr-namespace:Loon.Views.Content.Timelines.TweetItem"
+  xmlns:m="clr-namespace:Loon.Views"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  MinHeight="2"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  mc:Ignorable="d">
 
   <!--  Remove IsVisible binding when ItemsRepeater is fixed  -->
-  <Grid ColumnDefinitions="Auto,*"
-        IsVisible="{Binding Id, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+  <Grid
+    ColumnDefinitions="Auto,*"
+    IsVisible="{Binding Id, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
 
     <!--  Column 1  -->
 
     <l:TweetItemProfileImage
       Name="TweetItemProfileImage"
+      VerticalAlignment="Top"
       DataContext="{Binding OriginatingStatus}"
-      IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideProfileImages}"
-      VerticalAlignment="Top" />
+      IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideProfileImages}" />
 
     <!--  Column 2  -->
 
     <StackPanel
       Grid.Column="1"
-      Margin="7 0 0 10">
+      Margin="7,0,0,10">
 
       <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
 
@@ -35,20 +39,23 @@
 
       <l:TweetItemImage
         Name="TweetItemImage"
+        Margin="0,5,5,5"
         DataContext="{Binding OriginatingStatus.ExtendedEntities}"
-        IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideImages}"
-        Margin="0 5 5 5" />
+        IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideImages}" />
 
       <l:TweetItemQuoted
         Name="TweetItemQuoted"
         DataContext="{Binding OriginatingStatus.QuotedStatus}"
-        IsVisible="{Binding, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
+        IsVisible="{Binding, Converter={x:Static ObjectConverters.IsNotNull},
+                             FallbackValue=False}" />
 
       <l:TweetItemRelated
         Name="TweetItemRelated"
         DataContext="{Binding OriginatingStatus.RelatedLinkInfo}">
         <l:TweetItemImage.IsVisible>
-          <MultiBinding Converter="{StaticResource MultiBool}" FallbackValue="False">
+          <MultiBinding
+            Converter="{StaticResource MultiBool}"
+            FallbackValue="False">
             <Binding Converter="{x:Static ObjectConverters.IsNotNull}" />
             <Binding Path="!$parent[m:MainWindow].DataContext.Settings.HideExtendedContent" />
           </MultiBinding>
@@ -58,7 +65,7 @@
       <l:TweetItemActions DataContext="{Binding OriginatingStatus}" />
 
       <Separator
-        Margin="0 10 0 0"
+        Margin="0,10,0,0"
         IsVisible="{Binding $parent[m:MainWindow].DataContext.Settings.HideProfileImages}" />
     </StackPanel>
   </Grid>

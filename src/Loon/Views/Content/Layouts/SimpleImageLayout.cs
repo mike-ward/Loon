@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 
-namespace Loon.Views.Layouts
+namespace Loon.Views.Content.Layouts
 {
     /// <summary>
     /// Simple image panel designed specifically to display the 1-4 images

@@ -1,0 +1,31 @@
+﻿<Window
+  x:Class="Loon.Views.MainWindow"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:co="clr-namespace:Loon.Views.Content"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vm="clr-namespace:Loon.ViewModels"
+  xmlns:vw="clr-namespace:Loon.Views"
+  Title="{StaticResource title}"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  DataContext="{Binding Source={x:Type vm:MainWindowViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
+  ExtendClientAreaTitleBarHeightHint="1"
+  ExtendClientAreaToDecorationsHint="True"
+  FontSize="{Binding Settings.FontSize, FallbackValue=12}"
+  ShowInTaskbar="{Binding !Settings.ShowInSystemTray, FallbackValue=True}"
+  Topmost="{Binding Settings.AlwaysOnTop, FallbackValue=False}"
+  UseLayoutRounding="true"
+  mc:Ignorable="d">
+
+  <Border
+    BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+    BorderThickness="0.6">
+
+    <Grid RowDefinitions="Auto,*">
+      <vw:TitleBar Name="TitleBar" />
+      <co:AppView Grid.Row="1" />
+    </Grid>
+  </Border>
+</Window>

@@ -23,20 +23,17 @@
       <sys:String x:Key="tab-settings-name">Settings</sys:String>
       <sys:String x:Key="tab-pen-name">Compose</sys:String>
 
-      <!--  TweetItem  -->
-
-      <sys:String x:Key="tweet-retweeted">retweeted</sys:String>
-      <sys:String x:Key="follow">Follow</sys:String>
-      <sys:String x:Key="following">Following</sys:String>
-      <sys:String x:Key="unfollow">Unfollow</sys:String>
-
       <!--  Profile  -->
 
+      <sys:String x:Key="profile-retweeted">retweeted</sys:String>
+      <sys:String x:Key="profile-follow">Follow</sys:String>
+      <sys:String x:Key="profile-unfollow">Unfollow</sys:String>
       <sys:String x:Key="profile-joined">Joined</sys:String>
       <sys:String x:Key="profile-following">Following</sys:String>
       <sys:String x:Key="profile-followers">Followers</sys:String>
       <sys:String x:Key="profile-not-following">Not Following</sys:String>
       <sys:String x:Key="profile-follows-you">Follows You</sys:String>
+      <sys:String x:Key="profile-tweets">Tweets</sys:String>
 
       <!--  Symbols  -->
 

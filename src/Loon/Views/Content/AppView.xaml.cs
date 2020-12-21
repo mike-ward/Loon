@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content
 {
-    public class TabView : UserControl
+    public class AppView : UserControl
     {
-        public TabView()
+        public AppView()
         {
             InitializeComponent();
         }

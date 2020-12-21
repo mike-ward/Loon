@@ -4,15 +4,14 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using Loon.Services;
 
-namespace Loon.Views.Content.ImageViewer
+namespace Loon.Views.Content.Controls
 {
-    public class ImageViewerWindow : Window
+    public class ImageViewer : Window
     {
         public bool IsClosed { get; private set; }
 
-        public ImageViewerWindow()
+        public ImageViewer()
         {
             InitializeComponent();
         }
@@ -22,7 +21,7 @@ namespace Loon.Views.Content.ImageViewer
             AvaloniaXamlLoader.Load(this);
         }
 
-        public static readonly StyledProperty<IImage?> SourceProperty = AvaloniaProperty.Register<ImageViewerWindow, IImage?>(nameof(Source));
+        public static readonly StyledProperty<IImage?> SourceProperty = AvaloniaProperty.Register<ImageViewer, IImage?>(nameof(Source));
 
         public IImage? Source
         {
@@ -40,11 +39,6 @@ namespace Loon.Views.Content.ImageViewer
         {
             base.OnClosed(e);
             IsClosed = true;
-        }
-
-        public void CopyImageToClipboard()
-        {
-            ImageService.CopyImageToClipboard(Source);
         }
     }
 }

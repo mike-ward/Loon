@@ -1,0 +1,37 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="200"
+             x:Class="Loon.Views.Content.UserProfile.UserProfileMoreButton">
+
+  <Button
+    Classes="inline"
+    Command="{Binding $parent[UserControl].OpenMenu}">
+
+    <Button.ContextMenu>
+      <ContextMenu
+        PlacementMode="Left"
+        VerticalOffset="15">
+
+        <MenuItem Header="This" />
+        <MenuItem Header="is" />
+        <MenuItem Header="a" />
+        <MenuItem Header="test" />
+      </ContextMenu>
+    </Button.ContextMenu>
+
+    <Border
+      Width="28"
+      Height="28"
+      CornerRadius="30"
+      BorderThickness="2"
+      BorderBrush="{StaticResource TwitterBlueBrush}">
+      <TextBlock
+        Margin="0 3.4 0 0"
+        Text="{StaticResource EllipsisSymbol}"
+        FontFamily="{StaticResource SymbolFont}"
+        TextAlignment="Center" />
+    </Border>
+  </Button>
+</UserControl>

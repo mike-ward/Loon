@@ -11,6 +11,7 @@
     <StyleInclude Source="/Assets/Button.xaml" />
     <StyleInclude Source="/Assets/ScrollBar.xaml" />
     <StyleInclude Source="/Assets/Separator.xaml" />
+    <StyleInclude Source="/Assets/SplitView.xaml" />
     <StyleInclude Source="/Assets/TabItem.xaml" />
     <StyleInclude Source="/Assets/TextBlock.xaml" />
   </Application.Styles>

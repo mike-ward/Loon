@@ -1,0 +1,32 @@
+﻿<UserControl
+  x:Class="Loon.Views.Content.AppView"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:i="clr-namespace:Loon.Interfaces"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
+  xmlns:vw="clr-namespace:Loon.Views.Content"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  mc:Ignorable="d">
+
+  <Grid>
+    <vw:GetPinView IsVisible="{Binding !$parent[UserControl].DataContext.Settings.IsAuthenticated}, TargetNullValue=True, FallbackValue=True}" />
+
+    <SplitView
+      DisplayMode="Overlay"
+      IsPaneOpen="{Binding $parent[Window].DataContext.User, Converter={x:Static ObjectConverters.IsNotNull}}"
+      IsVisible="{Binding $parent[UserControl].DataContext.Settings.IsAuthenticated}, TargetNullValue=False, FallbackValue=False}"
+      OpenPaneLength="{Binding $parent[Window].Width}"
+      PaneBackground="{DynamicResource ThemeBackgroundBrush}"
+      PanePlacement="Right">
+
+      <SplitView.Pane>
+        <up:UserProfileView />
+      </SplitView.Pane>
+
+      <vw:MainView />
+    </SplitView>
+  </Grid>
+</UserControl>

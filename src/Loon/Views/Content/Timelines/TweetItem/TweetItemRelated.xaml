@@ -1,0 +1,44 @@
+﻿<UserControl
+  x:Class="Loon.Views.Content.Timelines.TweetItem.TweetItemRelated"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:c="clr-namespace:Loon.Views.Content.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:l="clr-namespace:Loon.Views.Content.Timelines.TweetItem"
+  xmlns:m="clr-namespace:Loon.Views"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  mc:Ignorable="d">
+
+  <Border
+    Margin="0,5"
+    Padding="10,0"
+    BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+    BorderThickness="0.6,0">
+
+    <StackPanel
+      Margin="5,0"
+      Spacing="5">
+      <l:TweetItemImage
+        Name="TweetItemImage"
+        DataContext="{Binding ImageTwitterStatus.ExtendedEntities}"
+        IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideImages}" />
+
+      <c:Hyperlink
+        FontWeight="Bold"
+        Link="{Binding Url}"
+        Text="{Binding Title, Converter={StaticResource HtmlDecode}}" />
+
+      <TextBlock
+        Classes="normal"
+        Text="{Binding Description, Converter={StaticResource TrimText}}" />
+
+      <c:Hyperlink
+        Link="{Binding Url}"
+        Text="{Binding SiteName, StringFormat='↗ {0}'}" />
+
+      <l:TweetItemTranslate DataContext="{Binding ImageTwitterStatus}" />
+    </StackPanel>
+  </Border>
+</UserControl>

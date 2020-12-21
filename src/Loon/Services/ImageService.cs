@@ -10,7 +10,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Loon.Extensions;
 using Loon.Models;
-using Loon.Views.Content.ImageViewer;
+using Loon.Views.Content.Controls;
 using Twitter.Models;
 
 namespace Loon.Services
@@ -55,13 +55,13 @@ namespace Loon.Services
             return new Bitmap(ms);
         }
 
-        private static ImageViewerWindow? imageViewer;
+        private static ImageViewer? imageViewer;
 
-        public static ImageViewerWindow GetImageViewer()
+        public static ImageViewer GetImageViewer()
         {
             if (imageViewer is null || imageViewer.IsClosed)
             {
-                imageViewer = new ImageViewerWindow();
+                imageViewer = new ImageViewer();
             }
 
             imageViewer.Hide();

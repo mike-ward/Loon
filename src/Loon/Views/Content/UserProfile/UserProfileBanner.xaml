@@ -2,11 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="250"
-             xmlns:l="clr-namespace:Loon.Views.Content.UserProfile"
              x:Class="Loon.Views.Content.UserProfile.UserProfileBanner">
 
-  <Grid Height="{x:Static l:UserProfileBanner.BannerHeight}">
+  <Grid Height="{x:Static up:UserProfileBanner.BannerHeight}">
 
     <Image
       Height="100"
@@ -39,8 +39,15 @@
       </Image>
     </Border>
 
-    <l:UserProfileActions
+    <StackPanel
+      Margin="10"
+      Spacing="15"
+      Orientation="Horizontal"
       VerticalAlignment="Bottom"
-      HorizontalAlignment="Right" />
+      HorizontalAlignment="Right">
+
+      <up:UserProfileMoreButton />
+      <up:UserProfileFollowButton />
+    </StackPanel>
   </Grid>
 </UserControl>

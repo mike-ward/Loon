@@ -1,11 +1,12 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.VisualTree;
 
 namespace Loon.Views.Content.UserProfile
 {
-    public class UserProfileActions : UserControl
+    public class UserProfileMoreButton : UserControl
     {
-        public UserProfileActions()
+        public UserProfileMoreButton()
         {
             InitializeComponent();
         }
@@ -13,6 +14,12 @@ namespace Loon.Views.Content.UserProfile
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+
+        public void OpenMenu()
+        {
+            var btn = this.FindDescendantOfType<Button>();
+            btn.ContextMenu.Open(btn);
         }
     }
 }

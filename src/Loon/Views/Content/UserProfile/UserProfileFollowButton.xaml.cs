@@ -24,7 +24,7 @@ namespace Loon.Views.Content.UserProfile
             base.OnDataContextChanged(e);
             if (DataContext is User user && this.FindDescendantOfType<TextBlock>() is TextBlock textBlock)
             {
-                textBlock.Text = App.GetString(user.IsFollowing ? "following" : "follow");
+                textBlock.Text = App.GetString(user.IsFollowing ? "profile-following" : "profile-follow");
             }
         }
 
@@ -33,7 +33,7 @@ namespace Loon.Views.Content.UserProfile
             if (sender is Border border && DataContext is User user && user.IsFollowing)
             {
                 border.Background = App.Current.TryFindResource("RedHoverBrush", out var brush) ? (ISolidColorBrush)brush! : Brushes.Black;
-                border.FindDescendantOfType<TextBlock>().Text = App.GetString("unfollow");
+                border.FindDescendantOfType<TextBlock>().Text = App.GetString("profile-unfollow");
             }
         }
 
@@ -42,7 +42,7 @@ namespace Loon.Views.Content.UserProfile
             if (sender is Border border && DataContext is User user)
             {
                 border.Background = App.Current.TryFindResource("TwitterBlueBrush", out var brush) ? (ISolidColorBrush)brush! : Brushes.Black;
-                border.FindDescendantOfType<TextBlock>().Text = App.GetString(user.IsFollowing ? "following" : "follow");
+                border.FindDescendantOfType<TextBlock>().Text = App.GetString(user.IsFollowing ? "profile-following" : "profile-follow");
             }
         }
     }
