@@ -1,0 +1,30 @@
+﻿<UserControl
+  x:Class="Loon.Views.Content.Controls.TweetItem.TweetItemTranslate"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:c="clr-namespace:Loon.Views.Content.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  mc:Ignorable="d">
+
+  <StackPanel>
+    <Button
+      HorizontalAlignment="Right"
+      Classes="inline"
+      Click="OnTranslateClick"
+      Content="{StaticResource translate-text-label}"
+      FontSize="9.5"
+      IsVisible="{Binding TranslatedText, Converter={x:Static StringConverters.IsNullOrEmpty}}" />
+
+    <Separator
+      Margin="30,10,40,5"
+      IsVisible="{Binding TranslatedText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+    <TextBlock
+      Classes="normal"
+      IsVisible="{Binding TranslatedText, Converter={x:Static StringConverters.IsNotNullOrEmpty}, FallbackValue=False}"
+      Text="{Binding TranslatedText}" />
+  </StackPanel>
+</UserControl>

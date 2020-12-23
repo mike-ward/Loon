@@ -1,0 +1,28 @@
+﻿<UserControl
+  x:Class="Loon.Views.Content.Controls.TweetItem.TweetItemRetweetedBy"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  Opacity="{DynamicResource Dim1}"
+  mc:Ignorable="d">
+
+  <StackPanel
+    Orientation="Horizontal"
+    Spacing="3">
+
+    <TextBlock
+      FontFamily="{DynamicResource SymbolFont}"
+      Text="{DynamicResource RetweetSymbol}" />
+
+    <Button
+      Classes="inline"
+      Command="{Binding $parent[Window].DataContext.SetUser}"
+      CommandParameter="{Binding User.ScreenName}"
+      Content="{Binding User.ScreenName, StringFormat='@{0}'}" />
+
+    <TextBlock Text="{DynamicResource tweet-retweeted}" />
+  </StackPanel>
+</UserControl>

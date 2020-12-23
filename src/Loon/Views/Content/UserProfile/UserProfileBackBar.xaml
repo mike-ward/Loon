@@ -1,30 +1,35 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="50"
-             x:Class="Loon.Views.Content.UserProfile.UserProfileBackBar">
+﻿<UserControl
+  x:Class="Loon.Views.Content.UserProfile.UserProfileBackBar"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
+  d:DesignHeight="50"
+  d:DesignWidth="400"
+  mc:Ignorable="d">
 
   <Button
-    Padding="0 10"
-    Classes="inline"
+    Padding="0,10"
     HorizontalContentAlignment="Left"
+    Classes="inline"
     Command="{Binding $parent[Window].DataContext.SetUser}">
 
     <Grid ColumnDefinitions="Auto,*">
 
       <TextBlock
-        Margin="10 0"
+        Margin="10,0"
         VerticalAlignment="Center"
-        Text="{StaticResource PreviousSymbol}"
-        FontFamily="{StaticResource SymbolFont}" />
+        FontFamily="{StaticResource SymbolFont}"
+        Text="{StaticResource PreviousSymbol}" />
 
       <StackPanel Grid.Column="1">
         <up:UserProfileName />
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="{Binding Tweets, Converter={StaticResource CountConverter}}" />
-          <TextBlock Text="{StaticResource profile-tweets}" Margin="3 0 0 0" />
+          <TextBlock
+            Margin="3,0,0,0"
+            Text="{StaticResource profile-tweets}" />
         </StackPanel>
       </StackPanel>
     </Grid>

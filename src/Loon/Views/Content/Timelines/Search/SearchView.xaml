@@ -1,0 +1,40 @@
+﻿<UserControl
+  x:Class="Loon.Views.Content.Timelines.Search.SearchView"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:t="clr-namespace:Loon.Views.Content.Timelines"
+  xmlns:v="clr-namespace:Loon.ViewModels.Content.Timelines"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  DataContext="{Binding Source={x:Type v:SearchTimelineViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
+  mc:Ignorable="d">
+
+  <Grid RowDefinitions="auto,auto,*">
+
+    <Grid
+      HorizontalAlignment="Center"
+      ColumnDefinitions="auto,auto">
+      <TextBox
+        Name="SearchTextBox"
+        Width="150"
+        Margin="20 0 0 0"
+        KeyDown="OnKeyDown"
+        Watermark="Search" />
+    </Grid>
+
+    <Separator
+      Grid.Row="1"
+      Margin="10" />
+
+    <TextBlock
+      Grid.Row="2"
+      Classes="busy"
+      IsVisible="{Binding IsSearching}, FallbackValue=False"
+      Text="searching..."
+      TextAlignment="Center" />
+
+    <t:TimelineView Grid.Row="2" />
+  </Grid>
+</UserControl>

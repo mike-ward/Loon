@@ -1,23 +1,26 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:m="clr-namespace:Loon.Models"
-             xmlns:c="clr-namespace:Loon.Views.Content.Controls"
-             mc:Ignorable="d" d:DesignWidth="210" d:DesignHeight="70"
-             x:Class="Loon.Views.Content.AppSettings.SettingsInfo">
+﻿<UserControl
+  x:Class="Loon.Views.Content.AppSettings.SettingsInfo"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:c="clr-namespace:Loon.Views.Content.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:m="clr-namespace:Loon.Models"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="70"
+  d:DesignWidth="210"
+  mc:Ignorable="d">
 
   <StackPanel
-    Spacing="3"
-    HorizontalAlignment="Center">
+    HorizontalAlignment="Center"
+    Spacing="3">
 
     <TextBlock
-      Text="{x:Static m:VersionInfo.Version}"
-      HorizontalAlignment="Center" />
+      HorizontalAlignment="Center"
+      Text="{x:Static m:VersionInfo.Version}" />
 
     <c:Hyperlink
-      Text="https://mike-ward.net"
-      Link="https://mike-ward.net" />
+      Link="https://mike-ward.net"
+      Text="https://mike-ward.net" />
 
     <TextBlock Text="{x:Static m:VersionInfo.Copyright}" />
   </StackPanel>

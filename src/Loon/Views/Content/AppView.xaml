@@ -5,28 +5,15 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:i="clr-namespace:Loon.Interfaces"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
-  xmlns:vw="clr-namespace:Loon.Views.Content"
+  xmlns:p="clr-namespace:Loon.Views.Content.UserProfile"
+  xmlns:v="clr-namespace:Loon.Views.Content"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
 
   <Grid>
-    <vw:GetPinView IsVisible="{Binding !$parent[UserControl].DataContext.Settings.IsAuthenticated}, TargetNullValue=True, FallbackValue=True}" />
-
-    <SplitView
-      DisplayMode="Overlay"
-      IsPaneOpen="{Binding $parent[Window].DataContext.User, Converter={x:Static ObjectConverters.IsNotNull}}"
-      IsVisible="{Binding $parent[UserControl].DataContext.Settings.IsAuthenticated}, TargetNullValue=False, FallbackValue=False}"
-      OpenPaneLength="{Binding $parent[Window].Width}"
-      PaneBackground="{DynamicResource ThemeBackgroundBrush}"
-      PanePlacement="Right">
-
-      <SplitView.Pane>
-        <up:UserProfileView />
-      </SplitView.Pane>
-
-      <vw:MainView />
-    </SplitView>
+    <v:GetPinView IsVisible="{Binding !$parent[Window].DataContext.Settings.IsAuthenticated, FallbackValue=True}" />
+    <v:MainView IsVisible="{Binding $parent[Window].DataContext.Settings.IsAuthenticated, FallbackValue=False}" />
+    <p:UserProfileView IsVisible="{Binding $parent[Window].DataContext.User, Converter={x:Static ObjectConverters.IsNotNull}}" />
   </Grid>
 </UserControl>

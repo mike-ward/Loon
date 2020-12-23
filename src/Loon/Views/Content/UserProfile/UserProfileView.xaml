@@ -1,19 +1,27 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
-             xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
-             DataContext="{Binding $parent[Window].DataContext.User}"
-             x:Class="Loon.Views.Content.UserProfile.UserProfileView">
+﻿<UserControl
+  x:Class="Loon.Views.Content.UserProfile.UserProfileView"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  Background="{DynamicResource ThemeBackgroundBrush}"
+  DataContext="{Binding $parent[Window].DataContext.User}"
+  mc:Ignorable="d">
 
   <!--  Use Grid so UserProfileTimeline is bounded  -->
 
   <Grid RowDefinitions="auto,auto,auto,auto,*">
     <up:UserProfileBackBar Grid.Row="0" />
     <up:UserProfileBanner Grid.Row="1" />
-    <up:UserProfileInfo Grid.Row="2" Margin="15 3" />
-    <Separator Grid.Row="3" Margin="15 10" />
+    <up:UserProfileInfo
+      Grid.Row="2"
+      Margin="15 3" />
+    <Separator
+      Grid.Row="3"
+      Margin="15 10" />
     <up:UserProfileTimeline Grid.Row="4" />
   </Grid>
 </UserControl>

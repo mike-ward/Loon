@@ -6,7 +6,7 @@ using Avalonia.Markup.Xaml;
 using Loon.Services;
 using Twitter.Models;
 
-namespace Loon.Views.Content.Timelines.TweetItem
+namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemImage : UserControl
     {

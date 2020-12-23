@@ -11,7 +11,7 @@ using Loon.Services;
 using Loon.ViewModels;
 using Twitter.Models;
 
-namespace Loon.Views.Content.Timelines.TweetItem
+namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemProfileImage : UserControl
     {
@@ -66,11 +66,13 @@ namespace Loon.Views.Content.Timelines.TweetItem
 
         public void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            if (DataContext is TwitterStatus status &&
+            if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed &&
+                DataContext is TwitterStatus status &&
                 status.User.ScreenName is string screenName &&
                 this.FindAncestorOfType<Window>() is Window window &&
                 window.DataContext is MainWindowViewModel vm)
             {
+                e.Handled = true;
                 vm.SetUser(screenName);
             }
         }

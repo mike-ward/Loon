@@ -2,7 +2,7 @@
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.VisualTree;
-using Loon.Views.Content.Timelines.TweetItem;
+using Loon.Views.Content.Controls.TweetItem;
 
 namespace Loon.Views.Content.Timelines
 {

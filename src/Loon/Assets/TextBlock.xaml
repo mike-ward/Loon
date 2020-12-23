@@ -4,7 +4,6 @@
 
   <Style Selector="TextBlock.normal">
     <Setter Property="TextWrapping" Value="Wrap" />
-    <Setter Property="Opacity" Value="{DynamicResource Dim1}" />
   </Style>
 
   <Style Selector="TextBlock.symbol">
@@ -18,6 +17,23 @@
   <Style Selector="TextBlock.hyperlink">
     <Setter Property="TextWrapping" Value="Wrap" />
     <Setter Property="VerticalAlignment" Value="Bottom" />
-    <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
   </Style>
+
+  <Styles>
+    <Style Selector="TextBlock.busy">
+      <Style.Animations>
+        <Animation
+          PlaybackDirection="Alternate"
+          RepeatCount="INFINITE"
+          Duration="0:0:1">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="0.1" />
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="1.0" />
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+  </Styles>
 </Styles>

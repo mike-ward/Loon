@@ -1,29 +1,32 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="250"
-             x:Class="Loon.Views.Content.UserProfile.UserProfileBanner">
+﻿<UserControl
+  x:Class="Loon.Views.Content.UserProfile.UserProfileBanner"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
+  d:DesignHeight="250"
+  d:DesignWidth="300"
+  mc:Ignorable="d">
 
   <Grid Height="{x:Static up:UserProfileBanner.BannerHeight}">
 
     <Image
       Height="100"
-      Stretch="UniformToFill"
       VerticalAlignment="Top"
       DataContextChanged="LoadImageAsync"
+      Stretch="UniformToFill"
       Tag="banner" />
 
     <Border
       Width="82"
       Height="82"
-      Margin="10 0 0 0"
-      CornerRadius="41"
-      BorderThickness="5"
+      Margin="10,0,0,0"
       HorizontalAlignment="Left"
       VerticalAlignment="Bottom"
-      BorderBrush="{DynamicResource ThemeBorderLowBrush}">
+      BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+      BorderThickness="5"
+      CornerRadius="41">
 
       <Image
         Width="72"
@@ -32,19 +35,19 @@
         Tag="profile">
         <Image.Clip>
           <EllipseGeometry
+            Center="36,36"
             RadiusX="36"
-            RadiusY="36"
-            Center="36,36" />
+            RadiusY="36" />
         </Image.Clip>
       </Image>
     </Border>
 
     <StackPanel
       Margin="10"
-      Spacing="15"
-      Orientation="Horizontal"
+      HorizontalAlignment="Right"
       VerticalAlignment="Bottom"
-      HorizontalAlignment="Right">
+      Orientation="Horizontal"
+      Spacing="15">
 
       <up:UserProfileMoreButton />
       <up:UserProfileFollowButton />

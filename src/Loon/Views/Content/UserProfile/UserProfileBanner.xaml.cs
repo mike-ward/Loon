@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.VisualTree;
@@ -43,6 +44,8 @@ namespace Loon.Views.Content.UserProfile
 
                         if (uri.IsPopulated())
                         {
+                            // Gives the slide view some time to slide
+                            await Task.Delay(15).ConfigureAwait(true);
                             image.Source = await ImageService.GetImageAsync(uri!, () => false).ConfigureAwait(true);
                         }
                     }

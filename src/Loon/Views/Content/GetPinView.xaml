@@ -1,11 +1,15 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Loon.ViewModels.Content"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
-             x:Class="Loon.Views.Content.GetPinView"
-             DataContext="{Binding Source={x:Type vm:GetPinViewModel}, Converter={StaticResource VML}, Mode=OneTime}">
+﻿<UserControl
+  x:Class="Loon.Views.Content.GetPinView"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vm="clr-namespace:Loon.ViewModels.Content"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  Background="{DynamicResource ThemeBackgroundBrush}"
+  DataContext="{Binding Source={x:Type vm:GetPinViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
+  mc:Ignorable="d">
 
   <Grid Margin="20">
 
@@ -13,14 +17,16 @@
 
     <Grid IsVisible="{Binding !SecondPage}">
       <StackPanel>
-        <TextBlock Text="{StaticResource pin-instructions-1}"
-                   TextAlignment="Center"
-                   TextWrapping="Wrap" />
+        <TextBlock
+          Text="{StaticResource pin-instructions-1}"
+          TextAlignment="Center"
+          TextWrapping="Wrap" />
 
-        <Button Margin="20"
-                MaxWidth="100"
-                Command="{Binding GetPin}"
-                Content="{StaticResource pin-get-pin}" />
+        <Button
+          MaxWidth="100"
+          Margin="20"
+          Command="{Binding GetPin}"
+          Content="{StaticResource pin-get-pin}" />
       </StackPanel>
     </Grid>
 
@@ -28,32 +34,37 @@
 
     <Grid IsVisible="{Binding SecondPage}">
       <StackPanel>
-        <TextBlock Text="{StaticResource pin-instructions-2}"
-                   TextAlignment="Center"
-                   TextWrapping="Wrap" />
+        <TextBlock
+          Text="{StaticResource pin-instructions-2}"
+          TextAlignment="Center"
+          TextWrapping="Wrap" />
 
-        <TextBox x:Name="PinTextBox"
-                 Margin="20"
-                 MaxWidth="100"
-                 FontSize="14"
-                 FontWeight="Bold"
-                 TextAlignment="Center"
-                 Watermark="PIN"
-                 Text="{Binding Pin, Mode=TwoWay}" />
+        <TextBox
+          x:Name="PinTextBox"
+          MaxWidth="100"
+          Margin="20"
+          FontSize="14"
+          FontWeight="Bold"
+          Text="{Binding Pin, Mode=TwoWay}"
+          TextAlignment="Center"
+          Watermark="PIN" />
 
-        <Button Margin="20"
-                MaxWidth="100"
-                Command="{Binding SignIn}"
-                Content="{StaticResource pin-sign-in}" />
+        <Button
+          MaxWidth="100"
+          Margin="20"
+          Command="{Binding SignIn}"
+          Content="{StaticResource pin-sign-in}" />
 
-        <TextBlock Text="{StaticResource pin-about}"
-                   TextAlignment="Center"
-                   TextWrapping="Wrap" />
+        <TextBlock
+          Text="{StaticResource pin-about}"
+          TextAlignment="Center"
+          TextWrapping="Wrap" />
 
-        <Button Margin="20"
-                MaxWidth="100"
-                Command="{Binding GoBack}"
-                Content="&#x25c0;" />
+        <Button
+          MaxWidth="100"
+          Margin="20"
+          Command="{Binding GoBack}"
+          Content="&#x25c0;" />
       </StackPanel>
     </Grid>
   </Grid>

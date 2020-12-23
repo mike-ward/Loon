@@ -2,51 +2,52 @@
   x:Class="Loon.Views.Content.MainView"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:as="clr-namespace:Loon.Views.Content.AppSettings"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:in="clr-namespace:Loon.Interfaces"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:ml="clr-namespace:Loon.Views"
-  xmlns:tl="clr-namespace:Loon.Views.Content.Timelines"
-  xmlns:vm="clr-namespace:Loon.ViewModels.Content.Timelines"
+  xmlns:n="clr-namespace:Loon.Views.Content.Timelines.Search"
+  xmlns:s="clr-namespace:Loon.Views.Content.AppSettings"
+  xmlns:t="clr-namespace:Loon.Views.Content.Timelines"
+  xmlns:v="clr-namespace:Loon.ViewModels.Content.Timelines"
+  xmlns:w="clr-namespace:Loon.Views.Content.Write"
   d:DesignHeight="450"
   d:DesignWidth="300"
+  Background="{DynamicResource ThemeBackgroundBrush}"
   mc:Ignorable="d">
 
-  <TabControl>
-    <TabItem Margin="5,0,0,3">
+  <TabControl SelectionChanged="OnSelectionChanged">
+    <TabItem>
       <TabItem.Header>
         <TextBlock Text="{DynamicResource HomeSymbol}" />
       </TabItem.Header>
-      <tl:TimelineView DataContext="{Binding Source={x:Type vm:HomeTimelineViewModel}, Converter={StaticResource VML}, Mode=OneTime}" />
+      <t:HomeTimelineView />
     </TabItem>
 
     <TabItem>
       <TabItem.Header>
         <TextBlock Text="{DynamicResource LikeSymbol}" />
       </TabItem.Header>
-      <tl:TimelineView DataContext="{Binding Source={x:Type vm:LikesTimelineViewModel}, Converter={StaticResource VML}, Mode=OneTime}" />
+      <t:LikesTimelineView />
     </TabItem>
 
     <TabItem>
       <TabItem.Header>
         <TextBlock Text="{DynamicResource SearchSymbol}" />
       </TabItem.Header>
-      This space for rent!
+      <n:SearchView />
     </TabItem>
 
     <TabItem>
       <TabItem.Header>
         <TextBlock Text="{DynamicResource SettingsSymbol}" />
       </TabItem.Header>
-      <as:SettingsView DataContext="{Binding Source={x:Type in:ISettings}, Converter={StaticResource VML}, Mode=OneTime}" />
+      <s:SettingsView />
     </TabItem>
 
     <TabItem>
       <TabItem.Header>
         <TextBlock Text="{DynamicResource WriteSymbol}" />
       </TabItem.Header>
-      This space for rent!
+      <w:WriteView />
     </TabItem>
   </TabControl>
 </UserControl>

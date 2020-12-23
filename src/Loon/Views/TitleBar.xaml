@@ -1,11 +1,14 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="25"
-             x:Class="Loon.Views.TitleBar"
-             PointerPressed="BeginMoveDrag"
-             Background="{DynamicResource ThemeControlMidBrush}">
+﻿<UserControl
+  x:Class="Loon.Views.TitleBar"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="25"
+  d:DesignWidth="300"
+  Background="{DynamicResource ThemeControlMidBrush}"
+  PointerPressed="BeginMoveDrag"
+  mc:Ignorable="d">
 
   <UserControl.Styles>
     <Style Selector="TextBlock.ctrl">
@@ -16,34 +19,40 @@
     </Style>
 
     <Style Selector="TextBlock.ctrl:pointerover">
-      <Setter Property="Background" Value="{StaticResource ThemeControlHighBrush}" />
+      <Setter Property="Background" Value="{StaticResource ThemeAccentBrush4}" />
     </Style>
   </UserControl.Styles>
 
-  <Grid Height="25"
-        ColumnDefinitions="Auto,Auto,*">
+  <Grid
+    Height="25"
+    ColumnDefinitions="Auto,Auto,*">
 
-    <Image Source="../app.ico"
-           Grid.Column="0"
-           Margin="6 0 7 0"
-           Width="18" />
+    <Image
+      Grid.Column="0"
+      Width="18"
+      Margin="6,0,7,0"
+      Source="../app.ico" />
 
-    <TextBlock Text="Loon"
-               Grid.Column="1"
-               Padding="0 4 0 0" />
+    <TextBlock
+      Grid.Column="1"
+      Padding="0,4,0,0"
+      Text="Loon" />
 
-    <StackPanel Orientation="Horizontal"
-                Grid.Column="2"
-                Margin="0 0 7 0"
-                HorizontalAlignment="Right">
+    <StackPanel
+      Grid.Column="2"
+      Margin="0,0,7,0"
+      HorizontalAlignment="Right"
+      Orientation="Horizontal">
 
-      <TextBlock Text="—"
-                 Classes="ctrl"
-                 PointerPressed="MinimizeApp" />
+      <TextBlock
+        Classes="ctrl"
+        PointerPressed="MinimizeApp"
+        Text="—" />
 
-      <TextBlock Text="✕"
-                 Classes="ctrl"
-                 PointerPressed="CloseApp" />
+      <TextBlock
+        Classes="ctrl"
+        PointerPressed="CloseApp"
+        Text="✕" />
     </StackPanel>
   </Grid>
 </UserControl>

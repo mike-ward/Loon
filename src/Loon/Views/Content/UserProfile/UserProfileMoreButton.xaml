@@ -1,9 +1,12 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="200"
-             x:Class="Loon.Views.Content.UserProfile.UserProfileMoreButton">
+﻿<UserControl
+  x:Class="Loon.Views.Content.UserProfile.UserProfileMoreButton"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="200"
+  d:DesignWidth="200"
+  mc:Ignorable="d">
 
   <Button
     Classes="inline"
@@ -24,13 +27,13 @@
     <Border
       Width="28"
       Height="28"
-      CornerRadius="30"
+      BorderBrush="{StaticResource TwitterBlueBrush}"
       BorderThickness="2"
-      BorderBrush="{StaticResource TwitterBlueBrush}">
+      CornerRadius="30">
       <TextBlock
-        Margin="0 3.4 0 0"
-        Text="{StaticResource EllipsisSymbol}"
+        Margin="0,3.4,0,0"
         FontFamily="{StaticResource SymbolFont}"
+        Text="{StaticResource EllipsisSymbol}"
         TextAlignment="Center" />
     </Border>
   </Button>

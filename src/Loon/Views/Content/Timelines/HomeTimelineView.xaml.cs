@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Loon.Views.Content.Timelines.TweetItem
+namespace Loon.Views.Content.Timelines
 {
-    public class TweetItemActions : UserControl
+    public class HomeTimelineView : UserControl
     {
-        public TweetItemActions()
+        public HomeTimelineView()
         {
             InitializeComponent();
         }

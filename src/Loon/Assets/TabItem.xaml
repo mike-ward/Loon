@@ -17,12 +17,12 @@
   </Style>
 
   <Style Selector="TabItem:selected">
-    <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeBorderHighBrush}" />
     <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
   </Style>
 
   <Style Selector="TabItem:pointerover">
-    <Setter Property="Foreground" Value="{DynamicResource ThemeControlHighlightLowBrush}" />
-    <Setter Property="Background" Value="{DynamicResource ThemeForegroundLowBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
   </Style>
 </Styles>

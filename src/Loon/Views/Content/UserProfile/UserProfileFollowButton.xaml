@@ -1,23 +1,25 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             mc:Ignorable="d" d:DesignWidth="110" d:DesignHeight="50"
-             x:Class="Loon.Views.Content.UserProfile.UserProfileFollowButton">
+﻿<UserControl
+  x:Class="Loon.Views.Content.UserProfile.UserProfileFollowButton"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+  d:DesignHeight="50"
+  d:DesignWidth="110"
+  mc:Ignorable="d">
 
-  <Button
-    Classes="inline">
+  <Button Classes="inline">
     <Border
       MinWidth="95"
+      Padding="15,4,15,6"
+      Background="{StaticResource TwitterBlueBrush}"
       CornerRadius="15"
-      Padding="15 4 15 6"
       PointerEnter="OnPointerEnter"
-      PointerLeave="OnPointerLeave"
-      Background="{StaticResource TwitterBlueBrush}">
+      PointerLeave="OnPointerLeave">
       <TextBlock
-        Text="Following"
         FontWeight="Bold"
+        Text="Following"
         TextAlignment="Center" />
     </Border>
   </Button>

@@ -34,7 +34,6 @@
     <None Remove="Assets\ScrollBar.xaml" />
     <None Remove="Assets\seguisym.ttf" />
     <None Remove="Assets\Separator.xaml" />
-    <None Remove="Assets\SplitView.xaml" />
     <None Remove="Assets\Strings.xaml" />
     <None Remove="Assets\TabItem.xaml" />
     <None Remove="Assets\TextBlock.xaml" />
@@ -54,17 +53,19 @@
     <None Remove="Views\Content\Controls\Hyperlink.xaml" />
     <None Remove="Views\Content\GetPinView.xaml" />
     <None Remove="Views\Content\MainView.xaml" />
+    <None Remove="Views\Content\Timelines\LikesTimelineView.xaml" />
+    <None Remove="Views\Content\Timelines\Search\SearchView.xaml" />
     <None Remove="Views\Content\Timelines\TimelineView.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemActions.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemAuthor.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemImage.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemProfileImage.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemQuoted.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemRelated.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemRetweetedBy.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemText.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemTranslate.xaml" />
-    <None Remove="Views\Content\Timelines\TweetItem\TweetItemView.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemActions.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemAuthor.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemImage.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemProfileImage.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemQuoted.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemRelated.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemRetweetedBy.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemText.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemTranslate.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemView.xaml" />
     <None Remove="Views\Content\UserProfile\UserProfileBackBar.xaml" />
     <None Remove="Views\Content\UserProfile\UserProfileBanner.xaml" />
     <None Remove="Views\Content\UserProfile\UserProfileFollowButton.xaml" />
@@ -73,6 +74,7 @@
     <None Remove="Views\Content\UserProfile\UserProfileName.xaml" />
     <None Remove="Views\Content\UserProfile\UserProfileTimeline.xaml" />
     <None Remove="Views\Content\UserProfile\UserProfileView.xaml" />
+    <None Remove="Views\Content\Write\WriteView.xaml" />
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\MessageBox.xaml" />
     <None Remove="Views\TitleBar.xaml" />
@@ -85,9 +87,6 @@
   
   <ItemGroup>
     <AvaloniaXaml Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaXaml>
-    <AvaloniaXaml Include="Assets\SplitView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Assets\TabItem.xaml">
@@ -165,37 +164,46 @@
     <AvaloniaXaml Include="Views\Content\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\HomeTimelineView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\LikesTimelineView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Timelines\Search\SearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\Timelines\TimelineView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemActions.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemActions.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemAuthor.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemAuthor.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemImage.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemImage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemProfileImage.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemProfileImage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemQuoted.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemQuoted.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemRelated.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemRelated.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemRetweetedBy.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemRetweetedBy.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemText.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemText.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemTranslate.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemTranslate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\TweetItem\TweetItemView.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileBackBar.xaml">
@@ -220,6 +228,9 @@
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Write\WriteView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\MainWindow.xaml">
@@ -300,37 +311,46 @@
     <Compile Update="Views\Content\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Content\Timelines\HomeTimelineView.xaml.cs">
+      <DependentUpon>HomeTimelineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\LikesTimelineView.xaml.cs">
+      <DependentUpon>LikesTimelineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Timelines\Search\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Content\Timelines\TimelineView.xaml.cs">
       <DependentUpon>TimelineView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemActions.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemActions.xaml.cs">
       <DependentUpon>TweetItemActions.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemAuthor.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemAuthor.xaml.cs">
       <DependentUpon>TweetItemAuthor.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemImage.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemImage.xaml.cs">
       <DependentUpon>TweetItemImage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemProfileImage.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemProfileImage.xaml.cs">
       <DependentUpon>TweetItemProfileImage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemQuoted.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemQuoted.xaml.cs">
       <DependentUpon>TweetItemQuoted.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemRelated.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemRelated.xaml.cs">
       <DependentUpon>TweetItemRelated.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemRetweetedBy.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemRetweetedBy.xaml.cs">
       <DependentUpon>TweetItemRetweetedBy.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemText.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemText.xaml.cs">
       <DependentUpon>TweetItemText.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemTranslate.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemTranslate.xaml.cs">
       <DependentUpon>TweetItemTranslate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\TweetItem\TweetItemView.xaml.cs">
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemView.xaml.cs">
       <DependentUpon>TweetItemView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\UserProfile\UserProfileBackBar.xaml.cs">
@@ -356,6 +376,9 @@
     </Compile>
     <Compile Update="Views\Content\UserProfile\UserProfileView.xaml.cs">
       <DependentUpon>UserProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Write\WriteView.xaml.cs">
+      <DependentUpon>WriteView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

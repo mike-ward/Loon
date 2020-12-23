@@ -6,7 +6,7 @@ using Loon.Extensions;
 using Loon.Services;
 using Twitter.Models;
 
-namespace Loon.Views.Content.Timelines.TweetItem
+namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemTranslate : UserControl
     {
