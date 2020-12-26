@@ -5,7 +5,7 @@ using Avalonia.Data.Converters;
 
 namespace Loon.Converters
 {
-    public class IsFollowingBrushConverter : IValueConverter
+    internal class IsFollowingBrushConverter : IValueConverter
     {
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

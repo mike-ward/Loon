@@ -1,4 +1,7 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
+using Avalonia.Markup.Xaml.Styling;
+using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
 using Twitter.Models;
@@ -20,11 +23,13 @@ namespace Loon.ViewModels
             TwitterService = twitterService;
             Settings = settings;
 
-            Settings.PropertyChanged += delegate
+            Settings.PropertyChanged += (_, e) =>
             {
                 TwitterService.AuthenticationTokens(
                     Settings.AccessToken,
                     Settings.AccessTokenSecret);
+
+                UpdateTheme(e.PropertyName);
             };
         }
 
@@ -66,6 +71,21 @@ namespace Loon.ViewModels
                 var task = TwitterService.UserInfo(screenName).AsTask();
                 task.Wait();
                 User = task.Result;
+            }
+        }
+
+        private void UpdateTheme(string? propertyName)
+        {
+            if (propertyName.IsEqualTo(nameof(ISettings.UseLightTheme)))
+            {
+                var styles = new StyleInclude(new Uri("resm:Styles"))
+                {
+                    Source = Settings.UseLightTheme
+                        ? new Uri("avares://Avalonia.Themes.Default/Accents/BaseLight.xaml")
+                        : new Uri("avares://Avalonia.Themes.Default/Accents/BaseDark.xaml")
+                };
+
+                App.Current.Styles[1] = styles;
             }
         }
     }

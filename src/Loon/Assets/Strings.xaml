@@ -37,20 +37,20 @@
 
       <!--  Symbols  -->
 
-      <FontFamily x:Key="SymbolFont">/Assets/#Segoe UI Symbol</FontFamily>
+      <FontFamily x:Key="AppFont">Segoe UI,Sans Regular</FontFamily>
+      <FontFamily x:Key="SymbolFont">/Assets/Fonts/#Symbols</FontFamily>
+      <FontFamily x:Key="SymbolFont1">/Assets/Fonts/#fontcustom</FontFamily>
 
       <sys:String x:Key="HomeSymbol">&#xE10F;</sys:String>
       <sys:String x:Key="MentionsSymbol">&#xE168;</sys:String>
       <sys:String x:Key="SearchSymbol">&#xE11A;</sys:String>
       <sys:String x:Key="SettingsSymbol">&#xE115;</sys:String>
       <sys:String x:Key="WriteSymbol">&#xE104;</sys:String>
-      <sys:String x:Key="AddFriendSymbol">&#xE1E2;</sys:String>
       <sys:String x:Key="FontSizeSymbol">&#xE1C8;</sys:String>
       <sys:String x:Key="QuoteSymbol">&#xE134;</sys:String>
 
-      <sys:String x:Key="ReplySymbol">&#x1F4AC;</sys:String>
+      <sys:String x:Key="ReplySymbol">&#xE15F;</sys:String>
       <sys:String x:Key="RetweetSymbol">&#xE1CA;</sys:String>
-      <sys:String x:Key="LikeSymbol">&#xE0A5;</sys:String>
       <sys:String x:Key="EllipsisSymbol">&#xE10C;</sys:String>
 
       <sys:String x:Key="XSymbol">&#xE10A;</sys:String>
@@ -64,6 +64,10 @@
       <sys:String x:Key="PlaySymbol">&#xE102;</sys:String>
       <sys:String x:Key="CopyUriClipboardSymbol">&#xE16F;</sys:String>
       <sys:String x:Key="CopyImageClipboardSymbol">&#x1f304;</sys:String>
+
+      <!--  Use SymbolFont1  -->
+      <sys:String x:Key="LikeSymbol">&#xF159;</sys:String>
+      <sys:String x:Key="AddFriendSymbol">&#xF203;</sys:String>
 
       <!--  Standard font symbols  -->
 
@@ -123,9 +127,6 @@
       <sys:String x:Key="compose-tweet-tooltip">Write a new tweet</sys:String>
       <sys:String x:Key="copy-uri-tooltip">Copy URL to clipboard</sys:String>
       <sys:String x:Key="copy-image-tooltip">Copy image to clipboard</sys:String>
-      <sys:String x:Key="play-pause-tooltip">Play/Pause</sys:String>
-      <sys:String x:Key="skip-to-start-tooltip">Skip to start</sys:String>
-      <sys:String x:Key="go-back-ten-tooltip">Go back 10 seconds</sys:String>
       <sys:String x:Key="new-tweets-arrived-tooltip">New tweets arrived</sys:String>
       <sys:String x:Key="my-tweet-color-tooltip">Background color (e.g. blue, #fff, #abccef) of tweets mentioning you. Blank for default</sys:String>
 

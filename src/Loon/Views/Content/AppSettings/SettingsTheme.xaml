@@ -18,12 +18,12 @@
       <RadioButton
         Content="{StaticResource theme-light}"
         GroupName="t"
-        IsChecked="{Binding Theme, Converter={StaticResource CompareTo}, ConverterParameter=light}" />
+        IsChecked="{Binding UseLightTheme}" />
 
       <RadioButton
         Content="{StaticResource theme-dark}"
         GroupName="t"
-        IsChecked="{Binding Theme, Converter={StaticResource CompareTo}, ConverterParameter=dark}" />
+        IsChecked="{Binding !UseLightTheme}" />
     </UniformGrid>
   </StackPanel>
 </UserControl>

@@ -39,4 +39,8 @@
     <Setter Property="Opacity" Value=".75" />
     <Setter Property="Background" Value="Transparent" />
   </Style>
+
+  <Style Selector="Button.blue:pointerover">
+    <Setter Property="Foreground" Value="{DynamicResource ThemeBackgroundBrush}" />
+  </Style>
 </Styles>

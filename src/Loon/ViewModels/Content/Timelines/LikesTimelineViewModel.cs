@@ -8,7 +8,7 @@ using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    public class LikesTimelineViewModel
+    internal class LikesTimelineViewModel
     {
         private Timeline Timeline { get; }
         private ITwitterService TwitterService { get; }

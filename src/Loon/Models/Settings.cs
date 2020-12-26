@@ -24,7 +24,7 @@ namespace Loon.Models
         private bool alwaysOnTop;
         private bool applyGrayscaleShader;
         private double fontSize = 12;
-        private string theme = "dark";
+        private bool useLightTheme;
         private string? myTweetColor;
         private string Profile { get; } = "loon";
 
@@ -67,7 +67,7 @@ namespace Loon.Models
         public bool Donated { get => donated; set => SetProperty(ref donated, value); }
         public bool ApplyGrayscaleShader { get => applyGrayscaleShader; set => SetProperty(ref applyGrayscaleShader, value); }
         public double FontSize { get => fontSize; set => SetProperty(ref fontSize, value); }
-        public string Theme { get => theme; set => SetProperty(ref theme, value); }
+        public bool UseLightTheme { get => useLightTheme; set => SetProperty(ref useLightTheme, value); }
         public string? MyTweetColor { get => myTweetColor; set => SetProperty(ref myTweetColor, value); }
         public WindowLocation Location { get; set; } = new WindowLocation { X = 200, Y = 200, Width = 300, Height = 500 };
 
@@ -95,7 +95,7 @@ namespace Loon.Models
                 ShowInSystemTray = settings.showInSystemTray;
                 AlwaysOnTop = settings.alwaysOnTop;
                 FontSize = settings.FontSize;
-                Theme = settings.Theme;
+                UseLightTheme = settings.UseLightTheme;
                 ApplyGrayscaleShader = settings.ApplyGrayscaleShader;
                 MyTweetColor = settings.MyTweetColor;
                 Donated = settings.Donated;

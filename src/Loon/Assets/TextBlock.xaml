@@ -7,7 +7,13 @@
   </Style>
 
   <Style Selector="TextBlock.symbol">
+    <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />
+  </Style>
+
+  <Style Selector="TextBlock.symbol1">
+    <Setter Property="VerticalAlignment" Value="Bottom" />
+    <Setter Property="FontFamily" Value="{DynamicResource SymbolFont1}" />
   </Style>
 
   <Style Selector="TextBlock.padleft">
@@ -19,21 +25,19 @@
     <Setter Property="VerticalAlignment" Value="Bottom" />
   </Style>
 
-  <Styles>
-    <Style Selector="TextBlock.busy">
-      <Style.Animations>
-        <Animation
-          PlaybackDirection="Alternate"
-          RepeatCount="INFINITE"
-          Duration="0:0:1">
-          <KeyFrame Cue="0%">
-            <Setter Property="Opacity" Value="0.1" />
-          </KeyFrame>
-          <KeyFrame Cue="100%">
-            <Setter Property="Opacity" Value="1.0" />
-          </KeyFrame>
-        </Animation>
-      </Style.Animations>
-    </Style>
-  </Styles>
+  <Style Selector="TextBlock.busy">
+    <Style.Animations>
+      <Animation
+        PlaybackDirection="Alternate"
+        RepeatCount="INFINITE"
+        Duration="0:0:1">
+        <KeyFrame Cue="0%">
+          <Setter Property="Opacity" Value="0.1" />
+        </KeyFrame>
+        <KeyFrame Cue="100%">
+          <Setter Property="Opacity" Value="1.0" />
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
 </Styles>

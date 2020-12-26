@@ -6,7 +6,7 @@ using Avalonia.Data.Converters;
 
 namespace Loon.Converters
 {
-    public class MultiBoolConverter : IMultiValueConverter
+    internal class MultiBoolConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {

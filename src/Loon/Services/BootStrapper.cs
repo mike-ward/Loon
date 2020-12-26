@@ -4,6 +4,7 @@ using Loon.Models;
 using Loon.ViewModels;
 using Loon.ViewModels.Content;
 using Loon.ViewModels.Content.Timelines;
+using Loon.ViewModels.Content.Write;
 using Loon.Views;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,6 +32,7 @@ namespace Loon.Services
             services.AddTransient<LikesTimelineViewModel>();
             services.AddTransient<UserProfileTimelineViewModel>();
             services.AddTransient<SearchTimelineViewModel>();
+            services.AddTransient<WriteViewModel>();
 
             // Models
             services.AddSingleton<ISettings, Settings>();

@@ -5,7 +5,7 @@ using Loon.Views;
 
 namespace Loon.Services
 {
-    public static class OpenUrlService
+    internal static class OpenUrlService
     {
         // Source: https://brockallen.com/2016/09/24/process-start-for-urls-on-net-core/
         public static void Open(string url)

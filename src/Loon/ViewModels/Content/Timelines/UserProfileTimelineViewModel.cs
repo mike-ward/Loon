@@ -6,7 +6,7 @@ using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    public class UserProfileTimelineViewModel
+    internal class UserProfileTimelineViewModel
     {
         private ITwitterService TwitterService { get; }
         public IAvaloniaList<TwitterStatus> StatusCollection { get; } = new AvaloniaList<TwitterStatus>();

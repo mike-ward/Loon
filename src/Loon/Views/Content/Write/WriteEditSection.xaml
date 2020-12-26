@@ -1,0 +1,61 @@
+﻿<UserControl
+  x:Class="Loon.Views.Content.Write.WriteEditSection"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ti="clr-namespace:Loon.Views.Content.Controls.TweetItem"
+  d:DesignHeight="450"
+  d:DesignWidth="300"
+  mc:Ignorable="d">
+
+  <Grid ColumnDefinitions="auto,*">
+
+    <ti:TweetItemProfileImage
+      Margin="0 0 10 0"
+      VerticalAlignment="Top"
+      DataContext="{Binding Me}" />
+
+    <StackPanel
+      Grid.Column="1"
+      Spacing="10">
+
+      <TextBox
+        Name="WriteTextBox"
+        MinHeight="100"
+        AcceptsReturn="true"
+        Watermark="What's happening?" />
+
+      <Grid
+        VerticalAlignment="Center"
+        ColumnDefinitions="*,auto,auto">
+
+        <TextBlock
+          Margin="5 0"
+          Text="{Binding Text.Length, ElementName=WriteTextBox}" />
+
+        <Button
+          Grid.Column="1"
+          Margin="5 0"
+          HorizontalAlignment="Right">
+          <TextBlock
+            Padding="5 0"
+            FontFamily="{StaticResource SymbolFont}"
+            Text="{StaticResource AddSymbol}" />
+        </Button>
+
+        <Button
+          Name="TweetButton"
+          Grid.Column="2"
+          HorizontalAlignment="Right"
+          Background="{StaticResource TwitterBlueBrush}"
+          Classes="blue"
+          Command="{Binding OnTweet}">
+          <TextBlock
+            Padding="5 0"
+            Text="Tweet" />
+        </Button>
+      </Grid>
+    </StackPanel>
+  </Grid>
+</UserControl>

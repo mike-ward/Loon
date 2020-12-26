@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Loon.Services
 {
-    public static class TranslateService
+    internal static class TranslateService
     {
         private const string serviceKey = "c32750406743418d86186b20b9903154";
         public static readonly string endpoint = "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0";

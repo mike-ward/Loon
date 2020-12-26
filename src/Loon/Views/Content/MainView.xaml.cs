@@ -1,6 +1,9 @@
-﻿using Avalonia.Controls;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Loon.Views.Content.Timelines.Search;
+using Loon.Commands;
+using Loon.Interfaces;
 
 namespace Loon.Views.Content
 {
@@ -21,12 +24,17 @@ namespace Loon.Views.Content
             if (sender is TabControl tabControl)
             {
                 var tabItem = tabControl.SelectedItem as TabItem;
-                var searchView = tabItem?.Content as SearchView;
+                await SetFocus(tabItem).ConfigureAwait(false);
+                TabGoBackCommand.Command.LastSelectedTab = e.RemovedItems.Cast<TabItem>().FirstOrDefault();
+            }
+        }
 
-                if (searchView is not null)
-                {
-                    await searchView.SetFocus();
-                }
+        private static async ValueTask SetFocus(TabItem? tabItem)
+        {
+            if (tabItem?.Content is ISetFocus view)
+            {
+                await Task.Delay(500).ConfigureAwait(true); // too soon and focus won't work
+                view.SetFocus();
             }
         }
     }

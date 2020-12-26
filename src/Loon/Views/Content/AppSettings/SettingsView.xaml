@@ -27,13 +27,19 @@
       <l:SettingsFontSize />
       <l:SettingsTheme />
       <l:SettingsMyTweetColor />
+
       <Separator />
+
       <l:SettingsSignOut />
       <l:SettingsDonate />
       <l:SettingsOpenSettings />
+
       <Separator />
+
       <l:SettingsInfo HorizontalAlignment="Center" />
+
       <Separator />
+
       <l:SettingsTips />
     </StackPanel>
   </ScrollViewer>

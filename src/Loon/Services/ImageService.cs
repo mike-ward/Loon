@@ -15,7 +15,7 @@ using Twitter.Models;
 
 namespace Loon.Services
 {
-    public static class ImageService
+    internal static class ImageService
     {
         public static async ValueTask<IImage?> GetImageAsync(string uri, Func<bool> Clearing)
         {

@@ -4,7 +4,6 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:n="clr-namespace:Loon.Views.Content.Timelines.Search"
   xmlns:s="clr-namespace:Loon.Views.Content.AppSettings"
   xmlns:t="clr-namespace:Loon.Views.Content.Timelines"
   xmlns:v="clr-namespace:Loon.ViewModels.Content.Timelines"
@@ -14,38 +13,58 @@
   Background="{DynamicResource ThemeBackgroundBrush}"
   mc:Ignorable="d">
 
-  <TabControl SelectionChanged="OnSelectionChanged">
+  <TabControl
+    Name="TabControl"
+    Margin="3 0 0 0"
+    SelectionChanged="OnSelectionChanged">
+
     <TabItem>
       <TabItem.Header>
-        <TextBlock Text="{DynamicResource HomeSymbol}" />
+        <TextBlock
+          Classes="symbol"
+          Text="{StaticResource HomeSymbol}"
+          ToolTip.Tip="{StaticResource tab-home-name}" />
       </TabItem.Header>
       <t:HomeTimelineView />
     </TabItem>
 
     <TabItem>
       <TabItem.Header>
-        <TextBlock Text="{DynamicResource LikeSymbol}" />
+        <TextBlock
+          Classes="symbol1"
+          FontSize="{Binding $parent[Window].FontSize, Converter={StaticResource HeartFontSize}, ConverterParameter=1.5}"
+          Text="{StaticResource LikeSymbol}"
+          ToolTip.Tip="{StaticResource tab-likes-name}" />
       </TabItem.Header>
       <t:LikesTimelineView />
     </TabItem>
 
     <TabItem>
       <TabItem.Header>
-        <TextBlock Text="{DynamicResource SearchSymbol}" />
+        <TextBlock
+          Classes="symbol"
+          Text="{StaticResource SearchSymbol}"
+          ToolTip.Tip="{StaticResource tab-search-name}" />
       </TabItem.Header>
-      <n:SearchView />
+      <t:SearchTimelineView />
     </TabItem>
 
     <TabItem>
       <TabItem.Header>
-        <TextBlock Text="{DynamicResource SettingsSymbol}" />
+        <TextBlock
+          Classes="symbol"
+          Text="{StaticResource SettingsSymbol}"
+          ToolTip.Tip="{StaticResource tab-settings-name}" />
       </TabItem.Header>
       <s:SettingsView />
     </TabItem>
 
     <TabItem>
       <TabItem.Header>
-        <TextBlock Text="{DynamicResource WriteSymbol}" />
+        <TextBlock
+          Classes="symbol"
+          Text="{StaticResource WriteSymbol}"
+          ToolTip.Tip="{StaticResource tab-pen-name}" />
       </TabItem.Header>
       <w:WriteView />
     </TabItem>

@@ -28,7 +28,7 @@
 
     <StackPanel
       Grid.Column="1"
-      Margin="7,0,0,10">
+      Margin="7 0 0 10">
 
       <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
 
@@ -39,7 +39,7 @@
 
       <l:TweetItemImage
         Name="TweetItemImage"
-        Margin="0,5,5,5"
+        Margin="0 5 5 5"
         DataContext="{Binding OriginatingStatus.ExtendedEntities}"
         IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideImages}" />
 
@@ -65,7 +65,7 @@
       <l:TweetItemActions DataContext="{Binding OriginatingStatus}" />
 
       <Separator
-        Margin="0,10,0,0"
+        Margin="0 10 0 0"
         IsVisible="{Binding $parent[m:MainWindow].DataContext.Settings.HideProfileImages}" />
     </StackPanel>
   </Grid>

@@ -1,14 +1,14 @@
-﻿using System.Threading.Tasks;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Loon.Interfaces;
 using Loon.ViewModels.Content.Timelines;
 
-namespace Loon.Views.Content.Timelines.Search
+namespace Loon.Views.Content.Timelines
 {
-    public class SearchView : UserControl
+    public class SearchTimelineView : UserControl, ISetFocus
     {
-        public SearchView()
+        public SearchTimelineView()
         {
             InitializeComponent();
         }
@@ -18,9 +18,8 @@ namespace Loon.Views.Content.Timelines.Search
             AvaloniaXamlLoader.Load(this);
         }
 
-        public async ValueTask SetFocus()
+        public void SetFocus()
         {
-            await Task.Delay(1000).ConfigureAwait(true);
             var textBox = this.FindControl<TextBox>("SearchTextBox");
             textBox?.Focus();
         }
@@ -31,7 +30,7 @@ namespace Loon.Views.Content.Timelines.Search
                 sender is TextBox textBox &&
                 DataContext is SearchTimelineViewModel vm)
             {
-                await vm.OnSearch(textBox.Text);
+                await vm.OnSearch(textBox.Text).ConfigureAwait(false);
             }
         }
     }

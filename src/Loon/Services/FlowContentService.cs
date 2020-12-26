@@ -10,7 +10,7 @@ using Twitter.Models;
 
 namespace Loon.Services
 {
-    public static class FlowContentService
+    internal static class FlowContentService
     {
         // Best I can do until Avalonia supports Inlines
         public static IEnumerable<Control> FlowContentInlines(TwitterStatus twitterStatus)

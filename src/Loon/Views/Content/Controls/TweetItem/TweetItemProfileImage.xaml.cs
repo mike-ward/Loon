@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -74,6 +75,14 @@ namespace Loon.Views.Content.Controls.TweetItem
             {
                 e.Handled = true;
                 vm.SetUser(screenName);
+            }
+            else if (e.GetCurrentPoint(null).Properties.IsRightButtonPressed &&
+                e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
+                DataContext is TwitterStatus status1)
+            {
+                e.Handled = true;
+                var json = JsonSerializer.Serialize(status1, new JsonSerializerOptions { WriteIndented = true });
+                _ = Application.Current.Clipboard.SetTextAsync(json);
             }
         }
     }

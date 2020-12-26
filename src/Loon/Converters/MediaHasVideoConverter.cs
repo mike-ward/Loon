@@ -6,7 +6,7 @@ using Twitter.Models;
 
 namespace Loon.Converters
 {
-    public class MediaHasVideoConverter : IValueConverter
+    internal class MediaHasVideoConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

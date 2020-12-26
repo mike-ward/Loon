@@ -6,7 +6,7 @@ using Twitter.Models;
 
 namespace Loon.Converters
 {
-    public class FlowContentConverter : IValueConverter
+    internal class FlowContentConverter : IValueConverter
     {
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

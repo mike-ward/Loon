@@ -4,21 +4,28 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  d:DesignHeight="450"
-  d:DesignWidth="300"
+  d:DesignHeight="50"
+  d:DesignWidth="200"
   mc:Ignorable="d">
+
+  <!--  Selawik Symbol has some strange kerning requiring some bottom margin padding in some cases  -->
 
   <StackPanel
     Orientation="Horizontal"
     Spacing="15">
 
-    <Button Classes="inline">
+    <Button
+      Classes="inline"
+      ToolTip.Tip="{StaticResource reply-tooltip}">
       <TextBlock
+        Margin="0 0 0 1"
         Classes="symbol"
         Text="{DynamicResource ReplySymbol}" />
     </Button>
 
-    <Button Classes="inline">
+    <Button
+      Classes="inline"
+      ToolTip.Tip="{StaticResource retweet-tooltip}">
       <StackPanel Orientation="Horizontal">
         <TextBlock
           Classes="symbol"
@@ -29,10 +36,12 @@
       </StackPanel>
     </Button>
 
-    <Button Classes="inline">
+    <Button
+      Classes="inline"
+      ToolTip.Tip="{StaticResource like-tooltip}">
       <StackPanel Orientation="Horizontal">
         <TextBlock
-          Classes="symbol"
+          Classes="symbol1"
           Text="{DynamicResource LikeSymbol}" />
         <TextBlock
           Classes="padleft"
@@ -40,16 +49,21 @@
       </StackPanel>
     </Button>
 
-    <Button Classes="inline">
+    <Button
+      Classes="inline"
+      ToolTip.Tip="{StaticResource retweet-with-comment-tooltip}">
       <TextBlock
+        Margin="0 0 0 2"
         Classes="symbol"
         Text="{DynamicResource QuoteSymbol}" />
     </Button>
 
-    <Button Classes="inline">
+    <Button
+      Classes="inline"
+      ToolTip.Tip="{StaticResource follow-tooltip}">
       <StackPanel Orientation="Horizontal">
         <TextBlock
-          Classes="symbol"
+          Classes="symbol1"
           Foreground="{Binding User.IsFollowing, Converter={StaticResource IsFollowingBrush}}"
           Text="{DynamicResource AddFriendSymbol}" />
         <TextBlock

@@ -4,7 +4,7 @@ using Avalonia.Data.Converters;
 
 namespace Loon.Converters
 {
-    public class DoubleFormatConverter : IValueConverter
+    internal class DoubleFormatConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

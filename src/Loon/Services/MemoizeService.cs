@@ -4,7 +4,7 @@ using BitFaster.Caching.Lru;
 
 namespace Loon.Services
 {
-    public static class MemoizeService
+    internal static class MemoizeService
     {
         public static Func<TKey, TResult> Memoize<TKey, TResult>(this Func<TKey, TResult> func, int capacity) where TKey : notnull
         {

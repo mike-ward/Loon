@@ -7,7 +7,7 @@ using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    public class SearchTimelineViewModel : NotifyPropertyChanged
+    internal class SearchTimelineViewModel : NotifyPropertyChanged
     {
         private bool isSearching;
         private ITwitterService TwitterService { get; }

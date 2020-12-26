@@ -31,12 +31,15 @@
     <None Remove="Assets\Accents.xaml" />
     <None Remove="Assets\Button.xaml" />
     <None Remove="Assets\Converters.xaml" />
+    <None Remove="Assets\Fonts\foundation-icons.ttf" />
+    <None Remove="Assets\Fonts\winjs-symbols.ttf" />
     <None Remove="Assets\ScrollBar.xaml" />
     <None Remove="Assets\seguisym.ttf" />
     <None Remove="Assets\Separator.xaml" />
     <None Remove="Assets\Strings.xaml" />
     <None Remove="Assets\TabItem.xaml" />
     <None Remove="Assets\TextBlock.xaml" />
+    <None Remove="Assets\ToolTip.xaml" />
     <None Remove="Views\Content\AppSettings\BulletItem.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsCheckboxes.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsDonate.xaml" />
@@ -54,7 +57,6 @@
     <None Remove="Views\Content\GetPinView.xaml" />
     <None Remove="Views\Content\MainView.xaml" />
     <None Remove="Views\Content\Timelines\LikesTimelineView.xaml" />
-    <None Remove="Views\Content\Timelines\Search\SearchView.xaml" />
     <None Remove="Views\Content\Timelines\TimelineView.xaml" />
     <None Remove="Views\Content\Controls\TweetItem\TweetItemActions.xaml" />
     <None Remove="Views\Content\Controls\TweetItem\TweetItemAuthor.xaml" />
@@ -74,6 +76,8 @@
     <None Remove="Views\Content\UserProfile\UserProfileName.xaml" />
     <None Remove="Views\Content\UserProfile\UserProfileTimeline.xaml" />
     <None Remove="Views\Content\UserProfile\UserProfileView.xaml" />
+    <None Remove="Views\Content\Write\ReplyToSection.xaml" />
+    <None Remove="Views\Content\Write\WriteEditSection.xaml" />
     <None Remove="Views\Content\Write\WriteView.xaml" />
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\MessageBox.xaml" />
@@ -82,7 +86,8 @@
 
   <ItemGroup>
     <AvaloniaResource Include="app.ico" />
-    <AvaloniaResource Include="Assets\seguisym.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\foundation-icons.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\winjs-symbols.ttf" />
   </ItemGroup>
   
   <ItemGroup>
@@ -90,6 +95,9 @@
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Assets\TabItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Assets\ToolTip.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Assets\TextBlock.xaml">
@@ -170,7 +178,7 @@
     <AvaloniaXaml Include="Views\Content\Timelines\LikesTimelineView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Timelines\Search\SearchView.xaml">
+    <AvaloniaXaml Include="Views\Content\Timelines\SearchTimelineView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\Timelines\TimelineView.xaml">
@@ -228,6 +236,12 @@
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Write\ReplyToSection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Write\WriteEditSection.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\Write\WriteView.xaml">
@@ -317,8 +331,8 @@
     <Compile Update="Views\Content\Timelines\LikesTimelineView.xaml.cs">
       <DependentUpon>LikesTimelineView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\Timelines\Search\SearchView.xaml.cs">
-      <DependentUpon>SearchView.xaml</DependentUpon>
+    <Compile Update="Views\Content\Timelines\SearchTimelineView.xaml.cs">
+      <DependentUpon>SearchTimelineView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\Timelines\TimelineView.xaml.cs">
       <DependentUpon>TimelineView.xaml</DependentUpon>
@@ -376,6 +390,12 @@
     </Compile>
     <Compile Update="Views\Content\UserProfile\UserProfileView.xaml.cs">
       <DependentUpon>UserProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Write\ReplyToSection.xaml.cs">
+      <DependentUpon>ReplyToSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Write\WriteEditSection.xaml.cs">
+      <DependentUpon>WriteEditSection.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\Write\WriteView.xaml.cs">
       <DependentUpon>WriteView.xaml</DependentUpon>

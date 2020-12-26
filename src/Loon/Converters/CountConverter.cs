@@ -4,7 +4,7 @@ using Avalonia.Data.Converters;
 
 namespace Loon.Converters
 {
-    public class CountConverter : IValueConverter
+    internal class CountConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

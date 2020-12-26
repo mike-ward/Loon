@@ -18,7 +18,7 @@ namespace Loon.Interfaces
         bool ShowInSystemTray { get; set; }
         bool AlwaysOnTop { get; set; }
         double FontSize { get; set; }
-        string? Theme { get; }
+        bool UseLightTheme { get; }
         bool ApplyGrayscaleShader { get; set; }
         string? MyTweetColor { get; set; }
         bool Donated { get; }

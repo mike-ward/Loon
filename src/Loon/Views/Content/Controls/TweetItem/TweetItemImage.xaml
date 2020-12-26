@@ -46,8 +46,12 @@
             </Border.IsVisible>
 
             <TextBlock
+              Margin="4 0 0 0"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
               FontFamily="{DynamicResource SymbolFont}"
-              FontSize="24"
+              FontSize="18"
+              Foreground="White"
               Text="{DynamicResource PlaySymbol}" />
           </Border>
         </Grid>

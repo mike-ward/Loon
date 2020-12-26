@@ -14,5 +14,6 @@
     <StyleInclude Source="/Assets/Separator.xaml" />
     <StyleInclude Source="/Assets/TabItem.xaml" />
     <StyleInclude Source="/Assets/TextBlock.xaml" />
+    <StyleInclude Source="/Assets/ToolTip.xaml" />
   </Application.Styles>
 </Application>

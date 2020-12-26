@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Loon.Extensions
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEqualTo(this string? a, string? b)

@@ -5,7 +5,7 @@ using Avalonia.Data.Converters;
 
 namespace Loon.Converters
 {
-    public class HtmlDecodeConverter : IValueConverter
+    internal class HtmlDecodeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -20,17 +20,26 @@ namespace Loon.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            LoadCloseSetup();
+            LinuxSetup();
+        }
 
+        private void LoadCloseSetup()
+        {
+            var vm = (MainWindowViewModel)DataContext!;
+            vm.Load(this);
+            Closing += delegate { vm.Save(this); };
+        }
+
+        private void LinuxSetup()
+        {
             if (OperatingSystem.IsLinux())
             {
+                // Linux won't allow us to extend into the non-client areas
                 this.FindControl<TitleBar>("TitleBar").IsVisible = false;
                 ExtendClientAreaToDecorationsHint = false;
                 ExtendClientAreaTitleBarHeightHint = 0;
             }
-
-            var vm = (MainWindowViewModel)DataContext!;
-            vm.Load(this);
-            Closing += delegate { vm.Save(this); };
         }
     }
 }
