@@ -2,6 +2,10 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+  <Style Selector="TextBlock">
+    <Setter Property="ToolTip.ShowDelay" Value="1500" />
+  </Style>
+
   <Style Selector="TextBlock.normal">
     <Setter Property="TextWrapping" Value="Wrap" />
   </Style>

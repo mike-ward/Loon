@@ -1,0 +1,36 @@
+﻿using System;
+using System.Threading.Tasks;
+using Loon.Services;
+
+#pragma warning disable S3168 // "async" methods should not return "void"
+#pragma warning disable AsyncFixer03 // Fire & forget async void methods
+
+namespace Loon.Extensions
+{
+    public static class TaskExtensions
+    {
+        public static async void FireAndForget(this Task task)
+        {
+            try
+            {
+                await task;
+            }
+            catch (Exception e)
+            {
+                TraceService.Message(e.Message);
+            }
+        }
+
+        public static async void FireAndForget(this ValueTask task)
+        {
+            try
+            {
+                await task;
+            }
+            catch (Exception e)
+            {
+                TraceService.Message(e.Message);
+            }
+        }
+    }
+}

@@ -7,7 +7,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:sv="clr-namespace:Loon.Services"
   xmlns:tl="clr-namespace:Loon.Views.Content.Timelines"
-  d:DesignHeight="450"
+  d:DesignHeight="50"
   d:DesignWidth="300"
   mc:Ignorable="d">
 
@@ -25,13 +25,9 @@
       Content="{Binding User.Name}"
       FontWeight="Bold" />
 
-    <TextBlock
-      Margin="-4 0 5 0"
-      FontWeight="Bold"
-      Foreground="{StaticResource TwitterBlueBrush}"
-      IsVisible="{Binding User.Verified}"
-      Opacity="0.90"
-      Text="☑" />
+    <co:VerifiedBadge
+      Margin="-1 1 5 0"
+      IsVisible="{Binding User.Verified}" />
 
     <Button
       Classes="inline1"

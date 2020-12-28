@@ -2,6 +2,10 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+  <Style Selector="Button">
+    <Setter Property="ToolTip.ShowDelay" Value="1500" />
+  </Style>
+
   <Style Selector="Button.inline">
     <Setter Property="Padding" Value="0" />
     <Setter Property="Opacity" Value=".65" />

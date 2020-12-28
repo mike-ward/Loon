@@ -15,5 +15,6 @@
     <StyleInclude Source="/Assets/TabItem.xaml" />
     <StyleInclude Source="/Assets/TextBlock.xaml" />
     <StyleInclude Source="/Assets/ToolTip.xaml" />
+    <StyleInclude Source="/Assets/VerifiedBadge.xaml" />
   </Application.Styles>
 </Application>

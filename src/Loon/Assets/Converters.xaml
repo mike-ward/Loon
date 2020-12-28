@@ -6,12 +6,12 @@
   <Style>
     <Style.Resources>
       <converters:ViewModelLocator x:Key="VML" />
+      <converters:BooleanToDynamicResourceConverter x:Key="BooleanToDynamicResource" />
       <converters:CountConverter x:Key="CountConverter" />
       <converters:DoubleFormatConverter x:Key="DoubleFormat" />
       <converters:FlowContentConverter x:Key="FlowContent" />
       <converters:HeartFontSizeConverter x:Key="HeartFontSize" />
       <converters:HtmlDecodeConverter x:Key="HtmlDecode" />
-      <converters:IsFollowingBrushConverter x:Key="IsFollowingBrush" />
       <converters:MediaHasVideoConverter x:Key="MediaHasVideo" />
       <converters:MultiBoolConverter x:Key="MultiBool" />
       <converters:TabItemWidthConverter x:Key="TabItemWidth" />

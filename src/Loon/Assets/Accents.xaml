@@ -7,6 +7,7 @@
     <Style.Resources>
       <SolidColorBrush x:Key="TwitterBlueBrush">#1DA1F2</SolidColorBrush>
       <SolidColorBrush x:Key="RedHoverBrush">DarkRed</SolidColorBrush>
+      <SolidColorBrush x:Key="LikeBrush">FireBrick</SolidColorBrush>
     </Style.Resources>
   </Style>
 </Styles>

@@ -1,22 +1,15 @@
-﻿using System;
-using System.Windows.Input;
-using Avalonia.LogicalTree;
+﻿using Avalonia.LogicalTree;
 using Loon.ViewModels.Content.Write;
 using Loon.Views.Content.Write;
 using Twitter.Models;
 
 namespace Loon.Commands
 {
-    internal class ReplyToCommand : ICommand
+    internal class ReplyToCommand : BaseCommand
     {
         public static readonly ReplyToCommand Command = new();
 
-        public bool CanExecute(object? parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object? parameter)
+        public override void Execute(object? parameter)
         {
             var content = App.MainWindow.Content as ILogical;
 
@@ -27,12 +20,5 @@ namespace Loon.Commands
                 writeViewModel.ReplyTo = parameter as TwitterStatus;
             }
         }
-
-        protected virtual void OnCanExecuteChanged(EventArgs e)
-        {
-            CanExecuteChanged?.Invoke(this, e);
-        }
-
-        public event EventHandler? CanExecuteChanged;
     }
 }

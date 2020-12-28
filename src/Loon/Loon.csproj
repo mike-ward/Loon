@@ -40,6 +40,7 @@
     <None Remove="Assets\TabItem.xaml" />
     <None Remove="Assets\TextBlock.xaml" />
     <None Remove="Assets\ToolTip.xaml" />
+    <None Remove="Assets\VerifiedBadge.xaml" />
     <None Remove="Views\Content\AppSettings\BulletItem.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsCheckboxes.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsDonate.xaml" />
@@ -55,6 +56,7 @@
     <None Remove="Views\Content\AppView.xaml" />
     <None Remove="Views\Content\Controls\Hyperlink.xaml" />
     <None Remove="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml" />
+    <None Remove="Views\Content\Controls\VerifiedBadge.xaml" />
     <None Remove="Views\Content\GetPinView.xaml" />
     <None Remove="Views\Content\MainView.xaml" />
     <None Remove="Views\Content\Timelines\LikesTimelineView.xaml" />
@@ -92,6 +94,9 @@
   
   <ItemGroup>
     <AvaloniaXaml Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Assets\VerifiedBadge.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Assets\TabItem.xaml">
@@ -164,6 +169,9 @@
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Controls\VerifiedBadge.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\GetPinView.xaml">
@@ -318,6 +326,9 @@
     </Compile>
     <Compile Update="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml.cs">
       <DependentUpon>TweetItemCompactView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\Controls\VerifiedBadge.xaml.cs">
+      <DependentUpon>VerifiedBadge.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\GetPinView.xaml.cs">
       <DependentUpon>GetPinView.xaml</DependentUpon>
