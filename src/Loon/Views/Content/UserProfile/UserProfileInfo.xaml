@@ -7,7 +7,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
   d:DesignHeight="450"
-  d:DesignWidth="800"
+  d:DesignWidth="300"
   mc:Ignorable="d">
 
   <StackPanel>
@@ -17,11 +17,11 @@
       Text="{Binding ScreenName, StringFormat='@{0}'}" />
 
     <TextBlock
-      Margin="0,10,0,0"
+      Margin="0 10 0 0"
       Classes="normal"
       Text="{Binding Description}" />
 
-    <StackPanel Margin="0,10,0,0">
+    <StackPanel Margin="0 10 0 0">
       <TextBlock Text="{Binding Location, StringFormat=🏠 {0}, FallbackValue=???}" />
       <co:Hyperlink
         Link="{Binding Url}"
@@ -30,24 +30,24 @@
     </StackPanel>
 
     <Grid
-      Margin="0,10,0,0"
+      Margin="0 10 0 0"
       ColumnDefinitions="auto,auto,auto,auto">
       <TextBlock
         Grid.Column="0"
         Text="{Binding Friends, Converter={StaticResource CountConverter}}" />
       <TextBlock
         Grid.Column="1"
-        Margin="3,0,0,0"
-        Classes="normal"
+        Margin="3 0 0 0"
+        Opacity="0.65"
         Text="{StaticResource profile-following}" />
       <TextBlock
         Grid.Column="2"
-        Margin="10,0,0,0"
+        Margin="10 0 0 0"
         Text="{Binding Followers, Converter={StaticResource CountConverter}}" />
       <TextBlock
         Grid.Column="3"
-        Margin="3,0,0,0"
-        Classes="normal"
+        Margin="3 0 0 0"
+        Opacity="0.65"
         Text="{StaticResource profile-followers}" />
     </Grid>
   </StackPanel>

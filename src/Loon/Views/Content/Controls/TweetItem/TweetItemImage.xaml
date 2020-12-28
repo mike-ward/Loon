@@ -20,7 +20,6 @@
             Margin="1"
             Cursor="Hand"
             DataContextChanged="LoadMediaAsync"
-            RenderOptions.BitmapInterpolationMode="LowQuality"
             Stretch="UniformToFill" />
 
           <Border

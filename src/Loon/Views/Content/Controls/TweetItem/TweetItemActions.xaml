@@ -2,13 +2,12 @@
   x:Class="Loon.Views.Content.Controls.TweetItem.TweetItemActions"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:c="clr-namespace:Loon.Commands"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DesignHeight="50"
   d:DesignWidth="200"
   mc:Ignorable="d">
-
-  <!--  Selawik Symbol has some strange kerning requiring some bottom margin padding in some cases  -->
 
   <StackPanel
     Orientation="Horizontal"
@@ -16,9 +15,10 @@
 
     <Button
       Classes="inline"
+      Command="{x:Static c:ReplyToCommand.Command}"
+      CommandParameter="{Binding}"
       ToolTip.Tip="{StaticResource reply-tooltip}">
       <TextBlock
-        Margin="0 0 0 1"
         Classes="symbol"
         Text="{DynamicResource ReplySymbol}" />
     </Button>
@@ -28,6 +28,7 @@
       ToolTip.Tip="{StaticResource retweet-tooltip}">
       <StackPanel Orientation="Horizontal">
         <TextBlock
+          VerticalAlignment="Center"
           Classes="symbol"
           Text="{DynamicResource RetweetSymbol}" />
         <TextBlock
@@ -53,7 +54,6 @@
       Classes="inline"
       ToolTip.Tip="{StaticResource retweet-with-comment-tooltip}">
       <TextBlock
-        Margin="0 0 0 2"
         Classes="symbol"
         Text="{DynamicResource QuoteSymbol}" />
     </Button>

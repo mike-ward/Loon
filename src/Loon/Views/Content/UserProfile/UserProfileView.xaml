@@ -16,12 +16,17 @@
   <Grid RowDefinitions="auto,auto,auto,auto,*">
     <up:UserProfileBackBar Grid.Row="0" />
     <up:UserProfileBanner Grid.Row="1" />
+
     <up:UserProfileInfo
       Grid.Row="2"
       Margin="15 3" />
+
     <Separator
       Grid.Row="3"
       Margin="15 10" />
-    <up:UserProfileTimeline Grid.Row="4" />
+
+    <up:UserProfileTimeline
+      Grid.Row="4"
+      Margin="5 0" />
   </Grid>
 </UserControl>

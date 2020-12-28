@@ -31,7 +31,8 @@
       BorderThickness="2"
       CornerRadius="30">
       <TextBlock
-        Margin="0,3.4,0,0"
+        Height="10"
+        VerticalAlignment="Center"
         FontFamily="{StaticResource SymbolFont}"
         Text="{StaticResource EllipsisSymbol}"
         TextAlignment="Center" />

@@ -1,12 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Loon.Interfaces;
 using Loon.ViewModels.Content.Timelines;
 
 namespace Loon.Views.Content.Timelines
 {
-    public class SearchTimelineView : UserControl, ISetFocus
+    public class SearchTimelineView : UserControl
     {
         public SearchTimelineView()
         {
@@ -16,12 +15,6 @@ namespace Loon.Views.Content.Timelines
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        public void SetFocus()
-        {
-            var textBox = this.FindControl<TextBox>("SearchTextBox");
-            textBox?.Focus();
         }
 
         public async void OnKeyDown(object? sender, KeyEventArgs e)

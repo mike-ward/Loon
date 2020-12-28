@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
+using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
-using Loon.Commands;
-using Loon.Interfaces;
+using Loon.ViewModels.Content.Write;
+using Loon.Views.Content.Write;
 
 namespace Loon.Views.Content
 {
@@ -19,22 +18,12 @@ namespace Loon.Views.Content
             AvaloniaXamlLoader.Load(this);
         }
 
-        public async void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+        public void OnSelectionChanged(object? s, SelectionChangedEventArgs e)
         {
-            if (sender is TabControl tabControl)
+            if (this.FindLogicalDescendantOfType<WriteView>() is WriteView writeView &&
+                writeView.DataContext is WriteViewModel writeViewModel)
             {
-                var tabItem = tabControl.SelectedItem as TabItem;
-                await SetFocus(tabItem).ConfigureAwait(false);
-                TabGoBackCommand.Command.LastSelectedTab = e.RemovedItems.Cast<TabItem>().FirstOrDefault();
-            }
-        }
-
-        private static async ValueTask SetFocus(TabItem? tabItem)
-        {
-            if (tabItem?.Content is ISetFocus view)
-            {
-                await Task.Delay(500).ConfigureAwait(true); // too soon and focus won't work
-                view.SetFocus();
+                writeViewModel.Reset();
             }
         }
     }

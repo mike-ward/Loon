@@ -23,22 +23,21 @@
       Command="{Binding $parent[Window].DataContext.SetUser}"
       CommandParameter="{Binding User.ScreenName}"
       Content="{Binding User.Name}"
-      FontWeight="Bold"
-      Opacity="{DynamicResource Dim1}" />
+      FontWeight="Bold" />
 
     <TextBlock
+      Margin="-4 0 5 0"
       FontWeight="Bold"
       Foreground="{StaticResource TwitterBlueBrush}"
-      IsVisible="{Binding User.Verified, FallbackValue=False}"
-      Opacity="{DynamicResource Dim0}"
-      Text="✓" />
+      IsVisible="{Binding User.Verified}"
+      Opacity="0.90"
+      Text="☑" />
 
     <Button
       Classes="inline1"
       Command="{Binding $parent[Window].DataContext.SetUser}"
       CommandParameter="{Binding User.ScreenName}"
-      Content="{Binding User.ScreenName, StringFormat='@{0}'}"
-      Opacity="{DynamicResource Dim1}" />
+      Content="{Binding User.ScreenName, StringFormat='@{0}'}" />
 
     <TextBlock Text="•" />
 

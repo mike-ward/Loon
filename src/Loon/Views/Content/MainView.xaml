@@ -2,6 +2,7 @@
   x:Class="Loon.Views.Content.MainView"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:b="clr-namespace:Loon.Behaviors"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:s="clr-namespace:Loon.Views.Content.AppSettings"
@@ -16,6 +17,7 @@
   <TabControl
     Name="TabControl"
     Margin="3 0 0 0"
+    b:PreviousIndexBehavior.PreviousIndex="0"
     SelectionChanged="OnSelectionChanged">
 
     <TabItem>
@@ -39,7 +41,7 @@
       <t:LikesTimelineView />
     </TabItem>
 
-    <TabItem>
+    <TabItem b:SetFocusSelectionChangedBehavior.Name="SearchTextBox">
       <TabItem.Header>
         <TextBlock
           Classes="symbol"
@@ -59,7 +61,7 @@
       <s:SettingsView />
     </TabItem>
 
-    <TabItem>
+    <TabItem b:SetFocusSelectionChangedBehavior.Name="WriteTextBox">
       <TabItem.Header>
         <TextBlock
           Classes="symbol"

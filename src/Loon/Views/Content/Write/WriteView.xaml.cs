@@ -1,10 +1,9 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Loon.Interfaces;
 
 namespace Loon.Views.Content.Write
 {
-    public class WriteView : UserControl, ISetFocus
+    public class WriteView : UserControl
     {
         public WriteView()
         {
@@ -14,12 +13,6 @@ namespace Loon.Views.Content.Write
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        public void SetFocus()
-        {
-            var textBox = this.FindControl<TextBox>("WriteTextBox");
-            textBox?.Focus();
         }
     }
 }

@@ -11,16 +11,16 @@
   mc:Ignorable="d">
 
   <Image
-    Width="44"
-    Height="44"
+    Width="40"
+    Height="40"
     Cursor="Hand"
     DataContextChanged="UpdateImage"
     PointerPressed="OnPointerPressed">
     <Image.Clip>
       <EllipseGeometry
-        Center="22,22"
-        RadiusX="22"
-        RadiusY="22" />
+        Center="20,20"
+        RadiusX="20"
+        RadiusY="20" />
     </Image.Clip>
   </Image>
 </UserControl>

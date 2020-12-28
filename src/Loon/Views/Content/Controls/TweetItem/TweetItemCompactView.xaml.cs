@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Loon.Views.Content.Write
+namespace Loon.Views.Content.Controls.TweetItem
 {
-    public class ReplyToSection : UserControl
+    public class TweetItemCompactView : UserControl
     {
-        public ReplyToSection()
+        public TweetItemCompactView()
         {
             InitializeComponent();
         }

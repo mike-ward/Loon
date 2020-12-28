@@ -4,6 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:t="clr-namespace:Loon.Views.Content.Controls.TweetItem"
   xmlns:vm="clr-namespace:Loon.ViewModels.Content.Write"
   xmlns:w="clr-namespace:Loon.Views.Content.Write"
   d:DesignHeight="450"
@@ -15,7 +16,9 @@
     Margin="10 0"
     Spacing="10">
 
-    <w:ReplyToSection />
+    <t:TweetItemCompactView
+      DataContext="{Binding ReplyTo}"
+      IsVisible="{Binding $parent[UserControl].DataContext.ReplyTo, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
     <w:WriteEditSection />
   </StackPanel>

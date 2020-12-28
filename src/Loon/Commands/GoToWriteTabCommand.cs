@@ -2,15 +2,12 @@
 using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.VisualTree;
-using Loon.Behaviors;
 
 namespace Loon.Commands
 {
-    public class TabGoBackCommand : ICommand
+    internal class GoToWriteTabCommand : ICommand
     {
-        public static readonly TabGoBackCommand Command = new TabGoBackCommand();
-
-        public TabItem? LastSelectedTab { get; set; }
+        public static readonly GoToWriteTabCommand Command = new();
 
         public bool CanExecute(object? parameter)
         {
@@ -20,14 +17,14 @@ namespace Loon.Commands
         public void Execute(object? parameter)
         {
             var tabControl = App.MainWindow.FindDescendantOfType<TabControl>();
-            tabControl.SelectedIndex = PreviousIndexBehavior.GetPreviousIndex(tabControl);
+            tabControl.SelectedIndex = tabControl.ItemCount - 1;
         }
-
-        public event EventHandler? CanExecuteChanged;
 
         protected virtual void OnCanExecuteChanged(EventArgs e)
         {
             CanExecuteChanged?.Invoke(this, e);
         }
+
+        public event EventHandler? CanExecuteChanged;
     }
 }

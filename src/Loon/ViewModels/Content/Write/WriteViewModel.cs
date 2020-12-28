@@ -16,6 +16,9 @@ namespace Loon.ViewModels.Content.Write
         private TwitterStatus? me;
         public TwitterStatus? Me { get => me; set => SetProperty(ref me, value); }
 
+        private TwitterStatus? replyTo;
+        public TwitterStatus? ReplyTo { get => replyTo; set => SetProperty(ref replyTo, value); }
+
         public WriteViewModel(ISettings settings, ITwitterService twitterService)
         {
             Settings = settings;
@@ -36,6 +39,11 @@ namespace Loon.ViewModels.Content.Write
         public void OnTweet()
         {
             TabGoBackCommand.Command.Execute(null);
+        }
+
+        public void Reset()
+        {
+            ReplyTo = null;
         }
     }
 }

@@ -16,6 +16,7 @@
     <Grid
       HorizontalAlignment="Center"
       ColumnDefinitions="auto,auto">
+
       <TextBox
         Name="SearchTextBox"
         Width="150"

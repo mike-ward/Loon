@@ -54,6 +54,7 @@
     <None Remove="Views\Content\AppSettings\SettingsView.xaml" />
     <None Remove="Views\Content\AppView.xaml" />
     <None Remove="Views\Content\Controls\Hyperlink.xaml" />
+    <None Remove="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml" />
     <None Remove="Views\Content\GetPinView.xaml" />
     <None Remove="Views\Content\MainView.xaml" />
     <None Remove="Views\Content\Timelines\LikesTimelineView.xaml" />
@@ -76,7 +77,6 @@
     <None Remove="Views\Content\UserProfile\UserProfileName.xaml" />
     <None Remove="Views\Content\UserProfile\UserProfileTimeline.xaml" />
     <None Remove="Views\Content\UserProfile\UserProfileView.xaml" />
-    <None Remove="Views\Content\Write\ReplyToSection.xaml" />
     <None Remove="Views\Content\Write\WriteEditSection.xaml" />
     <None Remove="Views\Content\Write\WriteView.xaml" />
     <None Remove="Views\MainWindow.xaml" />
@@ -163,6 +163,9 @@
     <AvaloniaXaml Include="Views\Content\Controls\Hyperlink.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\GetPinView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
@@ -236,9 +239,6 @@
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\UserProfile\UserProfileView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Write\ReplyToSection.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\Write\WriteEditSection.xaml">
@@ -316,6 +316,9 @@
     <Compile Update="Views\Content\Controls\Hyperlink.xaml.cs">
       <DependentUpon>Hyperlink.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml.cs">
+      <DependentUpon>TweetItemCompactView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Content\GetPinView.xaml.cs">
       <DependentUpon>GetPinView.xaml</DependentUpon>
     </Compile>
@@ -390,9 +393,6 @@
     </Compile>
     <Compile Update="Views\Content\UserProfile\UserProfileView.xaml.cs">
       <DependentUpon>UserProfileView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Content\Write\ReplyToSection.xaml.cs">
-      <DependentUpon>ReplyToSection.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\Write\WriteEditSection.xaml.cs">
       <DependentUpon>WriteEditSection.xaml</DependentUpon>
