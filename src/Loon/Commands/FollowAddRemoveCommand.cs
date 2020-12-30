@@ -6,12 +6,12 @@ using Twitter.Models;
 
 namespace Loon.Commands
 {
-    public class LikesAddRemoveCommand : BaseCommand
+    public class FollowAddRemoveCommand : BaseCommand
     {
         private bool inCommand;
         private ITwitterService TwitterService { get; }
 
-        public LikesAddRemoveCommand(ITwitterService twitterService)
+        public FollowAddRemoveCommand(ITwitterService twitterService)
         {
             TwitterService = twitterService;
         }
@@ -31,18 +31,23 @@ namespace Loon.Commands
                 if (!inCommand)
                 {
                     inCommand = true;
+                    var user = status.User;
+                    var screenName = user.ScreenName;
 
-                    if (status.Favorited)
+                    if (screenName is not null)
                     {
-                        await TwitterService.DestroyFavorite(status.Id).ConfigureAwait(true);
-                        status.Favorited = false;
-                        status.FavoriteCount = Math.Max(0, status.FavoriteCount - 1);
-                    }
-                    else
-                    {
-                        await TwitterService.CreateFavorite(status.Id).ConfigureAwait(true);
-                        status.Favorited = true;
-                        status.FavoriteCount++;
+                        if (status.User.IsFollowing)
+                        {
+                            await TwitterService.Unfollow(screenName).ConfigureAwait(true);
+                            user.Followers = Math.Max(0, user.Followers - 1);
+                            user.IsFollowing = false;
+                        }
+                        else
+                        {
+                            await TwitterService.Follow(screenName).ConfigureAwait(true);
+                            user.Followers++;
+                            user.IsFollowing = true;
+                        }
                     }
                 }
             }

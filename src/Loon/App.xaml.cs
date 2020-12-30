@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Loon.Commands;
 using Loon.Services;
 using Loon.Views;
 
@@ -25,14 +26,11 @@ namespace Loon
             base.OnFrameworkInitializationCompleted();
         }
 
+        public static AppCommands Commands { get; } = BootStrapper.GetService<AppCommands>();
+
         public static Window MainWindow
         {
             get { return ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).MainWindow; }
-        }
-
-        public static void Shutdown()
-        {
-            ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).Shutdown();
         }
 
         public static string GetString(string name)

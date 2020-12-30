@@ -14,8 +14,9 @@
       FontWeight="Bold"
       Text="{Binding Name}" />
 
-    <co:VerifiedBadge
+    <Path
       Margin="4 0"
+      Classes="verifiedbadge"
       IsVisible="{Binding User.Verified}" />
   </StackPanel>
 </UserControl>

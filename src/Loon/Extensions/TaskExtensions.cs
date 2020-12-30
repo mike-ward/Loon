@@ -13,7 +13,7 @@ namespace Loon.Extensions
         {
             try
             {
-                await task;
+                await task.ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -25,7 +25,7 @@ namespace Loon.Extensions
         {
             try
             {
-                await task;
+                await task.ConfigureAwait(false);
             }
             catch (Exception e)
             {

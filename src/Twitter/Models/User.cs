@@ -88,13 +88,17 @@ namespace Twitter.Models
         [JsonIgnore]
         public string? ProfileImageUrlOriginal => ProfileImageUrl?.Replace("_normal", "", StringComparison.Ordinal);
 
+        // INotifyPropertyChanged Implementation
+        //
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void SetProperty<T>(ref T item, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(item, value)) return;
-            item = value;
-            OnPropertyChanged(propertyName);
+            if (!EqualityComparer<T>.Default.Equals(item, value))
+            {
+                item = value;
+                OnPropertyChanged(propertyName);
+            }
         }
 
         protected virtual void OnPropertyChanged(string? propertyName)
@@ -103,6 +107,8 @@ namespace Twitter.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        // Overrides
+        //
         public override bool Equals(object? obj)
         {
             return obj is User user && Id.Equals(user.Id, StringComparison.Ordinal);

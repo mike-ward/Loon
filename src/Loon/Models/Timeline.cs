@@ -13,9 +13,6 @@ namespace Loon.Models
 {
     public class Timeline : NotifyPropertyChanged
     {
-        private string? exceptionMessage;
-        private bool pendingStatusesAvailable;
-
         private bool inUpdate;
         private readonly DispatcherTimer updateTimer;
 
@@ -26,8 +23,8 @@ namespace Loon.Models
         public ISet<string> AlreadyAdded { get; } = new HashSet<string>(StringComparer.Ordinal);
         public ISet<TwitterStatus> PendingStatusCollection { get; } = new HashSet<TwitterStatus>();
         public bool IsScrolled { get; set; }
-        public string? ExceptionMessage { get => exceptionMessage; set => SetProperty(ref exceptionMessage, value); }
-        public bool PendingStatusesAvailable { get => pendingStatusesAvailable; set => SetProperty(ref pendingStatusesAvailable, value); }
+        public string? ExceptionMessage { get => GetProp<string?>(); set => SetProp(value); }
+        public bool PendingStatusesAvailable { get => GetProp<bool>(); set => SetProp(value); }
 
         public Timeline(string name, double intervalInMinutes, IEnumerable<Func<Timeline, ValueTask>> updateTasks, ISettings settings)
         {

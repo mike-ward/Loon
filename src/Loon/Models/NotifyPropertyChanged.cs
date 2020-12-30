@@ -1,28 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace Loon.Models
 {
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        // Yeah, there's boxing going on here.
 
-        protected void SetProperty<T>(ref T item, T value, [CallerMemberName] string? propertyName = null)
+        private readonly string _id = Path.GetRandomFileName(); // easy way to get a unique string
+        private static readonly ConcurrentDictionary<string, object?> _properties = new();
+
+        protected T? GetProp<T>([CallerMemberName] string? propertyName = null)
         {
-            if (!EqualityComparer<T>.Default.Equals(item, value))
+            return _properties.TryGetValue(_id + propertyName, out var property)
+                ? (T)property
+                : default;
+        }
+
+        protected void SetProp<T>(T? value, [CallerMemberName] string? propertyName = null)
+        {
+            var key = _id + propertyName;
+
+            if (!_properties.TryGetValue(key, out var property) ||
+                !EqualityComparer<T>.Default.Equals((T)property, value))
             {
-                item = value;
-                OnPropertyChanged(propertyName);
+                _properties[key] = value;
+                OnPropertyChanged(propertyName!);
             }
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         protected void OnPropertyChanged(string? propertyName)
         {
-            if (propertyName is not null)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

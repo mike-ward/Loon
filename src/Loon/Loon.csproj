@@ -56,7 +56,6 @@
     <None Remove="Views\Content\AppView.xaml" />
     <None Remove="Views\Content\Controls\Hyperlink.xaml" />
     <None Remove="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml" />
-    <None Remove="Views\Content\Controls\VerifiedBadge.xaml" />
     <None Remove="Views\Content\GetPinView.xaml" />
     <None Remove="Views\Content\MainView.xaml" />
     <None Remove="Views\Content\Timelines\LikesTimelineView.xaml" />
@@ -169,9 +168,6 @@
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\Controls\VerifiedBadge.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\GetPinView.xaml">
@@ -326,9 +322,6 @@
     </Compile>
     <Compile Update="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml.cs">
       <DependentUpon>TweetItemCompactView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Content\Controls\VerifiedBadge.xaml.cs">
-      <DependentUpon>VerifiedBadge.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\GetPinView.xaml.cs">
       <DependentUpon>GetPinView.xaml</DependentUpon>

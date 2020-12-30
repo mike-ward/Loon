@@ -1,4 +1,5 @@
 ﻿using System;
+using Loon.Commands;
 using Loon.Interfaces;
 using Loon.Models;
 using Loon.ViewModels;
@@ -24,6 +25,7 @@ namespace Loon.Services
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<AppCommands>();
 
             // View Models
             services.AddTransient<MainWindowViewModel>();
@@ -43,8 +45,7 @@ namespace Loon.Services
 
         public static object GetService(Type type)
         {
-            return ServiceProvider.GetService(type
-                ?? throw new ArgumentNullException(nameof(type)))
+            return ServiceProvider.GetService(type)
                 ?? throw new NotSupportedException(type.Name);
         }
 

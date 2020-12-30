@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Linq;
-using Loon.Commands;
 using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
@@ -10,14 +9,11 @@ namespace Loon.ViewModels.Content.Write
 {
     internal class WriteViewModel : NotifyPropertyChanged
     {
-        public ISettings Settings { get; }
-        public ITwitterService TwitterService { get; }
+        private ISettings Settings { get; }
+        private ITwitterService TwitterService { get; }
 
-        private TwitterStatus? me;
-        public TwitterStatus? Me { get => me; set => SetProperty(ref me, value); }
-
-        private TwitterStatus? replyTo;
-        public TwitterStatus? ReplyTo { get => replyTo; set => SetProperty(ref replyTo, value); }
+        public TwitterStatus? Me { get => GetProp<TwitterStatus?>(); set => SetProp(value); }
+        public TwitterStatus? ReplyTo { get => GetProp<TwitterStatus?>(); set => SetProp(value); }
 
         public WriteViewModel(ISettings settings, ITwitterService twitterService)
         {
@@ -38,7 +34,7 @@ namespace Loon.ViewModels.Content.Write
 
         public void OnTweet()
         {
-            TabGoBackCommand.Command.Execute(null);
+            App.Commands.TabGoBack.Execute(null);
         }
 
         public void Reset()

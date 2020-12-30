@@ -1,5 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.AppSettings
@@ -8,7 +7,7 @@ namespace Loon.Views.Content.AppSettings
     {
         public SettingsTitle()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

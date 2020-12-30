@@ -206,7 +206,6 @@ namespace Twitter.Models
 
         // Overrides
         //
-
         public override bool Equals(object? obj)
         {
             return obj is TwitterStatus twitterStatus && Id.Equals(twitterStatus.Id, StringComparison.Ordinal);

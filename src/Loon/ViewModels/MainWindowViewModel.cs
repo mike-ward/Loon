@@ -10,11 +10,9 @@ namespace Loon.ViewModels
 {
     internal class MainWindowViewModel : NotifyPropertyChanged
     {
-        private User? user;
-
         public ITwitterService TwitterService { get; }
 
-        public User? User { get => user; set => SetProperty(ref user, value); }
+        public User? User { get => GetProp<User>(); set => SetProp(value); }
 
         public ISettings Settings { get; }
 
@@ -78,6 +76,7 @@ namespace Loon.ViewModels
         {
             if (propertyName.IsEqualTo(nameof(ISettings.UseLightTheme)))
             {
+                // This is slated to change in the next release of Avalonia
                 var styles = new StyleInclude(new Uri("resm:Styles"))
                 {
                     Source = Settings.UseLightTheme

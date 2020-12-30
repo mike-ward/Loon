@@ -51,14 +51,12 @@ namespace Loon.Services
         }
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "MA0048:File name must match type name")]
     public class TranslatorResult
     {
         [JsonPropertyName("translations")]
         public IList<TranslationsItem>? Translations { get; set; }
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "MA0048:File name must match type name")]
     public class TranslationsItem
     {
         [JsonPropertyName("text")]

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Windows.Input;
-using Loon.Interfaces;
-using Loon.Services;
 
 namespace Loon.Commands
 {
     public class BaseCommand : ICommand
     {
-        protected static ITwitterService TwitterService { get; } = BootStrapper.GetService<ITwitterService>();
-
         public virtual bool CanExecute(object? parameter)
         {
             return true;

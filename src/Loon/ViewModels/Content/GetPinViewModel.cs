@@ -9,12 +9,10 @@ namespace Loon.ViewModels.Content
 {
     internal class GetPinViewModel : NotifyPropertyChanged
     {
-        private string? pin;
-        private bool secondPage;
         private OAuthTokens? requestToken;
 
-        public string? Pin { get => pin; set => SetProperty(ref pin, value); }
-        public bool SecondPage { get => secondPage; set => SetProperty(ref secondPage, value); }
+        public string? Pin { get => GetProp<string>(); set => SetProp(value); }
+        public bool SecondPage { get => GetProp<bool>(); set => SetProp(value); }
 
         public ITwitterService Twitter { get; }
         public ISettings Settings { get; }

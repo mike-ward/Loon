@@ -1,13 +1,19 @@
 ﻿using Avalonia.LogicalTree;
+using Loon.Interfaces;
 using Loon.ViewModels.Content.Write;
 using Loon.Views.Content.Write;
 using Twitter.Models;
 
 namespace Loon.Commands
 {
-    internal class ReplyToCommand : BaseCommand
+    public class ReplyToCommand : BaseCommand
     {
-        public static readonly ReplyToCommand Command = new();
+        private readonly ITwitterService _twitterService;
+
+        public ReplyToCommand(ITwitterService twitterService)
+        {
+            _twitterService = twitterService;
+        }
 
         public override void Execute(object? parameter)
         {
@@ -16,7 +22,7 @@ namespace Loon.Commands
             if (content.FindLogicalDescendantOfType<WriteView>() is WriteView writeView &&
                 writeView.DataContext is WriteViewModel writeViewModel)
             {
-                GoToWriteTabCommand.Command.Execute(null);
+                App.Commands.GoToWriteTab.Execute(null);
                 writeViewModel.ReplyTo = parameter as TwitterStatus;
             }
         }

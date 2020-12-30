@@ -17,7 +17,8 @@ namespace Loon.Views
 
         public void CloseApp(object? sender, Avalonia.Input.PointerPressedEventArgs e)
         {
-            App.Shutdown();
+            e.Handled = true;
+            App.MainWindow.Close();
         }
 
         public void MinimizeApp(object? sender, Avalonia.Input.PointerPressedEventArgs e)
