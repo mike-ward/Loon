@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -11,7 +12,7 @@ namespace Loon.Models
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {
         private readonly string _id = Path.GetRandomFileName() + ".";
-        private static readonly ConcurrentDictionary<string, object?> _properties = new();
+        private static readonly ConcurrentDictionary<string, object?> _properties = new(StringComparer.Ordinal);
 
         protected T? Getter<T>([CallerMemberName] string? propertyName = null)
         {

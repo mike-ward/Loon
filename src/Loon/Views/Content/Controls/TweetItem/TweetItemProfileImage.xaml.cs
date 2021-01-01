@@ -7,9 +7,7 @@ using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using Avalonia.VisualTree;
 using Loon.Services;
-using Loon.ViewModels;
 using Twitter.Models;
 
 namespace Loon.Views.Content.Controls.TweetItem
@@ -68,14 +66,13 @@ namespace Loon.Views.Content.Controls.TweetItem
         public void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed &&
-                DataContext is TwitterStatus status &&
-                status.User.ScreenName is string screenName &&
-                this.FindAncestorOfType<Window>() is Window window &&
-                window.DataContext is MainWindowViewModel vm)
+                DataContext is TwitterStatus status)
             {
                 e.Handled = true;
-                vm.SetUserProfile(screenName);
+                App.Commands.SetUserProfileContext.Execute(status.User);
             }
+            // Useful for debugging twitter oddities
+            //
             else if (e.GetCurrentPoint(null).Properties.IsRightButtonPressed &&
                 e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
                 DataContext is TwitterStatus status1)

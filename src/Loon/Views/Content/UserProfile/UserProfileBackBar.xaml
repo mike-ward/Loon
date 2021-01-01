@@ -3,6 +3,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
   d:DesignHeight="50"
@@ -13,7 +14,7 @@
     Padding="0 10"
     HorizontalContentAlignment="Left"
     Classes="inline"
-    Command="{Binding $parent[Window].DataContext.SetUserProfile}"
+    Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}}"
     CommandParameter="{x:Null}">
 
     <Grid ColumnDefinitions="Auto,*">

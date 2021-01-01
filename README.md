@@ -8,10 +8,6 @@ This is a port of my Windows desktop client [Tweetz](https://github.com/mike-war
 
 It's a work in progress and many, many things don't work. However, you can actually login to twitter and get the home timeline with images.
 
-Links and hash tags don't work. I'm waiting on the Avalonia team to implement a few more features (TextBlock inlines for one).
-
-There's also the issue of creating a media player. The windows version relies on WPF's built-in functionality.
-
 I've run this client successfully on both Windows and Linux. I don't own a Mac.
 
 ### Building

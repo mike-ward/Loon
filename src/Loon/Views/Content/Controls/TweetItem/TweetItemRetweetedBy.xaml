@@ -3,6 +3,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DesignHeight="50"
   d:DesignWidth="300"
@@ -20,8 +21,8 @@
 
     <Button
       Classes="inline"
-      Command="{Binding $parent[Window].DataContext.SetUserProfile}"
-      CommandParameter="{Binding User.ScreenName}"
+      Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}}"
+      CommandParameter="{Binding User}"
       Content="{Binding User.ScreenName, StringFormat='@{0}'}" />
 
     <TextBlock Text="{DynamicResource tweet-retweeted}" />

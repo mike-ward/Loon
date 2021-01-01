@@ -11,6 +11,7 @@ namespace Loon.Commands
         public MinimizeAppCommand MinimizeApp { get; }
         public ReplyToCommand ReplyTo { get; }
         public RetweetCommand Retweet { get; }
+        public SetUserProfileContextCommand SetUserProfileContext { get; }
         public SignoutCommand Signout { get; }
         public TabGoBackCommand TabGoBack { get; }
 
@@ -23,6 +24,7 @@ namespace Loon.Commands
             MinimizeApp = new MinimizeAppCommand();
             ReplyTo = new ReplyToCommand(twitterService);
             Retweet = new RetweetCommand(settings, twitterService);
+            SetUserProfileContext = new SetUserProfileContextCommand(twitterService);
             Signout = new SignoutCommand(settings);
             TabGoBack = new TabGoBackCommand();
         }

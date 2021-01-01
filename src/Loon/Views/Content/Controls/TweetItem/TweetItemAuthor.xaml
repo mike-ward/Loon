@@ -4,6 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:co="clr-namespace:Loon.Views.Content.Controls"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:sv="clr-namespace:Loon.Services"
   xmlns:tl="clr-namespace:Loon.Views.Content.Timelines"
@@ -20,8 +21,8 @@
   <WrapPanel Orientation="Horizontal">
     <Button
       Classes="inline1"
-      Command="{Binding $parent[Window].DataContext.SetUserProfile}"
-      CommandParameter="{Binding User.ScreenName}"
+      Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}}"
+      CommandParameter="{Binding User}"
       Content="{Binding User.Name}"
       FontWeight="Bold" />
 
@@ -32,8 +33,8 @@
 
     <Button
       Classes="inline1"
-      Command="{Binding $parent[Window].DataContext.SetUserProfile}"
-      CommandParameter="{Binding User.ScreenName}"
+      Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}}"
+      CommandParameter="{Binding User}"
       Content="{Binding User.ScreenName, StringFormat='@{0}'}" />
 
     <TextBlock Text="•" />

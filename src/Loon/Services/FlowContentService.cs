@@ -5,7 +5,6 @@ using System.Net;
 using Avalonia.Controls;
 using Loon.Extensions;
 using Loon.Models;
-using Loon.ViewModels;
 using Twitter.Models;
 
 namespace Loon.Services
@@ -155,7 +154,7 @@ namespace Loon.Services
         {
             return Hyperlink(
                 "@" + screenName,
-                 () => (App.MainWindow.DataContext as MainWindowViewModel)?.SetUserProfile(screenName));
+                 () => App.Commands.SetUserProfileContext.Execute(screenName));
         }
 
         private static Control Hashtag(string text)

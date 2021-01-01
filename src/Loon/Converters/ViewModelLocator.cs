@@ -13,9 +13,9 @@ namespace Loon.Converters
             return BootStrapper.GetService(type);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value; // not used
+            return value?.GetType();
         }
     }
 }

@@ -5,7 +5,6 @@ using Avalonia.Markup.Xaml.Styling;
 using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
-using Loon.Services;
 using Twitter.Models;
 
 #pragma warning disable S1075 // URIs should not be hardcoded
@@ -16,7 +15,7 @@ namespace Loon.ViewModels
     {
         public ISettings Settings { get; }
         public ITwitterService TwitterService { get; }
-        public User? User { get => Getter<User>(); set => Setter(value); }
+        public User? UserProfileContext { get => Getter<User>(); set => Setter(value); }
 
         public MainWindowViewModel(ISettings settings, ITwitterService twitterService)
         {
@@ -51,28 +50,6 @@ namespace Loon.ViewModels
             Settings.Location.Y = window.Position.Y;
             Settings.Location.Width = window.Width;
             Settings.Location.Height = window.Height;
-        }
-
-        public void SetUserProfile(string screenName)
-        {
-            if (screenName is null)
-            {
-                User = null;
-                return;
-            }
-
-            try
-            {
-                var task = TwitterService.UserInfo(screenName).AsTask();
-                const int fiveSeconds = 5000;
-                User = task.Wait(fiveSeconds)
-                    ? task.Result
-                    : null;
-            }
-            catch (AggregateException e)
-            {
-                TraceService.Message(e.Message);
-            }
         }
 
         private void OnSettingsUpdated(object? _, PropertyChangedEventArgs e)
