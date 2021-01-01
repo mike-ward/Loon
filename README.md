@@ -2,6 +2,8 @@
 
 Loon is a cross platform desktop twitter client. It's minimal design mimics gadget style applications. I use it to monitor current events and announcements in the developer community.
 
+![screen shot](https://i.imgur.com/L3swvtB.png)
+
 ### Work in Progress
 
 This is a port of my Windows desktop client [Tweetz](https://github.com/mike-ward/tweetz) using the [Avalonia](http://avaloniaui.net/) framework. 
