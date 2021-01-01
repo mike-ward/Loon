@@ -1,13 +1,14 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Avalonia.VisualTree;
 using Loon.Views.Content.Controls.TweetItem;
 
 namespace Loon.Views.Content.Timelines
 {
     public class TimelineView : UserControl
     {
+        public static readonly string ScrollViewerName = "ScrollViewer";
+
         public TimelineView()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace Loon.Views.Content.Timelines
             if (e.GetCurrentPoint(relativeTo: null).Properties.IsRightButtonPressed)
             {
                 e.Handled = true;
-                this.FindDescendantOfType<ScrollViewer>()?.ScrollToHome();
+                this.FindControl<ScrollViewer>(ScrollViewerName)?.ScrollToHome();
             }
         }
     }

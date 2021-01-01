@@ -7,6 +7,10 @@ namespace Loon.Views
 {
     public class MessageBox : Window
     {
+        public static readonly string TextName = "Text";
+        public static readonly string TitleName = "Title";
+        public static readonly string ButtonsName = "Buttons";
+
         public enum MessageBoxButtons
         {
             Ok,
@@ -34,10 +38,10 @@ namespace Loon.Views
             var messageBoxResult = MessageBoxResult.Ok;
 
             var msgbox = new MessageBox();
-            msgbox.FindControl<TextBlock>("Title").Text = title;
-            msgbox.FindControl<TextBlock>("Text").Text = text;
+            msgbox.FindControl<TextBlock>(TitleName).Text = title;
+            msgbox.FindControl<TextBlock>(TextName).Text = text;
 
-            var buttonPanel = msgbox.FindControl<StackPanel>("Buttons");
+            var buttonPanel = msgbox.FindControl<StackPanel>(ButtonsName);
 
             if (buttons == MessageBoxButtons.Ok || buttons == MessageBoxButtons.OkCancel)
             {

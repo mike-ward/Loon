@@ -41,7 +41,7 @@
       <t:LikesTimelineView />
     </TabItem>
 
-    <TabItem b:SetFocusSelectionChangedBehavior.Name="SearchTextBox">
+    <TabItem b:SetFocusSelectionChangedBehavior.Name="{x:Static t:SearchTimelineView.SearchTextBoxName}">
       <TabItem.Header>
         <TextBlock
           Classes="symbol"
@@ -61,7 +61,7 @@
       <s:SettingsView />
     </TabItem>
 
-    <TabItem b:SetFocusSelectionChangedBehavior.Name="WriteTextBox">
+    <TabItem b:SetFocusSelectionChangedBehavior.Name="{x:Static w:WriteEditSection.WriteTextBoxName}">
       <TabItem.Header>
         <TextBlock
           Classes="symbol"

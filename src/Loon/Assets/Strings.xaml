@@ -35,9 +35,9 @@
       <sys:String x:Key="profile-follows-you">Follows You</sys:String>
       <sys:String x:Key="profile-tweets">Tweets</sys:String>
 
-      <!--  Symbols  -->
+      <!--  SymbolFont  -->
 
-      <FontFamily x:Key="AppFont">Segoe UI,Sans Regular</FontFamily>
+      <FontFamily x:Key="AppFont">Segoe UI,Open Sans,Arial</FontFamily>
       <FontFamily x:Key="SymbolFont">/Assets/Fonts/#Symbols</FontFamily>
       <FontFamily x:Key="SymbolFont1">/Assets/Fonts/#fontcustom</FontFamily>
 
@@ -65,9 +65,19 @@
       <sys:String x:Key="CopyUriClipboardSymbol">&#xE16F;</sys:String>
       <sys:String x:Key="CopyImageClipboardSymbol">&#x1f304;</sys:String>
 
-      <!--  Use SymbolFont1  -->
+      <sys:String x:Key="LinkSymbol">&#xE167;</sys:String>
+      <sys:String x:Key="MuteSymbol">&#xE198;</sys:String>
+      <sys:String x:Key="UnmuteSymbol">&#xE15D;</sys:String>
+      <sys:String x:Key="EmbedSymbol">&#xE148;</sys:String>
+
+      <!--  SymbolFont1  -->
+
       <sys:String x:Key="LikeSymbol">&#xF159;</sys:String>
       <sys:String x:Key="AddFriendSymbol">&#xF203;</sys:String>
+      <sys:String x:Key="BlockSymbol">&#xF1A0;</sys:String>
+      <sys:String x:Key="AddListSymbol">&#xF17F;</sys:String>
+      <sys:String x:Key="ListSymbol">&#xF180;</sys:String>
+      <sys:String x:Key="TopicsSymbol">&#xF172;</sys:String>
 
       <!--  Standard font symbols  -->
 

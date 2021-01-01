@@ -98,9 +98,11 @@ namespace Twitter.Services
                     })
                 .ConfigureAwait(false);
 
-            var userConnections = UserConnectionsService.LookupUserConnections(user.Id);
-            user.IsFollowing = userConnections?.IsFollowing ?? false;
-            user.IsFollowedBy = userConnections?.IsFollowedBy ?? false;
+            if (UserConnectionsService.LookupUserConnections(user.Id) is UserConnection userConnections)
+            {
+                user.IsFollowing = userConnections.IsFollowing;
+                user.IsFollowedBy = userConnections.IsFollowedBy;
+            }
             return user;
         }
 

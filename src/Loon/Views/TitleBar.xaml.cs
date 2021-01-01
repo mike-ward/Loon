@@ -15,18 +15,6 @@ namespace Loon.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        public void CloseApp(object? sender, Avalonia.Input.PointerPressedEventArgs e)
-        {
-            e.Handled = true;
-            App.MainWindow.Close();
-        }
-
-        public void MinimizeApp(object? sender, Avalonia.Input.PointerPressedEventArgs e)
-        {
-            e.Handled = true;
-            App.MainWindow.WindowState = WindowState.Minimized;
-        }
-
         public void BeginMoveDrag(object? sender, Avalonia.Input.PointerPressedEventArgs e)
         {
             App.MainWindow.BeginMoveDrag(e);

@@ -74,7 +74,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                 window.DataContext is MainWindowViewModel vm)
             {
                 e.Handled = true;
-                vm.SetUser(screenName);
+                vm.SetUserProfile(screenName);
             }
             else if (e.GetCurrentPoint(null).Properties.IsRightButtonPressed &&
                 e.KeyModifiers.HasFlag(KeyModifiers.Control) &&

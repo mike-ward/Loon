@@ -11,8 +11,8 @@ namespace Loon.ViewModels.Content
     {
         private OAuthTokens? requestToken;
 
-        public string? Pin { get => GetProp<string>(); set => SetProp(value); }
-        public bool SecondPage { get => GetProp<bool>(); set => SetProp(value); }
+        public string? Pin { get => Getter<string>(); set => Setter(value); }
+        public bool SecondPage { get => Getter<bool>(); set => Setter(value); }
 
         public ITwitterService Twitter { get; }
         public ISettings Settings { get; }

@@ -19,7 +19,7 @@
     <!--  Column 1  -->
 
     <l:TweetItemProfileImage
-      Name="TweetItemProfileImage"
+      Name="{x:Static l:TweetItemView.TweetItemProfileImageName}"
       VerticalAlignment="Top"
       DataContext="{Binding OriginatingStatus}"
       IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideProfileImages}" />
@@ -38,19 +38,19 @@
       <l:TweetItemTranslate DataContext="{Binding OriginatingStatus}" />
 
       <l:TweetItemImage
-        Name="TweetItemImage"
+        Name="{x:Static l:TweetItemView.TweetItemImageName}"
         Margin="0 5 5 5"
         DataContext="{Binding OriginatingStatus.ExtendedEntities}"
         IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideImages}" />
 
       <l:TweetItemQuoted
-        Name="TweetItemQuoted"
+        Name="{x:Static l:TweetItemView.TweetItemQuotedName}"
         DataContext="{Binding OriginatingStatus.QuotedStatus}"
         IsVisible="{Binding, Converter={x:Static ObjectConverters.IsNotNull},
                              FallbackValue=False}" />
 
       <l:TweetItemRelated
-        Name="TweetItemRelated"
+        Name="{x:Static l:TweetItemView.TweetItemRelatedName}"
         DataContext="{Binding OriginatingStatus.RelatedLinkInfo}">
         <l:TweetItemImage.IsVisible>
           <MultiBinding

@@ -6,29 +6,24 @@ using System.Runtime.CompilerServices;
 
 namespace Loon.Models
 {
+    // Yeah, there's boxing going on here.
+
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {
-        // Yeah, there's boxing going on here.
-
-        private readonly string _id = Path.GetRandomFileName(); // easy way to get a unique string
+        private readonly string _id = Path.GetRandomFileName() + ".";
         private static readonly ConcurrentDictionary<string, object?> _properties = new();
 
-        protected T? GetProp<T>([CallerMemberName] string? propertyName = null)
+        protected T? Getter<T>([CallerMemberName] string? propertyName = null)
         {
-            return _properties.TryGetValue(_id + propertyName, out var property)
-                ? (T)property
-                : default;
+            return (T)_properties.GetOrAdd(_id + propertyName, default(T));
         }
 
-        protected void SetProp<T>(T? value, [CallerMemberName] string? propertyName = null)
+        protected void Setter<T>(T? value, [CallerMemberName] string? propertyName = null)
         {
-            var key = _id + propertyName;
-
-            if (!_properties.TryGetValue(key, out var property) ||
-                !EqualityComparer<T>.Default.Equals((T)property, value))
+            if (!EqualityComparer<T>.Default.Equals(Getter<T>(propertyName), value))
             {
-                _properties[key] = value;
-                OnPropertyChanged(propertyName!);
+                _properties[_id + propertyName] = value;
+                OnPropertyChanged(propertyName);
             }
         }
 

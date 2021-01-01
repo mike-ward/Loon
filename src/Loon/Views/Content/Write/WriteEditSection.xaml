@@ -5,6 +5,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ti="clr-namespace:Loon.Views.Content.Controls.TweetItem"
+  xmlns:w="clr-namespace:Loon.Views.Content.Write"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
@@ -21,7 +22,7 @@
       Spacing="10">
 
       <TextBox
-        Name="WriteTextBox"
+        Name="{x:Static w:WriteEditSection.WriteTextBoxName}"
         MinHeight="100"
         AcceptsReturn="true"
         Watermark="What's happening?" />
@@ -32,7 +33,7 @@
 
         <TextBlock
           Margin="5 0"
-          Text="{Binding Text.Length, ElementName=WriteTextBox}" />
+          Text="{Binding Text.Length, ElementName={x:Static w:WriteEditSection.WriteTextBoxName}}" />
 
         <Button
           Grid.Column="1"
@@ -45,7 +46,6 @@
         </Button>
 
         <Button
-          Name="TweetButton"
           Grid.Column="2"
           HorizontalAlignment="Right"
           Background="{StaticResource TwitterBlueBrush}"

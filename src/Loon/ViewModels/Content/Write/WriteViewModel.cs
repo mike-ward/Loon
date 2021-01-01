@@ -12,8 +12,8 @@ namespace Loon.ViewModels.Content.Write
         private ISettings Settings { get; }
         private ITwitterService TwitterService { get; }
 
-        public TwitterStatus? Me { get => GetProp<TwitterStatus?>(); set => SetProp(value); }
-        public TwitterStatus? ReplyTo { get => GetProp<TwitterStatus?>(); set => SetProp(value); }
+        public TwitterStatus? Me { get => Getter<TwitterStatus?>(); set => Setter(value); }
+        public TwitterStatus? ReplyTo { get => Getter<TwitterStatus?>(); set => Setter(value); }
 
         public WriteViewModel(ISettings settings, ITwitterService twitterService)
         {

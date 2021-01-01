@@ -11,6 +11,8 @@ namespace Loon.Views.Content.UserProfile
 {
     public class UserProfileTimeline : UserControl
     {
+        public static readonly string UserTimelineName = "UserTimeline";
+
         public UserProfileTimeline()
         {
             InitializeComponent();
@@ -23,7 +25,7 @@ namespace Loon.Views.Content.UserProfile
 
         protected override async void OnDataContextChanged(EventArgs e)
         {
-            if (this.FindControl<TimelineView>("UserTimeline") is TimelineView tlv &&
+            if (this.FindControl<TimelineView>(UserTimelineName) is TimelineView tlv &&
                 tlv.DataContext is UserProfileTimelineViewModel vm)
             {
                 vm.StatusCollection.Clear();

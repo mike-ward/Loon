@@ -15,7 +15,7 @@
 
     <Button
       Classes="inline"
-      Command="{Binding ReplyTo, Source={x:Static l:App.Commands}}"
+      Command="{Binding ReplyTo, Source={x:Static l:App.Commands}, Mode=OneTime}"
       CommandParameter="{Binding}"
       ToolTip.Tip="{StaticResource reply-tooltip}">
       <TextBlock
@@ -25,7 +25,7 @@
 
     <Button
       Classes="inline"
-      Command="{Binding Retweet, Source={x:Static l:App.Commands}}"
+      Command="{Binding Retweet, Source={x:Static l:App.Commands}, Mode=OneTime}"
       CommandParameter="{Binding}"
       ToolTip.Tip="{StaticResource retweet-tooltip}">
       <StackPanel Orientation="Horizontal">
@@ -42,7 +42,7 @@
 
     <Button
       Classes="inline"
-      Command="{Binding LikesAddRemove, Source={x:Static l:App.Commands}}"
+      Command="{Binding LikesAddRemove, Source={x:Static l:App.Commands}, Mode=OneTime}"
       CommandParameter="{Binding}"
       ToolTip.Tip="{StaticResource like-tooltip}">
       <StackPanel Orientation="Horizontal">
@@ -66,8 +66,8 @@
 
     <Button
       Classes="inline"
-      Command="{Binding FollowAddRemove, Source={x:Static l:App.Commands}}"
-      CommandParameter="{Binding}"
+      Command="{Binding FollowAddRemove, Source={x:Static l:App.Commands}, Mode=OneTime}"
+      CommandParameter="{Binding User}"
       ToolTip.Tip="{StaticResource follow-tooltip}">
       <StackPanel Orientation="Horizontal">
         <TextBlock

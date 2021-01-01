@@ -155,7 +155,7 @@ namespace Loon.Services
         {
             return Hyperlink(
                 "@" + screenName,
-                 () => (App.MainWindow.DataContext as MainWindowViewModel)?.SetUser(screenName));
+                 () => (App.MainWindow.DataContext as MainWindowViewModel)?.SetUserProfile(screenName));
         }
 
         private static Control Hashtag(string text)

@@ -7,6 +7,8 @@ namespace Loon.Views.Content.Timelines
 {
     public class SearchTimelineView : UserControl
     {
+        public static readonly string SearchTextBoxName = "SearchTextBox";
+
         public SearchTimelineView()
         {
             InitializeComponent();

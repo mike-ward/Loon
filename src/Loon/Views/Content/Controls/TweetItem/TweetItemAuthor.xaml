@@ -20,7 +20,7 @@
   <WrapPanel Orientation="Horizontal">
     <Button
       Classes="inline1"
-      Command="{Binding $parent[Window].DataContext.SetUser}"
+      Command="{Binding $parent[Window].DataContext.SetUserProfile}"
       CommandParameter="{Binding User.ScreenName}"
       Content="{Binding User.Name}"
       FontWeight="Bold" />
@@ -32,7 +32,7 @@
 
     <Button
       Classes="inline1"
-      Command="{Binding $parent[Window].DataContext.SetUser}"
+      Command="{Binding $parent[Window].DataContext.SetUserProfile}"
       CommandParameter="{Binding User.ScreenName}"
       Content="{Binding User.ScreenName, StringFormat='@{0}'}" />
 

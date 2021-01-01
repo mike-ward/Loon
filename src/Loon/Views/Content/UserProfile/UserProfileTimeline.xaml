@@ -6,11 +6,12 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:tl="clr-namespace:Loon.Views.Content.Timelines"
   xmlns:tv="clr-namespace:Loon.ViewModels.Content.Timelines"
+  xmlns:u="clr-namespace:Loon.Views.Content.UserProfile"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
 
   <tl:TimelineView
-    Name="UserTimeline"
+    Name="{x:Static u:UserProfileTimeline.UserTimelineName}"
     DataContext="{Binding Source={x:Type tv:UserProfileTimelineViewModel}, Converter={StaticResource VML}, Mode=OneTime}" />
 </UserControl>

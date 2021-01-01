@@ -17,6 +17,6 @@
     <Path
       Margin="4 0"
       Classes="verifiedbadge"
-      IsVisible="{Binding User.Verified}" />
+      IsVisible="{Binding Verified}" />
   </StackPanel>
 </UserControl>

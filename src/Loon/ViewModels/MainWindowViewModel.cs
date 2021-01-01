@@ -1,40 +1,35 @@
 ﻿using System;
+using System.ComponentModel;
 using Avalonia;
 using Avalonia.Markup.Xaml.Styling;
 using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
+using Loon.Services;
 using Twitter.Models;
+
+#pragma warning disable S1075 // URIs should not be hardcoded
 
 namespace Loon.ViewModels
 {
     internal class MainWindowViewModel : NotifyPropertyChanged
     {
-        public ITwitterService TwitterService { get; }
-
-        public User? User { get => GetProp<User>(); set => SetProp(value); }
-
         public ISettings Settings { get; }
+        public ITwitterService TwitterService { get; }
+        public User? User { get => Getter<User>(); set => Setter(value); }
 
-        public MainWindowViewModel(ITwitterService twitterService, ISettings settings)
+        public MainWindowViewModel(ISettings settings, ITwitterService twitterService)
         {
-            TwitterService = twitterService;
             Settings = settings;
-
-            Settings.PropertyChanged += (_, e) =>
-            {
-                TwitterService.AuthenticationTokens(
-                    Settings.AccessToken,
-                    Settings.AccessTokenSecret);
-
-                UpdateTheme(e.PropertyName);
-            };
+            TwitterService = twitterService;
+            Settings.PropertyChanged += OnSettingsUpdated;
         }
 
         public void Load(IWindow window)
         {
             Settings.Load();
             SetWindowLocation(window);
+            window.Closing += delegate { Save(window); };
         }
 
         public void Save(IWindow window)
@@ -58,18 +53,35 @@ namespace Loon.ViewModels
             Settings.Location.Height = window.Height;
         }
 
-        public void SetUser(string screenName)
+        public void SetUserProfile(string screenName)
         {
             if (screenName is null)
             {
                 User = null;
+                return;
             }
-            else
+
+            try
             {
                 var task = TwitterService.UserInfo(screenName).AsTask();
-                task.Wait();
-                User = task.Result;
+                const int fiveSeconds = 5000;
+                User = task.Wait(fiveSeconds)
+                    ? task.Result
+                    : null;
             }
+            catch (AggregateException e)
+            {
+                TraceService.Message(e.Message);
+            }
+        }
+
+        private void OnSettingsUpdated(object? _, PropertyChangedEventArgs e)
+        {
+            TwitterService.AuthenticationTokens(
+                Settings.AccessToken,
+                Settings.AccessTokenSecret);
+
+            UpdateTheme(e.PropertyName);
         }
 
         private void UpdateTheme(string? propertyName)

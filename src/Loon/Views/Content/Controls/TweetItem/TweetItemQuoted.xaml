@@ -11,10 +11,10 @@
   mc:Ignorable="d">
 
   <Border
-    Margin="0,5"
-    Padding="10,0"
+    Margin="0 5"
+    Padding="10 0"
     BorderBrush="{DynamicResource ThemeBorderLowBrush}"
-    BorderThickness="0.6,0">
+    BorderThickness="0.6 0">
 
     <StackPanel>
       <l:TweetItemAuthor />
@@ -22,8 +22,8 @@
       <l:TweetItemTranslate />
 
       <l:TweetItemImage
-        Name="TweetItemImage"
-        Margin="0,5,5,5"
+        Name="{x:Static l:TweetItemView.TweetItemImageName}"
+        Margin="0 5 5 5"
         DataContext="{Binding ExtendedEntities}"
         IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideImages}" />
     </StackPanel>

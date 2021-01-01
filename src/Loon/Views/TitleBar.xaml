@@ -3,6 +3,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DesignHeight="25"
   d:DesignWidth="300"
@@ -11,14 +12,13 @@
   mc:Ignorable="d">
 
   <UserControl.Styles>
-    <Style Selector="TextBlock.ctrl">
-      <Setter Property="Padding" Value="15 3 15 0" />
+    <Style Selector="Button.title">
       <Setter Property="Cursor" Value="Hand" />
-      <Setter Property="TextAlignment" Value="Left" />
-      <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}" />
+      <Setter Property="Padding" Value="15 0 15 1" />
+      <Setter Property="BorderThickness" Value="0" />
     </Style>
 
-    <Style Selector="TextBlock.ctrl:pointerover">
+    <Style Selector="Button.title:pointerover">
       <Setter Property="Background" Value="{StaticResource ThemeAccentBrush4}" />
     </Style>
   </UserControl.Styles>
@@ -30,29 +30,29 @@
     <Image
       Grid.Column="0"
       Width="18"
-      Margin="6,0,7,0"
+      Margin="6 0 7 0"
       Source="../app.ico" />
 
     <TextBlock
       Grid.Column="1"
-      Padding="0,4,0,0"
+      Padding="0 4 0 0"
       Text="Loon" />
 
     <StackPanel
       Grid.Column="2"
-      Margin="0,0,7,0"
+      Margin="0 0 7 0"
       HorizontalAlignment="Right"
       Orientation="Horizontal">
 
-      <TextBlock
-        Classes="ctrl"
-        PointerPressed="MinimizeApp"
-        Text="—" />
+      <Button
+        Classes="title"
+        Command="{Binding MinimizeApp, Source={x:Static l:App.Commands}, Mode=OneTime}"
+        Content="—" />
 
-      <TextBlock
-        Classes="ctrl"
-        PointerPressed="CloseApp"
-        Text="✕" />
+      <Button
+        Classes="title"
+        Command="{Binding CloseApp, Source={x:Static l:App.Commands}, Mode=OneTime}"
+        Content="✕" />
     </StackPanel>
   </Grid>
 </UserControl>

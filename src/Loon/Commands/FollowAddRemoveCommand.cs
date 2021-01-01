@@ -18,25 +18,24 @@ namespace Loon.Commands
 
         public override void Execute(object? parameter)
         {
-            if (parameter is TwitterStatus status)
+            if (parameter is User user)
             {
-                ExecuteAsync(status).FireAndForget();
+                ExecuteAsync(user).FireAndForget();
             }
         }
 
-        private async ValueTask ExecuteAsync(TwitterStatus status)
+        private async ValueTask ExecuteAsync(User user)
         {
             try
             {
                 if (!inCommand)
                 {
                     inCommand = true;
-                    var user = status.User;
                     var screenName = user.ScreenName;
 
                     if (screenName is not null)
                     {
-                        if (status.User.IsFollowing)
+                        if (user.IsFollowing)
                         {
                             await TwitterService.Unfollow(screenName).ConfigureAwait(true);
                             user.Followers = Math.Max(0, user.Followers - 1);

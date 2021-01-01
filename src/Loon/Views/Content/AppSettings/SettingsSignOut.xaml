@@ -10,6 +10,6 @@
   mc:Ignorable="d">
   <Button
     Width="100"
-    Command="{Binding Signout, Source={x:Static l:App.Commands}}"
+    Command="{Binding Signout, Source={x:Static l:App.Commands}, Mode=OneTime}"
     Content="{StaticResource sign-out}" />
 </UserControl>

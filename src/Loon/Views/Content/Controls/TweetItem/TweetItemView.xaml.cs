@@ -5,6 +5,11 @@ namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemView : UserControl
     {
+        public static readonly string TweetItemImageName = nameof(TweetItemImage);
+        public static readonly string TweetItemProfileImageName = nameof(TweetItemProfileImage);
+        public static readonly string TweetItemQuotedName = nameof(TweetItemQuoted);
+        public static readonly string TweetItemRelatedName = nameof(TweetItemRelated);
+
         public TweetItemView()
         {
             InitializeComponent();
@@ -18,10 +23,10 @@ namespace Loon.Views.Content.Controls.TweetItem
         public void Clearing()
         {
             // Stop image downloading when scrolling
-            this.FindControl<TweetItemImage>(nameof(TweetItemImage)).Clearing = true;
-            this.FindControl<TweetItemProfileImage>(nameof(TweetItemProfileImage)).Clearing = true;
-            this.FindControl<TweetItemQuoted>(nameof(TweetItemQuoted)).FindControl<TweetItemImage>(nameof(TweetItemImage)).Clearing = true;
-            this.FindControl<TweetItemRelated>(nameof(TweetItemRelated)).FindControl<TweetItemImage>(nameof(TweetItemImage)).Clearing = true;
+            this.FindControl<TweetItemImage>(TweetItemImageName).Clearing = true;
+            this.FindControl<TweetItemProfileImage>(TweetItemProfileImageName).Clearing = true;
+            this.FindControl<TweetItemQuoted>(TweetItemQuotedName).FindControl<TweetItemImage>(TweetItemImageName).Clearing = true;
+            this.FindControl<TweetItemRelated>(TweetItemRelatedName).FindControl<TweetItemImage>(TweetItemImageName).Clearing = true;
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Loon.Views
 {
     public class MainWindow : Window, IWindow
     {
+        public static readonly string TitleBarName = "TitleBar";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -20,23 +22,16 @@ namespace Loon.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            LoadCloseSetup();
+            ((MainWindowViewModel)DataContext!).Load(this);
             LinuxSetup();
-        }
-
-        private void LoadCloseSetup()
-        {
-            var vm = (MainWindowViewModel)DataContext!;
-            vm.Load(this);
-            Closing += delegate { vm.Save(this); };
         }
 
         private void LinuxSetup()
         {
             if (OperatingSystem.IsLinux())
             {
-                // Linux won't allow us to extend into the non-client areas
-                this.FindControl<TitleBar>("TitleBar").IsVisible = false;
+                // On Linux, can't extend into non-client areas
+                this.FindControl<TitleBar>(TitleBarName).IsVisible = false;
                 ExtendClientAreaToDecorationsHint = false;
                 ExtendClientAreaTitleBarHeightHint = 0;
             }

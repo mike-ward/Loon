@@ -4,7 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  d:DesignHeight="200"
+  d:DesignHeight="300"
   d:DesignWidth="200"
   mc:Ignorable="d">
 
@@ -17,10 +17,69 @@
         PlacementMode="Left"
         VerticalOffset="15">
 
-        <MenuItem Header="This" />
-        <MenuItem Header="is" />
-        <MenuItem Header="a" />
-        <MenuItem Header="test" />
+        <MenuItem Header="Turn off Retweets">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol padleft"
+              Text="{StaticResource RetweetSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
+
+        <MenuItem Header="View Topics">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol1 padleft"
+              Text="{StaticResource TopicsSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
+
+        <MenuItem Header="Add/remove from Lists">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol1 padleft"
+              Text="{StaticResource AddListSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
+
+        <MenuItem Header="View Lists">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol1 padleft"
+              Text="{StaticResource ListSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
+
+        <MenuItem Header="Copy link to Profile">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol padleft"
+              Text="{StaticResource LinkSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
+
+        <MenuItem Header="{Binding ScreenName, StringFormat=Mute @{0}, FallbackValue=Mute}">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol padleft"
+              Text="{StaticResource MuteSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
+
+        <MenuItem Header="{Binding ScreenName, StringFormat=Block @{0}, FallbackValue=Block}">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol1 padleft"
+              Text="{StaticResource BlockSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
+
+        <MenuItem Header="Embed Tweet">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol padleft"
+              Text="{StaticResource EmbedSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
       </ContextMenu>
     </Button.ContextMenu>
 

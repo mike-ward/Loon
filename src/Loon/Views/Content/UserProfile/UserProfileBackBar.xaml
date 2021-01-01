@@ -10,15 +10,16 @@
   mc:Ignorable="d">
 
   <Button
-    Padding="0,10"
+    Padding="0 10"
     HorizontalContentAlignment="Left"
     Classes="inline"
-    Command="{Binding $parent[Window].DataContext.SetUser}">
+    Command="{Binding $parent[Window].DataContext.SetUserProfile}"
+    CommandParameter="{x:Null}">
 
     <Grid ColumnDefinitions="Auto,*">
 
       <TextBlock
-        Margin="10,0"
+        Margin="10 0"
         VerticalAlignment="Center"
         FontFamily="{StaticResource SymbolFont}"
         Text="{StaticResource PreviousSymbol}" />
@@ -28,7 +29,7 @@
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="{Binding Tweets, Converter={StaticResource CountConverter}}" />
           <TextBlock
-            Margin="3,0,0,0"
+            Margin="3 0 0 0"
             Text="{StaticResource profile-tweets}" />
         </StackPanel>
       </StackPanel>
