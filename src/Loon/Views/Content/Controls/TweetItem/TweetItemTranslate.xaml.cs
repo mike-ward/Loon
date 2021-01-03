@@ -25,9 +25,10 @@ namespace Loon.Views.Content.Controls.TweetItem
             if (DataContext is not null)
             {
                 var tweet = (TwitterStatus)DataContext;
-                var lang = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
+                var fromLang = tweet.Language ?? "und";
+                var toLang = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
                 tweet.TranslatedText = App.GetString("translate-text-working");
-                tweet.TranslatedText = await TranslateService.Translate(tweet.FullText, lang).ConfigureAwait(true);
+                tweet.TranslatedText = await TranslateService.Translate(tweet.FullText, fromLang, toLang).ConfigureAwait(true);
             }
         }
 

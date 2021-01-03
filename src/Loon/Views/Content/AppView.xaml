@@ -14,6 +14,6 @@
   <Grid>
     <v:GetPinView IsVisible="{Binding !$parent[Window].DataContext.Settings.IsAuthenticated, FallbackValue=True}" />
     <v:MainView IsVisible="{Binding $parent[Window].DataContext.Settings.IsAuthenticated, FallbackValue=False}" />
-    <p:UserProfileView IsVisible="{Binding $parent[Window].DataContext.UserProfileContext, Converter={x:Static ObjectConverters.IsNotNull}}" />
+    <p:UserProfileView IsVisible="{Binding UserProfileContext, Converter={x:Static ObjectConverters.IsNotNull}}" />
   </Grid>
 </UserControl>

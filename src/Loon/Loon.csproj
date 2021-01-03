@@ -254,7 +254,7 @@
     <AvaloniaXaml Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\MessageBox.xaml">
+    <AvaloniaXaml Include="Views\Content\Controls\MessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\TitleBar.xaml">
@@ -266,7 +266,6 @@
     <PackageReference Include="Avalonia" Version="0.10.0-rc1" />
     <PackageReference Include="Avalonia.Desktop" Version="0.10.0-rc1" />
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0-rc1" />
-    <PackageReference Include="BitFaster.Caching" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
   </ItemGroup>
   
@@ -407,7 +406,7 @@
     <Compile Update="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MessageBox.xaml.cs">
+    <Compile Update="Views\Content\Controls\MessageBox.xaml.cs">
       <DependentUpon>MessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\TitleBar.xaml.cs">

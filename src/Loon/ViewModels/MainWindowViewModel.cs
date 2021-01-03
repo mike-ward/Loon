@@ -4,18 +4,15 @@ using Avalonia;
 using Avalonia.Markup.Xaml.Styling;
 using Loon.Extensions;
 using Loon.Interfaces;
-using Loon.Models;
-using Twitter.Models;
 
 #pragma warning disable S1075 // URIs should not be hardcoded
 
 namespace Loon.ViewModels
 {
-    internal class MainWindowViewModel : NotifyPropertyChanged
+    internal class MainWindowViewModel
     {
         public ISettings Settings { get; }
         public ITwitterService TwitterService { get; }
-        public User? UserProfileContext { get => Getter<User>(); set => Setter(value); }
 
         public MainWindowViewModel(ISettings settings, ITwitterService twitterService)
         {
@@ -65,7 +62,7 @@ namespace Loon.ViewModels
         {
             if (propertyName.IsEqualTo(nameof(ISettings.UseLightTheme)))
             {
-                // This is slated to change in the next release of Avalonia
+                // This is slated to change in future release of Avalonia
                 var styles = new StyleInclude(new Uri("resm:Styles"))
                 {
                     Source = Settings.UseLightTheme

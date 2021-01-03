@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Loon.Interfaces;
 using Loon.Models;
-using Loon.Views;
+using Loon.Views.Content.Controls;
 using Twitter.Services;
 
 namespace Loon.ViewModels.Content
@@ -11,8 +11,8 @@ namespace Loon.ViewModels.Content
     {
         private OAuthTokens? requestToken;
 
-        public string? Pin { get => Getter<string>(); set => Setter(value); }
-        public bool SecondPage { get => Getter<bool>(); set => Setter(value); }
+        public string? Pin { get => Getter(default(string)); set => Setter(value); }
+        public bool SecondPage { get => Getter(false); set => Setter(value); }
 
         public ITwitterService Twitter { get; }
         public ISettings Settings { get; }

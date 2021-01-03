@@ -5,6 +5,7 @@ using Loon.Models;
 using Loon.ViewModels;
 using Loon.ViewModels.Content;
 using Loon.ViewModels.Content.Timelines;
+using Loon.ViewModels.Content.UserProfile;
 using Loon.ViewModels.Content.Write;
 using Loon.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,17 +31,20 @@ namespace Loon.Services
             // View Models
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<GetPinViewModel>();
+            services.AddTransient<MainViewModel>();
             services.AddTransient<HomeTimelineViewModel>();
             services.AddTransient<LikesTimelineViewModel>();
             services.AddTransient<UserProfileTimelineViewModel>();
             services.AddTransient<SearchTimelineViewModel>();
             services.AddTransient<WriteViewModel>();
+            services.AddTransient<UserProfileViewModel>();
 
             // Models
             services.AddSingleton<ISettings, Settings>();
 
             // Services
             services.AddSingleton<ITwitterService, TwitterService>();
+            services.AddSingleton<IPubSubService, PubSubService>();
         }
 
         public static object GetService(Type type)

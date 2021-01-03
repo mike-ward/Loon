@@ -8,6 +8,7 @@ namespace Loon.Views.Content.Timelines
     public class TimelineView : UserControl
     {
         public static readonly string ScrollViewerName = "ScrollViewer";
+        public static readonly string ItemsRepeaterName = "ItemsRepeater";
 
         public TimelineView()
         {

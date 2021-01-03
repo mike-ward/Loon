@@ -150,6 +150,12 @@
       <sys:String
         x:Key="tips-profiles"
         xml:space="preserve">Specify an alternate profile on the command line or shortcut.&#x0a;(e.g. tweetz.core.exe account2)</sys:String>
+
+      <!--  Write Tab  -->
+
+      <sys:String x:Key="whats-happening">What's happening?</sys:String>
+      <sys:String x:Key="tweet-button-text">Tweet</sys:String>
+      <sys:String x:Key="tweeting-button-text">Tweeting…</sys:String>
     </Style.Resources>
   </Style>
 </Styles>

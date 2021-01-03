@@ -18,7 +18,7 @@
 
     <t:TweetItemCompactView
       DataContext="{Binding ReplyTo}"
-      IsVisible="{Binding $parent[UserControl].DataContext.ReplyTo, Converter={x:Static ObjectConverters.IsNotNull}}" />
+      IsVisible="{Binding ., Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
 
     <w:WriteEditSection />
   </StackPanel>

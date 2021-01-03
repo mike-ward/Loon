@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 
-namespace Loon.Views
+namespace Loon.Views.Content.Controls
 {
     public class MessageBox : Window
     {

@@ -15,7 +15,7 @@
 
     <Button
       Classes="inline"
-      Command="{Binding ReplyTo, Source={x:Static l:App.Commands}, Mode=OneTime}"
+      Command="{Binding OpenWriteTab, Source={x:Static l:App.Commands}, Mode=OneTime}"
       CommandParameter="{Binding}"
       ToolTip.Tip="{StaticResource reply-tooltip}">
       <TextBlock

@@ -4,26 +4,30 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Avalonia.Collections;
+using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
 using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    internal class HomeTimelineViewModel
+    public class HomeTimelineViewModel
     {
         private const int mentionsInterval = 60;
         private int mentionsCounter = mentionsInterval;
 
         private Timeline Timeline { get; }
         private ITwitterService TwitterService { get; }
+
+        public const string AddStatusMessage = "add-status-message";
         public IAvaloniaList<TwitterStatus> StatusCollection { get => Timeline.StatusCollection; }
 
-        public HomeTimelineViewModel(ISettings settings, ITwitterService twitterService)
+        public HomeTimelineViewModel(ISettings settings, ITwitterService twitterService, IPubSubService pubSub)
         {
             TwitterService = twitterService;
             var name = App.GetString("tab-home-name");
             Timeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
+            pubSub.PubSubRaised += (s, e) => AddStatusHandler(e);
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()
@@ -33,6 +37,7 @@ namespace Loon.ViewModels.Content.Timelines
                 timeline => GetAndUpdateStatusesAsync(timeline),
                 timeline => TruncateStatusCollectionTask.Execute(timeline),
                 timeline => UpdateTimeStampsTask.Execute(timeline),
+                timeline => CollectTask.Execute(timeline),
             };
         }
 
@@ -67,6 +72,14 @@ namespace Loon.ViewModels.Content.Timelines
                 throw;
             }
             return Enumerable.Empty<TwitterStatus>();
+        }
+
+        private void AddStatusHandler(PubSubEventArgs e)
+        {
+            if (e.Message.IsEqualTo(AddStatusMessage) && e.Payload is TwitterStatus status)
+            {
+                UpdateStatuses.Execute(new[] { status }, Timeline);
+            }
         }
     }
 }

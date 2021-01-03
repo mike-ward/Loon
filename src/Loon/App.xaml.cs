@@ -27,17 +27,8 @@ namespace Loon
         }
 
         public static AppCommands Commands { get; } = BootStrapper.GetService<AppCommands>();
+        public static Window MainWindow => ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).MainWindow;
 
-        public static Window MainWindow
-        {
-            get { return ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).MainWindow; }
-        }
-
-        public static string GetString(string name)
-        {
-            return Current.TryFindResource(name, out var value) && value is string val
-                ? val
-                : $"string resource not found: {name}";
-        }
+        public static string GetString(string name) => Current.TryFindResource(name, out var value) && value is string val ? val : $"string resource not found: {name}";
     }
 }

@@ -7,23 +7,26 @@ using System.Runtime.CompilerServices;
 
 namespace Loon.Models
 {
-    // Yeah, there's boxing going on here.
+    // This is neither performant or optimal. It is however convenient to use and for 99% of (my)
+    // use cases, more than good enough.
 
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {
         private readonly string _id = Path.GetRandomFileName() + ".";
         private static readonly ConcurrentDictionary<string, object?> _properties = new(StringComparer.Ordinal);
 
-        protected T? Getter<T>([CallerMemberName] string? propertyName = null)
+        protected T Getter<T>(T initialValue, [CallerMemberName] string? propertyName = null)
         {
-            return (T)_properties.GetOrAdd(_id + propertyName, default(T));
+            return (T)_properties.GetOrAdd(_id + propertyName, initialValue) ?? initialValue;
         }
 
-        protected void Setter<T>(T? value, [CallerMemberName] string? propertyName = null)
+        protected void Setter<T>(T value, [CallerMemberName] string? propertyName = null)
         {
-            if (!EqualityComparer<T>.Default.Equals(Getter<T>(propertyName), value))
+            var key = _id + propertyName;
+            if (!_properties.TryGetValue(key, out var val) ||
+                !EqualityComparer<T>.Default.Equals((T)val, value))
             {
-                _properties[_id + propertyName] = value;
+                _properties[key] = value;
                 OnPropertyChanged(propertyName);
             }
         }

@@ -1,8 +1,9 @@
-﻿using Avalonia.Controls;
-using Avalonia.LogicalTree;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Loon.ViewModels.Content.Write;
-using Loon.Views.Content.Write;
+using Loon.Extensions;
+using Loon.ViewModels.Content;
 
 namespace Loon.Views.Content
 {
@@ -18,13 +19,19 @@ namespace Loon.Views.Content
             AvaloniaXamlLoader.Load(this);
         }
 
-        public void OnSelectionChanged(object? s, SelectionChangedEventArgs e)
+        public void OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
         {
-            if (this.FindLogicalDescendantOfType<WriteView>() is WriteView writeView &&
-                writeView.DataContext is WriteViewModel writeViewModel)
+            if (e.Property.Name.IsEqualTo(nameof(TabControl.SelectedIndex)) &&
+                DataContext is MainViewModel vm &&
+                e.OldValue is int old)
             {
-                writeViewModel.Reset();
+                vm.SetPreviousIndex(old, sender as TabControl);
             }
+        }
+
+        public void OnWriteTabClicked(object? sender, PointerPressedEventArgs e)
+        {
+            App.Commands.OpenWriteTab.Execute(null); // wanted side-effect; clear replyTo in write tab.
         }
     }
 }

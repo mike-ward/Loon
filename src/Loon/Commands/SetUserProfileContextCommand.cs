@@ -1,36 +1,22 @@
-﻿using System.Threading.Tasks;
-using Loon.Extensions;
-using Loon.Interfaces;
-using Loon.ViewModels;
-using Twitter.Models;
+﻿using Loon.Interfaces;
+using Loon.ViewModels.Content.UserProfile;
 
 namespace Loon.Commands
 {
     public class SetUserProfileContextCommand : BaseCommand
     {
         private readonly ITwitterService twitterService;
+        private readonly IPubSubService pubSubService;
 
-        public SetUserProfileContextCommand(ITwitterService twitterService)
+        public SetUserProfileContextCommand(ITwitterService twitterService, IPubSubService pubSubService)
         {
             this.twitterService = twitterService;
+            this.pubSubService = pubSubService;
         }
 
         public override void Execute(object? parameter)
         {
-            ExecuteAsync(parameter).FireAndForget();
-        }
-
-        public async ValueTask ExecuteAsync(object? parameter)
-        {
-            if (App.MainWindow.DataContext is MainWindowViewModel vm)
-            {
-                vm.UserProfileContext = parameter switch
-                {
-                    User user => user,
-                    string screenName => await twitterService.UserInfo(screenName).ConfigureAwait(true),
-                    _ => null
-                };
-            }
+            pubSubService.Publish(UserProfileViewModel.SetUserProfileContextMessage, parameter);
         }
     }
 }

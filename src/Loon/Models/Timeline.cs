@@ -23,8 +23,8 @@ namespace Loon.Models
         public ISet<string> AlreadyAdded { get; } = new HashSet<string>(StringComparer.Ordinal);
         public ISet<TwitterStatus> PendingStatusCollection { get; } = new HashSet<TwitterStatus>();
         public bool IsScrolled { get; set; }
-        public string? ExceptionMessage { get => Getter<string?>(); set => Setter(value); }
-        public bool PendingStatusesAvailable { get => Getter<bool>(); set => Setter(value); }
+        public string? ExceptionMessage { get => Getter(default(string)); set => Setter(value); }
+        public bool PendingStatusesAvailable { get => Getter(false); set => Setter(value); }
 
         public Timeline(string name, double intervalInMinutes, IEnumerable<Func<Timeline, ValueTask>> updateTasks, ISettings settings)
         {

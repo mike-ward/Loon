@@ -25,7 +25,9 @@
         Name="{x:Static w:WriteEditSection.WriteTextBoxName}"
         MinHeight="100"
         AcceptsReturn="true"
-        Watermark="What's happening?" />
+        Text="{Binding TweetText}"
+        TextWrapping="Wrap"
+        Watermark="{StaticResource whats-happening}" />
 
       <Grid
         VerticalAlignment="Center"
@@ -50,7 +52,8 @@
           HorizontalAlignment="Right"
           Background="{StaticResource TwitterBlueBrush}"
           Classes="blue"
-          Command="{Binding OnTweet}">
+          Command="{Binding OnTweet}"
+          IsEnabled="{Binding !IsTweeting}">
           <TextBlock
             Padding="5 0"
             Text="Tweet" />

@@ -5,15 +5,18 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:up="clr-namespace:Loon.Views.Content.UserProfile"
+  xmlns:vm="clr-namespace:Loon.ViewModels.Content.UserProfile"
   d:DesignHeight="450"
   d:DesignWidth="300"
   Background="{DynamicResource ThemeBackgroundBrush}"
-  DataContext="{Binding $parent[Window].DataContext.UserProfileContext, FallbackValue={x:Null}}"
+  DataContext="{Binding Source={x:Type vm:UserProfileViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
   mc:Ignorable="d">
 
   <!--  Use Grid so UserProfileTimeline is bounded  -->
 
-  <Grid RowDefinitions="auto,auto,auto,auto,*">
+  <Grid
+    DataContext="{Binding UserProfileContext}"
+    RowDefinitions="auto,auto,auto,auto,*">
     <up:UserProfileBackBar Grid.Row="0" />
     <up:UserProfileBanner Grid.Row="1" />
 

@@ -18,7 +18,7 @@ namespace Loon.Models
 
         public string? AccessToken
         {
-            get => Getter<string>();
+            get => Getter(default(string));
             set
             {
                 var tmp = IsAuthenticated;
@@ -29,7 +29,7 @@ namespace Loon.Models
 
         public string? AccessTokenSecret
         {
-            get => Getter<string>();
+            get => Getter(default(string));
             set
             {
                 var tmp = IsAuthenticated;
@@ -38,20 +38,20 @@ namespace Loon.Models
             }
         }
 
-        public string? ScreenName { get => Getter<string>(); set => Setter(value); }
-        public bool HideProfileImages { get => Getter<bool>(); set => Setter(value); }
-        public bool HideImages { get => Getter<bool>(); set => Setter(value); }
-        public bool HideExtendedContent { get => Getter<bool>(); set => Setter(value); }
-        public bool HideScreenName { get => Getter<bool>(); set => Setter(value); }
-        public bool HidePossiblySensitive { get => Getter<bool>(); set => Setter(value); }
-        public bool SpellCheck { get => Getter<bool>(); set => Setter(value); }
-        public bool ShowInSystemTray { get => Getter<bool>(); set => Setter(value); }
-        public bool AlwaysOnTop { get => Getter<bool>(); set => Setter(value); }
-        public bool Donated { get => Getter<bool>(); set => Setter(value); }
-        public bool ApplyGrayscaleShader { get => Getter<bool>(); set => Setter(value); }
-        public double FontSize { get => Getter<double>(); set => Setter(value); }
-        public bool UseLightTheme { get => Getter<bool>(); set => Setter(value); }
-        public string? MyTweetColor { get => Getter<string>(); set => Setter(value); }
+        public bool AlwaysOnTop { get => Getter(false); set => Setter(value); }
+        public bool ApplyGrayscaleShader { get => Getter(false); set => Setter(value); }
+        public bool Donated { get => Getter(false); set => Setter(value); }
+        public bool HideExtendedContent { get => Getter(false); set => Setter(value); }
+        public bool HideImages { get => Getter(false); set => Setter(value); }
+        public bool HidePossiblySensitive { get => Getter(false); set => Setter(value); }
+        public bool HideProfileImages { get => Getter(false); set => Setter(value); }
+        public bool HideScreenName { get => Getter(false); set => Setter(value); }
+        public bool ShowInSystemTray { get => Getter(false); set => Setter(value); }
+        public bool SpellCheck { get => Getter(false); set => Setter(value); }
+        public bool UseLightTheme { get => Getter(false); set => Setter(value); }
+        public double FontSize { get => Getter(12d); set => Setter(value); }
+        public string? MyTweetColor { get => Getter(default(string)); set => Setter(value); }
+        public string? ScreenName { get => Getter(default(string)); set => Setter(value); }
         public WindowLocation Location { get; set; } = new WindowLocation { X = 200, Y = 200, Width = 300, Height = 500 };
 
         [JsonIgnore]

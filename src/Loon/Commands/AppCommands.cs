@@ -6,27 +6,23 @@ namespace Loon.Commands
     {
         public CloseAppCommand CloseApp { get; }
         public FollowAddRemoveCommand FollowAddRemove { get; }
-        public GoToWriteTabCommand GoToWriteTab { get; }
+        public OpenWriteTabCommand OpenWriteTab { get; }
         public LikesAddRemoveCommand LikesAddRemove { get; }
         public MinimizeAppCommand MinimizeApp { get; }
-        public ReplyToCommand ReplyTo { get; }
         public RetweetCommand Retweet { get; }
         public SetUserProfileContextCommand SetUserProfileContext { get; }
         public SignoutCommand Signout { get; }
-        public TabGoBackCommand TabGoBack { get; }
 
-        public AppCommands(ITwitterService twitterService, ISettings settings)
+        public AppCommands(ITwitterService twitterService, ISettings settings, IPubSubService pubSubService)
         {
             CloseApp = new CloseAppCommand();
             FollowAddRemove = new FollowAddRemoveCommand(twitterService);
-            GoToWriteTab = new GoToWriteTabCommand();
+            OpenWriteTab = new OpenWriteTabCommand(pubSubService);
             LikesAddRemove = new LikesAddRemoveCommand(twitterService);
             MinimizeApp = new MinimizeAppCommand();
-            ReplyTo = new ReplyToCommand(twitterService);
             Retweet = new RetweetCommand(settings, twitterService);
-            SetUserProfileContext = new SetUserProfileContextCommand(twitterService);
+            SetUserProfileContext = new SetUserProfileContextCommand(twitterService, pubSubService);
             Signout = new SignoutCommand(settings);
-            TabGoBack = new TabGoBackCommand();
         }
     }
 }

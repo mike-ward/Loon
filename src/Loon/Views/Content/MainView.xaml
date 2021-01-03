@@ -3,6 +3,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:b="clr-namespace:Loon.Behaviors"
+  xmlns:c="clr-namespace:Loon.ViewModels.Content"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:s="clr-namespace:Loon.Views.Content.AppSettings"
@@ -12,18 +13,17 @@
   d:DesignHeight="450"
   d:DesignWidth="300"
   Background="{DynamicResource ThemeBackgroundBrush}"
+  DataContext="{Binding Source={x:Type c:MainViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
   mc:Ignorable="d">
 
   <TabControl
     Name="TabControl"
     Margin="3 0 0 0"
-    b:PreviousIndexBehavior.PreviousIndex="0"
-    SelectionChanged="OnSelectionChanged">
+    PropertyChanged="OnPropertyChanged">
 
     <TabItem>
       <TabItem.Header>
         <TextBlock
-          Classes="symbol"
           Text="{StaticResource HomeSymbol}"
           ToolTip.Tip="{StaticResource tab-home-name}" />
       </TabItem.Header>
@@ -34,7 +34,7 @@
       <TabItem.Header>
         <TextBlock
           Classes="symbol1"
-          FontSize="{Binding $parent[Window].FontSize, Converter={StaticResource HeartFontSize}, ConverterParameter=1.5}"
+          FontSize="19"
           Text="{StaticResource LikeSymbol}"
           ToolTip.Tip="{StaticResource tab-likes-name}" />
       </TabItem.Header>
@@ -44,7 +44,6 @@
     <TabItem b:SetFocusSelectionChangedBehavior.Name="{x:Static t:SearchTimelineView.SearchTextBoxName}">
       <TabItem.Header>
         <TextBlock
-          Classes="symbol"
           Text="{StaticResource SearchSymbol}"
           ToolTip.Tip="{StaticResource tab-search-name}" />
       </TabItem.Header>
@@ -54,17 +53,17 @@
     <TabItem>
       <TabItem.Header>
         <TextBlock
-          Classes="symbol"
           Text="{StaticResource SettingsSymbol}"
           ToolTip.Tip="{StaticResource tab-settings-name}" />
       </TabItem.Header>
       <s:SettingsView />
     </TabItem>
 
-    <TabItem b:SetFocusSelectionChangedBehavior.Name="{x:Static w:WriteEditSection.WriteTextBoxName}">
+    <TabItem
+      b:SetFocusSelectionChangedBehavior.Name="{x:Static w:WriteEditSection.WriteTextBoxName}"
+      PointerPressed="OnWriteTabClicked">
       <TabItem.Header>
         <TextBlock
-          Classes="symbol"
           Text="{StaticResource WriteSymbol}"
           ToolTip.Tip="{StaticResource tab-pen-name}" />
       </TabItem.Header>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Loon.Views;
+using Loon.Views.Content.Controls;
 
 namespace Loon.Services
 {
