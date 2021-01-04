@@ -14,8 +14,8 @@ namespace Loon.ViewModels.Content
         public MainViewModel(ISettings settings)
         {
             Settings = settings;
-            PubSubService.AddSubscriber(PubSubService.OpenPreviousTabMessage, OpenPreviousTabHandler);
-            PubSubService.AddSubscriber(PubSubService.OpenWriteTabMessage, OpenWriteTabHandler);
+            PubSubs.OpenWriteTab.Subscribe(OpenWriteTabHandler);
+            PubSubs.OpenPreviousTab.Subscribe(OpenPreviousTabHandler);
         }
 
         public void SetPreviousIndex(int idx, TabControl? tabCtrl)
@@ -24,7 +24,7 @@ namespace Loon.ViewModels.Content
             tabControl = tabCtrl ?? tabControl;
         }
 
-        private void OpenPreviousTabHandler(object? _)
+        private void OpenPreviousTabHandler()
         {
             if (tabControl is not null)
             {

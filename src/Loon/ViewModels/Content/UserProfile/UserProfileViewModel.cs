@@ -15,7 +15,7 @@ namespace Loon.ViewModels.Content.UserProfile
         public UserProfileViewModel(ITwitterService twitterService)
         {
             this.twitterService = twitterService;
-            PubSubService.AddSubscriber(PubSubService.SetUserProfileContextMessage, UserProfileContextHandler);
+            PubSubs.SetUserProfileContext.Subscribe(UserProfileContextHandler);
         }
 
         private void UserProfileContextHandler(object? payload)

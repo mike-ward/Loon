@@ -26,7 +26,7 @@ namespace Loon.ViewModels.Content.Timelines
             titterService = twitterService;
             var name = App.GetString("tab-home-name");
             timeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
-            PubSubService.AddSubscriber(PubSubService.AddStatusMessage, AddStatusHandler);
+            PubSubs.AddStatus.Subscribe(status => UpdateStatuses.Execute(new[] { status }, timeline).ConfigureAwait(false));
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()
@@ -71,14 +71,6 @@ namespace Loon.ViewModels.Content.Timelines
                 throw;
             }
             return Enumerable.Empty<TwitterStatus>();
-        }
-
-        private void AddStatusHandler(object? payload)
-        {
-            if (payload is TwitterStatus status)
-            {
-                UpdateStatuses.Execute(new[] { status }, timeline);
-            }
         }
     }
 }

@@ -1,33 +1,58 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Linq;
-using Loon.Extensions;
+using Twitter.Models;
 
 namespace Loon.Services
 {
-    public static class PubSubService
+    public static class PubSubs
     {
-        private static readonly ConcurrentBag<(string message, Action<object?> handler)> subscribers = new();
+        public static PubSubService OpenPreviousTab { get; } = new();
+        public static PubSubService<TwitterStatus> AddStatus { get; } = new();
+        public static PubSubService<TwitterStatus?> OpenWriteTab { get; } = new();
+        public static PubSubService<object?> SetUserProfileContext { get; } = new(); // waiting for discriminated unions
+    }
 
-        public const string AddStatusMessage = "add-status-message";
-        public const string OpenWriteTabMessage = nameof(OpenWriteTabMessage);
-        public const string OpenPreviousTabMessage = nameof(OpenPreviousTabMessage);
-        public const string SetUserProfileContextMessage = nameof(SetUserProfileContextMessage);
+    public class PubSubService<T>
+    {
+        private readonly ConcurrentBag<Action<T>> subscribers = new();
 
-        public static void AddSubscriber(string message, Action<object?> handler)
+        public void Subscribe(Action<T> handler)
         {
-            subscribers.Add((message, handler));
+            subscribers.Add(handler);
         }
 
-        public static void Publish(string message, object? payload)
+        public void Publish(T payload)
         {
             try
             {
-                foreach (var subscriber in subscribers
-                    .ToArray()
-                    .Where(subscriber => subscriber.message.IsEqualTo(message)))
+                foreach (var subscriber in subscribers.ToArray())
                 {
-                    subscriber.handler.Invoke(payload);
+                    subscriber.Invoke(payload);
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceService.Message(ex.Message);
+            }
+        }
+    }
+
+    public class PubSubService
+    {
+        private readonly ConcurrentBag<Action> subscribers = new();
+
+        public void Subscribe(Action handler)
+        {
+            subscribers.Add(handler);
+        }
+
+        public void Publish()
+        {
+            try
+            {
+                foreach (var subscriber in subscribers.ToArray())
+                {
+                    subscriber.Invoke();
                 }
             }
             catch (Exception ex)

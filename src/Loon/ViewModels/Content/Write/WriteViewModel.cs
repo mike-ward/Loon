@@ -32,7 +32,7 @@ namespace Loon.ViewModels.Content.Write
             this.settings = settings;
             this.twitterService = twitterService;
             this.settings.PropertyChanged += Settings_PropertyChanged;
-            PubSubService.AddSubscriber(PubSubService.OpenWriteTabMessage, OpenWriteTabHandler);
+            PubSubs.OpenWriteTab.Subscribe(twitterStatus => ReplyTo = twitterStatus);
         }
 
         private async void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -44,11 +44,6 @@ namespace Loon.ViewModels.Content.Write
             }
         }
 
-        private void OpenWriteTabHandler(object? payload)
-        {
-            ReplyTo = payload as TwitterStatus;
-        }
-
         public async ValueTask OnTweet()
         {
             if (TweetText.Length == 0) { return; }
@@ -58,8 +53,8 @@ namespace Loon.ViewModels.Content.Write
             try
             {
                 var status = await twitterService.UpdateStatus(TweetText, ReplyTo?.Id, null, Array.Empty<string>()).ConfigureAwait(true);
-                PubSubService.Publish(PubSubService.AddStatusMessage, status);
-                PubSubService.Publish(PubSubService.OpenPreviousTabMessage, null);
+                PubSubs.AddStatus.Publish(status);
+                PubSubs.OpenPreviousTab.Publish();
                 Reset();
             }
             catch (WebException ex)

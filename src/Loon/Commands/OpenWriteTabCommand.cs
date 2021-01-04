@@ -1,4 +1,5 @@
 ﻿using Loon.Services;
+using Twitter.Models;
 
 namespace Loon.Commands
 {
@@ -6,7 +7,7 @@ namespace Loon.Commands
     {
         public override void Execute(object? parameter)
         {
-            PubSubService.Publish(PubSubService.OpenWriteTabMessage, parameter);
+            PubSubs.OpenWriteTab.Publish(parameter as TwitterStatus);
         }
     }
 }
