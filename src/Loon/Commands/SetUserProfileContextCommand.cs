@@ -1,22 +1,20 @@
 ﻿using Loon.Interfaces;
-using Loon.ViewModels.Content.UserProfile;
+using Loon.Services;
 
 namespace Loon.Commands
 {
     public class SetUserProfileContextCommand : BaseCommand
     {
         private readonly ITwitterService twitterService;
-        private readonly IPubSubService pubSubService;
 
-        public SetUserProfileContextCommand(ITwitterService twitterService, IPubSubService pubSubService)
+        public SetUserProfileContextCommand(ITwitterService twitterService)
         {
             this.twitterService = twitterService;
-            this.pubSubService = pubSubService;
         }
 
         public override void Execute(object? parameter)
         {
-            pubSubService.Publish(UserProfileViewModel.SetUserProfileContextMessage, parameter);
+            PubSubService.Publish(PubSubService.SetUserProfileContextMessage, parameter);
         }
     }
 }

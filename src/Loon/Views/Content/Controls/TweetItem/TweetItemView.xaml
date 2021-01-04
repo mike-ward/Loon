@@ -46,8 +46,7 @@
       <l:TweetItemQuoted
         Name="{x:Static l:TweetItemView.TweetItemQuotedName}"
         DataContext="{Binding OriginatingStatus.QuotedStatus}"
-        IsVisible="{Binding, Converter={x:Static ObjectConverters.IsNotNull},
-                             FallbackValue=False}" />
+        IsVisible="{Binding ., Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
 
       <l:TweetItemRelated
         Name="{x:Static l:TweetItemView.TweetItemRelatedName}"

@@ -13,15 +13,15 @@ namespace Loon.Commands
         public SetUserProfileContextCommand SetUserProfileContext { get; }
         public SignoutCommand Signout { get; }
 
-        public AppCommands(ITwitterService twitterService, ISettings settings, IPubSubService pubSubService)
+        public AppCommands(ITwitterService twitterService, ISettings settings)
         {
             CloseApp = new CloseAppCommand();
             FollowAddRemove = new FollowAddRemoveCommand(twitterService);
-            OpenWriteTab = new OpenWriteTabCommand(pubSubService);
+            OpenWriteTab = new OpenWriteTabCommand();
             LikesAddRemove = new LikesAddRemoveCommand(twitterService);
             MinimizeApp = new MinimizeAppCommand();
             Retweet = new RetweetCommand(settings, twitterService);
-            SetUserProfileContext = new SetUserProfileContextCommand(twitterService, pubSubService);
+            SetUserProfileContext = new SetUserProfileContextCommand(twitterService);
             Signout = new SignoutCommand(settings);
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
-using Loon.ViewModels.Content.Timelines;
+using Loon.Services;
 using Loon.Views.Content.Controls;
 using Twitter.Models;
 
@@ -15,14 +15,11 @@ namespace Loon.ViewModels.Content.Write
 {
     internal class WriteViewModel : NotifyPropertyChanged
     {
-        private ISettings Settings { get; }
-        private ITwitterService TwitterService { get; }
-        private IPubSubService PubSubService { get; }
+        private readonly ISettings settings;
+        private readonly ITwitterService twitterService;
 
         private readonly string tweetButtonText = App.GetString("tweet-button-text");
         private readonly string tweetingButtonText = App.GetString("tweeting-button-text");
-
-        public const string OpenWriteTabMessage = "open-write-tab-message";
 
         public TwitterStatus? Me { get => Getter(default(TwitterStatus)); set => Setter(value); }
         public TwitterStatus? ReplyTo { get => Getter(default(TwitterStatus)); set => Setter(value); }
@@ -30,30 +27,26 @@ namespace Loon.ViewModels.Content.Write
         public string TweetButtonText { get => Getter(tweetButtonText); set => Setter(value); }
         public bool IsTweeting { get => Getter(false); set => Setter(value); }
 
-        public WriteViewModel(ISettings settings, ITwitterService twitterService, IPubSubService pubSubService)
+        public WriteViewModel(ISettings settings, ITwitterService twitterService)
         {
-            Settings = settings;
-            TwitterService = twitterService;
-            Settings.PropertyChanged += Settings_PropertyChanged;
-            PubSubService = pubSubService;
-            PubSubService.PubSubRaised += OpenWriteTabHandler;
+            this.settings = settings;
+            this.twitterService = twitterService;
+            this.settings.PropertyChanged += Settings_PropertyChanged;
+            PubSubService.AddSubscriber(PubSubService.OpenWriteTabMessage, OpenWriteTabHandler);
         }
 
         private async void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && Settings.ScreenName is string screenName)
+            if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && settings.ScreenName is string screenName)
             {
-                var statuses = await TwitterService.GetUserTimeline(screenName).ConfigureAwait(true);
+                var statuses = await twitterService.GetUserTimeline(screenName).ConfigureAwait(true);
                 Me = statuses?.First();
             }
         }
 
-        private void OpenWriteTabHandler(object? sender, PubSubEventArgs e)
+        private void OpenWriteTabHandler(object? payload)
         {
-            if (e.Message.IsEqualTo(OpenWriteTabMessage))
-            {
-                ReplyTo = e.Payload as TwitterStatus;
-            }
+            ReplyTo = payload as TwitterStatus;
         }
 
         public async ValueTask OnTweet()
@@ -64,9 +57,9 @@ namespace Loon.ViewModels.Content.Write
 
             try
             {
-                var status = await TwitterService.UpdateStatus(TweetText, ReplyTo?.Id, null, Array.Empty<string>()).ConfigureAwait(true);
-                PubSubService.Publish(HomeTimelineViewModel.AddStatusMessage, status);
-                PubSubService.Publish(MainViewModel.OpenPreviousTabMessage, null);
+                var status = await twitterService.UpdateStatus(TweetText, ReplyTo?.Id, null, Array.Empty<string>()).ConfigureAwait(true);
+                PubSubService.Publish(PubSubService.AddStatusMessage, status);
+                PubSubService.Publish(PubSubService.OpenPreviousTabMessage, null);
                 Reset();
             }
             catch (WebException ex)
@@ -88,15 +81,16 @@ namespace Loon.ViewModels.Content.Write
             }
             finally
             {
-                TweetButtonText = tweetButtonText;
-                IsTweeting = false;
+                Reset();
             }
         }
 
         public void Reset()
         {
             ReplyTo = null;
+            IsTweeting = false;
             TweetText = string.Empty;
+            TweetButtonText = tweetButtonText;
         }
     }
 }

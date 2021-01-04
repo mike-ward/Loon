@@ -1,34 +1,31 @@
-﻿using Loon.Extensions;
+﻿using System.Threading.Tasks;
 using Loon.Interfaces;
 using Loon.Models;
+using Loon.Services;
 using Twitter.Models;
 
 namespace Loon.ViewModels.Content.UserProfile
 {
     public class UserProfileViewModel : NotifyPropertyChanged
     {
-        public const string SetUserProfileContextMessage = "set-user-profile-message";
         private readonly ITwitterService twitterService;
 
         public User? UserProfileContext { get => Getter(default(User)); set => Setter(value); }
 
-        public UserProfileViewModel(IPubSubService pubSubService, ITwitterService twitterService)
+        public UserProfileViewModel(ITwitterService twitterService)
         {
-            pubSubService.PubSubRaised += UserProfileContextHandler;
             this.twitterService = twitterService;
+            PubSubService.AddSubscriber(PubSubService.SetUserProfileContextMessage, UserProfileContextHandler);
         }
 
-        private async void UserProfileContextHandler(object? sender, PubSubEventArgs e)
+        private void UserProfileContextHandler(object? payload)
         {
-            if (e.Message.IsEqualTo(SetUserProfileContextMessage))
+            UserProfileContext = payload switch
             {
-                UserProfileContext = e.Payload switch
-                {
-                    User user => user,
-                    string screenName => await twitterService.UserInfo(screenName).ConfigureAwait(false),
-                    _ => null
-                };
-            }
+                User user => user,
+                string screenName => Task.Run(async () => await twitterService.UserInfo(screenName).ConfigureAwait(false)).Result,
+                _ => null
+            };
         }
     }
 }

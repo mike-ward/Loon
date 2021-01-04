@@ -10,8 +10,6 @@
       <converters:CountConverter x:Key="CountConverter" />
       <converters:DoubleFormatConverter x:Key="DoubleFormat" />
       <converters:FlowContentConverter x:Key="FlowContent" />
-      <converters:HeartFontSizeConverter x:Key="HeartFontSize" />
-      <converters:HtmlDecodeConverter x:Key="HtmlDecode" />
       <converters:MediaHasVideoConverter x:Key="MediaHasVideo" />
       <converters:MultiBoolConverter x:Key="MultiBool" />
       <converters:TabItemWidthConverter x:Key="TabItemWidth" />

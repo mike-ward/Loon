@@ -10,22 +10,22 @@ namespace Loon.ViewModels.Content
     internal class GetPinViewModel : NotifyPropertyChanged
     {
         private OAuthTokens? requestToken;
+        private readonly ITwitterService twitterService;
 
         public string? Pin { get => Getter(default(string)); set => Setter(value); }
         public bool SecondPage { get => Getter(false); set => Setter(value); }
 
-        public ITwitterService Twitter { get; }
         public ISettings Settings { get; }
 
-        public GetPinViewModel(ITwitterService twitter, ISettings settings)
+        public GetPinViewModel(ITwitterService twitterService, ISettings settings)
         {
-            Twitter = twitter;
+            this.twitterService = twitterService;
             Settings = settings;
         }
 
         public async ValueTask GetPin()
         {
-            requestToken = await Twitter.GetPin().ConfigureAwait(false);
+            requestToken = await twitterService.GetPin().ConfigureAwait(false);
             SecondPage = true;
         }
 
@@ -34,7 +34,7 @@ namespace Loon.ViewModels.Content
             if (requestToken is null) { throw new InvalidOperationException("requestToken is null"); }
             if (string.IsNullOrWhiteSpace(Pin)) { throw new InvalidOperationException("Pin is null"); }
 
-            var access = await Twitter.AuthenticateWithPinAsync(requestToken, Pin).ConfigureAwait(false);
+            var access = await twitterService.AuthenticateWithPinAsync(requestToken, Pin).ConfigureAwait(false);
             GoBack();
 
             if (access is not null)

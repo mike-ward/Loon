@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Avalonia.Collections;
-using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
+using Loon.Services;
 using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
@@ -16,18 +16,17 @@ namespace Loon.ViewModels.Content.Timelines
         private const int mentionsInterval = 60;
         private int mentionsCounter = mentionsInterval;
 
-        private Timeline Timeline { get; }
-        private ITwitterService TwitterService { get; }
+        private readonly Timeline timeline;
+        private readonly ITwitterService titterService;
 
-        public const string AddStatusMessage = "add-status-message";
-        public IAvaloniaList<TwitterStatus> StatusCollection { get => Timeline.StatusCollection; }
+        public IAvaloniaList<TwitterStatus> StatusCollection { get => timeline.StatusCollection; }
 
-        public HomeTimelineViewModel(ISettings settings, ITwitterService twitterService, IPubSubService pubSub)
+        public HomeTimelineViewModel(ISettings settings, ITwitterService twitterService)
         {
-            TwitterService = twitterService;
+            titterService = twitterService;
             var name = App.GetString("tab-home-name");
-            Timeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
-            pubSub.PubSubRaised += (s, e) => AddStatusHandler(e);
+            timeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
+            PubSubService.AddSubscriber(PubSubService.AddStatusMessage, AddStatusHandler);
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()
@@ -44,7 +43,7 @@ namespace Loon.ViewModels.Content.Timelines
         private async ValueTask GetAndUpdateStatusesAsync(Timeline timeline)
         {
             var mentions = await GetMentionsAsync().ConfigureAwait(true);
-            var statuses = await TwitterService.GetHomeTimeline().ConfigureAwait(true);
+            var statuses = await titterService.GetHomeTimeline().ConfigureAwait(true);
             await UpdateStatuses.Execute(statuses.Concat(mentions), timeline).ConfigureAwait(true);
         }
 
@@ -58,7 +57,7 @@ namespace Loon.ViewModels.Content.Timelines
                 if (mentionsCounter++ >= mentionsInterval)
                 {
                     mentionsCounter = 0;
-                    return await TwitterService.GetMentionsTimeline().ConfigureAwait(true);
+                    return await titterService.GetMentionsTimeline().ConfigureAwait(true);
                 }
             }
             catch (WebException ex)
@@ -74,11 +73,11 @@ namespace Loon.ViewModels.Content.Timelines
             return Enumerable.Empty<TwitterStatus>();
         }
 
-        private void AddStatusHandler(PubSubEventArgs e)
+        private void AddStatusHandler(object? payload)
         {
-            if (e.Message.IsEqualTo(AddStatusMessage) && e.Payload is TwitterStatus status)
+            if (payload is TwitterStatus status)
             {
-                UpdateStatuses.Execute(new[] { status }, Timeline);
+                UpdateStatuses.Execute(new[] { status }, timeline);
             }
         }
     }

@@ -11,14 +11,15 @@ namespace Loon.ViewModels
 {
     internal class MainWindowViewModel
     {
-        public ISettings Settings { get; }
-        public ITwitterService TwitterService { get; }
+        private readonly ITwitterService twitterService;
+
+        public ISettings Settings { get; set; }
 
         public MainWindowViewModel(ISettings settings, ITwitterService twitterService)
         {
-            Settings = settings;
-            TwitterService = twitterService;
-            Settings.PropertyChanged += OnSettingsUpdated;
+            this.Settings = settings;
+            this.twitterService = twitterService;
+            this.Settings.PropertyChanged += OnSettingsUpdated;
         }
 
         public void Load(IWindow window)
@@ -51,7 +52,7 @@ namespace Loon.ViewModels
 
         private void OnSettingsUpdated(object? _, PropertyChangedEventArgs e)
         {
-            TwitterService.AuthenticationTokens(
+            twitterService.AuthenticationTokens(
                 Settings.AccessToken,
                 Settings.AccessTokenSecret);
 

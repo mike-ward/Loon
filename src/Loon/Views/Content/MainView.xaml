@@ -17,7 +17,6 @@
   mc:Ignorable="d">
 
   <TabControl
-    Name="TabControl"
     Margin="3 0 0 0"
     PropertyChanged="OnPropertyChanged">
 

@@ -10,15 +10,15 @@ namespace Loon.ViewModels.Content.Timelines
 {
     internal class LikesTimelineViewModel
     {
-        private Timeline Timeline { get; }
-        private ITwitterService TwitterService { get; }
-        public IAvaloniaList<TwitterStatus> StatusCollection { get => Timeline.StatusCollection; }
+        private readonly Timeline timeline;
+        private readonly ITwitterService twitterService;
+        public IAvaloniaList<TwitterStatus> StatusCollection { get => timeline.StatusCollection; }
 
         public LikesTimelineViewModel(ISettings settings, ITwitterService twitterService)
         {
-            TwitterService = twitterService;
+            this.twitterService = twitterService;
             var name = App.GetString("tab-likes-name");
-            Timeline = new Timeline(name: name, intervalInMinutes: 20, updateTasks: Tasks(), settings: settings);
+            timeline = new Timeline(name: name, intervalInMinutes: 20, updateTasks: Tasks(), settings: settings);
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()
@@ -33,7 +33,7 @@ namespace Loon.ViewModels.Content.Timelines
 
         private async ValueTask GetAndUpdateStatusesAsync(Timeline timeline)
         {
-            var statuses = await TwitterService.GetFavoritesTimeline().ConfigureAwait(true);
+            var statuses = await twitterService.GetFavoritesTimeline().ConfigureAwait(true);
             await UpdateStatuses.Execute(statuses, timeline).ConfigureAwait(true);
         }
     }

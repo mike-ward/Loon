@@ -28,7 +28,7 @@
       <c:Hyperlink
         FontWeight="Bold"
         Link="{Binding Url}"
-        Text="{Binding Title, Converter={StaticResource HtmlDecode}}" />
+        Text="{Binding Title}" />
 
       <TextBlock
         Classes="normal"

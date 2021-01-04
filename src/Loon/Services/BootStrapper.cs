@@ -44,7 +44,6 @@ namespace Loon.Services
 
             // Services
             services.AddSingleton<ITwitterService, TwitterService>();
-            services.AddSingleton<IPubSubService, PubSubService>();
         }
 
         public static object GetService(Type type)

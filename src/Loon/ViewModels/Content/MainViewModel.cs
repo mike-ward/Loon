@@ -1,46 +1,42 @@
 ﻿using Avalonia.Controls;
-using Loon.Extensions;
 using Loon.Interfaces;
-using Loon.Models;
-using Loon.ViewModels.Content.Write;
+using Loon.Services;
 
 namespace Loon.ViewModels.Content
 {
-    public class MainViewModel : NotifyPropertyChanged
+    public class MainViewModel
     {
         private int previousIndex;
+        private TabControl? tabControl;
 
-        public TabControl? TabControl { get; set; }
+        public ISettings Settings { get; }
 
-        public const string OpenPreviousTabMessage = "previous-tab-message";
-        private IPubSubService PubSubService { get; }
-
-        public MainViewModel(IPubSubService pubSubService)
+        public MainViewModel(ISettings settings)
         {
-            PubSubService = pubSubService;
-            PubSubService.PubSubRaised += OpenPreviousTabHandler;
-            PubSubService.PubSubRaised += OpenWriteTabHandler;
+            Settings = settings;
+            PubSubService.AddSubscriber(PubSubService.OpenPreviousTabMessage, OpenPreviousTabHandler);
+            PubSubService.AddSubscriber(PubSubService.OpenWriteTabMessage, OpenWriteTabHandler);
         }
 
-        public void SetPreviousIndex(int idx, TabControl? tabControl)
+        public void SetPreviousIndex(int idx, TabControl? tabCtrl)
         {
             previousIndex = idx;
-            if (TabControl is null) { TabControl = tabControl; }
+            tabControl = tabCtrl ?? tabControl;
         }
 
-        private void OpenPreviousTabHandler(object? sender, PubSubEventArgs e)
+        private void OpenPreviousTabHandler(object? _)
         {
-            if (e.Message.IsEqualTo(OpenPreviousTabMessage) && TabControl is not null)
+            if (tabControl is not null)
             {
-                TabControl.SelectedIndex = previousIndex;
+                tabControl.SelectedIndex = previousIndex;
             }
         }
 
-        private void OpenWriteTabHandler(object? sender, PubSubEventArgs e)
+        private void OpenWriteTabHandler(object? _)
         {
-            if (e.Message.IsEqualTo(WriteViewModel.OpenWriteTabMessage) && TabControl is not null)
+            if (tabControl is not null)
             {
-                TabControl.SelectedIndex = TabControl.ItemCount - 1;
+                tabControl.SelectedIndex = tabControl.ItemCount - 1;
             }
         }
     }

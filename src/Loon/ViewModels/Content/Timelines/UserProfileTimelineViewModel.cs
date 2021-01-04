@@ -8,17 +8,17 @@ namespace Loon.ViewModels.Content.Timelines
 {
     internal class UserProfileTimelineViewModel
     {
-        private ITwitterService TwitterService { get; }
+        private readonly ITwitterService twitterService;
         public IAvaloniaList<TwitterStatus> StatusCollection { get; } = new AvaloniaList<TwitterStatus>();
 
         public UserProfileTimelineViewModel(ITwitterService twitterService)
         {
-            TwitterService = twitterService;
+            this.twitterService = twitterService;
         }
 
         public ValueTask<IEnumerable<TwitterStatus>> GetUserTimeline(string screenName)
         {
-            return TwitterService.GetUserTimeline(screenName);
+            return twitterService.GetUserTimeline(screenName);
         }
     }
 }
