@@ -52,8 +52,15 @@
           HorizontalAlignment="Right"
           Background="{StaticResource TwitterBlueBrush}"
           Classes="blue"
-          Command="{Binding OnTweet}"
-          IsEnabled="{Binding !IsTweeting}">
+          Command="{Binding OnTweet}">
+
+          <Button.IsEnabled>
+            <MultiBinding Converter="{StaticResource MultiBool}">
+              <Binding Path="!!TweetText.Length" />
+              <Binding Path="!IsTweeting" />
+            </MultiBinding>
+          </Button.IsEnabled>
+
           <TextBlock
             Padding="5 0"
             Text="Tweet" />

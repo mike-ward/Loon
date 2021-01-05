@@ -5,9 +5,7 @@
 
   <Style Selector="TabItem">
     <Setter Property="Width" Value="{Binding $parent[mn:MainWindow].Width, Converter={StaticResource TabItemWidth}}" />
-    <Setter Property="Height" Value="35" />
-    <Setter Property="Margin" Value="0 0 0 3" />
-    <Setter Property="Padding" Value="0 5 0 3" />
+    <Setter Property="Height" Value="33" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />

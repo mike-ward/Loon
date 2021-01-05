@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Threading;
 using Twitter.Models;
 
 namespace Loon.Services
@@ -14,18 +15,26 @@ namespace Loon.Services
 
     public class PubSubService<T>
     {
-        private readonly ConcurrentBag<Action<T>> subscribers = new();
+        private int nextId;
+        private readonly ConcurrentDictionary<int, Action<T>> subscribers = new();
 
-        public void Subscribe(Action<T> handler)
+        public int Subscribe(Action<T> handler)
         {
-            subscribers.Add(handler);
+            var id = Interlocked.Increment(ref nextId);
+            subscribers[id] = handler;
+            return id;
+        }
+
+        public void Unsubscribe(int id)
+        {
+            subscribers.TryRemove(id, out var _);
         }
 
         public void Publish(T payload)
         {
             try
             {
-                foreach (var subscriber in subscribers.ToArray())
+                foreach (var subscriber in subscribers.Values)
                 {
                     subscriber.Invoke(payload);
                 }
@@ -39,18 +48,26 @@ namespace Loon.Services
 
     public class PubSubService
     {
-        private readonly ConcurrentBag<Action> subscribers = new();
+        private int nextId;
+        private readonly ConcurrentDictionary<int, Action> subscribers = new();
 
-        public void Subscribe(Action handler)
+        public int Subscribe(Action handler)
         {
-            subscribers.Add(handler);
+            var id = Interlocked.Increment(ref nextId);
+            subscribers[id] = handler;
+            return id;
+        }
+
+        public void Unsubscribe(int id)
+        {
+            subscribers.TryRemove(id, out var _);
         }
 
         public void Publish()
         {
             try
             {
-                foreach (var subscriber in subscribers.ToArray())
+                foreach (var subscriber in subscribers.Values)
                 {
                     subscriber.Invoke();
                 }

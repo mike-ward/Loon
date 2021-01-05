@@ -42,14 +42,12 @@
     <None Remove="Assets\ToolTip.xaml" />
     <None Remove="Assets\VerifiedBadge.xaml" />
     <None Remove="Views\Content\AppSettings\BulletItem.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsAbout.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsCheckboxes.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsDonate.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsFontSize.xaml" />
-    <None Remove="Views\Content\AppSettings\SettingsInfo.xaml" />
-    <None Remove="Views\Content\AppSettings\SettingsMyTweetColor.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsOpenSettings.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsSignOut.xaml" />
-    <None Remove="Views\Content\AppSettings\SettingsTheme.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsTips.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsTitle.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsView.xaml" />
@@ -137,19 +135,13 @@
     <AvaloniaXaml Include="Views\Content\AppSettings\SettingsFontSize.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsInfo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsMyTweetColor.xaml">
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsAbout.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\AppSettings\SettingsOpenSettings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\AppSettings\SettingsSignOut.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaXaml>
-    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\AppSettings\SettingsTips.xaml">
@@ -289,20 +281,14 @@
     <Compile Update="Views\Content\AppSettings\SettingsFontSize.xaml.cs">
       <DependentUpon>SettingsFontSize.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Content\AppSettings\SettingsInfo.xaml.cs">
-      <DependentUpon>SettingsInfo.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Content\AppSettings\SettingsMyTweetColor.xaml.cs">
-      <DependentUpon>SettingsMyTweetColor.xaml</DependentUpon>
+    <Compile Update="Views\Content\AppSettings\SettingsAbout.xaml.cs">
+      <DependentUpon>SettingsAbout.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\AppSettings\SettingsOpenSettings.xaml.cs">
       <DependentUpon>SettingsOpenSettings.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\AppSettings\SettingsSignOut.xaml.cs">
       <DependentUpon>SettingsSignOut.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Content\AppSettings\SettingsTheme.xaml.cs">
-      <DependentUpon>SettingsTheme.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\AppSettings\SettingsTips.xaml.cs">
       <DependentUpon>SettingsTips.xaml</DependentUpon>

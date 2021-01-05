@@ -2,8 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace Loon.Models
 {
@@ -12,21 +12,24 @@ namespace Loon.Models
 
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {
-        private readonly string _id = Path.GetRandomFileName() + ".";
-        private static readonly ConcurrentDictionary<string, object?> _properties = new(StringComparer.Ordinal);
+        private static int nextId;
+        private static readonly ConcurrentDictionary<string, object?> properties = new(StringComparer.Ordinal);
+
+        private readonly string _id = Interlocked.Increment(ref nextId) + ".";
 
         protected T Getter<T>(T initialValue, [CallerMemberName] string? propertyName = null)
         {
-            return (T)_properties.GetOrAdd(_id + propertyName, initialValue) ?? initialValue;
+            return (T)properties.GetOrAdd(_id + propertyName, initialValue)!;
         }
 
-        protected void Setter<T>(T value, [CallerMemberName] string? propertyName = null)
+        protected void Setter<T>(T newValue, [CallerMemberName] string? propertyName = null)
         {
-            var key = _id + propertyName;
-            if (!_properties.TryGetValue(key, out var val) ||
-                !EqualityComparer<T>.Default.Equals((T)val, value))
+            var property = _id + propertyName;
+
+            if (!properties.TryGetValue(property, out var oldValue) ||
+                !EqualityComparer<T>.Default.Equals((T)oldValue, newValue))
             {
-                _properties[key] = value;
+                properties[property] = newValue;
                 OnPropertyChanged(propertyName);
             }
         }

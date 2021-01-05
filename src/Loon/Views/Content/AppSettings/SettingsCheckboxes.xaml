@@ -26,8 +26,12 @@
       <TextBlock Text="{StaticResource hide-screen-name}" />
     </CheckBox>
 
+    <CheckBox IsChecked="{Binding HideTranslate}">
+      <TextBlock Text="{StaticResource hide-translate-link}" />
+    </CheckBox>
+
     <CheckBox IsChecked="{Binding HidePossiblySensitive}">
-      <TextBlock Text="{StaticResource hide-possibly-sensiive}" />
+      <TextBlock Text="{StaticResource hide-possibly-sensitive}" />
     </CheckBox>
 
     <CheckBox IsChecked="{Binding AlwaysOnTop}">
@@ -40,6 +44,10 @@
 
     <CheckBox IsChecked="{Binding ShowInSystemTray}">
       <TextBlock Text="{StaticResource show-in-system-tray}" />
+    </CheckBox>
+
+    <CheckBox IsChecked="{Binding UseLightTheme}">
+      <TextBlock Text="{StaticResource use-light-theme}" />
     </CheckBox>
 
     <CheckBox IsChecked="{Binding ApplyGrayscaleShader}">

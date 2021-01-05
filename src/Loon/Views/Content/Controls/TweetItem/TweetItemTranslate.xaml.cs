@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -34,10 +35,27 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         protected override void OnDataContextChanged(System.EventArgs e)
         {
+            SetVisibility();
+        }
+
+        protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
+        {
+            base.OnPropertyChanged(change);
+
+            if (change.Property.Name.IsEqualTo(nameof(Tag)))
+            {
+                SetVisibility();
+            }
+        }
+
+        private void SetVisibility()
+        {
             IsVisible = DataContext is TwitterStatus status
-                && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
-                && status.Language.IsNotEqualToIgnoreCase("und")
-                && status.FullText.IsPopulated();
+               && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+               && status.Language.IsNotEqualToIgnoreCase("und")
+               && status.FullText.IsPopulated()
+               && Tag is bool hide
+               && !hide;
         }
     }
 }

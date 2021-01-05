@@ -31,17 +31,8 @@ namespace Loon.ViewModels.Content.Write
         {
             this.settings = settings;
             this.twitterService = twitterService;
-            this.settings.PropertyChanged += Settings_PropertyChanged;
             PubSubs.OpenWriteTab.Subscribe(twitterStatus => ReplyTo = twitterStatus);
-        }
-
-        private async void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && settings.ScreenName is string screenName)
-            {
-                var statuses = await twitterService.GetUserTimeline(screenName).ConfigureAwait(true);
-                Me = statuses?.First();
-            }
+            settings.PropertyChanged += Settings_PropertyChanged;
         }
 
         public async ValueTask OnTweet()
@@ -62,7 +53,7 @@ namespace Loon.ViewModels.Content.Write
                 var stream = ex.Response?.GetResponseStream();
                 if (stream is null) { return; }
                 using var reader = new StreamReader(stream);
-                var message = await reader.ReadToEndAsync();
+                var message = await reader.ReadToEndAsync().ConfigureAwait(true);
 
                 await MessageBox
                     .Show(App.MainWindow, message, App.GetString("title"), MessageBox.MessageBoxButtons.Ok)
@@ -74,18 +65,23 @@ namespace Loon.ViewModels.Content.Write
                     .Show(App.MainWindow, ex.Message, App.GetString("title"), MessageBox.MessageBoxButtons.Ok)
                     .ConfigureAwait(true);
             }
-            finally
-            {
-                Reset();
-            }
         }
 
-        public void Reset()
+        private void Reset()
         {
             ReplyTo = null;
             IsTweeting = false;
             TweetText = string.Empty;
             TweetButtonText = tweetButtonText;
+        }
+
+        private async void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && settings.ScreenName is string screenName)
+            {
+                var statuses = await twitterService.GetUserTimeline(screenName).ConfigureAwait(true);
+                Me = statuses?.First();
+            }
         }
     }
 }

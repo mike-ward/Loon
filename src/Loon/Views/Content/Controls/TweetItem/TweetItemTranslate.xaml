@@ -7,6 +7,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DesignHeight="450"
   d:DesignWidth="300"
+  Tag="{Binding $parent[Window].DataContext.Settings.HideTranslate}"
   mc:Ignorable="d">
 
   <StackPanel>
@@ -19,7 +20,7 @@
       IsVisible="{Binding TranslatedText, Converter={x:Static StringConverters.IsNullOrEmpty}}" />
 
     <Separator
-      Margin="30,10,40,5"
+      Margin="30 10 40 5"
       IsVisible="{Binding TranslatedText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
 
     <TextBlock

@@ -12,6 +12,7 @@ namespace Loon.Commands
         public RetweetCommand Retweet { get; }
         public SetUserProfileContextCommand SetUserProfileContext { get; }
         public SignoutCommand Signout { get; }
+        public UpdateThemeCommand UpdateTheme { get; }
 
         public AppCommands(ITwitterService twitterService, ISettings settings)
         {
@@ -23,6 +24,7 @@ namespace Loon.Commands
             Retweet = new RetweetCommand(settings, twitterService);
             SetUserProfileContext = new SetUserProfileContextCommand(twitterService);
             Signout = new SignoutCommand(settings);
+            UpdateTheme = new UpdateThemeCommand();
         }
     }
 }

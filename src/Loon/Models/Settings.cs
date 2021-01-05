@@ -46,11 +46,10 @@ namespace Loon.Models
         public bool HidePossiblySensitive { get => Getter(false); set => Setter(value); }
         public bool HideProfileImages { get => Getter(false); set => Setter(value); }
         public bool HideScreenName { get => Getter(false); set => Setter(value); }
+        public bool HideTranslate { get => Getter(false); set => Setter(value); }
         public bool ShowInSystemTray { get => Getter(false); set => Setter(value); }
-        public bool SpellCheck { get => Getter(false); set => Setter(value); }
         public bool UseLightTheme { get => Getter(false); set => Setter(value); }
         public double FontSize { get => Getter(12d); set => Setter(value); }
-        public string? MyTweetColor { get => Getter(default(string)); set => Setter(value); }
         public string? ScreenName { get => Getter(default(string)); set => Setter(value); }
         public WindowLocation Location { get; set; } = new WindowLocation { X = 200, Y = 200, Width = 300, Height = 500 };
 

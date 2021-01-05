@@ -35,6 +35,7 @@
         Text="{Binding Description, Converter={StaticResource TrimText}}" />
 
       <c:Hyperlink
+        IsVisible="{Binding SiteName, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
         Link="{Binding Url}"
         Text="{Binding SiteName, StringFormat='↗ {0}'}" />
 

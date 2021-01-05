@@ -31,7 +31,6 @@ namespace Loon.Services
             // View Models
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<GetPinViewModel>();
-            services.AddTransient<MainViewModel>();
             services.AddTransient<HomeTimelineViewModel>();
             services.AddTransient<LikesTimelineViewModel>();
             services.AddTransient<UserProfileTimelineViewModel>();

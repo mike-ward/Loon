@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.AppSettings
 {
-    public class SettingsInfo : UserControl
+    public class SettingsAbout : UserControl
     {
-        public SettingsInfo()
+        public SettingsAbout()
         {
             InitializeComponent();
         }

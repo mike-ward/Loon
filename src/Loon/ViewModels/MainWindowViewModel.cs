@@ -1,11 +1,7 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Avalonia;
-using Avalonia.Markup.Xaml.Styling;
 using Loon.Extensions;
 using Loon.Interfaces;
-
-#pragma warning disable S1075 // URIs should not be hardcoded
 
 namespace Loon.ViewModels
 {
@@ -17,9 +13,9 @@ namespace Loon.ViewModels
 
         public MainWindowViewModel(ISettings settings, ITwitterService twitterService)
         {
-            this.Settings = settings;
+            Settings = settings;
             this.twitterService = twitterService;
-            this.Settings.PropertyChanged += OnSettingsUpdated;
+            settings.PropertyChanged += OnSettingsUpdated;
         }
 
         public void Load(IWindow window)
@@ -56,22 +52,9 @@ namespace Loon.ViewModels
                 Settings.AccessToken,
                 Settings.AccessTokenSecret);
 
-            UpdateTheme(e.PropertyName);
-        }
-
-        private void UpdateTheme(string? propertyName)
-        {
-            if (propertyName.IsEqualTo(nameof(ISettings.UseLightTheme)))
+            if (e.PropertyName.IsEqualTo(nameof(ISettings.UseLightTheme)))
             {
-                // This is slated to change in future release of Avalonia
-                var styles = new StyleInclude(new Uri("resm:Styles"))
-                {
-                    Source = Settings.UseLightTheme
-                        ? new Uri("avares://Avalonia.Themes.Default/Accents/BaseLight.xaml")
-                        : new Uri("avares://Avalonia.Themes.Default/Accents/BaseDark.xaml")
-                };
-
-                App.Current.Styles[1] = styles;
+                App.Commands.UpdateTheme.Execute(Settings.UseLightTheme);
             }
         }
     }

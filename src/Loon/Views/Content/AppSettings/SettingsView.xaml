@@ -25,8 +25,6 @@
       <l:SettingsTitle />
       <l:SettingsCheckboxes />
       <l:SettingsFontSize />
-      <l:SettingsTheme />
-      <l:SettingsMyTweetColor />
 
       <Separator />
 
@@ -36,7 +34,7 @@
 
       <Separator />
 
-      <l:SettingsInfo HorizontalAlignment="Center" />
+      <l:SettingsAbout HorizontalAlignment="Center" />
 
       <Separator />
 

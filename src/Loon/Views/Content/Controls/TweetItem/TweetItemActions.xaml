@@ -11,7 +11,8 @@
 
   <StackPanel
     Orientation="Horizontal"
-    Spacing="15">
+    Spacing="15"
+    UseLayoutRounding="false">
 
     <Button
       Classes="inline"
