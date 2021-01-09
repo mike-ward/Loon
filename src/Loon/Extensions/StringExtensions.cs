@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Runtime.CompilerServices;
 
 namespace Loon.Extensions
@@ -29,7 +30,7 @@ namespace Loon.Extensions
             return !string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
         }
 
-        public static bool IsPopulated(this string? str)
+        public static bool IsNotVacant(this string? str)
         {
             return !string.IsNullOrWhiteSpace(str);
         }
@@ -41,6 +42,13 @@ namespace Loon.Extensions
                 source = source.Substring(0, length) + "…";
             }
             return source;
+        }
+
+        public static string HtmlDecode(this string text)
+        {
+            // Twice to handle sequences like: "&amp;mdash;"
+            return WebUtility.HtmlDecode(
+                WebUtility.HtmlDecode(text));
         }
     }
 }

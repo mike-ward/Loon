@@ -14,7 +14,7 @@ namespace Loon.Models
         private string Profile { get; } = "loon";
 
         [JsonIgnore]
-        public bool IsAuthenticated => AccessToken.IsPopulated() && AccessTokenSecret.IsPopulated();
+        public bool IsAuthenticated => AccessToken.IsNotVacant() && AccessTokenSecret.IsNotVacant();
 
         public string? AccessToken
         {

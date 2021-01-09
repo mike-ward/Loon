@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using Avalonia.Controls;
 using Loon.Extensions;
 using Loon.Models;
@@ -125,7 +124,7 @@ namespace Loon.Services
         {
             var textBlock = new TextBlock();
             textBlock.Classes.Add("normal");
-            textBlock.Text = ConvertXmlEntities(text);
+            textBlock.Text = text.HtmlDecode();
             return textBlock;
         }
 
@@ -137,7 +136,7 @@ namespace Loon.Services
 
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
-            textBlock.Text = ConvertXmlEntities(text);
+            textBlock.Text = text.HtmlDecode();
 
             button.Content = textBlock;
             return button;
@@ -162,13 +161,6 @@ namespace Loon.Services
             return Hyperlink(
                 "#" + text,
                 () => OpenUrlService.Open($"https://twitter.com/hashtag/{text}"));
-        }
-
-        private static string ConvertXmlEntities(string text)
-        {
-            // Twice to handle sequences like: "&amp;mdash;"
-            return WebUtility.HtmlDecode(
-                WebUtility.HtmlDecode(text));
         }
     }
 }

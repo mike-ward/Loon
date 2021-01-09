@@ -17,25 +17,38 @@ namespace Loon.Services
 {
     internal static class ImageService
     {
+        private static readonly string TempPath = Path.GetTempPath();
+
         public static async ValueTask<IImage?> GetImageAsync(string uri, Func<bool> Clearing)
         {
             try
             {
-                return await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
+                if (!Clearing())
+                {
+                    return FromCache(uri) ?? await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
+                }
             }
             catch
             {
                 try
                 {
-                    await Task.Delay(500).ConfigureAwait(true);
-                    return await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
+                    if (!Clearing())
+                    {
+                        await Task.Delay(500).ConfigureAwait(true);
+                        return await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
+                    }
                 }
                 catch
                 {
-                    await Task.Delay(2000).ConfigureAwait(true);
-                    return await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
+                    if (!Clearing())
+                    {
+                        await Task.Delay(2000).ConfigureAwait(true);
+                        return await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
+                    }
                 }
             }
+
+            return default;
         }
 
         public static async ValueTask<IImage?> TryGetImageAsync(string uri, Func<bool> Clearing)
@@ -51,8 +64,11 @@ namespace Loon.Services
             await stream.CopyToAsync(ms).ConfigureAwait(false);
 
             if (Clearing()) return null;
+
             ms.Position = 0;
-            return new Bitmap(ms);
+            var bitmap = new Bitmap(ms);
+            ToCache(uri, bitmap);
+            return bitmap;
         }
 
         private static ImageViewer? imageViewer;
@@ -89,7 +105,7 @@ namespace Loon.Services
             var viewer = GetImageViewer(); // call here to close now
             var videoUrl = VideoUrl((image.DataContext) as Media);
 
-            if (videoUrl.IsPopulated())
+            if (videoUrl.IsNotVacant())
             {
                 var pi = new ProcessStartInfo();
 
@@ -126,6 +142,32 @@ namespace Loon.Services
                 .Select(variant => variant.Url)
                 .FirstOrDefault()
                 ?? string.Empty;
+        }
+
+        private static void ToCache(string uri, Bitmap image)
+        {
+            var path = GetPath(uri);
+            try
+            {
+                image.Save(path);
+            }
+            catch (Exception ex)
+            {
+                TraceService.Message(ex.Message);
+            }
+        }
+
+        private static IImage? FromCache(string uri)
+        {
+            var path = GetPath(uri);
+            return File.Exists(path)
+                ? new Bitmap(path)
+                : null;
+        }
+
+        private static string GetPath(string uri)
+        {
+            return Path.Combine(TempPath, Path.GetFileName(uri));
         }
     }
 }

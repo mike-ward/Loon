@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Loon.Extensions;
 
 namespace Loon.Services
 {
@@ -38,7 +39,7 @@ namespace Loon.Services
                 using var response = await request.GetResponseAsync().ConfigureAwait(false);
                 using var stream = response.GetResponseStream();
                 var result = await JsonSerializer.DeserializeAsync<TranslatorResult>(stream).ConfigureAwait(false);
-                return result?.TranslatedText ?? "{error}";
+                return result?.TranslatedText?.HtmlDecode() ?? "{error}";
             }
             catch (Exception ex)
             {

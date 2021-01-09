@@ -90,8 +90,7 @@ namespace Twitter.Models
 
         private static async ValueTask<RelatedLinkInfo?> GetLinkInfoAsync(string url)
         {
-            if (!UrlValid(url)) return null;
-
+            await Task.Yield(); // forces to complete async
             var request = (HttpWebRequest)WebRequest.Create(url);
             using var response = await request.GetResponseAsync().ConfigureAwait(false);
 
@@ -109,17 +108,17 @@ namespace Twitter.Models
                 if (line.Contains(headCloseTag, StringComparison.OrdinalIgnoreCase)) break;
             }
 
-            var metaInfo = ParseForSocialTags(url, $"{htmlBuilder}</html>");
+            var metaInfo = await ParseForSocialTags(url, $"{htmlBuilder}</html>").ConfigureAwait(false);
 
             return !string.IsNullOrEmpty(metaInfo.Title) && !string.IsNullOrEmpty(metaInfo.Description)
                 ? metaInfo
                 : null;
         }
 
-        private static RelatedLinkInfo ParseForSocialTags(string url, string html)
+        private static async ValueTask<RelatedLinkInfo> ParseForSocialTags(string url, string html)
         {
             var document = new HtmlDocument();
-            document.LoadHtml(html);
+            await Task.Run(() => document.LoadHtml(html)).ConfigureAwait(false);
 
             var language = document.DocumentNode.SelectSingleNode("//html")?.Attributes["lang"]?.Value;
             if (string.IsNullOrWhiteSpace(language) || language.Equals("und", StringComparison.OrdinalIgnoreCase))

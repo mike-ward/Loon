@@ -10,7 +10,13 @@ namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemImage : UserControl
     {
-        public bool Clearing { get; set; }
+        private volatile bool clearing;
+
+        public bool Clearing
+        {
+            get { return clearing; }
+            set { clearing = value; }
+        }
 
         public TweetItemImage()
         {
@@ -31,18 +37,15 @@ namespace Loon.Views.Content.Controls.TweetItem
                 if (sender is Image image)
                 {
                     image.Source = null;
-                    await Task.Delay(30).ConfigureAwait(true);
-
-                    if (Clearing)
-                    {
-                        return;
-                    }
+                    await Task.Delay(300).ConfigureAwait(true);
+                    if (Clearing) { return; }
 
                     var media = image.DataContext as Media;
 
                     if (media?.MediaUrl.Length > 0)
                     {
-                        image.Source = await ImageService.GetImageAsync(media.MediaUrl, () => Clearing).ConfigureAwait(true);
+                        var imageSource = await ImageService.GetImageAsync(media.MediaUrl, () => Clearing).ConfigureAwait(true);
+                        if (!Clearing && imageSource is not null) { image.Source = imageSource; }
                     }
                 }
             }

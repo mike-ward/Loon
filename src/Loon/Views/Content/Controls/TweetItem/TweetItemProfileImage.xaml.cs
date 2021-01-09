@@ -14,12 +14,15 @@ namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemProfileImage : UserControl
     {
-        public bool Clearing { get; set; }
-
+        private volatile bool clearing;
         private const int profileSize = 73; // Twitter's bigger profile image size is 48x48
+        private static readonly Bitmap EmptyBitmap = new WriteableBitmap(new PixelSize(profileSize, profileSize), new Vector(96, 96), PixelFormat.Bgra8888, AlphaFormat.Premul);
 
-        private static readonly Bitmap EmptyBitmap
-            = new WriteableBitmap(new PixelSize(profileSize, profileSize), new Vector(96, 96), PixelFormat.Bgra8888, AlphaFormat.Premul);
+        public bool Clearing
+        {
+            get { return clearing; }
+            set { clearing = value; }
+        }
 
         public TweetItemProfileImage()
         {

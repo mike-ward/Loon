@@ -10,7 +10,7 @@ namespace Loon.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Services.ImageService.VideoUrl(value as Media).IsPopulated();
+            return Services.ImageService.VideoUrl(value as Media).IsNotVacant();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

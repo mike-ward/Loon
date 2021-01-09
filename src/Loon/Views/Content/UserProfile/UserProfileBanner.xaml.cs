@@ -42,7 +42,7 @@ namespace Loon.Views.Content.UserProfile
                             _ => null
                         };
 
-                        if (uri.IsPopulated())
+                        if (uri.IsNotVacant())
                         {
                             // Gives the slide view some time to slide
                             await Task.Delay(15).ConfigureAwait(true);
