@@ -7,7 +7,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DesignHeight="25"
   d:DesignWidth="300"
-  Background="{DynamicResource ThemeControlMidBrush}"
+  Background="{DynamicResource ThemeTitleBarBrush}"
   PointerPressed="BeginMoveDrag"
   mc:Ignorable="d">
 
@@ -16,6 +16,7 @@
       <Setter Property="Cursor" Value="Hand" />
       <Setter Property="Padding" Value="15 0 15 1" />
       <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Background" Value="{DynamicResource ThemeTitleBarBrush}" />
     </Style>
 
     <Style Selector="Button.title:pointerover">

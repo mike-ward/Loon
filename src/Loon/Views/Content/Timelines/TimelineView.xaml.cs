@@ -28,15 +28,15 @@ namespace Loon.Views.Content.Timelines
             }
         }
 
-        protected override void OnPointerPressed(PointerPressedEventArgs e)
+        protected override void OnPointerReleased(PointerReleasedEventArgs e)
         {
-            base.OnPointerPressed(e);
-
-            if (e.GetCurrentPoint(relativeTo: null).Properties.IsRightButtonPressed)
+            if (e.InitialPressMouseButton == MouseButton.Right)
             {
                 e.Handled = true;
                 this.FindControl<ScrollViewer>(ScrollViewerName)?.ScrollToHome();
             }
+
+            base.OnPointerReleased(e);
         }
     }
 }

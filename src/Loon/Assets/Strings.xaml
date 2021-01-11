@@ -69,6 +69,7 @@
       <sys:String x:Key="MuteSymbol">&#xE198;</sys:String>
       <sys:String x:Key="UnmuteSymbol">&#xE15D;</sys:String>
       <sys:String x:Key="EmbedSymbol">&#xE148;</sys:String>
+      <sys:String x:Key="MailSymbol">&#xE135;</sys:String>
 
       <!--  SymbolFont1  -->
 
@@ -78,6 +79,7 @@
       <sys:String x:Key="AddListSymbol">&#xF17F;</sys:String>
       <sys:String x:Key="ListSymbol">&#xF180;</sys:String>
       <sys:String x:Key="TopicsSymbol">&#xF172;</sys:String>
+      <sys:String x:Key="TwitterSymbol">&#xF1E4;</sys:String>
 
       <!--  Standard font symbols  -->
 
@@ -103,6 +105,7 @@
       <sys:String x:Key="use-light-theme">Use light theme</sys:String>
       <sys:String x:Key="donate">Donate</sys:String>
       <sys:String x:Key="sign-out">Sign Out</sys:String>
+      <sys:String x:Key="clear-image-cache">Clear Image Cache</sys:String>
       <sys:String x:Key="open-settings-file">Open Settings...</sys:String>
       <sys:String x:Key="show-in-system-tray">Show in system tray</sys:String>
       <sys:String x:Key="always-on-top">Always on top</sys:String>
@@ -152,6 +155,12 @@
       <sys:String x:Key="whats-happening">What's happening?</sys:String>
       <sys:String x:Key="tweet-button-text">Tweet</sys:String>
       <sys:String x:Key="tweeting-button-text">Tweeting…</sys:String>
+
+      <!--  Hyperlink Context Menu  -->
+
+      <sys:String x:Key="copy-link-address">Copy link address</sys:String>
+      <sys:String x:Key="email-link">Email link…</sys:String>
+      <sys:String x:Key="share-link-twitter">Share link on Twitter…</sys:String>
     </Style.Resources>
   </Style>
 </Styles>

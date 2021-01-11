@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -21,30 +23,39 @@ namespace Loon.Services
 
         public static async ValueTask<IImage?> GetImageAsync(string uri, Func<bool> Clearing)
         {
-            try
-            {
-                if (!Clearing())
-                {
-                    return FromCache(uri) ?? await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
-                }
-            }
-            catch
+            int delay = 200;
+            const int retries = 3;
+            const int backoffMultiplier = 3;
+
+            for (var retry = 0; retry < retries; retry++)
             {
                 try
                 {
-                    if (!Clearing())
-                    {
-                        await Task.Delay(500).ConfigureAwait(true);
-                        return await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
-                    }
+                    if (Clearing()) break;
+                    if (FromCache(uri) is IImage image) return image;
+                    await Task.Delay(delay).ConfigureAwait(false);
+                    if (Clearing()) { return null; }
+                    return await TryGetImageAsync(uri, Clearing).ConfigureAwait(false);
+                }
+                catch (WebException ex)
+                {
+                    TraceService.Message(ex.Message);
+                }
+                catch (FormatException ex)
+                {
+                    TraceService.Message(ex.Message);
+                }
+                catch (ArgumentException ex)
+                {
+                    TraceService.Message(ex.Message);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    TraceService.Message(ex.Message);
                 }
                 catch
                 {
-                    if (!Clearing())
-                    {
-                        await Task.Delay(2000).ConfigureAwait(true);
-                        return await TryGetImageAsync(uri, Clearing).ConfigureAwait(true);
-                    }
+                    delay *= backoffMultiplier;
                 }
             }
 
@@ -53,18 +64,16 @@ namespace Loon.Services
 
         public static async ValueTask<IImage?> TryGetImageAsync(string uri, Func<bool> Clearing)
         {
-            if (Clearing()) return null;
             var wc = WebRequest.Create(uri);
             wc.Timeout = Constants.WebRequestTimeout;
             using var response = await wc.GetResponseAsync().ConfigureAwait(false);
 
-            if (Clearing()) return null;
+            if (Clearing()) { return null; }
             using var stream = response.GetResponseStream();
             using var ms = new MemoryStream(); // Bitmap constructor needs a seekable stream
             await stream.CopyToAsync(ms).ConfigureAwait(false);
 
-            if (Clearing()) return null;
-
+            if (Clearing()) { return null; }
             ms.Position = 0;
             var bitmap = new Bitmap(ms);
             ToCache(uri, bitmap);
@@ -159,15 +168,41 @@ namespace Loon.Services
 
         private static IImage? FromCache(string uri)
         {
-            var path = GetPath(uri);
-            return File.Exists(path)
-                ? new Bitmap(path)
-                : null;
+            try
+            {
+                var path = GetPath(uri);
+
+                return File.Exists(path)
+                    ? new Bitmap(path)
+                    : null;
+            }
+            catch (Exception ex)
+            {
+                TraceService.Message(ex.Message);
+                return null;
+            }
         }
 
         private static string GetPath(string uri)
         {
-            return Path.Combine(TempPath, Path.GetFileName(uri));
+            return Path.Combine(
+                TempPath,
+                "loon-" + Convert.ToHexString(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(uri))));
+        }
+
+        public static void ClearImageCache()
+        {
+            foreach (var file in Directory.GetFiles(TempPath, "loon-*"))
+            {
+                try
+                {
+                    File.Delete(file);
+                }
+                catch
+                {
+                    // don't care
+                }
+            }
         }
     }
 }

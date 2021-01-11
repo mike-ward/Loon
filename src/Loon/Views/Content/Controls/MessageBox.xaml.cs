@@ -32,13 +32,13 @@ namespace Loon.Views.Content.Controls
             AvaloniaXamlLoader.Load(this);
         }
 
-        public static async Task<MessageBoxResult> Show(Window parent, string text, string title, MessageBoxButtons buttons)
+        public static async Task<MessageBoxResult> Show(string text, MessageBoxButtons buttons)
         {
             ContentControl? autoFocusControl = null;
             var messageBoxResult = MessageBoxResult.Ok;
 
             var msgbox = new MessageBox();
-            msgbox.FindControl<TextBlock>(TitleName).Text = title;
+            msgbox.FindControl<TextBlock>(TitleName).Text = App.GetString("title");
             msgbox.FindControl<TextBlock>(TextName).Text = text;
 
             var buttonPanel = msgbox.FindControl<StackPanel>(ButtonsName);
@@ -59,7 +59,7 @@ namespace Loon.Views.Content.Controls
                 AddButton("Cancel", MessageBoxResult.Cancel, isDefaultButton: true);
             }
 
-            await msgbox.ShowDialog(parent).ConfigureAwait(false);
+            await msgbox.ShowDialog(App.MainWindow).ConfigureAwait(false);
 
             autoFocusControl?.Focus();
             return messageBoxResult;

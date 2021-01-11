@@ -27,7 +27,7 @@ namespace Loon.Services
                     catch (Exception ex)
                     {
                         MessageBox
-                            .Show(App.MainWindow, ex.Message, App.GetString("title"), MessageBox.MessageBoxButtons.Ok)
+                            .Show(ex.Message, MessageBox.MessageBoxButtons.Ok)
                             .ConfigureAwait(false);
                     }
                 }

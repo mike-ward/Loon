@@ -31,8 +31,10 @@
     <None Remove="Assets\Accents.xaml" />
     <None Remove="Assets\Button.xaml" />
     <None Remove="Assets\Converters.xaml" />
+    <None Remove="Assets\DarkThemeOverrides.xaml" />
     <None Remove="Assets\Fonts\foundation-icons.ttf" />
     <None Remove="Assets\Fonts\winjs-symbols.ttf" />
+    <None Remove="Assets\LightThemeOverrides.xaml" />
     <None Remove="Assets\ScrollBar.xaml" />
     <None Remove="Assets\seguisym.ttf" />
     <None Remove="Assets\Separator.xaml" />
@@ -44,6 +46,7 @@
     <None Remove="Views\Content\AppSettings\BulletItem.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsAbout.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsCheckboxes.xaml" />
+    <None Remove="Views\Content\AppSettings\SettingsClearImageCache.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsDonate.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsFontSize.xaml" />
     <None Remove="Views\Content\AppSettings\SettingsOpenSettings.xaml" />
@@ -93,6 +96,12 @@
     <AvaloniaXaml Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
+    <AvaloniaXaml Include="Assets\DarkThemeOverrides.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Assets\LightThemeOverrides.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
     <AvaloniaXaml Include="Assets\VerifiedBadge.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
@@ -124,6 +133,9 @@
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\AppSettings\BulletItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsClearImageCache.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\AppSettings\SettingsCheckboxes.xaml">
@@ -271,6 +283,9 @@
     </Compile>
     <Compile Update="Views\Content\AppSettings\BulletItem.xaml.cs">
       <DependentUpon>BulletItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Content\AppSettings\SettingsClearImageCache.xaml.cs">
+      <DependentUpon>SettingsClearImageCache.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Content\AppSettings\SettingsCheckboxes.xaml.cs">
       <DependentUpon>SettingsCheckboxes.xaml</DependentUpon>

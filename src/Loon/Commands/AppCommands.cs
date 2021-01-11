@@ -4,7 +4,9 @@ namespace Loon.Commands
 {
     public class AppCommands
     {
+        public ClearImageCacheCommand ClearImageCache { get; }
         public CloseAppCommand CloseApp { get; }
+        public CopyToClipboardCommand CopyToClipboard { get; }
         public FollowAddRemoveCommand FollowAddRemove { get; }
         public OpenWriteTabCommand OpenWriteTab { get; }
         public LikesAddRemoveCommand LikesAddRemove { get; }
@@ -16,7 +18,9 @@ namespace Loon.Commands
 
         public AppCommands(ITwitterService twitterService, ISettings settings)
         {
+            ClearImageCache = new ClearImageCacheCommand();
             CloseApp = new CloseAppCommand();
+            CopyToClipboard = new CopyToClipboardCommand();
             FollowAddRemove = new FollowAddRemoveCommand(twitterService);
             OpenWriteTab = new OpenWriteTabCommand();
             LikesAddRemove = new LikesAddRemoveCommand(twitterService);

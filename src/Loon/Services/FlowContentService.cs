@@ -8,7 +8,7 @@ using Twitter.Models;
 
 namespace Loon.Services
 {
-    internal static class FlowContentService
+    public static class FlowContentService
     {
         // Best I can do until Avalonia supports Inlines
         public static IEnumerable<Control> FlowContentInlines(TwitterStatus twitterStatus)
@@ -128,11 +128,12 @@ namespace Loon.Services
             return textBlock;
         }
 
-        private static Control Hyperlink(string text, Action command)
+        private static Control Hyperlink(string text, Action command, ContextMenu? contextMenu = null)
         {
             var button = new Button();
             button.Classes.Add("inline");
             button.Click += delegate { command(); };
+            button.ContextMenu = contextMenu;
 
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
@@ -146,7 +147,8 @@ namespace Loon.Services
         {
             return Hyperlink(
                 link.TruncateWithEllipsis(25),
-                () => OpenUrlService.Open(link));
+                () => OpenUrlService.Open(link),
+                ContextMenu(link));
         }
 
         private static Control Mention(string screenName)
@@ -158,9 +160,47 @@ namespace Loon.Services
 
         private static Control Hashtag(string text)
         {
+            var link = $"https://twitter.com/hashtag/{text}";
             return Hyperlink(
                 "#" + text,
-                () => OpenUrlService.Open($"https://twitter.com/hashtag/{text}"));
+                () => OpenUrlService.Open(link),
+                ContextMenu(link));
+        }
+
+        public static ContextMenu ContextMenu(string link)
+        {
+            var copyLinkAddress = new MenuItem
+            {
+                Header = App.GetString("copy-link-address"),
+                Command = App.Commands.CopyToClipboard,
+                CommandParameter = link,
+            };
+
+            var emailLinkAddress = new MenuItem
+            {
+                Header = App.GetString("email-link"),
+                CommandParameter = link,
+                Icon = new TextBlock { Classes = new Classes("symbol", "padleft"), Text = App.GetString("MailSymbol") },
+            };
+
+            var shareLinkTwitter = new MenuItem
+            {
+                Header = App.GetString("share-link-twitter"),
+                CommandParameter = link,
+                Icon = new TextBlock { Classes = new Classes("symbol1", "padleft"), Text = App.GetString("TwitterSymbol") },
+            };
+
+            return new ContextMenu
+            {
+                HorizontalOffset = 15,
+                VerticalOffset = 10,
+                Items = new[]
+                {
+                    copyLinkAddress,
+                    emailLinkAddress,
+                    shareLinkTwitter,
+                }
+            };
         }
     }
 }

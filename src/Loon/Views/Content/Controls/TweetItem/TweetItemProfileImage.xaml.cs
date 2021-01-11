@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -34,39 +33,39 @@ namespace Loon.Views.Content.Controls.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-        public async void UpdateImage(object? sender, EventArgs e)
+#pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
+#pragma warning disable S1144 // (used in XAML) Unused private types or members should be removedremoved
+
+        private async void UpdateImage(object? sender, EventArgs e)
         {
-            try
+            if (sender is Image image)
             {
-                Clearing = false;
-
-                if (sender is Image image)
+                try
                 {
-                    image.Source = EmptyBitmap;
+                    Clearing = false;
 
-                    await Task.Delay(30).ConfigureAwait(true);
-                    if (Clearing)
+                    if (DataContext is TwitterStatus status &&
+                        status.User.ProfileImageUrlBigger is string uri &&
+                        uri.Length > 0)
                     {
-                        return;
+                        image.Source = await ImageService
+                            .GetImageAsync(uri, () => Clearing)
+                            .ConfigureAwait(true);
                     }
-
-                    if (DataContext is TwitterStatus status)
+                    else
                     {
-                        var uri = status.User.ProfileImageUrlBigger;
-                        if (uri is not null && uri.Length > 0 && !Clearing)
-                        {
-                            image.Source = await ImageService.GetImageAsync(uri, () => Clearing).ConfigureAwait(true);
-                        }
+                        image.Source = EmptyBitmap;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                TraceService.Message(ex.Message);
+                catch (Exception ex)
+                {
+                    image.Source = EmptyBitmap;
+                    TraceService.Message(ex.Message);
+                }
             }
         }
 
-        public void OnPointerPressed(object? sender, PointerPressedEventArgs e)
+        private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed &&
                 DataContext is TwitterStatus status)

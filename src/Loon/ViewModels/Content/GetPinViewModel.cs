@@ -47,7 +47,7 @@ namespace Loon.ViewModels.Content
             else
             {
                 await MessageBox
-                    .Show(App.MainWindow, App.GetString("pin-error"), App.GetString("title"), MessageBox.MessageBoxButtons.Ok)
+                    .Show(App.GetString("pin-error"), MessageBox.MessageBoxButtons.Ok)
                     .ConfigureAwait(false);
             }
         }

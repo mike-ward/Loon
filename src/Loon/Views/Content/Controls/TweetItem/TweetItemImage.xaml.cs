@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -28,34 +27,38 @@ namespace Loon.Views.Content.Controls.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-        public async void LoadMediaAsync(object? sender, EventArgs e)
+#pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
+#pragma warning disable S1144 // (used in XAML) Unused private types or members should be removed
+
+        private async void LoadMediaAsync(object? sender, EventArgs e)
         {
-            try
+            if (sender is Image image)
             {
-                Clearing = false;
-
-                if (sender is Image image)
+                try
                 {
-                    image.Source = null;
-                    await Task.Delay(300).ConfigureAwait(true);
-                    if (Clearing) { return; }
+                    Clearing = false;
 
-                    var media = image.DataContext as Media;
-
-                    if (media?.MediaUrl.Length > 0)
+                    if (image.DataContext is Media media &&
+                        media?.MediaUrl.Length > 0)
                     {
-                        var imageSource = await ImageService.GetImageAsync(media.MediaUrl, () => Clearing).ConfigureAwait(true);
-                        if (!Clearing && imageSource is not null) { image.Source = imageSource; }
+                        image.Source = await ImageService
+                            .GetImageAsync(media.MediaUrl, () => Clearing)
+                            .ConfigureAwait(true);
+                    }
+                    else
+                    {
+                        image.Source = null;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                TraceService.Message(ex.Message);
+                catch (Exception ex)
+                {
+                    image.Source = null;
+                    TraceService.Message(ex.Message);
+                }
             }
         }
 
-        public void OpenInViewer(object? sender, PointerPressedEventArgs e)
+        private void OpenInViewer(object? sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed &&
                 sender is Grid grid &&

@@ -21,7 +21,11 @@ namespace Loon.Views.Content.Controls.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-        public async void OnTranslateClick(object? _, RoutedEventArgs __)
+#pragma warning disable CA1822 // (used in XAML) Mark members as static
+#pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
+#pragma warning disable S1144 // (used in XAML) Unused private types or members should be removedremoved
+
+        private async void OnTranslateClick(object? _, RoutedEventArgs __)
         {
             if (DataContext is not null)
             {

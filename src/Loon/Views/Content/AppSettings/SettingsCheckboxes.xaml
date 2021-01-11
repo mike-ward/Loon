@@ -50,10 +50,6 @@
       <TextBlock Text="{StaticResource use-light-theme}" />
     </CheckBox>
 
-    <CheckBox IsChecked="{Binding ApplyGrayscaleShader}">
-      <TextBlock Text="{StaticResource apply-grayscale-shader}" />
-    </CheckBox>
-
     <CheckBox IsChecked="{Binding Donated}">
       <TextBlock Text="{StaticResource donated}" />
     </CheckBox>

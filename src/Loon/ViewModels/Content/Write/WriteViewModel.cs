@@ -56,13 +56,13 @@ namespace Loon.ViewModels.Content.Write
                 var message = await reader.ReadToEndAsync().ConfigureAwait(true);
 
                 await MessageBox
-                    .Show(App.MainWindow, message, App.GetString("title"), MessageBox.MessageBoxButtons.Ok)
+                    .Show(message, MessageBox.MessageBoxButtons.Ok)
                     .ConfigureAwait(true);
             }
             catch (Exception ex)
             {
                 await MessageBox
-                    .Show(App.MainWindow, ex.Message, App.GetString("title"), MessageBox.MessageBoxButtons.Ok)
+                    .Show(ex.Message, MessageBox.MessageBoxButtons.Ok)
                     .ConfigureAwait(true);
             }
         }

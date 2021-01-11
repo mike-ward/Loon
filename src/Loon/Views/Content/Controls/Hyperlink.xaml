@@ -3,7 +3,9 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:s="clr-namespace:Loon.Services"
   HorizontalAlignment="Left"
   d:DesignHeight="30"
   d:DesignWidth="200"
@@ -12,6 +14,35 @@
   <Button
     Classes="inline1"
     Command="{Binding $parent[UserControl].OnClick}">
+
+    <Button.ContextMenu>
+      <ContextMenu
+        HorizontalOffset="10"
+        VerticalOffset="10">
+        <MenuItem
+          Command="{Binding CopyToClipboard, Source={x:Static l:App.Commands}}"
+          CommandParameter="{Binding $parent[UserControl].Link}}"
+          Header="{StaticResource copy-link-address}" />
+        <MenuItem
+          CommandParameter="{Binding $parent[UserControl].Link}}"
+          Header="{StaticResource email-link}">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol padleft"
+              Text="{StaticResource MailSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem
+          CommandParameter="{Binding $parent[UserControl].Link}}"
+          Header="{StaticResource share-link-twitter}">
+          <MenuItem.Icon>
+            <TextBlock
+              Classes="symbol1 padleft"
+              Text="{StaticResource TwitterSymbol}" />
+          </MenuItem.Icon>
+        </MenuItem>
+      </ContextMenu>
+    </Button.ContextMenu>
 
     <TextBlock
       Text="{Binding $parent[UserControl].Text}"

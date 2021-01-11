@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.VisualTree;
@@ -25,13 +24,14 @@ namespace Loon.Views.Content.UserProfile
 
         public async void LoadImageAsync(object? sender, EventArgs e)
         {
-            try
+            if (sender is Image image)
             {
-                if (sender is Image image)
+                try
                 {
                     image.Source = null;
 
-                    if (image.DataContext is User user && image.Tag is string which)
+                    if (image.DataContext is User user &&
+                        image.Tag is string which)
                     {
                         CollapseHeightIfNoBanner(user);
 
@@ -44,16 +44,14 @@ namespace Loon.Views.Content.UserProfile
 
                         if (uri.IsNotVacant())
                         {
-                            // Gives the slide view some time to slide
-                            await Task.Delay(15).ConfigureAwait(true);
                             image.Source = await ImageService.GetImageAsync(uri!, () => false).ConfigureAwait(true);
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                TraceService.Message(ex.Message);
+                catch (Exception ex)
+                {
+                    TraceService.Message(ex.Message);
+                }
             }
         }
 
