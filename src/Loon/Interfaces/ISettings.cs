@@ -19,7 +19,6 @@ namespace Loon.Interfaces
         bool AlwaysOnTop { get; set; }
         double FontSize { get; set; }
         bool UseLightTheme { get; }
-        bool ApplyGrayscaleShader { get; set; }
         bool Donated { get; }
         WindowLocation Location { get; set; }
 

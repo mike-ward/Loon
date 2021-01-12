@@ -12,21 +12,7 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         public TweetItemView()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        public void Clearing()
-        {
-            // Stop image downloading when scrolling
-            this.FindControl<TweetItemImage>(TweetItemImageName).Clearing = true;
-            this.FindControl<TweetItemProfileImage>(TweetItemProfileImageName).Clearing = true;
-            this.FindControl<TweetItemQuoted>(TweetItemQuotedName).FindControl<TweetItemImage>(TweetItemImageName).Clearing = true;
-            this.FindControl<TweetItemRelated>(TweetItemRelatedName).FindControl<TweetItemImage>(TweetItemImageName).Clearing = true;
         }
     }
 }

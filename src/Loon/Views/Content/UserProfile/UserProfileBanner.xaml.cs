@@ -42,9 +42,9 @@ namespace Loon.Views.Content.UserProfile
                             _ => null
                         };
 
-                        if (uri.IsNotVacant())
+                        if (uri.IsNotNullOrWhiteSpace())
                         {
-                            image.Source = await ImageService.GetImageAsync(uri!, () => false).ConfigureAwait(true);
+                            image.Source = await ImageService.GetImageAsync(uri!, () => 0).ConfigureAwait(true);
                         }
                     }
                 }

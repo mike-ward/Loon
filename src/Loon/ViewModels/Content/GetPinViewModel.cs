@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
 using Loon.Views.Content.Controls;
@@ -12,8 +13,10 @@ namespace Loon.ViewModels.Content
         private OAuthTokens? requestToken;
         private readonly ITwitterService twitterService;
 
-        public string? Pin { get => Getter(default(string)); set => Setter(value); }
-        public bool SecondPage { get => Getter(false); set => Setter(value); }
+        private string? pin;
+        public string? Pin { get => pin; set => SetProperty(ref pin, value); }
+        private bool secondPage;
+        public bool SecondPage { get => secondPage; set => SetProperty(ref secondPage, value); }
 
         public ISettings Settings { get; }
 
@@ -32,9 +35,9 @@ namespace Loon.ViewModels.Content
         public async ValueTask SignIn()
         {
             if (requestToken is null) { throw new InvalidOperationException("requestToken is null"); }
-            if (string.IsNullOrWhiteSpace(Pin)) { throw new InvalidOperationException("Pin is null"); }
+            if (Pin.IsNullOrWhiteSpace()) { throw new InvalidOperationException("Pin is null"); }
 
-            var access = await twitterService.AuthenticateWithPinAsync(requestToken, Pin).ConfigureAwait(false);
+            var access = await twitterService.AuthenticateWithPinAsync(requestToken, Pin!).ConfigureAwait(false);
             GoBack();
 
             if (access is not null)

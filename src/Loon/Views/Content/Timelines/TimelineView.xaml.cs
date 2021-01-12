@@ -1,7 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Loon.Views.Content.Controls.TweetItem;
 
 namespace Loon.Views.Content.Timelines
 {
@@ -18,14 +17,6 @@ namespace Loon.Views.Content.Timelines
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        public void OnElementClearing(object? sender, ItemsRepeaterElementClearingEventArgs e)
-        {
-            if (e.Element is TweetItemView ti)
-            {
-                ti.Clearing();
-            }
         }
 
         protected override void OnPointerReleased(PointerReleasedEventArgs e)

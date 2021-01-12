@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -9,13 +10,7 @@ namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemImage : UserControl
     {
-        private volatile bool clearing;
-
-        public bool Clearing
-        {
-            get { return clearing; }
-            set { clearing = value; }
-        }
+        private volatile uint nextId;
 
         public TweetItemImage()
         {
@@ -36,14 +31,19 @@ namespace Loon.Views.Content.Controls.TweetItem
             {
                 try
                 {
-                    Clearing = false;
-
                     if (image.DataContext is Media media &&
                         media?.MediaUrl.Length > 0)
                     {
-                        image.Source = await ImageService
-                            .GetImageAsync(media.MediaUrl, () => Clearing)
+                        var id = Interlocked.Increment(ref nextId);
+
+                        var source = await ImageService
+                            .GetImageAsync(media.MediaUrl, () => nextId)
                             .ConfigureAwait(true);
+
+                        if (id == nextId)
+                        {
+                            image.Source = source;
+                        }
                     }
                     else
                     {

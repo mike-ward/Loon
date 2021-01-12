@@ -10,7 +10,8 @@ namespace Loon.ViewModels.Content.UserProfile
     {
         private readonly ITwitterService twitterService;
 
-        public User? UserProfileContext { get => Getter(default(User)); set => Setter(value); }
+        private User? user;
+        public User? UserProfileContext { get => user; set => SetProperty(ref user, value); }
 
         public UserProfileViewModel(ITwitterService twitterService)
         {

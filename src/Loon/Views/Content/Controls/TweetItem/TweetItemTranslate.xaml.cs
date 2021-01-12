@@ -57,7 +57,7 @@ namespace Loon.Views.Content.Controls.TweetItem
             IsVisible = DataContext is TwitterStatus status
                && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
                && status.Language.IsNotEqualToIgnoreCase("und")
-               && status.FullText.IsNotVacant()
+               && status.FullText.IsNotNullOrWhiteSpace()
                && Tag is bool hide
                && !hide;
         }

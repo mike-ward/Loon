@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -13,15 +14,9 @@ namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemProfileImage : UserControl
     {
-        private volatile bool clearing;
+        private volatile uint nextId;
         private const int profileSize = 73; // Twitter's bigger profile image size is 48x48
         private static readonly Bitmap EmptyBitmap = new WriteableBitmap(new PixelSize(profileSize, profileSize), new Vector(96, 96), PixelFormat.Bgra8888, AlphaFormat.Premul);
-
-        public bool Clearing
-        {
-            get { return clearing; }
-            set { clearing = value; }
-        }
 
         public TweetItemProfileImage()
         {
@@ -42,15 +37,20 @@ namespace Loon.Views.Content.Controls.TweetItem
             {
                 try
                 {
-                    Clearing = false;
+                    var id = Interlocked.Increment(ref nextId);
 
                     if (DataContext is TwitterStatus status &&
                         status.User.ProfileImageUrlBigger is string uri &&
                         uri.Length > 0)
                     {
-                        image.Source = await ImageService
-                            .GetImageAsync(uri, () => Clearing)
+                        var source = await ImageService
+                            .GetImageAsync(uri, () => nextId)
                             .ConfigureAwait(true);
+
+                        if (id == nextId)
+                        {
+                            image.Source = source;
+                        }
                     }
                     else
                     {

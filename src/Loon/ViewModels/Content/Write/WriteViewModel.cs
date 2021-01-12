@@ -18,14 +18,19 @@ namespace Loon.ViewModels.Content.Write
         private readonly ISettings settings;
         private readonly ITwitterService twitterService;
 
-        private readonly string tweetButtonText = App.GetString("tweet-button-text");
-        private readonly string tweetingButtonText = App.GetString("tweeting-button-text");
+        private static readonly string tweetButtonTextConst = App.GetString("tweet-button-text");
+        private static readonly string tweetingButtonTextConst = App.GetString("tweeting-button-text");
 
-        public TwitterStatus? Me { get => Getter(default(TwitterStatus)); set => Setter(value); }
-        public TwitterStatus? ReplyTo { get => Getter(default(TwitterStatus)); set => Setter(value); }
-        public string TweetText { get => Getter(string.Empty); set => Setter(value); }
-        public string TweetButtonText { get => Getter(tweetButtonText); set => Setter(value); }
-        public bool IsTweeting { get => Getter(false); set => Setter(value); }
+        private TwitterStatus? twitterStatus;
+        public TwitterStatus? Me { get => twitterStatus; set => SetProperty(ref twitterStatus, value); }
+        private TwitterStatus? replyTo;
+        public TwitterStatus? ReplyTo { get => replyTo; set => SetProperty(ref replyTo, value); }
+        private string tweetText = string.Empty;
+        public string TweetText { get => tweetText; set => SetProperty(ref tweetText, value); }
+        private string tweetButtonText = tweetButtonTextConst;
+        public string TweetButtonText { get => tweetButtonText; set => SetProperty(ref tweetButtonText, value); }
+        private bool isTweeting;
+        public bool IsTweeting { get => isTweeting; set => SetProperty(ref isTweeting, value); }
 
         public WriteViewModel(ISettings settings, ITwitterService twitterService)
         {
@@ -39,7 +44,7 @@ namespace Loon.ViewModels.Content.Write
         {
             if (TweetText.Length == 0) { return; }
             IsTweeting = true;
-            TweetButtonText = tweetingButtonText;
+            TweetButtonText = tweetingButtonTextConst;
 
             try
             {

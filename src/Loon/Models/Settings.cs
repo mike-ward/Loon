@@ -14,43 +14,63 @@ namespace Loon.Models
         private string Profile { get; } = "loon";
 
         [JsonIgnore]
-        public bool IsAuthenticated => AccessToken.IsNotVacant() && AccessTokenSecret.IsNotVacant();
+        private bool isAuthenticiated;
+
+        public bool IsAuthenticated { get => isAuthenticiated; set => SetProperty(ref isAuthenticiated, value); }
+
+        private bool GetCheckAuthenticiated()
+        {
+            return AccessToken.IsNotNullOrWhiteSpace() && AccessTokenSecret.IsNotNullOrWhiteSpace();
+        }
+
+        private string? accessToken;
 
         public string? AccessToken
         {
-            get => Getter(default(string));
+            get => accessToken;
             set
             {
-                var tmp = IsAuthenticated;
-                Setter(value);
-                if (IsAuthenticated != tmp) { OnPropertyChanged(nameof(IsAuthenticated)); }
+                SetProperty(ref accessToken, value);
+                IsAuthenticated = GetCheckAuthenticiated();
             }
         }
+
+        private string? accessTokenSecret;
 
         public string? AccessTokenSecret
         {
-            get => Getter(default(string));
+            get => accessTokenSecret;
             set
             {
-                var tmp = IsAuthenticated;
-                Setter(value);
-                if (IsAuthenticated != tmp) { OnPropertyChanged(nameof(IsAuthenticated)); }
+                SetProperty(ref accessTokenSecret, value);
+                IsAuthenticated = GetCheckAuthenticiated();
             }
         }
 
-        public bool AlwaysOnTop { get => Getter(false); set => Setter(value); }
-        public bool ApplyGrayscaleShader { get => Getter(false); set => Setter(value); }
-        public bool Donated { get => Getter(false); set => Setter(value); }
-        public bool HideExtendedContent { get => Getter(false); set => Setter(value); }
-        public bool HideImages { get => Getter(false); set => Setter(value); }
-        public bool HidePossiblySensitive { get => Getter(false); set => Setter(value); }
-        public bool HideProfileImages { get => Getter(false); set => Setter(value); }
-        public bool HideScreenName { get => Getter(false); set => Setter(value); }
-        public bool HideTranslate { get => Getter(false); set => Setter(value); }
-        public bool ShowInSystemTray { get => Getter(false); set => Setter(value); }
-        public bool UseLightTheme { get => Getter(false); set => Setter(value); }
-        public double FontSize { get => Getter(12d); set => Setter(value); }
-        public string? ScreenName { get => Getter(default(string)); set => Setter(value); }
+        private bool alwaysOnTop;
+        public bool AlwaysOnTop { get => alwaysOnTop; set => SetProperty(ref alwaysOnTop, value); }
+        private bool donated;
+        public bool Donated { get => donated; set => SetProperty(ref donated, value); }
+        private bool hideExtendedContent;
+        public bool HideExtendedContent { get => hideExtendedContent; set => SetProperty(ref hideExtendedContent, value); }
+        private bool hideImages;
+        public bool HideImages { get => hideImages; set => SetProperty(ref hideImages, value); }
+        private bool hidePossiblySensitive;
+        public bool HidePossiblySensitive { get => hidePossiblySensitive; set => SetProperty(ref hidePossiblySensitive, value); }
+        private bool hideProfileImages;
+        public bool HideProfileImages { get => hideProfileImages; set => SetProperty(ref hideProfileImages, value); }
+        private bool hideScreenName;
+        public bool HideScreenName { get => hideScreenName; set => SetProperty(ref hideScreenName, value); }
+        private bool hideTranslate;
+        public bool HideTranslate { get => hideTranslate; set => SetProperty(ref hideTranslate, value); }
+        private bool showInSystemTray;
+        public bool ShowInSystemTray { get => showInSystemTray; set => SetProperty(ref showInSystemTray, value); }
+        private bool useLightTheme;
+        public bool UseLightTheme { get => useLightTheme; set => SetProperty(ref useLightTheme, value); }
+        private double fontSize = 12;
+        public double FontSize { get => fontSize; set => SetProperty(ref fontSize, value); }
+        private string? screenName;
+        public string? ScreenName { get => screenName; set => SetProperty(ref screenName, value); }
         public WindowLocation Location { get; set; } = new WindowLocation { X = 200, Y = 200, Width = 300, Height = 500 };
 
         [JsonIgnore]

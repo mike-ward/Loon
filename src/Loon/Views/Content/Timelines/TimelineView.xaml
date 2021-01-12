@@ -18,7 +18,6 @@
     <ItemsRepeater
       Name="{x:Static l:TimelineView.ItemsRepeaterName}"
       Margin="0 0 5 0"
-      ElementClearing="OnElementClearing"
       Items="{Binding StatusCollection}">
 
       <ItemsRepeater.ItemTemplate>

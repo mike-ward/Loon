@@ -90,7 +90,6 @@ namespace Twitter.Models
 
         private static async ValueTask<RelatedLinkInfo?> GetLinkInfoAsync(string url)
         {
-            await Task.Yield(); // forces to complete async
             var request = (HttpWebRequest)WebRequest.Create(url);
             using var response = await request.GetResponseAsync().ConfigureAwait(false);
 

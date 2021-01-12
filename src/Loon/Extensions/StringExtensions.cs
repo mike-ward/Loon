@@ -30,7 +30,12 @@ namespace Loon.Extensions
             return !string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
         }
 
-        public static bool IsNotVacant(this string? str)
+        public static bool IsNullOrWhiteSpace(this string? str)
+        {
+            return string.IsNullOrWhiteSpace(str);
+        }
+
+        public static bool IsNotNullOrWhiteSpace(this string? str)
         {
             return !string.IsNullOrWhiteSpace(str);
         }

@@ -11,7 +11,8 @@ namespace Loon.ViewModels.Content.Timelines
     {
         private readonly ITwitterService twitterService;
         public IAvaloniaList<TwitterStatus> StatusCollection { get; } = new AvaloniaList<TwitterStatus>();
-        public bool IsSearching { get => Getter(false); set => Setter(value); }
+        private bool isSearching;
+        public bool IsSearching { get => isSearching; set => SetProperty(ref isSearching, value); }
 
         public SearchTimelineViewModel(ITwitterService twitterService)
         {
