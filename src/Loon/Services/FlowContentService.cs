@@ -18,7 +18,9 @@ namespace Loon.Services
                 yield break;
             }
 
-            var nodes = FlowContentNodes(twitterStatus);
+            var nodes =
+                twitterStatus.FlowContent as IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)> ??
+                FlowContentNodes(twitterStatus);
 
             foreach (var node in nodes)
             {
@@ -50,7 +52,7 @@ namespace Loon.Services
             }
         }
 
-        private static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)> FlowContentNodes(TwitterStatus twitterStatus)
+        public static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)> FlowContentNodes(TwitterStatus twitterStatus)
         {
             var start = 0;
             var twitterString = new TwitterString(twitterStatus.FullText ?? twitterStatus.Text ?? string.Empty);

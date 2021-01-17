@@ -10,7 +10,7 @@
 
   <Button
     Classes="inline"
-    Command="{Binding $parent[UserControl].OpenMenu}">
+    Command="{Binding $parent[UserControl].OpenMenu, Mode=OneTime}">
 
     <Button.ContextMenu>
       <ContextMenu

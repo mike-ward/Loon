@@ -25,7 +25,7 @@
         <Button
           MaxWidth="100"
           Margin="20"
-          Command="{Binding GetPin}"
+          Command="{Binding GetPin, Mode=OneTime}"
           Content="{StaticResource pin-get-pin}" />
       </StackPanel>
     </Grid>
@@ -52,7 +52,7 @@
         <Button
           MaxWidth="100"
           Margin="20"
-          Command="{Binding SignIn}"
+          Command="{Binding SignIn, Mode=OneTime}"
           Content="{StaticResource pin-sign-in}" />
 
         <TextBlock
@@ -63,7 +63,7 @@
         <Button
           MaxWidth="100"
           Margin="20"
-          Command="{Binding GoBack}"
+          Command="{Binding GoBack, Mode=OneTime}"
           Content="&#x25c0;" />
       </StackPanel>
     </Grid>

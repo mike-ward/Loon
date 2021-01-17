@@ -14,7 +14,7 @@
     Padding="0 10"
     HorizontalContentAlignment="Left"
     Classes="inline"
-    Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}}"
+    Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}, Mode=OneTime}"
     CommandParameter="{x:Null}">
 
     <Grid ColumnDefinitions="Auto,*">

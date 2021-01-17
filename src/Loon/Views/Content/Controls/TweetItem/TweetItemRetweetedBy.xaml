@@ -21,7 +21,7 @@
 
     <Button
       Classes="inline"
-      Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}}"
+      Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}, Mode=OneTime}"
       CommandParameter="{Binding User}"
       Content="{Binding User.ScreenName, StringFormat='@{0}'}" />
 

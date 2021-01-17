@@ -21,10 +21,9 @@ namespace Loon.Services
     {
         private static readonly string TempPath = Path.GetTempPath();
 
-        public static async ValueTask<IImage?> GetImageAsync(string uri, Func<uint> nextId)
+        public static async ValueTask<IImage?> GetImageAsync(string uri)
         {
             int delay = 200;
-            var id = nextId();
             const int retries = 3;
             const int backoffMultiplier = 3;
 
@@ -32,13 +31,9 @@ namespace Loon.Services
             {
                 try
                 {
-                    if (id != nextId()) break;
-                    if (FromCache(uri) is IImage image) return image;
-
-                    await Task.Delay(delay).ConfigureAwait(false);
-
-                    if (id != nextId()) break;
-                    return await TryGetImageAsync(uri, nextId).ConfigureAwait(false);
+                    return FromCache(uri) is IImage image
+                        ? image
+                        : await TryGetImageAsync(uri).ConfigureAwait(false);
                 }
                 catch (FormatException ex)
                 {
@@ -61,19 +56,16 @@ namespace Loon.Services
             return default;
         }
 
-        public static async ValueTask<IImage?> TryGetImageAsync(string uri, Func<uint> nextId)
+        public static async ValueTask<IImage?> TryGetImageAsync(string uri)
         {
-            var id = nextId();
             var wc = WebRequest.Create(uri);
             wc.Timeout = Constants.WebRequestTimeout;
             using var response = await wc.GetResponseAsync().ConfigureAwait(false);
 
-            if (id != nextId()) { return null; }
             using var stream = response.GetResponseStream();
             using var ms = new MemoryStream(); // Bitmap constructor needs a seekable stream
             await stream.CopyToAsync(ms).ConfigureAwait(false);
 
-            if (id != nextId()) { return null; }
             ms.Position = 0;
             var bitmap = new Bitmap(ms);
             ToCache(uri, bitmap);

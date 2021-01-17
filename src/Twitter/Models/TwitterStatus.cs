@@ -146,9 +146,13 @@ namespace Twitter.Models
             }
         }
 
+        [JsonIgnore]
+        public object? FlowContent { get; set; }
+
         /// <summary>
         /// Indicates if user is author of tweet
         /// </summary>
+        [JsonIgnore]
         public bool IsMyTweet { get; set; }
 
         public bool MentionsMe { get; set; }

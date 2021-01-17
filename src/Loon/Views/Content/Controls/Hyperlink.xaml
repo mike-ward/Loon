@@ -13,14 +13,14 @@
 
   <Button
     Classes="inline1"
-    Command="{Binding $parent[UserControl].OnClick}">
+    Command="{Binding $parent[UserControl].OnClick, Mode=OneTime}">
 
     <Button.ContextMenu>
       <ContextMenu
         HorizontalOffset="10"
         VerticalOffset="10">
         <MenuItem
-          Command="{Binding CopyToClipboard, Source={x:Static l:App.Commands}}"
+          Command="{Binding CopyToClipboard, Source={x:Static l:App.Commands}, Mode=OneTime}"
           CommandParameter="{Binding $parent[UserControl].Link}}"
           Header="{StaticResource copy-link-address}" />
         <MenuItem

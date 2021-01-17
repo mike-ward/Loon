@@ -31,9 +31,7 @@
       Margin="7 0 0 10">
 
       <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
-
       <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
-
       <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
       <l:TweetItemTranslate DataContext="{Binding OriginatingStatus}" />
 
