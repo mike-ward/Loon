@@ -6,6 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -23,40 +24,81 @@ namespace Loon.Services
 
         public static async ValueTask<IImage?> GetImageAsync(string uri)
         {
-            int delay = 200;
             const int retries = 3;
-            const int backoffMultiplier = 3;
 
             for (var retry = 0; retry < retries; retry++)
             {
                 try
                 {
-                    return FromCache(uri) is IImage image
-                        ? image
-                        : await TryGetImageAsync(uri).ConfigureAwait(false);
+                    if (retry > 0)
+                    {
+                        TraceService.Message($"retry image: {retry}");
+                        await Task.Delay(500).ConfigureAwait(false);
+                    }
+
+                    return await FromCacheAsync(uri).ConfigureAwait(false)
+                        ?? await TryGetImageAsync(uri).ConfigureAwait(false);
                 }
                 catch (FormatException ex)
                 {
                     TraceService.Message(ex.Message);
+                    break;
                 }
                 catch (ArgumentException ex)
                 {
                     TraceService.Message(ex.Message);
+                    break;
                 }
                 catch (FileNotFoundException ex)
                 {
                     TraceService.Message(ex.Message);
+                    break;
                 }
-                catch
+                catch (Exception ex)
                 {
-                    delay *= backoffMultiplier;
+                    TraceService.Message(ex.Message);
                 }
             }
 
             return default;
         }
 
-        public static async ValueTask<IImage?> TryGetImageAsync(string uri)
+        private static async ValueTask<IImage?> FromCacheAsync(string uri)
+        {
+            try
+            {
+                var path = GetPath(uri);
+
+                return File.Exists(path)
+                    ? await GetBitmap(path).ConfigureAwait(false)
+                    : default;
+            }
+            catch (Exception ex)
+            {
+                TraceService.Message(ex.Message);
+                return default;
+            }
+        }
+
+        private static string GetPath(string uri)
+        {
+            var hash = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(uri));
+
+            return Path.Combine(
+                TempPath,
+                "loon-" + Convert.ToHexString(hash));
+        }
+
+        private static async ValueTask<IImage?> GetBitmap(string url)
+        {
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(1000);
+            var bytes = await File.ReadAllBytesAsync(url, cts.Token).ConfigureAwait(false);
+            using var stream = new MemoryStream(bytes);
+            return new Bitmap(stream);
+        }
+
+        private static async ValueTask<IImage?> TryGetImageAsync(string uri)
         {
             var wc = WebRequest.Create(uri);
             wc.Timeout = Constants.WebRequestTimeout;
@@ -68,13 +110,29 @@ namespace Loon.Services
 
             ms.Position = 0;
             var bitmap = new Bitmap(ms);
-            ToCache(uri, bitmap);
+            await ToCacheAsync(uri, bitmap).ConfigureAwait(false);
             return bitmap;
+        }
+
+        private static async ValueTask ToCacheAsync(string uri, Bitmap image)
+        {
+            try
+            {
+                using var ms = new MemoryStream();
+                image.Save(ms);
+                var cts = new CancellationTokenSource();
+                cts.CancelAfter(1000);
+                await File.WriteAllBytesAsync(GetPath(uri), ms.ToArray(), cts.Token).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                TraceService.Message(ex.Message);
+            }
         }
 
         private static ImageViewer? imageViewer;
 
-        public static ImageViewer GetImageViewer()
+        private static ImageViewer GetImageViewer()
         {
             if (imageViewer is null || imageViewer.IsClosed)
             {
@@ -115,13 +173,19 @@ namespace Loon.Services
                     pi.FileName = Path.Combine(
                         Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty,
                         "Assets/Windows/mpv.exe");
+
+                    pi.Arguments = $"--ontop --no-border --autofit-smaller=640x480 --keep-open --script-opts=osc-scalewindowed=3 {videoUrl}";
+                }
+                else if (OperatingSystem.IsLinux())
+                {
+                    pi.UseShellExecute = true;
+                    pi.FileName = videoUrl;
                 }
                 else
                 {
                     return;
                 }
 
-                pi.Arguments = $"--ontop --no-border --autofit-smaller=640x480 --keep-open --script-opts=osc-scalewindowed=3 {videoUrl}";
                 pi.CreateNoWindow = false;
                 process = Process.Start(pi);
             }
@@ -143,43 +207,6 @@ namespace Loon.Services
                 .Select(variant => variant.Url)
                 .FirstOrDefault()
                 ?? string.Empty;
-        }
-
-        private static void ToCache(string uri, Bitmap image)
-        {
-            var path = GetPath(uri);
-            try
-            {
-                image.Save(path);
-            }
-            catch (Exception ex)
-            {
-                TraceService.Message(ex.Message);
-            }
-        }
-
-        private static IImage? FromCache(string uri)
-        {
-            try
-            {
-                var path = GetPath(uri);
-
-                return File.Exists(path)
-                    ? new Bitmap(path)
-                    : null;
-            }
-            catch (Exception ex)
-            {
-                TraceService.Message(ex.Message);
-                return null;
-            }
-        }
-
-        private static string GetPath(string uri)
-        {
-            return Path.Combine(
-                TempPath,
-                "loon-" + Convert.ToHexString(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(uri))));
         }
 
         public static void ClearImageCache()

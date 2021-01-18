@@ -35,6 +35,7 @@
     <None Remove="Assets\Fonts\foundation-icons.ttf" />
     <None Remove="Assets\Fonts\winjs-symbols.ttf" />
     <None Remove="Assets\LightThemeOverrides.xaml" />
+    <None Remove="Assets\Logo\loon.ico" />
     <None Remove="Assets\ScrollBar.xaml" />
     <None Remove="Assets\seguisym.ttf" />
     <None Remove="Assets\Separator.xaml" />
@@ -264,6 +265,10 @@
     <AvaloniaXaml Include="Views\TitleBar.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="Assets\Logo\loon.ico" />
   </ItemGroup>
   
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Loon.Extensions;
@@ -75,7 +74,7 @@ namespace Loon.Models
 
         [JsonIgnore]
         public string SettingsFilePath => Path.Combine(
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,
+            AppContext.BaseDirectory,
             $"{Profile}.settings.txt");
 
         public void Load()

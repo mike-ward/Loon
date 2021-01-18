@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
 using Loon.Services;
@@ -21,12 +22,23 @@ namespace Loon.ViewModels.Content.UserProfile
 
         private void UserProfileContextHandler(object? payload)
         {
-            UserProfileContext = payload switch
+            if (payload is User user)
             {
-                User user => user,
-                string screenName => Task.Run(async () => await twitterService.UserInfo(screenName).ConfigureAwait(false)).Result,
-                _ => null
-            };
+                UserProfileContext = user;
+            }
+            else if (payload is string screenName)
+            {
+                GetUserInfo(screenName).FireAndForget();
+            }
+            else
+            {
+                UserProfileContext = null;
+            }
+        }
+
+        private async ValueTask GetUserInfo(string screenName)
+        {
+            UserProfileContext = await twitterService.UserInfo(screenName).ConfigureAwait(true);
         }
     }
 }
