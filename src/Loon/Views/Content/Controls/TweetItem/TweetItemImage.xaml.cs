@@ -29,9 +29,16 @@ namespace Loon.Views.Content.Controls.TweetItem
             {
                 try
                 {
-                    image.Source = await ImageService
+                    image.Source = null;
+
+                    var imageSource = await ImageService
                         .GetImageAsync(media.MediaUrl)
                         .ConfigureAwait(true);
+
+                    if (image.Source is null) // check for overlapped request
+                    {
+                        image.Source = imageSource;
+                    }
                 }
                 catch (Exception ex)
                 {

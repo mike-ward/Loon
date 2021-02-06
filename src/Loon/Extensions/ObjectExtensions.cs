@@ -8,13 +8,13 @@ namespace Loon.Extensions
     {
         public static string ToStringInvariant(this object obj) => Convert.ToString(obj, CultureInfo.InvariantCulture) ?? "{null}";
 
-        public static void CopyPropertiesTo<T, U>(this T source, U dest)
+        public static void CopyPropertiesTo<T, TU>(this T source, TU dest)
         {
             var sourceProps = typeof(T)
                 .GetProperties()
                 .Where(x => x.CanRead);
 
-            var destProps = typeof(U)
+            var destProps = typeof(TU)
                 .GetProperties()
                 .Where(x => x.CanWrite)
                 .ToArray();

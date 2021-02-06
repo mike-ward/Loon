@@ -12,11 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Loon.Services
 {
-    internal static class BootStrapper
+    internal static class Bootstrapper
     {
         private static ServiceProvider ServiceProvider { get; }
 
-        static BootStrapper()
+        static Bootstrapper()
         {
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);

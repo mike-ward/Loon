@@ -35,7 +35,9 @@ namespace Loon.Views.Content.Controls.TweetItem
             {
                 try
                 {
-                    image.Source =
+                    image.Source = null;
+
+                    var imageSource =
                         DataContext is TwitterStatus status &&
                         status.User.ProfileImageUrlBigger is string uri &&
                         uri.Length > 0
@@ -43,6 +45,10 @@ namespace Loon.Views.Content.Controls.TweetItem
                                 .GetImageAsync(uri)
                                 .ConfigureAwait(true)
                             : EmptyBitmap;
+
+                    image.Source = image.Source is null
+                        ? imageSource
+                        : EmptyBitmap;
                 }
                 catch (Exception ex)
                 {
@@ -54,7 +60,7 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed &&
+            if (e.GetCurrentPoint(relativeTo: null).Properties.IsLeftButtonPressed &&
                 DataContext is TwitterStatus status)
             {
                 e.Handled = true;
@@ -62,7 +68,7 @@ namespace Loon.Views.Content.Controls.TweetItem
             }
             // Useful for debugging twitter oddities
             //
-            else if (e.GetCurrentPoint(null).Properties.IsRightButtonPressed &&
+            else if (e.GetCurrentPoint(relativeTo: null).Properties.IsRightButtonPressed &&
                 e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
                 DataContext is TwitterStatus status1)
             {

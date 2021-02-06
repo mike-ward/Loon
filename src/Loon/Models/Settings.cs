@@ -13,11 +13,11 @@ namespace Loon.Models
         private string Profile { get; } = "loon";
 
         [JsonIgnore]
-        private bool isAuthenticiated;
+        private bool isAuthenticated;
 
-        public bool IsAuthenticated { get => isAuthenticiated; set => SetProperty(ref isAuthenticiated, value); }
+        public bool IsAuthenticated { get => isAuthenticated; set => SetProperty(ref isAuthenticated, value); }
 
-        private bool GetCheckAuthenticiated()
+        private bool GetCheckAuthenticated()
         {
             return AccessToken.IsNotNullOrWhiteSpace() && AccessTokenSecret.IsNotNullOrWhiteSpace();
         }
@@ -30,7 +30,7 @@ namespace Loon.Models
             set
             {
                 SetProperty(ref accessToken, value);
-                IsAuthenticated = GetCheckAuthenticiated();
+                IsAuthenticated = GetCheckAuthenticated();
             }
         }
 
@@ -42,7 +42,7 @@ namespace Loon.Models
             set
             {
                 SetProperty(ref accessTokenSecret, value);
-                IsAuthenticated = GetCheckAuthenticiated();
+                IsAuthenticated = GetCheckAuthenticated();
             }
         }
 

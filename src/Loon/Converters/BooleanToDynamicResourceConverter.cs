@@ -11,11 +11,11 @@ namespace Loon.Converters
     {
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool val && val &&
+            if (value is true &&
                 parameter is DynamicResourceExtension resource &&
                 resource.ResourceKey is not null)
             {
-                return App.Current.TryFindResource(resource.ResourceKey, out var resourceValue)
+                return Application.Current.TryFindResource(resource.ResourceKey, out var resourceValue)
                     ? resourceValue
                     : AvaloniaProperty.UnsetValue;
             }

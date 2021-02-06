@@ -10,7 +10,7 @@ namespace Loon.Converters
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            return values.All(value => value is bool val && val);
+            return values.All(value => value is true);
         }
     }
 }

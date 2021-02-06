@@ -35,9 +35,14 @@ namespace Loon.Models
             Settings = settings;
 
             updateTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(intervalInMinutes) };
-            updateTimer.Tick += async delegate { await UpdateAsync().ConfigureAwait(false); };
+            updateTimer.Tick += UpdateTimerTick;
 
             Settings.PropertyChanged += CheckAuthentication;
+        }
+
+        private async void UpdateTimerTick(object? sender, EventArgs e)
+        {
+            await UpdateAsync().ConfigureAwait(false);
         }
 
         private async ValueTask UpdateAsync()

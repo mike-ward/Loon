@@ -21,10 +21,10 @@
         VerticalOffset="10">
         <MenuItem
           Command="{Binding CopyToClipboard, Source={x:Static l:App.Commands}, Mode=OneTime}"
-          CommandParameter="{Binding $parent[UserControl].Link}}"
+          CommandParameter="{Binding $parent[UserControl].Link}"
           Header="{StaticResource copy-link-address}" />
         <MenuItem
-          CommandParameter="{Binding $parent[UserControl].Link}}"
+          CommandParameter="{Binding $parent[UserControl].Link}"
           Header="{StaticResource email-link}">
           <MenuItem.Icon>
             <TextBlock
@@ -33,7 +33,7 @@
           </MenuItem.Icon>
         </MenuItem>
         <MenuItem
-          CommandParameter="{Binding $parent[UserControl].Link}}"
+          CommandParameter="{Binding $parent[UserControl].Link}"
           Header="{StaticResource share-link-twitter}">
           <MenuItem.Icon>
             <TextBlock

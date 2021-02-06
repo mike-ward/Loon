@@ -9,7 +9,7 @@ namespace Loon.ViewModels
     {
         private readonly ITwitterService twitterService;
 
-        public ISettings Settings { get; set; }
+        public ISettings Settings { get; }
 
         public MainWindowViewModel(ISettings settings, ITwitterService twitterService)
         {
@@ -25,7 +25,7 @@ namespace Loon.ViewModels
             window.Closing += delegate { Save(window); };
         }
 
-        public void Save(IWindow window)
+        private void Save(IWindow window)
         {
             UpdateWindowLocation(window);
             Settings.Save();

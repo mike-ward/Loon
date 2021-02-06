@@ -10,7 +10,7 @@ namespace Loon.Services
 {
     internal static class TranslateService
     {
-        public static readonly string endpoint = "https://libretranslate.com/translate";
+        private const string Endpoint = "https://libretranslate.com/translate";
 
         public static async ValueTask<string> Translate(string? text, string fromLanguage, string toLanguage)
         {
@@ -21,7 +21,7 @@ namespace Loon.Services
 
             try
             {
-                var request = WebRequest.Create(endpoint);
+                var request = WebRequest.Create(Endpoint);
 
                 var q = "q=" + Uri.EscapeDataString(text);
                 var s = "&source=" + Uri.EscapeDataString(fromLanguage);
@@ -37,7 +37,7 @@ namespace Loon.Services
                 content.Close();
 
                 using var response = await request.GetResponseAsync().ConfigureAwait(false);
-                using var stream = response.GetResponseStream();
+                await using var stream = response.GetResponseStream();
                 var result = await JsonSerializer.DeserializeAsync<TranslatorResult>(stream).ConfigureAwait(false);
                 return result?.TranslatedText?.HtmlDecode() ?? "{error}";
             }

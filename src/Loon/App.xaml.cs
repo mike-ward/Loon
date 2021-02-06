@@ -20,13 +20,13 @@ namespace Loon
             // Need to check so designer works
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime app)
             {
-                app.MainWindow = BootStrapper.GetService<MainWindow>();
+                app.MainWindow = Bootstrapper.GetService<MainWindow>();
             }
 
             base.OnFrameworkInitializationCompleted();
         }
 
-        public static AppCommands Commands { get; } = BootStrapper.GetService<AppCommands>();
+        public static AppCommands Commands { get; } = Bootstrapper.GetService<AppCommands>();
         public static Window MainWindow => ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).MainWindow;
 
         public static string GetString(string name) => Current.TryFindResource(name, out var value) && value is string val ? val : $"string resource not found: {name}";
