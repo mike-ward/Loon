@@ -5,7 +5,6 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:s="clr-namespace:Loon.Services"
   HorizontalAlignment="Left"
   d:DesignHeight="30"
   d:DesignWidth="200"

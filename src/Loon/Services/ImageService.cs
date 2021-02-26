@@ -171,7 +171,7 @@ namespace Loon.Services
                 if (OperatingSystem.IsWindows())
                 {
                     pi.FileName = Path.Combine(
-                        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty,
+                        AppContext.BaseDirectory,
                         "Assets/Windows/mpv.exe");
 
                     pi.Arguments = $"--ontop --no-border --autofit-smaller=640x480 --keep-open --script-opts=osc-scalewindowed=3 {videoUrl}";
