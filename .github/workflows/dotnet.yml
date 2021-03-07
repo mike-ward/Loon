@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build ./src/Loon.sln --no-restore
     - name: Run Infer#      
-      uses: microsoft/infersharpaction@v0.2
+      uses: microsoft/infersharpaction@v1.0
       id: runinfersharp
       with:
         binary-path: './src/Loon/bin/Release/.net5.0'
