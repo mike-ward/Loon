@@ -14,7 +14,17 @@ I've run this client successfully on both Windows and Linux. I don't own a Mac.
 
 ### Building
 
-You'll need Visual Studio with the [Avalonia extension](https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaforVisualStudio) installed.
+#### Windows
 
-Clone the project, load it into Visual Studio, press F5.
+Visual Studio:
+- Install the [Avalonia extension](https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaforVisualStudio)
+- Clone the project, load it into Visual Studio, press F5.
 
+Rider:
+- Clone and press F5.
+
+#### Linux
+from the project folder type: `dotnet run`
+
+Rider:
+- Clone and press F5.
