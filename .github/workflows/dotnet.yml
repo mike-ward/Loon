@@ -20,7 +20,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./src/Loon.sln
     - name: Build
-      run: dotnet build ./src/Loon.sln --no-restore
+      run: dotnet build ./src/Loon.sln -c Release --no-restore
     - name: Run Infer#      
       uses: microsoft/infersharpaction@v1.0
       id: runinfersharp
