@@ -22,10 +22,10 @@ jobs:
     - name: Build
       run: dotnet build ./src/Loon.sln -c Release --no-restore
     - name: Copy dll's infer folder
-        run: | 
-          mkdir ./src/Loon/bin/Release/net5.0/infer
-          cp ./src/Loon/bin/Release/net5.0/Loon.dll ./src/Loon/bin/Release/net5.0/infer
-          cp ./src/Loon/bin/Release/net5.0/Twitter.dll ./src/Loon/bin/Release/net5.0/infer
+      run: | 
+        mkdir ./src/Loon/bin/Release/net5.0/infer
+        cp ./src/Loon/bin/Release/net5.0/Loon.dll ./src/Loon/bin/Release/net5.0/infer
+        cp ./src/Loon/bin/Release/net5.0/Twitter.dll ./src/Loon/bin/Release/net5.0/infer
     - name: Run Infer#      
       uses: microsoft/infersharpaction@v1.0
       id: runinfersharp
