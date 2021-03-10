@@ -4,8 +4,9 @@
   xmlns:mn="clr-namespace:Loon.Views">
 
   <Style Selector="TabItem">
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Margin" Value="0 1 0 0" />
     <Setter Property="Width" Value="{Binding $parent[mn:MainWindow].Width, Converter={StaticResource TabItemWidth}}" />
-    <Setter Property="Height" Value="33" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="FontFamily" Value="{DynamicResource SymbolFont}" />

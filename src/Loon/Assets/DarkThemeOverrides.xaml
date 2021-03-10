@@ -6,6 +6,7 @@
   <Style>
     <Style.Resources>
       <SolidColorBrush x:Key="ThemeTitleBarBrush">#FF505050</SolidColorBrush>
+      <SolidColorBrush x:Key="ThemeAccentBrush4">#FF333333</SolidColorBrush>
     </Style.Resources>
   </Style>
 </Styles>

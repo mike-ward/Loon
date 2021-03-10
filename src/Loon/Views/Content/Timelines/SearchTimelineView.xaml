@@ -32,7 +32,7 @@
     <TextBlock
       Grid.Row="2"
       Classes="busy"
-      IsVisible="{Binding IsSearching}, FallbackValue=False"
+      IsVisible="{Binding IsSearching, FallbackValue=False}"
       Text="searching..."
       TextAlignment="Center" />
 

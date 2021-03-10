@@ -272,10 +272,10 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.999-cibuild0012694-beta" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0012694-beta" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.999-cibuild0012694-beta" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Avalonia" Version="0.10.999-cibuild0013089-beta" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0013089-beta" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.999-cibuild0013089-beta" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-preview.1.21102.12" />
   </ItemGroup>
   
   <ItemGroup>
