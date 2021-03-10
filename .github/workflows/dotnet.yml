@@ -21,7 +21,7 @@ jobs:
       run: dotnet restore ./src/Loon.sln
     - name: Build
       run: dotnet build ./src/Loon.sln -c Release --no-restore
-    - name Copy dll's infer folder
+    - name: Copy dll's infer folder
         run: | 
           mkdir ./src/Loon/bin/Release/net5.0/infer
           cp ./src/Loon/bin/Release/net5.0/Loon.dll ./src/Loon/bin/Release/net5.0/infer
