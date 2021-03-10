@@ -12,19 +12,14 @@ It's a work in progress and many, many things don't work. However, you can actua
 
 I've run this client successfully on both Windows and Linux. I don't own a Mac.
 
-### Building
+### How to Build
 
-#### Windows
+`dotnet build ./src/Loon.sln`
 
 Visual Studio:
 - Install the [Avalonia extension](https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaforVisualStudio)
-- Clone the project, load it into Visual Studio, press F5.
+- Clone, load, F5.
 
-Rider:
-- Clone and press F5.
 
-#### Linux
-from the project folder type: `dotnet run`
-
-Rider:
-- Clone and press F5.
+Linux and Mac OS:
+- Rider IDE supports Avalonia development
