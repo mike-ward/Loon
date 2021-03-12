@@ -16,18 +16,18 @@ namespace Twitter.Models
     /// </summary>
     public class RelatedLinkInfo
     {
-        public string Url { get; private set; } = string.Empty;
-        public string Title { get; private set; } = string.Empty;
-        public string? ImageUrl { get; private set; }
-        public string Description { get; private set; } = string.Empty;
-        public string SiteName { get; private set; } = string.Empty;
-        public string Language { get; private set; } = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        public string  Url         { get; private set; } = string.Empty;
+        public string  Title       { get; private set; } = string.Empty;
+        public string? ImageUrl    { get; private set; }
+        public string  Description { get; private set; } = string.Empty;
+        public string  SiteName    { get; private set; } = string.Empty;
+        public string  Language    { get; private set; } = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
         public TwitterStatus ImageTwitterStatus
         {
             get => new()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id       = Guid.NewGuid().ToString(),
                 Language = Language,
                 FullText = Description,
                 ExtendedEntities = new Entities
@@ -38,9 +38,9 @@ namespace Twitter.Models
                         {
                             new Media
                             {
-                                Url = ImageUrl,
-                                MediaUrl = ImageUrl,
-                                DisplayUrl = ImageUrl,
+                                Url         = ImageUrl,
+                                MediaUrl    = ImageUrl,
+                                DisplayUrl  = ImageUrl,
                                 ExpandedUrl = ImageUrl,
                             },
                         },
@@ -90,11 +90,10 @@ namespace Twitter.Models
 
         private static async ValueTask<RelatedLinkInfo?> GetLinkInfoAsync(string url)
         {
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            using var response = await request.GetResponseAsync().ConfigureAwait(false);
+            using var response = await OAuthApiRequest.MyHttpClient.GetAsync(url).ConfigureAwait(false);
+            using var reader   = new StreamReader(await response.Content.ReadAsStreamAsync().ConfigureAwait(false), Encoding.UTF8);
 
             var htmlBuilder = new StringBuilder();
-            using var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
 
             while (true)
             {
@@ -132,8 +131,8 @@ namespace Twitter.Models
             {
                 foreach (var tag in metaTags)
                 {
-                    var tagName = tag.Attributes["name"];
-                    var tagContent = tag.Attributes["content"];
+                    var tagName     = tag.Attributes["name"];
+                    var tagContent  = tag.Attributes["content"];
                     var tagProperty = tag.Attributes["property"];
 
                     if (tagName is not null && tagContent is not null)
@@ -219,6 +218,7 @@ namespace Twitter.Models
             {
                 source = source.Substring(0, length);
             }
+
             return source;
         }
     }

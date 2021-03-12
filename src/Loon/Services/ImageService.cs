@@ -2,19 +2,18 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Loon.Extensions;
-using Loon.Models;
 using Loon.Views.Content.Controls;
 using Twitter.Models;
+using Twitter.Services;
 
 namespace Loon.Services
 {
@@ -93,20 +92,17 @@ namespace Loon.Services
         {
             var cts = new CancellationTokenSource();
             cts.CancelAfter(1000);
-            var bytes = await File.ReadAllBytesAsync(url, cts.Token).ConfigureAwait(false);
-            using var stream = new MemoryStream(bytes);
+            var             bytes  = await File.ReadAllBytesAsync(url, cts.Token).ConfigureAwait(false);
+            await using var stream = new MemoryStream(bytes);
             return new Bitmap(stream);
         }
 
         private static async ValueTask<IImage?> TryGetImageAsync(string uri)
         {
-            var wc = WebRequest.Create(uri);
-            wc.Timeout = Constants.WebRequestTimeout;
-            using var response = await wc.GetResponseAsync().ConfigureAwait(false);
+            var response = await OAuthApiRequest.MyHttpClient.GetStreamAsync(uri).ConfigureAwait(false);
 
-            using var stream = response.GetResponseStream();
-            using var ms = new MemoryStream(); // Bitmap constructor needs a seekable stream
-            await stream.CopyToAsync(ms).ConfigureAwait(false);
+            await using var ms = new MemoryStream(); // Bitmap constructor needs a seekable stream
+            await response.CopyToAsync(ms).ConfigureAwait(false);
 
             ms.Position = 0;
             var bitmap = new Bitmap(ms);
@@ -118,7 +114,7 @@ namespace Loon.Services
         {
             try
             {
-                using var ms = new MemoryStream();
+                await using var ms = new MemoryStream();
                 image.Save(ms);
                 var cts = new CancellationTokenSource();
                 cts.CancelAfter(1000);
@@ -153,7 +149,7 @@ namespace Loon.Services
             if (Source is not null)
             {
                 // This space for rent
-                App.Current.Clipboard.SetTextAsync("bitmap copying not implemented");
+                Application.Current.Clipboard.SetTextAsync("bitmap copying not implemented");
             }
         }
 
@@ -161,7 +157,7 @@ namespace Loon.Services
 
         public static void OpenInViewer(Image image)
         {
-            var viewer = GetImageViewer(); // call here to close now
+            var viewer   = GetImageViewer(); // call here to close now
             var videoUrl = VideoUrl((image.DataContext) as Media);
 
             if (videoUrl.IsNotNullOrWhiteSpace())
@@ -179,7 +175,7 @@ namespace Loon.Services
                 else if (OperatingSystem.IsLinux())
                 {
                     pi.UseShellExecute = true;
-                    pi.FileName = videoUrl;
+                    pi.FileName        = videoUrl;
                 }
                 else
                 {
@@ -187,7 +183,7 @@ namespace Loon.Services
                 }
 
                 pi.CreateNoWindow = false;
-                process = Process.Start(pi);
+                process           = Process.Start(pi);
             }
             else if (image.Source is not null)
             {
@@ -198,14 +194,14 @@ namespace Loon.Services
 
         public static string VideoUrl(Media? media)
         {
-            if (media is null || media.VideoInfo is null || media.VideoInfo.Variants is null)
+            if (media?.VideoInfo?.Variants is null)
             {
                 return string.Empty;
             }
 
             return media.VideoInfo.Variants
-                .Select(variant => variant.Url)
-                .FirstOrDefault()
+                    .Select(variant => variant.Url)
+                    .FirstOrDefault()
                 ?? string.Empty;
         }
 

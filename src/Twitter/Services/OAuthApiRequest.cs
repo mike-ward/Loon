@@ -4,31 +4,33 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Twitter.Services
 {
-    internal sealed class OAuthApiRequest
+    public sealed class OAuthApiRequest
     {
-        public const string GET = "GET";
-        public const string POST = "POST";
+        public const  string     GET  = "GET";
+        public const  string     POST = "POST";
+        public static HttpClient MyHttpClient { get; } = new();
 
-        private string? ConsumerKey { get; }
-        private string? ConsumerSecret { get; }
-        private string? AccessToken { get; set; }
+        private string? ConsumerKey       { get; }
+        private string? ConsumerSecret    { get; }
+        private string? AccessToken       { get; set; }
         private string? AccessTokenSecret { get; set; }
 
         public OAuthApiRequest(string? consumerKey, string? consumerSecret)
         {
-            ConsumerKey = consumerKey;
+            ConsumerKey    = consumerKey;
             ConsumerSecret = consumerSecret;
         }
 
         public void AuthenticationTokens(string? accessToken, string? accessTokenSecret)
         {
-            AccessToken = accessToken;
+            AccessToken       = accessToken;
             AccessTokenSecret = accessTokenSecret;
         }
 
@@ -72,29 +74,31 @@ namespace Twitter.Services
         /// <returns></returns>
         private async ValueTask<T> OAuthRequestAsync<T>(string url, IEnumerable<(string, string)> parameters, string method)
         {
-            var post = string.Equals(method, POST, StringComparison.Ordinal);
-            var nonce = OAuth.Nonce();
-            var timestamp = OAuth.TimeStamp();
-            var parray = parameters.ToArray();
-            var signature = OAuth.Signature(method, url, nonce, timestamp, ConsumerKey!, ConsumerSecret!, AccessToken!, AccessTokenSecret!, parray);
-            var authorizeHeader = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
+            var post             = string.Equals(method, POST, StringComparison.Ordinal);
+            var nonce            = OAuth.Nonce();
+            var timestamp        = OAuth.TimeStamp();
+            var parray           = parameters.ToArray();
+            var signature        = OAuth.Signature(method, url, nonce, timestamp, ConsumerKey!, ConsumerSecret!, AccessToken!, AccessTokenSecret!, parray);
+            var authorizeHeader  = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
             var parameterStrings = parray.Select(p => $"{OAuth.UrlEncode(p.Item1)}={OAuth.UrlEncode(p.Item2)}");
-            if (!post) url += $"?{string.Join("&", parameterStrings)}";
 
-            var request = WebRequest.Create(url);
-            request.Method = method;
+            var request = new HttpRequestMessage();
             request.Headers.Add("Authorization", authorizeHeader);
 
             if (post)
             {
-                request.ContentType = "application/x-www-form-urlencoded";
-                using var requestStream = await request.GetRequestStreamAsync().ConfigureAwait(false);
-                await WriteTextToStreamAsync(requestStream, string.Join("&", parameterStrings)).ConfigureAwait(false);
+                request.Method  = HttpMethod.Post;
+                request.Content = new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes(string.Join("&", parameterStrings))));
+            }
+            else
+            {
+                request.Method =  HttpMethod.Get;
+                url            += $"?{string.Join("&", parameterStrings)}";
             }
 
-            using var response = await request.GetResponseAsync().ConfigureAwait(false);
-            using var stream = response.GetResponseStream();
-            var result = await JsonSerializer.DeserializeAsync<T>(stream).ConfigureAwait(false);
+            request.RequestUri = new Uri(url);
+            using var response = await MyHttpClient.SendAsync(request);
+            var       result   = await JsonSerializer.DeserializeAsync<T>(await response.Content.ReadAsStreamAsync()).ConfigureAwait(false);
             return result ?? throw new InvalidOperationException("JsonSerializer.DeserializeAsync<T>(stream) return null");
         }
 
@@ -107,6 +111,8 @@ namespace Twitter.Services
         /// <returns></returns>
         public async ValueTask AppendMediaAsync(string mediaId, int segmentIndex, byte[] payload)
         {
+            await Task.CompletedTask;
+            /*
             var nonce = OAuth.Nonce();
             var timestamp = OAuth.TimeStamp();
             const string uploadUrl = TwitterApi.UploadMediaUrl;
@@ -128,6 +134,7 @@ namespace Twitter.Services
             await WriteTextToStreamAsync(requestStream, $"--{boundary}--\r\n").ConfigureAwait(false);
 
             using var _ = await request.GetResponseAsync().ConfigureAwait(false);
+            */
         }
 
         private static async ValueTask TextParameterAsync(Stream stream, string boundary, string name, string payload)

@@ -6,7 +6,7 @@
     <Description>A gadget-like desktop twitter client.</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>Enable</Nullable>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
