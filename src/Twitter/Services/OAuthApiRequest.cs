@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -111,30 +110,30 @@ namespace Twitter.Services
         /// <returns></returns>
         public async ValueTask AppendMediaAsync(string mediaId, int segmentIndex, byte[] payload)
         {
-            await Task.CompletedTask;
-            /*
             var nonce = OAuth.Nonce();
             var timestamp = OAuth.TimeStamp();
             const string uploadUrl = TwitterApi.UploadMediaUrl;
             var signature = OAuth.Signature(POST, uploadUrl, nonce, timestamp, ConsumerKey!, ConsumerSecret!, AccessToken!, AccessTokenSecret!, parameters: null);
             var authorizeHeader = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
 
-            var request = WebRequest.Create(uploadUrl);
+
+            var request = new HttpRequestMessage();
             request.Headers.Add("Authorization", authorizeHeader);
-            request.Method = POST;
+            request.Method = HttpMethod.Post;
 
             var boundary = $"{Guid.NewGuid():N}";
-            request.ContentType = "multipart/form-data; boundary=" + boundary;
-
-            using var requestStream = await request.GetRequestStreamAsync().ConfigureAwait(false);
-            await TextParameterAsync(requestStream, boundary, "command", "APPEND").ConfigureAwait(false);
-            await TextParameterAsync(requestStream, boundary, "media_id", mediaId).ConfigureAwait(false);
-            await TextParameterAsync(requestStream, boundary, "segment_index", segmentIndex.ToString(CultureInfo.InvariantCulture)).ConfigureAwait(false);
-            await BinaryParameterAsync(requestStream, boundary, "media", payload).ConfigureAwait(false);
-            await WriteTextToStreamAsync(requestStream, $"--{boundary}--\r\n").ConfigureAwait(false);
-
-            using var _ = await request.GetResponseAsync().ConfigureAwait(false);
-            */
+            request.Headers.Add("ContentType", "multipart/form-data; boundary=" + boundary);
+            
+            var stream = new MemoryStream();
+            await TextParameterAsync(stream, boundary, "command", "APPEND").ConfigureAwait(false);
+            await TextParameterAsync(stream, boundary, "media_id", mediaId).ConfigureAwait(false);
+            await TextParameterAsync(stream, boundary, "segment_index", segmentIndex.ToString(CultureInfo.InvariantCulture)).ConfigureAwait(false);
+            await BinaryParameterAsync(stream, boundary, "media", payload).ConfigureAwait(false);
+            await WriteTextToStreamAsync(stream, $"--{boundary}--\r\n").ConfigureAwait(false);
+            stream.Flush();
+            
+            request.Content = new StreamContent(stream);
+            await MyHttpClient.SendAsync(request).ConfigureAwait(false);
         }
 
         private static async ValueTask TextParameterAsync(Stream stream, string boundary, string name, string payload)
