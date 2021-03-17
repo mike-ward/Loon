@@ -73,7 +73,7 @@
       <StackPanel Orientation="Horizontal">
         <TextBlock
           Classes="symbol1"
-          Foreground="{Binding User.IsFollowing, Converter={StaticResource BooleanToDynamicResource}, ConverterParameter={DynamicResource TwitterBlueBrush}}"
+          Foreground="{Binding User.IsFollowing, Converter={StaticResource BooleanToDynamicResource}, ConverterParameter={StaticResource TwitterBlueBrush}}"
           Text="{DynamicResource AddFriendSymbol}" />
         <TextBlock
           Classes="padleft"

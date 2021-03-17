@@ -34,10 +34,7 @@
         DataContextChanged="LoadImageAsync"
         Tag="profile">
         <Image.Clip>
-          <EllipseGeometry
-            Center="36,36"
-            RadiusX="36"
-            RadiusY="36" />
+          <EllipseGeometry Rect="0 0 72 72" />
         </Image.Clip>
       </Image>
     </Border>

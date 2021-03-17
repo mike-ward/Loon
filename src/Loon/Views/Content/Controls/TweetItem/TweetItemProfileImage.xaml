@@ -16,10 +16,7 @@
     DataContextChanged="UpdateImage"
     PointerPressed="OnPointerPressed">
     <Image.Clip>
-      <EllipseGeometry
-        Center="20,20"
-        RadiusX="20"
-        RadiusY="20" />
+      <EllipseGeometry Rect="0 0 40 40" />
     </Image.Clip>
   </Image>
 </UserControl>
