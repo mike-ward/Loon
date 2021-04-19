@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Loon.ViewModels.Content.Timelines;
+using Loon.Views.Content.Controls;
 using Loon.Views.Content.Timelines;
 using Twitter.Models;
 
@@ -25,16 +26,22 @@ namespace Loon.Views.Content.UserProfile
 
         protected override async void OnDataContextChanged(EventArgs e)
         {
-            if (this.FindControl<TimelineView>(UserTimelineName) is TimelineView tlv &&
-                tlv.DataContext is UserProfileTimelineViewModel vm)
+            if (this.FindControl<TimelineView>(UserTimelineName) is { DataContext: UserProfileTimelineViewModel vm })
             {
                 vm.StatusCollection.Clear();
 
                 if (DataContext is User user)
                 {
                     await Task.Delay(500).ConfigureAwait(true);
-                    var statuses = await vm.GetUserTimeline(user.ScreenName!).ConfigureAwait(true);
-                    vm.StatusCollection.AddRange(statuses.OrderByDescending(status => status.OriginatingStatus.CreatedDate));
+                    try
+                    {
+                        var statuses = await vm.GetUserTimeline(user.ScreenName!).ConfigureAwait(true);
+                        vm.StatusCollection.AddRange(statuses.OrderByDescending(status => status.OriginatingStatus.CreatedDate));
+                    }
+                    catch (Exception ex)
+                    {
+                        await MessageBox.Show(ex.Message, MessageBox.MessageBoxButtons.Ok);
+                    }
                 }
             }
 
