@@ -11,7 +11,5 @@
   d:DesignWidth="300"
   mc:Ignorable="d">
 
-  <tl:TimelineView
-    Name="{x:Static u:UserProfileTimeline.UserTimelineName}"
-    DataContext="{Binding Source={x:Type tv:UserProfileTimelineViewModel}, Converter={StaticResource VML}, Mode=OneTime}" />
+  <tl:TimelineView Name="{x:Static u:UserProfileTimeline.UserTimelineName}" />
 </UserControl>

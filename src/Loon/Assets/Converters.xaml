@@ -5,7 +5,6 @@
 
   <Style>
     <Style.Resources>
-      <converters:ViewModelLocator x:Key="VML" />
       <converters:BooleanToDynamicResourceConverter x:Key="BooleanToDynamicResource" />
       <converters:CountConverter x:Key="CountConverter" />
       <converters:DoubleFormatConverter x:Key="DoubleFormat" />

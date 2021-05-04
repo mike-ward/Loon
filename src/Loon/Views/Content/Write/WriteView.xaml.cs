@@ -1,5 +1,8 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Jab;
+using Loon.Services;
+using Loon.ViewModels.Content.Write;
 
 namespace Loon.Views.Content.Write
 {
@@ -8,6 +11,7 @@ namespace Loon.Views.Content.Write
         public WriteView()
         {
             InitializeComponent();
+            DataContext = Bootstrapper.ServiceProvider.GetService<WriteViewModel>();
         }
 
         private void InitializeComponent()

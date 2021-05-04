@@ -9,7 +9,6 @@
   xmlns:w="clr-namespace:Loon.Views.Content.Write"
   d:DesignHeight="450"
   d:DesignWidth="300"
-  DataContext="{Binding Source={x:Type vm:WriteViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
   mc:Ignorable="d">
 
   <StackPanel

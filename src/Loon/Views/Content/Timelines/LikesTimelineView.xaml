@@ -8,7 +8,6 @@
   xmlns:v="clr-namespace:Loon.ViewModels.Content.Timelines"
   d:DesignHeight="450"
   d:DesignWidth="300"
-  DataContext="{Binding Source={x:Type v:LikesTimelineViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
   mc:Ignorable="d">
   <t:TimelineView />
 </UserControl>

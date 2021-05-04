@@ -8,7 +8,6 @@
   d:DesignHeight="450"
   d:DesignWidth="300"
   Background="{DynamicResource ThemeBackgroundBrush}"
-  DataContext="{Binding Source={x:Type vm:GetPinViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
   mc:Ignorable="d">
 
   <Grid Margin="20">

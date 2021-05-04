@@ -2,7 +2,9 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Jab;
 using Loon.Interfaces;
+using Loon.Services;
 using Loon.ViewModels;
 
 namespace Loon.Views
@@ -13,6 +15,7 @@ namespace Loon.Views
 
         public MainWindow()
         {
+            DataContext = Bootstrapper.ServiceProvider.GetService<MainWindowViewModel>();
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();

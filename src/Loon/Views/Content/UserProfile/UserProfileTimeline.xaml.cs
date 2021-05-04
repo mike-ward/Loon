@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Jab;
+using Loon.Services;
 using Loon.ViewModels.Content.Timelines;
 using Loon.Views.Content.Controls;
 using Loon.Views.Content.Timelines;
@@ -17,6 +19,7 @@ namespace Loon.Views.Content.UserProfile
         public UserProfileTimeline()
         {
             InitializeComponent();
+            this.FindControl<TimelineView>(UserTimelineName).DataContext = Bootstrapper.ServiceProvider.GetService<UserProfileTimelineViewModel>();
         }
 
         private void InitializeComponent()

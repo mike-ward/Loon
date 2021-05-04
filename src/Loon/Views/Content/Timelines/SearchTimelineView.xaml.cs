@@ -1,6 +1,8 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Jab;
+using Loon.Services;
 using Loon.ViewModels.Content.Timelines;
 
 namespace Loon.Views.Content.Timelines
@@ -12,6 +14,7 @@ namespace Loon.Views.Content.Timelines
         public SearchTimelineView()
         {
             InitializeComponent();
+            DataContext = Bootstrapper.ServiceProvider.GetService<SearchTimelineViewModel>();
         }
 
         private void InitializeComponent()

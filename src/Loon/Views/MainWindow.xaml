@@ -10,7 +10,6 @@
   Title="{StaticResource title}"
   d:DesignHeight="600"
   d:DesignWidth="300"
-  DataContext="{Binding Source={x:Type vm:MainWindowViewModel}, Converter={StaticResource VML}, Mode=OneTime}"
   ExtendClientAreaTitleBarHeightHint="1"
   ExtendClientAreaToDecorationsHint="True"
   FontFamily="{StaticResource AppFont}"
