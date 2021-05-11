@@ -12,7 +12,7 @@ namespace Loon.Services
 
         public TwitterService()
         {
-            const string consumerKey = "ZScn2AEIQrfC48Zlw";
+            const string consumerKey    = "ZScn2AEIQrfC48Zlw";
             const string consumerSecret = "8gKdPBwUfZCQfUiyeFeEwVBQiV3q50wIOrIjoCxa2Q";
             twitterApi = new TwitterApi(consumerKey, consumerSecret);
         }

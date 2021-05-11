@@ -7,7 +7,7 @@ namespace Loon.Views.Content.Controls.TweetItem
     {
         public TweetItemQuoted()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

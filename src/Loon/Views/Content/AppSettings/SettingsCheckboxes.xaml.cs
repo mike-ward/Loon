@@ -7,7 +7,7 @@ namespace Loon.Views.Content.AppSettings
     {
         public SettingsCheckboxes()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

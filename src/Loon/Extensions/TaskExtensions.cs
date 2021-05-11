@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Loon.Services;
 
-#pragma warning disable S3168 // "async" methods should not return "void"
+#pragma warning disable S3168        // "async" methods should not return "void"
 #pragma warning disable AsyncFixer03 // Fire & forget async void methods
 
 namespace Loon.Extensions

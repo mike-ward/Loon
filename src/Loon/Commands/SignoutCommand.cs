@@ -13,9 +13,9 @@ namespace Loon.Commands
 
         public override void Execute(object? parameter)
         {
-            _settings.AccessToken = null;
+            _settings.AccessToken       = null;
             _settings.AccessTokenSecret = null;
-            _settings.ScreenName = null;
+            _settings.ScreenName        = null;
         }
     }
 }

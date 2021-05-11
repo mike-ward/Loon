@@ -50,14 +50,14 @@ namespace Loon.Services
         public static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)> FlowContentNodes(
             TwitterStatus twitterStatus)
         {
-            var start = 0;
+            var start         = 0;
             var twitterString = new TwitterString(twitterStatus.FullText ?? twitterStatus.Text ?? string.Empty);
 
             foreach (var item in FlowControlItems(twitterStatus.Entities ?? new Entities()))
             {
                 if (item.Start >= start)
                 {
-                    var len = item.Start - start;
+                    var len  = item.Start - start;
                     var text = twitterString.Substring(start, len);
                     yield return (FlowContentNodeType.Text, text);
                 }
@@ -73,48 +73,48 @@ namespace Loon.Services
             FlowControlItems(Entities entities)
         {
             var urls = entities.Urls
-                           ?.Select(url =>
-                           (
-                               FlowContentNodeType: FlowContentNodeType.Url,
-                               Text: url.ExpandedUrl,
-                               Start: url.Indices[0],
-                               End: url.Indices[1]
-                           ))
-                       ?? Enumerable
-                           .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
+                    ?.Select(url =>
+                    (
+                        FlowContentNodeType: FlowContentNodeType.Url,
+                        Text: url.ExpandedUrl,
+                        Start: url.Indices[0],
+                        End: url.Indices[1]
+                    ))
+                ?? Enumerable
+                    .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
 
             var mentions = entities.Mentions
-                               ?.Select(mention =>
-                               (
-                                   FlowContentNodeType: FlowContentNodeType.Mention,
-                                   Text: mention.ScreenName,
-                                   Start: mention.Indices[0],
-                                   End: mention.Indices[1]
-                               ))
-                           ?? Enumerable
-                               .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
+                    ?.Select(mention =>
+                    (
+                        FlowContentNodeType: FlowContentNodeType.Mention,
+                        Text: mention.ScreenName,
+                        Start: mention.Indices[0],
+                        End: mention.Indices[1]
+                    ))
+                ?? Enumerable
+                    .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
 
             var hashTags = entities.HashTags
-                               ?.Select(hashtag =>
-                               (
-                                   FlowContentNodeType: FlowContentNodeType.HashTag,
-                                   Text: hashtag.Text,
-                                   Start: hashtag.Indices[0],
-                                   End: hashtag.Indices[1]
-                               ))
-                           ?? Enumerable
-                               .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
+                    ?.Select(hashtag =>
+                    (
+                        FlowContentNodeType: FlowContentNodeType.HashTag,
+                        hashtag.Text,
+                        Start: hashtag.Indices[0],
+                        End: hashtag.Indices[1]
+                    ))
+                ?? Enumerable
+                    .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
 
             var media = entities.Media
-                            ?.Select(mediaItem =>
-                            (
-                                FlowContentNodeType: FlowContentNodeType.Media,
-                                Text: mediaItem.Url,
-                                Start: mediaItem.Indices[0],
-                                End: mediaItem.Indices[1]
-                            ))
-                        ?? Enumerable
-                            .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
+                    ?.Select(mediaItem =>
+                    (
+                        FlowContentNodeType: FlowContentNodeType.Media,
+                        Text: mediaItem.Url,
+                        Start: mediaItem.Indices[0],
+                        End: mediaItem.Indices[1]
+                    ))
+                ?? Enumerable
+                    .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
 
             return urls
                 .Concat(mentions)
@@ -135,8 +135,8 @@ namespace Loon.Services
         {
             var button = new Button();
             button.Classes.Add("inline");
-            button.Click += delegate { command(); };
-            button.ContextMenu = contextMenu;
+            button.Click       += delegate { command(); };
+            button.ContextMenu =  contextMenu;
 
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
@@ -172,37 +172,32 @@ namespace Loon.Services
 
         private static ContextMenu ContextMenu(string link)
         {
-            var copyLinkAddress = new MenuItem
-            {
-                Header = App.GetString("copy-link-address"),
-                Command = App.Commands.CopyToClipboard,
-                CommandParameter = link,
+            var copyLinkAddress = new MenuItem {
+                Header           = App.GetString("copy-link-address"),
+                Command          = App.Commands.CopyToClipboard,
+                CommandParameter = link
             };
 
-            var emailLinkAddress = new MenuItem
-            {
-                Header = App.GetString("email-link"),
+            var emailLinkAddress = new MenuItem {
+                Header           = App.GetString("email-link"),
                 CommandParameter = link,
-                Icon = new TextBlock {Classes = new Classes("symbol", "padleft"), Text = App.GetString("MailSymbol")},
+                Icon             = new TextBlock { Classes = new Classes("symbol", "padleft"), Text = App.GetString("MailSymbol") }
             };
 
-            var shareLinkTwitter = new MenuItem
-            {
-                Header = App.GetString("share-link-twitter"),
+            var shareLinkTwitter = new MenuItem {
+                Header           = App.GetString("share-link-twitter"),
                 CommandParameter = link,
                 Icon = new TextBlock
-                    {Classes = new Classes("symbol1", "padleft"), Text = App.GetString("TwitterSymbol")},
+                    { Classes = new Classes("symbol1", "padleft"), Text = App.GetString("TwitterSymbol") }
             };
 
-            return new ContextMenu
-            {
+            return new ContextMenu {
                 HorizontalOffset = 15,
-                VerticalOffset = 10,
-                Items = new[]
-                {
+                VerticalOffset   = 10,
+                Items = new[] {
                     copyLinkAddress,
                     emailLinkAddress,
-                    shareLinkTwitter,
+                    shareLinkTwitter
                 }
             };
         }

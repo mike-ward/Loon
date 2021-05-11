@@ -8,14 +8,14 @@ namespace Twitter.Services
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded")]
     public class TwitterApi
     {
-        private string ConsumerKey { get; }
-        private string ConsumerSecret { get; }
+        private          string          ConsumerKey    { get; }
+        private          string          ConsumerSecret { get; }
         private readonly OAuthApiRequest oAuthApiRequest;
 
         public TwitterApi(string consumerKey, string consumerSecret)
         {
-            ConsumerKey = consumerKey;
-            ConsumerSecret = consumerSecret;
+            ConsumerKey     = consumerKey;
+            ConsumerSecret  = consumerSecret;
             oAuthApiRequest = new OAuthApiRequest(ConsumerKey, ConsumerSecret);
         }
 
@@ -53,6 +53,7 @@ namespace Twitter.Services
             {
                 status.UpdateFromStatus(status);
             }
+
             return statuses;
         }
 
@@ -90,19 +91,19 @@ namespace Twitter.Services
         {
             var user = await oAuthApiRequest
                 .GetAsync<User>("https://api.twitter.com/1.1/users/show.json",
-                    new[]
-                    {
+                    new[] {
                         TwitterOptions.IncludeEntities(),
                         TwitterOptions.ExtendedTweetMode(),
-                        TwitterOptions.ScreenName(screenName),
+                        TwitterOptions.ScreenName(screenName)
                     })
                 .ConfigureAwait(false);
 
             if (UserConnectionsService.LookupUserConnections(user.Id) is UserConnection userConnections)
             {
-                user.IsFollowing = userConnections.IsFollowing;
+                user.IsFollowing  = userConnections.IsFollowing;
                 user.IsFollowedBy = userConnections.IsFollowedBy;
             }
+
             return user;
         }
 
@@ -110,20 +111,19 @@ namespace Twitter.Services
         {
             return oAuthApiRequest
                 .GetAsync<Tweet>("https://api.twitter.com/1.1/search/tweets.json",
-                    new[]
-                    {
+                    new[] {
                         TwitterOptions.Count(100),
                         TwitterOptions.Query(query),
                         TwitterOptions.IncludeEntities(),
-                        TwitterOptions.ExtendedTweetMode(),
+                        TwitterOptions.ExtendedTweetMode()
                     });
         }
 
         public ValueTask RetweetStatus(string statusId)
         {
             return oAuthApiRequest
-               .PostAsync($"https://api.twitter.com/1.1/statuses/retweet/{statusId}.json",
-                   Enumerable.Empty<(string, string)>());
+                .PostAsync($"https://api.twitter.com/1.1/statuses/retweet/{statusId}.json",
+                    Enumerable.Empty<(string, string)>());
         }
 
         public ValueTask UnretweetStatus(string statusId)
@@ -137,36 +137,35 @@ namespace Twitter.Services
         {
             return oAuthApiRequest
                 .PostAsync("https://api.twitter.com/1.1/favorites/create.json",
-                     new[] { TwitterOptions.Id(statusId) });
+                    new[] { TwitterOptions.Id(statusId) });
         }
 
         public ValueTask DestroyFavorite(string statusId)
         {
             return oAuthApiRequest
-               .PostAsync("https://api.twitter.com/1.1/favorites/destroy.json",
-                  new[] { TwitterOptions.Id(statusId) });
+                .PostAsync("https://api.twitter.com/1.1/favorites/destroy.json",
+                    new[] { TwitterOptions.Id(statusId) });
         }
 
         public ValueTask Follow(string screenName)
         {
             return oAuthApiRequest
-               .PostAsync("https://api.twitter.com/1.1/friendships/create.json",
-                   new[] { TwitterOptions.ScreenName(screenName), });
+                .PostAsync("https://api.twitter.com/1.1/friendships/create.json",
+                    new[] { TwitterOptions.ScreenName(screenName) });
         }
 
         public ValueTask Unfollow(string screenName)
         {
             return oAuthApiRequest
-               .PostAsync("https://api.twitter.com/1.1/friendships/destroy.json",
-                   new[] { TwitterOptions.ScreenName(screenName) });
+                .PostAsync("https://api.twitter.com/1.1/friendships/destroy.json",
+                    new[] { TwitterOptions.ScreenName(screenName) });
         }
 
         public ValueTask<TwitterStatus> UpdateStatus(string text, string? replyToStatusId, string? attachmentUrl, string[]? mediaIds)
         {
-            var parameters = new List<(string, string)>
-            {
+            var parameters = new List<(string, string)> {
                 TwitterOptions.Status(text),
-                TwitterOptions.ExtendedTweetMode(),
+                TwitterOptions.ExtendedTweetMode()
             };
 
             if (!string.IsNullOrEmpty(replyToStatusId))
@@ -193,11 +192,10 @@ namespace Twitter.Services
         {
             return oAuthApiRequest
                 .GetAsync<TwitterStatus>("https://api.twitter.com/1.1/statuses/show.json",
-                    new[]
-                    {
+                    new[] {
                         TwitterOptions.Id(statusId),
                         TwitterOptions.IncludeEntities(),
-                        TwitterOptions.ExtendedTweetMode(),
+                        TwitterOptions.ExtendedTweetMode()
                     });
         }
 
@@ -207,28 +205,26 @@ namespace Twitter.Services
         {
             return oAuthApiRequest
                 .PostAsync<UploadMedia>(UploadMediaUrl,
-                    new[]
-                    {
+                    new[] {
                         TwitterOptions.Command("INIT"),
                         TwitterOptions.TotalBytes(totalBytes),
-                        TwitterOptions.MediaType(mediaType),
+                        TwitterOptions.MediaType(mediaType)
                     });
         }
 
         public ValueTask UploadMediaAppend(string mediaId, int segmentIndex, byte[] data)
         {
             return oAuthApiRequest
-               .AppendMediaAsync(mediaId, segmentIndex, data);
+                .AppendMediaAsync(mediaId, segmentIndex, data);
         }
 
         public ValueTask<UploadMedia> UploadMediaStatus(string mediaId)
         {
             return oAuthApiRequest
                 .GetAsync<UploadMedia>(UploadMediaUrl,
-                    new[]
-                    {
+                    new[] {
                         TwitterOptions.Command("STATUS"),
-                        TwitterOptions.MediaId(mediaId),
+                        TwitterOptions.MediaId(mediaId)
                     });
         }
 
@@ -236,10 +232,9 @@ namespace Twitter.Services
         {
             return oAuthApiRequest
                 .PostAsync<UploadMedia>(UploadMediaUrl,
-                    new[]
-                    {
+                    new[] {
                         TwitterOptions.Command("FINALIZE"),
-                        TwitterOptions.MediaId(mediaId),
+                        TwitterOptions.MediaId(mediaId)
                     });
         }
 
@@ -247,9 +242,8 @@ namespace Twitter.Services
         {
             return oAuthApiRequest
                 .GetAsync<IEnumerable<UserConnection>>("https://api.twitter.com/1.1/friendships/lookup.json",
-                    new[]
-                    {
-                       TwitterOptions.UserIds(ids),
+                    new[] {
+                        TwitterOptions.UserIds(ids)
                     });
         }
 
@@ -257,13 +251,12 @@ namespace Twitter.Services
         {
             return await oAuthApiRequest
                 .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/statuses/user_timeline.json",
-                    new[]
-                    {
+                    new[] {
                         TwitterOptions.ScreenName(screenName),
                         TwitterOptions.Count(50),
                         TwitterOptions.IncludeEntities(),
                         TwitterOptions.IncludeRetweets(),
-                        TwitterOptions.ExtendedTweetMode(),
+                        TwitterOptions.ExtendedTweetMode()
                     })
                 .ConfigureAwait(false);
         }

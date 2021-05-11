@@ -13,7 +13,7 @@ namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemProfileImage : UserControl
     {
-        private const int profileSize = 73; // Twitter's bigger profile image size is 48x48
+        private const           int    profileSize = 73; // Twitter's bigger profile image size is 48x48
         private static readonly Bitmap EmptyBitmap = new WriteableBitmap(new PixelSize(profileSize, profileSize), new Vector(96, 96), PixelFormat.Bgra8888, AlphaFormat.Premul);
 
         public TweetItemProfileImage()
@@ -27,7 +27,7 @@ namespace Loon.Views.Content.Controls.TweetItem
         }
 
 #pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
-#pragma warning disable S1144 // (used in XAML) Unused private types or members should be removedremoved
+#pragma warning disable S1144   // (used in XAML) Unused private types or members should be removedremoved
 
         private async void UpdateImage(object? sender, EventArgs e)
         {

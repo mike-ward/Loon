@@ -13,7 +13,9 @@ namespace Loon.Views.Content.Layouts
         {
             return new Size(
                 availableSize.Width,
-                Children.Count > 0 ? Models.Constants.ImagePanelHeight : 0);
+                Children.Count > 0
+                    ? Models.Constants.ImagePanelHeight
+                    : 0);
         }
 
         protected override Size ArrangeOverride(Size finalSize)

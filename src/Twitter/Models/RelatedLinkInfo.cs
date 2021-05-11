@@ -25,26 +25,22 @@ namespace Twitter.Models
 
         public TwitterStatus ImageTwitterStatus
         {
-            get => new()
-            {
+            get => new() {
                 Id       = Guid.NewGuid().ToString(),
                 Language = Language,
                 FullText = Description,
-                ExtendedEntities = new Entities
-                {
+                ExtendedEntities = new Entities {
                     Media = string.IsNullOrWhiteSpace(ImageUrl)
                         ? null
-                        : new[]
-                        {
-                            new Media
-                            {
+                        : new[] {
+                            new Media {
                                 Url         = ImageUrl,
                                 MediaUrl    = ImageUrl,
                                 DisplayUrl  = ImageUrl,
-                                ExpandedUrl = ImageUrl,
-                            },
-                        },
-                },
+                                ExpandedUrl = ImageUrl
+                            }
+                        }
+                }
             };
         }
 

@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
@@ -26,7 +27,9 @@ namespace Loon.Views.Content.UserProfile
             if (DataContext is User user &&
                 this.FindControl<TextBlock>(TextBlockName) is TextBlock textBlock)
             {
-                textBlock.Text = App.GetString(user.IsFollowing ? "profile-following" : "profile-follow");
+                textBlock.Text = App.GetString(user.IsFollowing
+                    ? "profile-following"
+                    : "profile-follow");
             }
         }
 
@@ -37,7 +40,9 @@ namespace Loon.Views.Content.UserProfile
                 user.IsFollowing &&
                 this.FindControl<TextBlock>(TextBlockName) is TextBlock textBlock)
             {
-                border.Background = App.Current.TryFindResource("RedHoverBrush", out var brush) ? (IBrush)brush! : Brushes.Black;
+                border.Background = Application.Current.TryFindResource("RedHoverBrush", out var brush)
+                    ? (IBrush)brush!
+                    : Brushes.Black;
                 textBlock.Text = App.GetString("profile-unfollow");
             }
         }
@@ -48,8 +53,12 @@ namespace Loon.Views.Content.UserProfile
                 DataContext is User user &&
                 this.FindControl<TextBlock>(TextBlockName) is TextBlock textBlock)
             {
-                border.Background = App.Current.TryFindResource("TwitterBlueBrush", out var brush) ? (IBrush)brush! : Brushes.Black;
-                textBlock.Text = App.GetString(user.IsFollowing ? "profile-following" : "profile-follow");
+                border.Background = Application.Current.TryFindResource("TwitterBlueBrush", out var brush)
+                    ? (IBrush)brush!
+                    : Brushes.Black;
+                textBlock.Text = App.GetString(user.IsFollowing
+                    ? "profile-following"
+                    : "profile-follow");
             }
         }
     }

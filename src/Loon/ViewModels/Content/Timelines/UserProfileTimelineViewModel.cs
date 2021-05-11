@@ -8,8 +8,8 @@ namespace Loon.ViewModels.Content.Timelines
 {
     internal class UserProfileTimelineViewModel
     {
-        private readonly ITwitterService twitterService;
-        public IAvaloniaList<TwitterStatus> StatusCollection { get; } = new AvaloniaList<TwitterStatus>();
+        private readonly ITwitterService              twitterService;
+        public           IAvaloniaList<TwitterStatus> StatusCollection { get; } = new AvaloniaList<TwitterStatus>();
 
         public UserProfileTimelineViewModel(ITwitterService twitterService)
         {

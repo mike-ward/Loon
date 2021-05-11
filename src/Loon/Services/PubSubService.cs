@@ -7,15 +7,15 @@ namespace Loon.Services
 {
     public static class PubSubs
     {
-        public static PubSubService OpenPreviousTab { get; } = new();
-        public static PubSubService<TwitterStatus> AddStatus { get; } = new();
-        public static PubSubService<TwitterStatus?> OpenWriteTab { get; } = new();
-        public static PubSubService<object?> SetUserProfileContext { get; } = new(); // waiting for discriminated unions
+        public static PubSubService                 OpenPreviousTab       { get; } = new();
+        public static PubSubService<TwitterStatus>  AddStatus             { get; } = new();
+        public static PubSubService<TwitterStatus?> OpenWriteTab          { get; } = new();
+        public static PubSubService<object?>        SetUserProfileContext { get; } = new(); // waiting for discriminated unions
     }
 
     public class PubSubService<T>
     {
-        private int nextId;
+        private          int                                  nextId;
         private readonly ConcurrentDictionary<int, Action<T>> subscribers = new();
 
         public int Subscribe(Action<T> handler)
@@ -48,7 +48,7 @@ namespace Loon.Services
 
     public class PubSubService
     {
-        private int nextId;
+        private          int                               nextId;
         private readonly ConcurrentDictionary<int, Action> subscribers = new();
 
         public int Subscribe(Action handler)

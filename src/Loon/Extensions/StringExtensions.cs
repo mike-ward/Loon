@@ -46,6 +46,7 @@ namespace Loon.Extensions
             {
                 source = source.Substring(0, length) + "…";
             }
+
             return source;
         }
 

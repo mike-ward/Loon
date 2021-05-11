@@ -13,8 +13,8 @@ namespace Loon.ViewModels
 
         public MainWindowViewModel(ISettings settings, ITwitterService twitterService)
         {
-            Settings = settings;
-            this.twitterService = twitterService;
+            Settings                 =  settings;
+            this.twitterService      =  twitterService;
             settings.PropertyChanged += OnSettingsUpdated;
         }
 
@@ -33,16 +33,16 @@ namespace Loon.ViewModels
 
         private void SetWindowLocation(IWindow window)
         {
-            window.Width = Settings.Location.Width;
-            window.Height = Settings.Location.Height;
+            window.Width    = Settings.Location.Width;
+            window.Height   = Settings.Location.Height;
             window.Position = new PixelPoint(Settings.Location.X, Settings.Location.Y);
         }
 
         private void UpdateWindowLocation(IWindow window)
         {
-            Settings.Location.X = window.Position.X;
-            Settings.Location.Y = window.Position.Y;
-            Settings.Location.Width = window.Width;
+            Settings.Location.X      = window.Position.X;
+            Settings.Location.Y      = window.Position.Y;
+            Settings.Location.Width  = window.Width;
             Settings.Location.Height = window.Height;
         }
 

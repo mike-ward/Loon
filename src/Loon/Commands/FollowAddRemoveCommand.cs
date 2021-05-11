@@ -8,7 +8,7 @@ namespace Loon.Commands
 {
     public class FollowAddRemoveCommand : BaseCommand
     {
-        private bool inCommand;
+        private bool            inCommand;
         private ITwitterService TwitterService { get; }
 
         public FollowAddRemoveCommand(ITwitterService twitterService)
@@ -38,7 +38,7 @@ namespace Loon.Commands
                         if (user.IsFollowing)
                         {
                             await TwitterService.Unfollow(screenName).ConfigureAwait(true);
-                            user.Followers = Math.Max(0, user.Followers - 1);
+                            user.Followers   = Math.Max(0, user.Followers - 1);
                             user.IsFollowing = false;
                         }
                         else

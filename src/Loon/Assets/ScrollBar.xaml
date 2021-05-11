@@ -10,8 +10,6 @@
           Background="Transparent"
           UseLayoutRounding="False">
           <Track
-            Grid.Row="1"
-            Grid.Column="1"
             IsDirectionReversed="True"
             Maximum="{TemplateBinding Maximum}"
             Minimum="{TemplateBinding Minimum}"
@@ -45,8 +43,6 @@
           Background="{DynamicResource ThemeControlMidBrush}"
           UseLayoutRounding="False">
           <Track
-            Grid.Row="1"
-            Grid.Column="1"
             Maximum="{TemplateBinding Maximum}"
             Minimum="{TemplateBinding Minimum}"
             Orientation="{TemplateBinding Orientation}"

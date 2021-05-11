@@ -20,7 +20,7 @@ namespace Loon.Views.Content.Controls.TweetItem
         }
 
 #pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
-#pragma warning disable S1144 // (used in XAML) Unused private types or members should be removed
+#pragma warning disable S1144   // (used in XAML) Unused private types or members should be removed
 
         private async void LoadMediaAsync(object? sender, EventArgs e)
         {

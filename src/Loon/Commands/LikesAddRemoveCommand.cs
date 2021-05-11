@@ -8,7 +8,7 @@ namespace Loon.Commands
 {
     public class LikesAddRemoveCommand : BaseCommand
     {
-        private bool inCommand;
+        private bool            inCommand;
         private ITwitterService TwitterService { get; }
 
         public LikesAddRemoveCommand(ITwitterService twitterService)
@@ -35,7 +35,7 @@ namespace Loon.Commands
                     if (status.Favorited)
                     {
                         await TwitterService.DestroyFavorite(status.Id).ConfigureAwait(true);
-                        status.Favorited = false;
+                        status.Favorited     = false;
                         status.FavoriteCount = Math.Max(0, status.FavoriteCount - 1);
                     }
                     else

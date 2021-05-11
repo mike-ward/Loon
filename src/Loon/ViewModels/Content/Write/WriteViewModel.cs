@@ -15,26 +15,55 @@ namespace Loon.ViewModels.Content.Write
 {
     internal class WriteViewModel : NotifyPropertyChanged
     {
-        private readonly ISettings settings;
+        private readonly ISettings       settings;
         private readonly ITwitterService twitterService;
 
-        private static readonly string tweetButtonTextConst = App.GetString("tweet-button-text");
+        private static readonly string tweetButtonTextConst    = App.GetString("tweet-button-text");
         private static readonly string tweetingButtonTextConst = App.GetString("tweeting-button-text");
 
         private TwitterStatus? twitterStatus;
-        public TwitterStatus? Me { get => twitterStatus; set => SetProperty(ref twitterStatus, value); }
+
+        public TwitterStatus? Me
+        {
+            get => twitterStatus;
+            set => SetProperty(ref twitterStatus, value);
+        }
+
         private TwitterStatus? replyTo;
-        public TwitterStatus? ReplyTo { get => replyTo; set => SetProperty(ref replyTo, value); }
+
+        public TwitterStatus? ReplyTo
+        {
+            get => replyTo;
+            set => SetProperty(ref replyTo, value);
+        }
+
         private string tweetText = string.Empty;
-        public string TweetText { get => tweetText; set => SetProperty(ref tweetText, value); }
+
+        public string TweetText
+        {
+            get => tweetText;
+            set => SetProperty(ref tweetText, value);
+        }
+
         private string tweetButtonText = tweetButtonTextConst;
-        public string TweetButtonText { get => tweetButtonText; set => SetProperty(ref tweetButtonText, value); }
+
+        public string TweetButtonText
+        {
+            get => tweetButtonText;
+            set => SetProperty(ref tweetButtonText, value);
+        }
+
         private bool isTweeting;
-        public bool IsTweeting { get => isTweeting; set => SetProperty(ref isTweeting, value); }
+
+        public bool IsTweeting
+        {
+            get => isTweeting;
+            set => SetProperty(ref isTweeting, value);
+        }
 
         public WriteViewModel(ISettings settings, ITwitterService twitterService)
         {
-            this.settings = settings;
+            this.settings       = settings;
             this.twitterService = twitterService;
             PubSubs.OpenWriteTab.Subscribe(twitterStatus => ReplyTo = twitterStatus);
             settings.PropertyChanged += Settings_PropertyChanged;
@@ -43,7 +72,8 @@ namespace Loon.ViewModels.Content.Write
         public async ValueTask OnTweet()
         {
             if (TweetText.Length == 0) { return; }
-            IsTweeting = true;
+
+            IsTweeting      = true;
             TweetButtonText = tweetingButtonTextConst;
 
             try
@@ -57,8 +87,9 @@ namespace Loon.ViewModels.Content.Write
             {
                 var stream = ex.Response?.GetResponseStream();
                 if (stream is null) { return; }
-                using var reader = new StreamReader(stream);
-                var message = await reader.ReadToEndAsync().ConfigureAwait(true);
+
+                using var reader  = new StreamReader(stream);
+                var       message = await reader.ReadToEndAsync().ConfigureAwait(true);
 
                 await MessageBox
                     .Show(message, MessageBox.MessageBoxButtons.Ok)
@@ -74,9 +105,9 @@ namespace Loon.ViewModels.Content.Write
 
         private void Reset()
         {
-            ReplyTo = null;
-            IsTweeting = false;
-            TweetText = string.Empty;
+            ReplyTo         = null;
+            IsTweeting      = false;
+            TweetText       = string.Empty;
             TweetButtonText = tweetButtonText;
         }
 

@@ -13,28 +13,39 @@ namespace Loon.Models
 {
     public class Timeline : NotifyPropertyChanged
     {
-        private bool inUpdate;
+        private          bool            inUpdate;
         private readonly DispatcherTimer updateTimer;
 
-        public string TimelineName { get; }
-        public ISettings Settings { get; }
-        public AvaloniaList<TwitterStatus> StatusCollection { get; } = new();
-        public IEnumerable<Func<Timeline, ValueTask>> UpdateTasks { get; }
-        public ISet<string> AlreadyAdded { get; } = new HashSet<string>(StringComparer.Ordinal);
-        public ISet<TwitterStatus> PendingStatusCollection { get; } = new HashSet<TwitterStatus>();
-        public bool IsScrolled { get; set; }
-        private string? exceptionMessage;
-        public string? ExceptionMessage { get => exceptionMessage; set => SetProperty(ref exceptionMessage, value); }
+        public  string                                 TimelineName            { get; }
+        public  ISettings                              Settings                { get; }
+        public  AvaloniaList<TwitterStatus>            StatusCollection        { get; } = new();
+        public  IEnumerable<Func<Timeline, ValueTask>> UpdateTasks             { get; }
+        public  ISet<string>                           AlreadyAdded            { get; } = new HashSet<string>(StringComparer.Ordinal);
+        public  ISet<TwitterStatus>                    PendingStatusCollection { get; } = new HashSet<TwitterStatus>();
+        public  bool                                   IsScrolled              { get; set; }
+        private string?                                exceptionMessage;
+
+        public string? ExceptionMessage
+        {
+            get => exceptionMessage;
+            set => SetProperty(ref exceptionMessage, value);
+        }
+
         private bool pendingStatusAvailable;
-        public bool PendingStatusesAvailable { get => pendingStatusAvailable; set => SetProperty(ref pendingStatusAvailable, value); }
+
+        public bool PendingStatusesAvailable
+        {
+            get => pendingStatusAvailable;
+            set => SetProperty(ref pendingStatusAvailable, value);
+        }
 
         public Timeline(string name, double intervalInMinutes, IEnumerable<Func<Timeline, ValueTask>> updateTasks, ISettings settings)
         {
             TimelineName = name;
-            UpdateTasks = updateTasks;
-            Settings = settings;
+            UpdateTasks  = updateTasks;
+            Settings     = settings;
 
-            updateTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(intervalInMinutes) };
+            updateTimer      =  new DispatcherTimer { Interval = TimeSpan.FromMinutes(intervalInMinutes) };
             updateTimer.Tick += UpdateTimerTick;
 
             Settings.PropertyChanged += CheckAuthentication;
@@ -55,7 +66,7 @@ namespace Loon.Models
                     return;
                 }
 
-                inUpdate = true;
+                inUpdate         = true;
                 ExceptionMessage = null;
 
                 TraceService.Message($"{TimelineName}: Updating");
@@ -96,11 +107,11 @@ namespace Loon.Models
             if (!updateTimer.IsEnabled)
             {
                 await Dispatcher.UIThread.InvokeAsync(async () =>
-                {
-                    updateTimer.Start();
-                    await UpdateAsync().ConfigureAwait(false);
-                })
-                .ConfigureAwait(false);
+                    {
+                        updateTimer.Start();
+                        await UpdateAsync().ConfigureAwait(false);
+                    })
+                    .ConfigureAwait(false);
             }
         }
 

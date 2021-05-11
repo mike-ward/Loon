@@ -8,13 +8,13 @@ namespace Loon.Commands
 {
     public class RetweetCommand : BaseCommand
     {
-        private bool inCommand;
-        private ISettings Settings { get; }
+        private bool            inCommand;
+        private ISettings       Settings       { get; }
         private ITwitterService TwitterService { get; }
 
         public RetweetCommand(ISettings settings, ITwitterService twitterService)
         {
-            Settings = settings;
+            Settings       = settings;
             TwitterService = twitterService;
         }
 
@@ -43,7 +43,7 @@ namespace Loon.Commands
                         if (status.RetweetedByMe)
                         {
                             await TwitterService.UnretweetStatus(status.Id).ConfigureAwait(true);
-                            status.RetweetCount = Math.Max(0, status.RetweetCount - 1);
+                            status.RetweetCount  = Math.Max(0, status.RetweetCount - 1);
                             status.RetweetedByMe = false;
                         }
                         else

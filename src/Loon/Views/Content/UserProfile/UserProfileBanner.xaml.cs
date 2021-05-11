@@ -35,11 +35,10 @@ namespace Loon.Views.Content.UserProfile
                     {
                         CollapseHeightIfNoBanner(user);
 
-                        var uri = which switch
-                        {
+                        var uri = which switch {
                             "profile" => user.ProfileImageUrlBigger,
-                            "banner" => user.ProfileBannerUrlSmall,
-                            _ => null
+                            "banner"  => user.ProfileBannerUrlSmall,
+                            _         => null
                         };
 
                         if (uri.IsNotNullOrWhiteSpace())

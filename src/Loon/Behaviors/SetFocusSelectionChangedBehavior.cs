@@ -12,8 +12,8 @@ namespace Loon.Behaviors
     public class SetFocusSelectionChangedBehavior : AvaloniaObject
     {
         public static readonly AttachedProperty<string> NameProperty =
-        AvaloniaProperty.RegisterAttached<SetFocusSelectionChangedBehavior, TabControl, string>
-            ("Name", string.Empty, false, BindingMode.OneTime, null, FocusType);
+            AvaloniaProperty.RegisterAttached<SetFocusSelectionChangedBehavior, TabControl, string>
+                ("Name", string.Empty, false, BindingMode.OneTime, null, FocusType);
 
         public static void SetName(Control element, string value)
         {

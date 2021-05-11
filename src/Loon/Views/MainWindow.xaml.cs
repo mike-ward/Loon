@@ -1,5 +1,4 @@
 ﻿using System;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Jab;
@@ -35,8 +34,8 @@ namespace Loon.Views
             {
                 // On Linux, can't extend into non-client areas
                 this.FindControl<TitleBar>(TitleBarName).IsVisible = false;
-                ExtendClientAreaToDecorationsHint = false;
-                ExtendClientAreaTitleBarHeightHint = 0;
+                ExtendClientAreaToDecorationsHint                  = false;
+                ExtendClientAreaTitleBarHeightHint                 = 0;
             }
         }
     }

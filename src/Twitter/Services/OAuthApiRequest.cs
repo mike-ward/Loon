@@ -110,11 +110,11 @@ namespace Twitter.Services
         /// <returns></returns>
         public async ValueTask AppendMediaAsync(string mediaId, int segmentIndex, byte[] payload)
         {
-            var nonce = OAuth.Nonce();
-            var timestamp = OAuth.TimeStamp();
-            const string uploadUrl = TwitterApi.UploadMediaUrl;
-            var signature = OAuth.Signature(POST, uploadUrl, nonce, timestamp, ConsumerKey!, ConsumerSecret!, AccessToken!, AccessTokenSecret!, parameters: null);
-            var authorizeHeader = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
+            var          nonce           = OAuth.Nonce();
+            var          timestamp       = OAuth.TimeStamp();
+            const string uploadUrl       = TwitterApi.UploadMediaUrl;
+            var          signature       = OAuth.Signature(POST, uploadUrl, nonce, timestamp, ConsumerKey!, ConsumerSecret!, AccessToken!, AccessTokenSecret!, parameters: null);
+            var          authorizeHeader = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
 
 
             var request = new HttpRequestMessage();
@@ -123,7 +123,7 @@ namespace Twitter.Services
 
             var boundary = $"{Guid.NewGuid():N}";
             request.Headers.Add("ContentType", "multipart/form-data; boundary=" + boundary);
-            
+
             var stream = new MemoryStream();
             await TextParameterAsync(stream, boundary, "command", "APPEND").ConfigureAwait(false);
             await TextParameterAsync(stream, boundary, "media_id", mediaId).ConfigureAwait(false);
@@ -131,7 +131,7 @@ namespace Twitter.Services
             await BinaryParameterAsync(stream, boundary, "media", payload).ConfigureAwait(false);
             await WriteTextToStreamAsync(stream, $"--{boundary}--\r\n").ConfigureAwait(false);
             stream.Flush();
-            
+
             request.Content = new StreamContent(stream);
             await MyHttpClient.SendAsync(request).ConfigureAwait(false);
         }

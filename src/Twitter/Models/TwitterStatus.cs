@@ -13,63 +13,75 @@ namespace Twitter.Models
 {
     public class TwitterStatus : INotifyPropertyChanged
     {
-        private int replyCount;
-        private int retweetCount;
-        private int favoriteCount;
-        private int quoteCount;
-        private DateTime createdDate;
+        private int              replyCount;
+        private int              retweetCount;
+        private int              favoriteCount;
+        private int              quoteCount;
+        private DateTime         createdDate;
         private RelatedLinkInfo? relatedLinkInfo;
-        private bool retweetedByMe;
-        private bool favorited;
-        private bool isSensitive;
-        private string? translatedText;
-        private string? language;
+        private bool             retweetedByMe;
+        private bool             favorited;
+        private bool             isSensitive;
+        private string?          translatedText;
+        private string?          language;
 
-        [JsonPropertyName("id_str")]
-        public string Id { get; set; } = string.Empty;
+        [JsonPropertyName("id_str")] public string Id { get; set; } = string.Empty;
 
-        [JsonPropertyName("full_text")]
-        public string? FullText { get; set; }
+        [JsonPropertyName("full_text")] public string? FullText { get; set; }
 
-        [JsonPropertyName("text")]
-        public string? Text { get; set; }
+        [JsonPropertyName("text")] public string? Text { get; set; }
 
-        [JsonPropertyName("user")]
-        public User User { get; set; } = User.Empty;
+        [JsonPropertyName("user")] public User User { get; set; } = User.Empty;
 
-        [JsonPropertyName("created_at")]
-        public string CreatedAt { get; set; } = string.Empty;
+        [JsonPropertyName("created_at")] public string CreatedAt { get; set; } = string.Empty;
 
-        [JsonPropertyName("entities")]
-        public Entities? Entities { get; set; }
+        [JsonPropertyName("entities")] public Entities? Entities { get; set; }
 
         [JsonPropertyName("extended_entities")]
         public Entities? ExtendedEntities { get; set; }
 
         public bool IsQuoted => QuotedStatus is not null;
 
-        [JsonPropertyName("quoted_status")]
-        public TwitterStatus? QuotedStatus { get; set; }
+        [JsonPropertyName("quoted_status")] public TwitterStatus? QuotedStatus { get; set; }
 
         [JsonPropertyName("quote_count")]
-        public int QuoteCount { get => quoteCount; set => SetProperty(ref quoteCount, value); }
+        public int QuoteCount
+        {
+            get => quoteCount;
+            set => SetProperty(ref quoteCount, value);
+        }
 
         public bool IsRetweet => RetweetedStatus is not null;
 
-        [JsonPropertyName("retweeted_status")]
-        public TwitterStatus? RetweetedStatus { get; set; }
+        [JsonPropertyName("retweeted_status")] public TwitterStatus? RetweetedStatus { get; set; }
 
         [JsonPropertyName("retweeted")]
-        public bool RetweetedByMe { get => retweetedByMe; set => SetProperty(ref retweetedByMe, value); }
+        public bool RetweetedByMe
+        {
+            get => retweetedByMe;
+            set => SetProperty(ref retweetedByMe, value);
+        }
 
         [JsonPropertyName("retweet_count")]
-        public int RetweetCount { get => retweetCount; set => SetProperty(ref retweetCount, value); }
+        public int RetweetCount
+        {
+            get => retweetCount;
+            set => SetProperty(ref retweetCount, value);
+        }
 
         [JsonPropertyName("favorite_count")]
-        public int FavoriteCount { get => favoriteCount; set => SetProperty(ref favoriteCount, value); }
+        public int FavoriteCount
+        {
+            get => favoriteCount;
+            set => SetProperty(ref favoriteCount, value);
+        }
 
         [JsonPropertyName("favorited")]
-        public bool Favorited { get => favorited; set => SetProperty(ref favorited, value); }
+        public bool Favorited
+        {
+            get => favorited;
+            set => SetProperty(ref favorited, value);
+        }
 
         [JsonPropertyName("in_reply_to_status_id_str")]
         public string? InReplyToStatusId { get; set; }
@@ -81,19 +93,34 @@ namespace Twitter.Models
         public string? InReplyToScreenName { get; set; }
 
         [JsonPropertyName("reply_count")]
-        public int ReplyCount { get => replyCount; set => SetProperty(ref replyCount, value); }
+        public int ReplyCount
+        {
+            get => replyCount;
+            set => SetProperty(ref replyCount, value);
+        }
 
         [JsonPropertyName("possibly_sensitive")]
-        public bool IsSensitive { get => isSensitive; set => SetProperty(ref isSensitive, value); }
+        public bool IsSensitive
+        {
+            get => isSensitive;
+            set => SetProperty(ref isSensitive, value);
+        }
 
         [JsonPropertyName("lang")]
-        public string? Language { get => language; set => SetProperty(ref language, value); }
+        public string? Language
+        {
+            get => language;
+            set => SetProperty(ref language, value);
+        }
 
         [JsonIgnore]
-        public string? TranslatedText { get => translatedText; set => SetProperty(ref translatedText, value); }
+        public string? TranslatedText
+        {
+            get => translatedText;
+            set => SetProperty(ref translatedText, value);
+        }
 
-        [JsonIgnore]
-        public string? OverrideLink { get; set; }
+        [JsonIgnore] public string? OverrideLink { get; set; }
 
         private int checkedRelatedInfo; // Interlocked.CompareExchange() does not support bool
 
@@ -106,12 +133,10 @@ namespace Twitter.Models
                 {
                     Task.Run(async () => RelatedLinkInfo = await RelatedLinkInfo.GetRelatedLinkInfoAsync(this).ConfigureAwait(false));
                 }
+
                 return relatedLinkInfo;
             }
-            set
-            {
-                SetProperty(ref relatedLinkInfo, value);
-            }
+            set { SetProperty(ref relatedLinkInfo, value); }
         }
 
         /// <summary>
@@ -142,12 +167,12 @@ namespace Twitter.Models
                 {
                     createdDate = ParseTwitterDate(CreatedAt);
                 }
+
                 return createdDate;
             }
         }
 
-        [JsonIgnore]
-        public object? FlowContent { get; set; }
+        [JsonIgnore] public object? FlowContent { get; set; }
 
         /// <summary>
         /// Indicates if user is author of tweet
@@ -178,15 +203,15 @@ namespace Twitter.Models
             if (Id is null) throw new InvalidOperationException("Status Id is null");
             if (!Id.Equals(status.Id, StringComparison.Ordinal)) return;
 
-            ReplyCount = status.ReplyCount;
-            RetweetCount = status.RetweetCount;
+            ReplyCount    = status.ReplyCount;
+            RetweetCount  = status.RetweetCount;
             FavoriteCount = status.FavoriteCount;
-            QuoteCount = status.QuoteCount;
+            QuoteCount    = status.QuoteCount;
             RetweetedByMe = status.RetweetedByMe;
-            Favorited = status.Favorited;
+            Favorited     = status.Favorited;
 
             var userConnections = UserConnectionsService.LookupUserConnections(User.Id);
-            User.IsFollowing = userConnections?.IsFollowing ?? false;
+            User.IsFollowing  = userConnections?.IsFollowing ?? false;
             User.IsFollowedBy = userConnections?.IsFollowedBy ?? false;
 
             QuotedStatus?.UpdateFromStatus(status?.QuotedStatus);
@@ -196,7 +221,7 @@ namespace Twitter.Models
         public void UpdateAboutMeProperties(string? screenName)
         {
             if (string.IsNullOrEmpty(screenName)) return;
-            IsMyTweet = string.CompareOrdinal(screenName, OriginatingStatus.User.ScreenName) == 0;
+            IsMyTweet  = string.CompareOrdinal(screenName, OriginatingStatus.User.ScreenName) == 0;
             MentionsMe = Entities?.Mentions?.Any(mention => string.CompareOrdinal(mention.ScreenName, screenName) == 0) ?? false;
         }
 

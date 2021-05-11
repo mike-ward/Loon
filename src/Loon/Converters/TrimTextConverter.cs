@@ -8,7 +8,7 @@ namespace Loon.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var text = value as string ?? string.Empty;
+            var       text      = value as string ?? string.Empty;
             const int maxLength = 300;
 
             return text.Length > maxLength

@@ -13,7 +13,7 @@ namespace Loon.Views.Content.Controls.TweetItem
     {
         public TweetItemTranslate()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()
@@ -21,17 +21,17 @@ namespace Loon.Views.Content.Controls.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-#pragma warning disable CA1822 // (used in XAML) Mark members as static
+#pragma warning disable CA1822  // (used in XAML) Mark members as static
 #pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
-#pragma warning disable S1144 // (used in XAML) Unused private types or members should be removedremoved
+#pragma warning disable S1144   // (used in XAML) Unused private types or members should be removedremoved
 
         private async void OnTranslateClick(object? _, RoutedEventArgs __)
         {
             if (DataContext is not null)
             {
-                var tweet = (TwitterStatus)DataContext;
+                var tweet    = (TwitterStatus)DataContext;
                 var fromLang = tweet.Language ?? "und";
-                var toLang = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
+                var toLang   = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
                 tweet.TranslatedText = App.GetString("translate-text-working");
                 tweet.TranslatedText = await TranslateService.Translate(tweet.FullText, fromLang, toLang).ConfigureAwait(true);
             }
@@ -55,11 +55,11 @@ namespace Loon.Views.Content.Controls.TweetItem
         private void SetVisibility()
         {
             IsVisible = DataContext is TwitterStatus status
-               && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
-               && status.Language.IsNotEqualToIgnoreCase("und")
-               && status.FullText.IsNotNullOrWhiteSpace()
-               && Tag is bool hide
-               && !hide;
+                && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+                && status.Language.IsNotEqualToIgnoreCase("und")
+                && status.FullText.IsNotNullOrWhiteSpace()
+                && Tag is bool hide
+                && !hide;
         }
     }
 }

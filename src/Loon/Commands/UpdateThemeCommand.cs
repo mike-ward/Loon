@@ -1,4 +1,5 @@
 ﻿using System;
+using Avalonia;
 using Avalonia.Markup.Xaml.Styling;
 
 #pragma warning disable S1075 // URIs should not be hardcoded
@@ -12,23 +13,21 @@ namespace Loon.Commands
             var useLight = parameter is bool val && val;
 
             // This is slated to change in future release of Avalonia
-            var styles = new StyleInclude(new Uri("resm:Styles"))
-            {
+            var styles = new StyleInclude(new Uri("resm:Styles")) {
                 Source = useLight
                     ? new Uri("avares://Avalonia.Themes.Default/Accents/BaseLight.xaml")
                     : new Uri("avares://Avalonia.Themes.Default/Accents/BaseDark.xaml")
             };
 
-            App.Current.Styles[1] = styles;
+            Application.Current.Styles[1] = styles;
 
-            var overrides = new StyleInclude(new Uri("resm:Styles"))
-            {
+            var overrides = new StyleInclude(new Uri("resm:Styles")) {
                 Source = useLight
-                ? new Uri("avares://Loon/Assets/LightThemeOverrides.xaml")
-                : new Uri("avares://Loon/Assets/DarkThemeOverrides.xaml")
+                    ? new Uri("avares://Loon/Assets/LightThemeOverrides.xaml")
+                    : new Uri("avares://Loon/Assets/DarkThemeOverrides.xaml")
             };
 
-            App.Current.Styles[2] = overrides;
+            Application.Current.Styles[2] = overrides;
         }
     }
 }

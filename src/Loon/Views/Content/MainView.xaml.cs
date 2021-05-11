@@ -9,7 +9,7 @@ namespace Loon.Views.Content
 {
     public class MainView : UserControl
     {
-        private int previousIndex;
+        private                int    previousIndex;
         public static readonly string TabControlName = "TabControl";
 
         public MainView()

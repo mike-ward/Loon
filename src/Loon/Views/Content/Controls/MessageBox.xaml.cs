@@ -7,8 +7,8 @@ namespace Loon.Views.Content.Controls
 {
     public class MessageBox : Window
     {
-        public static readonly string TextName = "Text";
-        public static readonly string TitleName = "Title";
+        public static readonly string TextName    = "Text";
+        public static readonly string TitleName   = "Title";
         public static readonly string ButtonsName = "Buttons";
 
         public enum MessageBoxButtons
@@ -16,7 +16,7 @@ namespace Loon.Views.Content.Controls
             Ok,
             OkCancel,
             YesNo,
-            YesNoCancel,
+            YesNoCancel
         }
 
         public enum MessageBoxResult
@@ -24,7 +24,7 @@ namespace Loon.Views.Content.Controls
             Ok,
             Cancel,
             Yes,
-            No,
+            No
         }
 
         public MessageBox()
@@ -35,11 +35,11 @@ namespace Loon.Views.Content.Controls
         public static async Task<MessageBoxResult> Show(string text, MessageBoxButtons buttons)
         {
             ContentControl? autoFocusControl = null;
-            var messageBoxResult = MessageBoxResult.Ok;
+            var             messageBoxResult = MessageBoxResult.Ok;
 
             var msgbox = new MessageBox();
             msgbox.FindControl<TextBlock>(TitleName).Text = App.GetString("title");
-            msgbox.FindControl<TextBlock>(TextName).Text = text;
+            msgbox.FindControl<TextBlock>(TextName).Text  = text;
 
             var buttonPanel = msgbox.FindControl<StackPanel>(ButtonsName);
 

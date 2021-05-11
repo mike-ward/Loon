@@ -14,12 +14,15 @@ namespace Loon.ViewModels.Content.Timelines
     public class HomeTimelineViewModel
     {
         private const int mentionsInterval = 60;
-        private int mentionsCounter = mentionsInterval;
+        private       int mentionsCounter  = mentionsInterval;
 
-        private readonly Timeline timeline;
+        private readonly Timeline        timeline;
         private readonly ITwitterService titterService;
 
-        public IAvaloniaList<TwitterStatus> StatusCollection { get => timeline.StatusCollection; }
+        public IAvaloniaList<TwitterStatus> StatusCollection
+        {
+            get => timeline.StatusCollection;
+        }
 
         public HomeTimelineViewModel(ISettings settings, ITwitterService twitterService)
         {
@@ -31,13 +34,12 @@ namespace Loon.ViewModels.Content.Timelines
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()
         {
-            return new Func<Timeline, ValueTask>[]
-            {
+            return new Func<Timeline, ValueTask>[] {
                 timeline => GetAndUpdateStatusesAsync(timeline),
                 timeline => TruncateStatusCollectionTask.Execute(timeline),
                 timeline => UpdateTimeStampsTask.Execute(timeline),
                 timeline => FlowContentTask.Execute(timeline),
-                timeline => CollectTask.Execute(timeline),
+                timeline => CollectTask.Execute(timeline)
             };
         }
 
@@ -69,8 +71,10 @@ namespace Loon.ViewModels.Content.Timelines
                     // Alerting the user does no good in this instance (IMO)
                     return Enumerable.Empty<TwitterStatus>();
                 }
+
                 throw;
             }
+
             return Enumerable.Empty<TwitterStatus>();
         }
     }

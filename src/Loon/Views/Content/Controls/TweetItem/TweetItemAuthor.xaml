@@ -6,8 +6,6 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:sv="clr-namespace:Loon.Services"
-  xmlns:tl="clr-namespace:Loon.Views.Content.Timelines"
   d:DesignHeight="50"
   d:DesignWidth="300"
   mc:Ignorable="d">

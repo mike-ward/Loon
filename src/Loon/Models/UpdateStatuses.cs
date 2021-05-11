@@ -34,6 +34,7 @@ namespace Loon.Models
                     else
                     {
                         if (timeline.StatusCollection.Count == 0) { timeline.StatusCollection.Insert(0, new TwitterStatus()); }
+
                         // Insert at zero when ItemsRepeater bug is fixed.
                         timeline.StatusCollection.Insert(1, clonedStatus);
                     }
@@ -46,7 +47,7 @@ namespace Loon.Models
         private static TwitterStatus Clone(TwitterStatus twitterStatus)
         {
             var bytes = JsonSerializer.SerializeToUtf8Bytes(twitterStatus);
-            var span = new ReadOnlySpan<byte>(bytes);
+            var span  = new ReadOnlySpan<byte>(bytes);
             return JsonSerializer.Deserialize<TwitterStatus>(span)!;
         }
     }

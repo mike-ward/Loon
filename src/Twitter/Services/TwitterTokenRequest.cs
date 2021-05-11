@@ -33,8 +33,7 @@ namespace Twitter.Services
                 throw new InvalidOperationException("callback token not confirmed");
             }
 
-            return new OAuthTokens
-            {
+            return new OAuthTokens {
                 OAuthToken  = oauthToken,
                 OAuthSecret = oauthSecret
             };
@@ -61,8 +60,7 @@ namespace Twitter.Services
             var       content  = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var       tokens   = content.Split('&');
 
-            var oauthTokens = new OAuthTokens
-            {
+            var oauthTokens = new OAuthTokens {
                 OAuthToken  = Token(tokens[0]),
                 OAuthSecret = Token(tokens[1]),
                 UserId      = Token(tokens[2]),

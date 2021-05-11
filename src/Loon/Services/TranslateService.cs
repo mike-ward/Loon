@@ -23,8 +23,7 @@ namespace Loon.Services
             {
                 var request = new HttpRequestMessage(HttpMethod.Post, Endpoint);
 
-                var content = new FormUrlEncodedContent(new[]
-                {
+                var content = new FormUrlEncodedContent(new[] {
                     new KeyValuePair<string?, string?>("q", Uri.EscapeDataString(text)),
                     new KeyValuePair<string?, string?>("source", Uri.EscapeDataString(fromLanguage)),
                     new KeyValuePair<string?, string?>("target", Uri.EscapeDataString(toLanguage))

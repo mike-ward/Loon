@@ -12,10 +12,13 @@ namespace Loon.Models
     {
         private string Profile { get; } = "loon";
 
-        [JsonIgnore]
-        private bool isAuthenticated;
+        [JsonIgnore] private bool isAuthenticated;
 
-        public bool IsAuthenticated { get => isAuthenticated; set => SetProperty(ref isAuthenticated, value); }
+        public bool IsAuthenticated
+        {
+            get => isAuthenticated;
+            set => SetProperty(ref isAuthenticated, value);
+        }
 
         private bool GetCheckAuthenticated()
         {
@@ -47,29 +50,101 @@ namespace Loon.Models
         }
 
         private bool alwaysOnTop;
-        public bool AlwaysOnTop { get => alwaysOnTop; set => SetProperty(ref alwaysOnTop, value); }
+
+        public bool AlwaysOnTop
+        {
+            get => alwaysOnTop;
+            set => SetProperty(ref alwaysOnTop, value);
+        }
+
         private bool donated;
-        public bool Donated { get => donated; set => SetProperty(ref donated, value); }
+
+        public bool Donated
+        {
+            get => donated;
+            set => SetProperty(ref donated, value);
+        }
+
         private bool hideExtendedContent;
-        public bool HideExtendedContent { get => hideExtendedContent; set => SetProperty(ref hideExtendedContent, value); }
+
+        public bool HideExtendedContent
+        {
+            get => hideExtendedContent;
+            set => SetProperty(ref hideExtendedContent, value);
+        }
+
         private bool hideImages;
-        public bool HideImages { get => hideImages; set => SetProperty(ref hideImages, value); }
+
+        public bool HideImages
+        {
+            get => hideImages;
+            set => SetProperty(ref hideImages, value);
+        }
+
         private bool hidePossiblySensitive;
-        public bool HidePossiblySensitive { get => hidePossiblySensitive; set => SetProperty(ref hidePossiblySensitive, value); }
+
+        public bool HidePossiblySensitive
+        {
+            get => hidePossiblySensitive;
+            set => SetProperty(ref hidePossiblySensitive, value);
+        }
+
         private bool hideProfileImages;
-        public bool HideProfileImages { get => hideProfileImages; set => SetProperty(ref hideProfileImages, value); }
+
+        public bool HideProfileImages
+        {
+            get => hideProfileImages;
+            set => SetProperty(ref hideProfileImages, value);
+        }
+
         private bool hideScreenName;
-        public bool HideScreenName { get => hideScreenName; set => SetProperty(ref hideScreenName, value); }
+
+        public bool HideScreenName
+        {
+            get => hideScreenName;
+            set => SetProperty(ref hideScreenName, value);
+        }
+
         private bool hideTranslate;
-        public bool HideTranslate { get => hideTranslate; set => SetProperty(ref hideTranslate, value); }
+
+        public bool HideTranslate
+        {
+            get => hideTranslate;
+            set => SetProperty(ref hideTranslate, value);
+        }
+
         private bool showInSystemTray;
-        public bool ShowInSystemTray { get => showInSystemTray; set => SetProperty(ref showInSystemTray, value); }
+
+        public bool ShowInSystemTray
+        {
+            get => showInSystemTray;
+            set => SetProperty(ref showInSystemTray, value);
+        }
+
         private bool useLightTheme;
-        public bool UseLightTheme { get => useLightTheme; set => SetProperty(ref useLightTheme, value); }
+
+        public bool UseLightTheme
+        {
+            get => useLightTheme;
+            set => SetProperty(ref useLightTheme, value);
+        }
+
         private double fontSize = 12;
-        public double FontSize { get => fontSize; set => SetProperty(ref fontSize, value); }
+
+        public double FontSize
+        {
+            get => fontSize;
+            set => SetProperty(ref fontSize, value);
+        }
+
         private string? screenName;
-        public string? ScreenName { get => screenName; set => SetProperty(ref screenName, value); }
+
+        public string? ScreenName
+        {
+            get => screenName;
+            set => SetProperty(ref screenName, value);
+        }
+
         public WindowLocation Location { get; set; } = new WindowLocation { X = 200, Y = 200, Width = 300, Height = 500 };
 
         [JsonIgnore]
@@ -81,7 +156,7 @@ namespace Loon.Models
         {
             try
             {
-                var json = File.ReadAllText(SettingsFilePath);
+                var json     = File.ReadAllText(SettingsFilePath);
                 var settings = JsonSerializer.Deserialize<Settings>(json)!;
                 settings.CopyPropertiesTo(this);
             }

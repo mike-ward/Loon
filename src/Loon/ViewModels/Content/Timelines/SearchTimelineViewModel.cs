@@ -9,10 +9,15 @@ namespace Loon.ViewModels.Content.Timelines
 {
     internal class SearchTimelineViewModel : NotifyPropertyChanged
     {
-        private readonly ITwitterService twitterService;
-        public IAvaloniaList<TwitterStatus> StatusCollection { get; } = new AvaloniaList<TwitterStatus>();
-        private bool isSearching;
-        public bool IsSearching { get => isSearching; set => SetProperty(ref isSearching, value); }
+        private readonly ITwitterService              twitterService;
+        public           IAvaloniaList<TwitterStatus> StatusCollection { get; } = new AvaloniaList<TwitterStatus>();
+        private          bool                         isSearching;
+
+        public bool IsSearching
+        {
+            get => isSearching;
+            set => SetProperty(ref isSearching, value);
+        }
 
         public SearchTimelineViewModel(ITwitterService twitterService)
         {

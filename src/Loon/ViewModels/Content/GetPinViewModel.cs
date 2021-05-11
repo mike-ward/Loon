@@ -10,31 +10,43 @@ namespace Loon.ViewModels.Content
 {
     internal class GetPinViewModel : NotifyPropertyChanged
     {
-        private OAuthTokens? requestToken;
+        private          OAuthTokens?    requestToken;
         private readonly ITwitterService twitterService;
 
         private string? pin;
-        public string? Pin { get => pin; set => SetProperty(ref pin, value); }
+
+        public string? Pin
+        {
+            get => pin;
+            set => SetProperty(ref pin, value);
+        }
+
         private bool secondPage;
-        public bool SecondPage { get => secondPage; set => SetProperty(ref secondPage, value); }
+
+        public bool SecondPage
+        {
+            get => secondPage;
+            set => SetProperty(ref secondPage, value);
+        }
 
         public ISettings Settings { get; }
 
         public GetPinViewModel(ITwitterService twitterService, ISettings settings)
         {
             this.twitterService = twitterService;
-            Settings = settings;
+            Settings            = settings;
         }
 
         public async ValueTask GetPin()
         {
             requestToken = await twitterService.GetPin().ConfigureAwait(false);
-            SecondPage = true;
+            SecondPage   = true;
         }
 
         public async ValueTask SignIn()
         {
             if (requestToken is null) { throw new InvalidOperationException("requestToken is null"); }
+
             if (Pin.IsNullOrWhiteSpace()) { throw new InvalidOperationException("Pin is null"); }
 
             var access = await twitterService.AuthenticateWithPinAsync(requestToken, Pin!).ConfigureAwait(false);
@@ -42,9 +54,9 @@ namespace Loon.ViewModels.Content
 
             if (access is not null)
             {
-                Settings.AccessToken = access.OAuthToken;
+                Settings.AccessToken       = access.OAuthToken;
                 Settings.AccessTokenSecret = access.OAuthSecret;
-                Settings.ScreenName = access.ScreenName;
+                Settings.ScreenName        = access.ScreenName;
                 Settings.Save();
             }
             else
@@ -57,7 +69,7 @@ namespace Loon.ViewModels.Content
 
         public void GoBack()
         {
-            Pin = null;
+            Pin        = null;
             SecondPage = false;
         }
     }
