@@ -16,20 +16,9 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.100
+        dotnet-version: 6.0.100-preview.4.21255.9
+        include-prerelease: true
     - name: Restore dependencies
       run: dotnet restore ./src/Loon.sln
     - name: Build
       run: dotnet build ./src/Loon.sln -c Release --no-restore
-    - name: Copy dll's infer folder
-      run: | 
-        mkdir ./src/Loon/bin/Release/net5.0/infer
-        cp ./src/Loon/bin/Release/net5.0/Loon.dll ./src/Loon/bin/Release/net5.0/infer
-        cp ./src/Loon/bin/Release/net5.0/Twitter.dll ./src/Loon/bin/Release/net5.0/infer
-    - name: Run Infer#      
-      uses: microsoft/infersharpaction@v1.0
-      id: runinfersharp
-      with:
-        binary-path: './src/Loon/bin/Release/net5.0/infer'
-    - name: Infer# analysis results
-      run: echo "${{ steps.runinfersharp.outputs.results }}"
