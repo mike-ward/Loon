@@ -12,7 +12,7 @@ namespace Twitter.Services
     // info using their API but of course its rate limited. This class creates a
     // dictionary and keeps it updated as much as it can given the rate limits.
 
-    public static class UserConnectionsService
+    internal static class UserConnectionsService
     {
         private const           int                                          maxIds = 100; // Twitter cap
         private static          int                                          lastIndex;

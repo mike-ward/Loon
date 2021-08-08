@@ -2,7 +2,7 @@
 
 namespace Loon.Models
 {
-    public static class UpdateTimeStampsTask
+    internal static class UpdateTimeStampsTask
     {
         public static ValueTask Execute(Timeline timeline)
         {

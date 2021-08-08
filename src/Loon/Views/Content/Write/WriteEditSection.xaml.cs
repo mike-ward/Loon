@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.Write
 {
-    public class WriteEditSection : UserControl
+    internal class WriteEditSection : UserControl
     {
         public static readonly string WriteTextBoxName = "WriteTextBox";
 

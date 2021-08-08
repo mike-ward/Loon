@@ -1,6 +1,6 @@
 ﻿namespace Loon.Models
 {
-    public enum FlowContentNodeType
+    internal enum FlowContentNodeType
     {
         Text,
         Url,

@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.UserProfile
 {
-    public class UserProfileInfo : UserControl
+    internal class UserProfileInfo : UserControl
     {
         public UserProfileInfo()
         {

@@ -11,7 +11,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
-    public class TweetItemProfileImage : UserControl
+    internal class TweetItemProfileImage : UserControl
     {
         private const           int    profileSize = 73; // Twitter's bigger profile image size is 48x48
         private static readonly Bitmap EmptyBitmap = new WriteableBitmap(new PixelSize(profileSize, profileSize), new Vector(96, 96), PixelFormat.Bgra8888, AlphaFormat.Premul);

@@ -2,7 +2,7 @@
 
 namespace Loon.Commands
 {
-    public class SignoutCommand : BaseCommand
+    internal class SignoutCommand : BaseCommand
     {
         private readonly ISettings _settings;
 

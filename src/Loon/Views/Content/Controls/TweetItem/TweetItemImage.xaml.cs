@@ -7,7 +7,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
-    public class TweetItemImage : UserControl
+    internal class TweetItemImage : UserControl
     {
         public TweetItemImage()
         {

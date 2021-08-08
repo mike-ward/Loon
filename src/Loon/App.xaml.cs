@@ -9,7 +9,7 @@ using Loon.Views;
 
 namespace Loon
 {
-    public class App : Application
+    internal class App : Application
     {
         public override void Initialize()
         {

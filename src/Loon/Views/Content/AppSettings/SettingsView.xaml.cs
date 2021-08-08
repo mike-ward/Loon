@@ -6,7 +6,7 @@ using Loon.Services;
 
 namespace Loon.Views.Content.AppSettings
 {
-    public class SettingsView : UserControl
+    internal class SettingsView : UserControl
     {
         public SettingsView()
         {

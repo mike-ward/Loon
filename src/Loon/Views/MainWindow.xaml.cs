@@ -9,7 +9,7 @@ using Loon.ViewModels;
 
 namespace Loon.Views
 {
-    public class MainWindow : Window, IWindow
+    internal class MainWindow : Window, IWindow
     {
         public static readonly string TitleBarName = "TitleBar";
 

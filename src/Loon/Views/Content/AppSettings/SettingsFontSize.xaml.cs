@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.AppSettings
 {
-    public class SettingsFontSize : UserControl
+    internal class SettingsFontSize : UserControl
     {
         public SettingsFontSize()
         {

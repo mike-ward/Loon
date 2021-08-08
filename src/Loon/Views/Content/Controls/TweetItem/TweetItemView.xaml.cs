@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
-    public class TweetItemView : UserControl
+    internal class TweetItemView : UserControl
     {
         public const string TweetItemImageName = nameof(TweetItemImage);
         public const string TweetItemProfileImageName = nameof(TweetItemProfileImage);

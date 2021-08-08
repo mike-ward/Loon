@@ -4,7 +4,7 @@ using Loon.Services;
 
 namespace Loon.Models
 {
-    public static class FlowContentTask
+    internal static class FlowContentTask
     {
         public static ValueTask Execute(Timeline timeline)
         {

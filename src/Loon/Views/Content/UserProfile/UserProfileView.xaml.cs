@@ -6,7 +6,7 @@ using Loon.ViewModels.Content.UserProfile;
 
 namespace Loon.Views.Content.UserProfile
 {
-    public class UserProfileView : UserControl
+    internal class UserProfileView : UserControl
     {
         public UserProfileView()
         {

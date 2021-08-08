@@ -6,7 +6,7 @@ using Twitter.Models;
 
 namespace Loon.Commands
 {
-    public class RetweetCommand : BaseCommand
+    internal class RetweetCommand : BaseCommand
     {
         private bool            inCommand;
         private ISettings       Settings       { get; }

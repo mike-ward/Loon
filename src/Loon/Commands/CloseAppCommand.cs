@@ -1,6 +1,6 @@
 ﻿namespace Loon.Commands
 {
-    public class CloseAppCommand : BaseCommand
+    internal class CloseAppCommand : BaseCommand
     {
         public override void Execute(object? parameter)
         {

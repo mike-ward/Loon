@@ -7,7 +7,7 @@ using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace Loon.Converters
 {
-    public class BooleanToDynamicResourceConverter : IValueConverter
+    internal class BooleanToDynamicResourceConverter : IValueConverter
     {
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

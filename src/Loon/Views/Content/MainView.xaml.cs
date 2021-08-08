@@ -7,7 +7,7 @@ using Loon.Services;
 
 namespace Loon.Views.Content
 {
-    public class MainView : UserControl
+    internal class MainView : UserControl
     {
         private                int    previousIndex;
         public static readonly string TabControlName = "TabControl";

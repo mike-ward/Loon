@@ -5,7 +5,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.Controls
 {
-    public class MessageBox : Window
+    internal class MessageBox : Window
     {
         public static readonly string TextName    = "Text";
         public static readonly string TitleName   = "Title";

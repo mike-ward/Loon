@@ -7,7 +7,7 @@ using Loon.Services;
 
 namespace Loon.Extensions
 {
-    public static class TaskExtensions
+    internal static class TaskExtensions
     {
         public static async void FireAndForget(this Task task)
         {

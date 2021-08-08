@@ -5,7 +5,7 @@ using Twitter.Models;
 
 namespace Loon.Services
 {
-    public static class PubSubs
+    internal static class PubSubs
     {
         public static PubSubService                 OpenPreviousTab       { get; } = new();
         public static PubSubService<TwitterStatus>  AddStatus             { get; } = new();
@@ -13,7 +13,7 @@ namespace Loon.Services
         public static PubSubService<object?>        SetUserProfileContext { get; } = new(); // waiting for discriminated unions
     }
 
-    public class PubSubService<T>
+    internal class PubSubService<T>
     {
         private          int                                  nextId;
         private readonly ConcurrentDictionary<int, Action<T>> subscribers = new();
@@ -46,7 +46,7 @@ namespace Loon.Services
         }
     }
 
-    public class PubSubService
+    internal class PubSubService
     {
         private          int                               nextId;
         private readonly ConcurrentDictionary<int, Action> subscribers = new();

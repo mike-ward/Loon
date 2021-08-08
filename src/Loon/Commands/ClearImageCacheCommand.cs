@@ -3,7 +3,7 @@ using Loon.Services;
 
 namespace Loon.Commands
 {
-    public class ClearImageCacheCommand : BaseCommand
+    internal class ClearImageCacheCommand : BaseCommand
     {
         public override void Execute(object? parameter)
         {

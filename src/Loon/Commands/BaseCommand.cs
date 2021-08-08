@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Loon.Commands
 {
-    public class BaseCommand : ICommand
+    internal class BaseCommand : ICommand
     {
         public virtual bool CanExecute(object? parameter)
         {

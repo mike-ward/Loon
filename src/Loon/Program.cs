@@ -13,7 +13,7 @@ namespace Loon
         }
 
         // Avalonia configuration, don't remove; also used by visual designer.
-        public static AppBuilder BuildAvaloniaApp()
+        private static AppBuilder BuildAvaloniaApp()
         {
             return AppBuilder
                 .Configure<App>()

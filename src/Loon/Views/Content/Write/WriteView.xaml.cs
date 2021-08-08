@@ -6,7 +6,7 @@ using Loon.ViewModels.Content.Write;
 
 namespace Loon.Views.Content.Write
 {
-    public class WriteView : UserControl
+    internal class WriteView : UserControl
     {
         public WriteView()
         {

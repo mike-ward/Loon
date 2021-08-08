@@ -7,7 +7,7 @@ using Twitter.Models;
 
 namespace Loon.Models
 {
-    public static class UpdateStatuses
+    internal static class UpdateStatuses
     {
         public static ValueTask Execute(IEnumerable<TwitterStatus> statuses, Timeline timeline)
         {

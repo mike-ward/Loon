@@ -52,7 +52,7 @@ namespace Loon.Services
         }
     }
 
-    public class TranslatorResult
+    internal class TranslatorResult
     {
         [JsonPropertyName("translatedText")] public string? TranslatedText { get; set; }
         [JsonPropertyName("error")]          public string? ErrorText      { get; set; }

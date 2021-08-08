@@ -2,7 +2,7 @@
 
 namespace Loon.Commands
 {
-    public class AppCommands
+    internal class AppCommands
     {
         public ClearImageCacheCommand       ClearImageCache       { get; }
         public CloseAppCommand              CloseApp              { get; }

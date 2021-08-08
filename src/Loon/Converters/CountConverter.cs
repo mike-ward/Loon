@@ -8,10 +8,9 @@ namespace Loon.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is int)) { return value; }
+            if (!(value is int count)) { return value; }
 
-            var          count = (int)value;
-            const double k     = 1000;
+            const double k = 1000;
 
             return count switch {
                 0        => " ",

@@ -7,7 +7,7 @@ using Loon.ViewModels.Content.Timelines;
 
 namespace Loon.Views.Content.Timelines
 {
-    public class SearchTimelineView : UserControl
+    internal class SearchTimelineView : UserControl
     {
         public static readonly string SearchTextBoxName = "SearchTextBox";
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Loon.Models
 {
-    public static class CollectTask
+    internal static class CollectTask
     {
         public static ValueTask Execute(Timeline _)
         {

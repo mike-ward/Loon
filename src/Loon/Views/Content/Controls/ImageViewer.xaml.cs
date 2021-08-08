@@ -7,7 +7,7 @@ using Avalonia.Media;
 
 namespace Loon.Views.Content.Controls
 {
-    public class ImageViewer : Window
+    internal class ImageViewer : Window
     {
         public bool IsClosed { get; private set; }
 

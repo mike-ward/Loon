@@ -2,7 +2,7 @@
 
 namespace Loon.Models
 {
-    public static class TruncateStatusCollectionTask
+    internal static class TruncateStatusCollectionTask
     {
         public static ValueTask Execute(Timeline timeline)
         {
