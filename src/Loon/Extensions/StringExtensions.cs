@@ -44,7 +44,7 @@ namespace Loon.Extensions
         {
             if (source.Length > length)
             {
-                source = source.Substring(0, length) + "…";
+                source = string.Concat(source.AsSpan(0, length), "…");
             }
 
             return source;

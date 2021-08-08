@@ -12,7 +12,7 @@ namespace Loon.Converters
             const int maxLength = 300;
 
             return text.Length > maxLength
-                ? text.Substring(0, maxLength) + "…"
+                ? string.Concat(text.AsSpan(0, maxLength), "…")
                 : text;
         }
 

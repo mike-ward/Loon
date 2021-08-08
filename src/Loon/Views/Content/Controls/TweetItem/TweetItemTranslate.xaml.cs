@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -21,10 +22,6 @@ namespace Loon.Views.Content.Controls.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-#pragma warning disable CA1822  // (used in XAML) Mark members as static
-#pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
-#pragma warning disable S1144   // (used in XAML) Unused private types or members should be removedremoved
-
         private async void OnTranslateClick(object? _, RoutedEventArgs __)
         {
             if (DataContext is not null)
@@ -37,10 +34,12 @@ namespace Loon.Views.Content.Controls.TweetItem
             }
         }
 
-        protected override void OnDataContextChanged(System.EventArgs e)
+        protected override void OnDataContextChanged(EventArgs e)
         {
             SetVisibility();
         }
+
+#pragma warning disable 8631 // Nullability of type argument 'T' must match constraint type 'object' constraint in order to use it as parameter 'T'
 
         protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
         {
@@ -58,8 +57,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                 && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
                 && status.Language.IsNotEqualToIgnoreCase("und")
                 && status.FullText.IsNotNullOrWhiteSpace()
-                && Tag is bool hide
-                && !hide;
+                && Tag is bool and false;
         }
     }
 }

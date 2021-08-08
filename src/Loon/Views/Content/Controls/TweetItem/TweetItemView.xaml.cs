@@ -5,10 +5,10 @@ namespace Loon.Views.Content.Controls.TweetItem
 {
     public class TweetItemView : UserControl
     {
-        public static readonly string TweetItemImageName        = nameof(TweetItemImage);
-        public static readonly string TweetItemProfileImageName = nameof(TweetItemProfileImage);
-        public static readonly string TweetItemQuotedName       = nameof(TweetItemQuoted);
-        public static readonly string TweetItemRelatedName      = nameof(TweetItemRelated);
+        public const string TweetItemImageName = nameof(TweetItemImage);
+        public const string TweetItemProfileImageName = nameof(TweetItemProfileImage);
+        public const string TweetItemQuotedName = nameof(TweetItemQuoted);
+        public const string TweetItemRelatedName = nameof(TweetItemRelated);
 
         public TweetItemView()
         {

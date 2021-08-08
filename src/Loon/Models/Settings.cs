@@ -147,6 +147,8 @@ namespace Loon.Models
 
         public WindowLocation Location { get; set; } = new WindowLocation { X = 200, Y = 200, Width = 300, Height = 500 };
 
+        public string? TranslateApiKey { get; }
+
         [JsonIgnore]
         public string SettingsFilePath => Path.Combine(
             AppContext.BaseDirectory,

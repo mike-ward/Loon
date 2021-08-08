@@ -14,10 +14,10 @@ namespace Loon.Converters
             const double k     = 1000;
 
             return count switch {
-                var c when c == 0     => " ",
-                var c when c < 999    => count.ToString(CultureInfo.InvariantCulture),
-                var c when c < 999999 => string.Format(CultureInfo.InvariantCulture, "{0:N1}K", count / k),
-                _                     => string.Format(CultureInfo.InvariantCulture, "{0:N1}M", count / (k * k))
+                0        => " ",
+                < 999    => count.ToString(CultureInfo.InvariantCulture),
+                < 999999 => string.Format(CultureInfo.InvariantCulture, "{0:N1}K", count / k),
+                _        => string.Format(CultureInfo.InvariantCulture, "{0:N1}M", count / (k * k))
             };
         }
 

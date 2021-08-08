@@ -9,6 +9,7 @@ namespace Loon.Interfaces
         string?        AccessToken           { get; set; }
         string?        AccessTokenSecret     { get; set; }
         string?        ScreenName            { get; set; }
+        string?        TranslateApiKey       { get; }
         bool           HideProfileImages     { get; }
         bool           HideImages            { get; }
         bool           HideExtendedContent   { get; }

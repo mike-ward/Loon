@@ -12,8 +12,7 @@ namespace Loon.Converters
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is true &&
-                parameter is DynamicResourceExtension resource &&
-                resource.ResourceKey is not null)
+                parameter is DynamicResourceExtension { ResourceKey: { } } resource)
             {
                 return Application.Current.TryFindResource(resource.ResourceKey, out var resourceValue)
                     ? resourceValue

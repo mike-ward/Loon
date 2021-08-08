@@ -30,11 +30,13 @@
       CommandParameter="{Binding}"
       ToolTip.Tip="{StaticResource retweet-tooltip}">
       <StackPanel Orientation="Horizontal">
+        <!-- ReSharper disable Xaml.DynamicResourceError -->
         <TextBlock
           VerticalAlignment="Center"
           Classes="symbol"
           Foreground="{Binding RetweetedByMe, Converter={StaticResource BooleanToDynamicResource}, ConverterParameter={DynamicResource RetweetBrush}}"
           Text="{DynamicResource RetweetSymbol}" />
+        <!-- ReSharper restore Xaml.DynamicResourceError -->
         <TextBlock
           Classes="padleft"
           Text="{Binding RetweetCount, Converter={StaticResource CountConverter}}" />
@@ -47,10 +49,12 @@
       CommandParameter="{Binding}"
       ToolTip.Tip="{StaticResource like-tooltip}">
       <StackPanel Orientation="Horizontal">
+        <!-- ReSharper disable Xaml.DynamicResourceError -->
         <TextBlock
           Classes="symbol1"
           Foreground="{Binding Favorited, Converter={StaticResource BooleanToDynamicResource}, ConverterParameter={DynamicResource LikeBrush}}"
           Text="{DynamicResource LikeSymbol}" />
+        <!-- ReSharper restore Xaml.DynamicResourceError -->
         <TextBlock
           Classes="padleft"
           Text="{Binding FavoriteCount, Converter={StaticResource CountConverter}}" />
