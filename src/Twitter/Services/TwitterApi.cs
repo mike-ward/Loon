@@ -40,21 +40,23 @@ namespace Twitter.Services
 
         private async ValueTask<IEnumerable<TwitterStatus>> UpdateUserConnections(IEnumerable<TwitterStatus> statuses)
         {
+            var statuses_ = statuses.ToArray();
+
             // The timeline API's no longer report Following and FollowedBy status and the
             // friendship lookup connections API is rate limited. Keep a cached list and update the
             // fields accordingly.
             await UserConnectionsService
-                .AddUserIdsAsync(statuses.Select(status => status.OriginatingStatus.User.Id), this)
+                .AddUserIdsAsync(statuses_.Select(status => status.OriginatingStatus.User.Id), this)
                 .ConfigureAwait(false);
 
             // Needed to set the Following and FollowedBy properties because the
             // timeline API's no longer report these fields
-            foreach (var status in statuses)
+            foreach (var status in statuses_)
             {
                 status.UpdateFromStatus(status);
             }
 
-            return statuses;
+            return statuses_;
         }
 
         public async ValueTask<IEnumerable<TwitterStatus>> HomeTimeline()
@@ -98,7 +100,7 @@ namespace Twitter.Services
                     })
                 .ConfigureAwait(false);
 
-            if (UserConnectionsService.LookupUserConnections(user.Id) is UserConnection userConnections)
+            if (UserConnectionsService.LookupUserConnections(user.Id) is { } userConnections)
             {
                 user.IsFollowing  = userConnections.IsFollowing;
                 user.IsFollowedBy = userConnections.IsFollowedBy;

@@ -5,6 +5,7 @@ namespace Twitter.Models
 {
     public class Tweet
     {
-        [JsonPropertyName("statuses")] public TwitterStatus[] Statuses { get; set; } = Array.Empty<TwitterStatus>();
+        [JsonPropertyName("statuses")]
+        public TwitterStatus[] Statuses { get; set; } = Array.Empty<TwitterStatus>();
     }
 }

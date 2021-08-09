@@ -4,6 +4,7 @@ namespace Twitter.Models
 {
     public class Variant
     {
-        [JsonPropertyName("url")] public string? Url { get; set; }
+        [JsonPropertyName("url")]
+        public string? Url { get; set; }
     }
 }

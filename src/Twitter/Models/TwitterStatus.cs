@@ -25,24 +25,31 @@ namespace Twitter.Models
         private string?          translatedText;
         private string?          language;
 
-        [JsonPropertyName("id_str")] public string Id { get; set; } = string.Empty;
+        [JsonPropertyName("id_str")]
+        public string Id { get; set; } = string.Empty;
 
-        [JsonPropertyName("full_text")] public string? FullText { get; set; }
+        [JsonPropertyName("full_text")]
+        public string? FullText { get; set; }
 
-        [JsonPropertyName("text")] public string? Text { get; set; }
+        [JsonPropertyName("text")]
+        public string? Text { get; set; }
 
-        [JsonPropertyName("user")] public User User { get; set; } = User.Empty;
+        [JsonPropertyName("user")]
+        public User User { get; set; } = User.Empty;
 
-        [JsonPropertyName("created_at")] public string CreatedAt { get; set; } = string.Empty;
+        [JsonPropertyName("created_at")]
+        public string CreatedAt { get; set; } = string.Empty;
 
-        [JsonPropertyName("entities")] public Entities? Entities { get; set; }
+        [JsonPropertyName("entities")]
+        public Entities? Entities { get; set; }
 
         [JsonPropertyName("extended_entities")]
         public Entities? ExtendedEntities { get; set; }
 
         public bool IsQuoted => QuotedStatus is not null;
 
-        [JsonPropertyName("quoted_status")] public TwitterStatus? QuotedStatus { get; set; }
+        [JsonPropertyName("quoted_status")]
+        public TwitterStatus? QuotedStatus { get; set; }
 
         [JsonPropertyName("quote_count")]
         public int QuoteCount
@@ -53,7 +60,8 @@ namespace Twitter.Models
 
         public bool IsRetweet => RetweetedStatus is not null;
 
-        [JsonPropertyName("retweeted_status")] public TwitterStatus? RetweetedStatus { get; set; }
+        [JsonPropertyName("retweeted_status")]
+        public TwitterStatus? RetweetedStatus { get; set; }
 
         [JsonPropertyName("retweeted")]
         public bool RetweetedByMe
@@ -120,7 +128,8 @@ namespace Twitter.Models
             set => SetProperty(ref translatedText, value);
         }
 
-        [JsonIgnore] public string? OverrideLink { get; set; }
+        [JsonIgnore]
+        public string? OverrideLink { get; set; }
 
         private int checkedRelatedInfo; // Interlocked.CompareExchange() does not support bool
 
@@ -136,7 +145,7 @@ namespace Twitter.Models
 
                 return relatedLinkInfo;
             }
-            set { SetProperty(ref relatedLinkInfo, value); }
+            set => SetProperty(ref relatedLinkInfo, value);
         }
 
         /// <summary>
@@ -152,7 +161,7 @@ namespace Twitter.Models
         /// </summary>
         [JsonIgnore]
         public string StatusLink => string.IsNullOrWhiteSpace(OverrideLink)
-            ? $"https://twitter.com/{User?.ScreenName}/status/{Id}"
+            ? $"https://twitter.com/{User.ScreenName}/status/{Id}"
             : OverrideLink;
 
         /// <summary>
@@ -172,7 +181,8 @@ namespace Twitter.Models
             }
         }
 
-        [JsonIgnore] public object? FlowContent { get; set; }
+        [JsonIgnore]
+        public object? FlowContent { get; set; }
 
         /// <summary>
         /// Indicates if user is author of tweet
@@ -214,8 +224,8 @@ namespace Twitter.Models
             User.IsFollowing  = userConnections?.IsFollowing ?? false;
             User.IsFollowedBy = userConnections?.IsFollowedBy ?? false;
 
-            QuotedStatus?.UpdateFromStatus(status?.QuotedStatus);
-            RetweetedStatus?.UpdateFromStatus(status?.RetweetedStatus);
+            QuotedStatus?.UpdateFromStatus(status.QuotedStatus);
+            RetweetedStatus?.UpdateFromStatus(status.RetweetedStatus);
         }
 
         public void UpdateAboutMeProperties(string? screenName)
@@ -242,6 +252,7 @@ namespace Twitter.Models
 
         public override int GetHashCode()
         {
+            // ReSharper disable once NonReadonlyMemberInGetHashCode
             return StringComparer.Ordinal.GetHashCode(Id);
         }
 

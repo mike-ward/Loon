@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
-using Loon.Views.Content.Controls;
 using Twitter.Services;
 
 namespace Loon.ViewModels.Content
@@ -52,19 +51,10 @@ namespace Loon.ViewModels.Content
             var access = await twitterService.AuthenticateWithPinAsync(requestToken, Pin!).ConfigureAwait(false);
             GoBack();
 
-            if (access is not null)
-            {
-                Settings.AccessToken       = access.OAuthToken;
-                Settings.AccessTokenSecret = access.OAuthSecret;
-                Settings.ScreenName        = access.ScreenName;
-                Settings.Save();
-            }
-            else
-            {
-                await MessageBox
-                    .Show(App.GetString("pin-error"), MessageBox.MessageBoxButtons.Ok)
-                    .ConfigureAwait(false);
-            }
+            Settings.AccessToken       = access.OAuthToken;
+            Settings.AccessTokenSecret = access.OAuthSecret;
+            Settings.ScreenName        = access.ScreenName;
+            Settings.Save();
         }
 
         public void GoBack()

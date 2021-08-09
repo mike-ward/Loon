@@ -4,6 +4,7 @@ namespace Twitter.Models
 {
     public class UserObjectUrls
     {
-        [JsonPropertyName("urls")] public UrlEntity[]? Urls { get; set; }
+        [JsonPropertyName("urls")]
+        public UrlEntity[]? Urls { get; set; }
     }
 }

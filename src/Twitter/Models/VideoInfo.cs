@@ -4,6 +4,7 @@ namespace Twitter.Models
 {
     public class VideoInfo
     {
-        [JsonPropertyName("variants")] public Variant[]? Variants { get; set; }
+        [JsonPropertyName("variants")]
+        public Variant[]? Variants { get; set; }
     }
 }

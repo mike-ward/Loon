@@ -65,7 +65,7 @@ namespace Loon.ViewModels.Content.Write
         {
             this.settings       = settings;
             this.twitterService = twitterService;
-            PubSubs.OpenWriteTab.Subscribe(twitterStatus => ReplyTo = twitterStatus);
+            PubSubs.OpenWriteTab.Subscribe(twitterStatusArg => ReplyTo = twitterStatusArg);
             settings.PropertyChanged += Settings_PropertyChanged;
         }
 
@@ -113,7 +113,7 @@ namespace Loon.ViewModels.Content.Write
 
         private async void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && settings.ScreenName is string screenName)
+            if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && settings.ScreenName is { } screenName)
             {
                 var statuses = await twitterService.GetUserTimeline(screenName).ConfigureAwait(true);
                 Me = statuses?.First();

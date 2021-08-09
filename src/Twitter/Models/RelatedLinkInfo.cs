@@ -23,9 +23,8 @@ namespace Twitter.Models
         public string  SiteName    { get; private set; } = string.Empty;
         public string  Language    { get; private set; } = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
-        public TwitterStatus ImageTwitterStatus
-        {
-            get => new() {
+        public TwitterStatus ImageTwitterStatus =>
+            new() {
                 Id       = Guid.NewGuid().ToString(),
                 Language = Language,
                 FullText = Description,
@@ -42,7 +41,6 @@ namespace Twitter.Models
                         }
                 }
             };
-        }
 
         public static async ValueTask<RelatedLinkInfo?> GetRelatedLinkInfoAsync(TwitterStatus status)
         {

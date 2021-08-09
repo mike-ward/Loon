@@ -11,12 +11,12 @@ namespace Loon.ViewModels.Content.UserProfile
     {
         private readonly ITwitterService twitterService;
 
-        private User? user;
+        private User? userProfileContext;
 
         public User? UserProfileContext
         {
-            get => user;
-            set => SetProperty(ref user, value);
+            get => userProfileContext;
+            set => SetProperty(ref userProfileContext, value);
         }
 
         public UserProfileViewModel(ITwitterService twitterService)
@@ -27,17 +27,17 @@ namespace Loon.ViewModels.Content.UserProfile
 
         private void UserProfileContextHandler(object? payload)
         {
-            if (payload is User user)
+            switch (payload)
             {
-                UserProfileContext = user;
-            }
-            else if (payload is string screenName)
-            {
-                GetUserInfo(screenName).FireAndForget();
-            }
-            else
-            {
-                UserProfileContext = null;
+                case User user:
+                    UserProfileContext = user;
+                    break;
+                case string screenName:
+                    GetUserInfo(screenName).FireAndForget();
+                    break;
+                default:
+                    UserProfileContext = null;
+                    break;
             }
         }
 
