@@ -33,35 +33,17 @@ namespace Twitter.Services
             AccessTokenSecret = accessTokenSecret;
         }
 
-        public ValueTask GetAsync(string url, IEnumerable<(string, string)> parameters)
-        {
-            return RequestAsync(url, parameters, GET);
-        }
+        public ValueTask GetAsync(string url, IEnumerable<(string, string)> parameters) => RequestAsync(url, parameters, GET);
 
-        public ValueTask<T> GetAsync<T>(string url, IEnumerable<(string, string)> parameters)
-        {
-            return RequestAsync<T>(url, parameters, GET);
-        }
+        public ValueTask<T> GetAsync<T>(string url, IEnumerable<(string, string)> parameters) => RequestAsync<T>(url, parameters, GET);
 
-        public ValueTask PostAsync(string url, IEnumerable<(string, string)> parameters)
-        {
-            return RequestAsync(url, parameters, POST);
-        }
+        public ValueTask PostAsync(string url, IEnumerable<(string, string)> parameters) => RequestAsync(url, parameters, POST);
 
-        public ValueTask<T> PostAsync<T>(string url, IEnumerable<(string, string)> parameters)
-        {
-            return RequestAsync<T>(url, parameters, POST);
-        }
+        public ValueTask<T> PostAsync<T>(string url, IEnumerable<(string, string)> parameters) => RequestAsync<T>(url, parameters, POST);
 
-        private async ValueTask RequestAsync(string url, IEnumerable<(string, string)> parameters, string method)
-        {
-            _ = await RequestAsync<object>(url, parameters, method).ConfigureAwait(false);
-        }
+        private async ValueTask RequestAsync(string url, IEnumerable<(string, string)> parameters, string method) => _ = await RequestAsync<object>(url, parameters, method).ConfigureAwait(false);
 
-        private ValueTask<T> RequestAsync<T>(string url, IEnumerable<(string, string)> parameters, string method)
-        {
-            return OAuthRequestAsync<T>(url, parameters, method);
-        }
+        private ValueTask<T> RequestAsync<T>(string url, IEnumerable<(string, string)> parameters, string method) => OAuthRequestAsync<T>(url, parameters, method);
 
         /// <summary>
         /// Builds, signs and delivers an OAuth Request
@@ -115,7 +97,6 @@ namespace Twitter.Services
             const string uploadUrl       = TwitterApi.UploadMediaUrl;
             var          signature       = OAuth.Signature(POST, uploadUrl, nonce, timestamp, ConsumerKey!, ConsumerSecret!, AccessToken!, AccessTokenSecret!, parameters: null);
             var          authorizeHeader = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
-
 
             var request = new HttpRequestMessage();
             request.Headers.Add("Authorization", authorizeHeader);

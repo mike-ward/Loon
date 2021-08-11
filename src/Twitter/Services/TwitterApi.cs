@@ -62,8 +62,7 @@ namespace Twitter.Services
         public async ValueTask<IEnumerable<TwitterStatus>> HomeTimeline()
         {
             var statuses = await oAuthApiRequest
-                .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/statuses/home_timeline.json",
-                    TwitterOptions.Default())
+                .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/statuses/home_timeline.json", TwitterOptions.Default())
                 .ConfigureAwait(false);
 
             return await UpdateUserConnections(statuses).ConfigureAwait(false);
@@ -72,8 +71,7 @@ namespace Twitter.Services
         public async ValueTask<IEnumerable<TwitterStatus>> MentionsTimeline(int count)
         {
             var statuses = await oAuthApiRequest
-                .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/statuses/mentions_timeline.json",
-                    TwitterOptions.Default(count))
+                .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/statuses/mentions_timeline.json", TwitterOptions.Default(count))
                 .ConfigureAwait(false);
 
             return await UpdateUserConnections(statuses).ConfigureAwait(false);
@@ -82,8 +80,7 @@ namespace Twitter.Services
         public async ValueTask<IEnumerable<TwitterStatus>> FavoritesTimeline()
         {
             var statuses = await oAuthApiRequest
-                .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/favorites/list.json",
-                    TwitterOptions.Default())
+                .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/favorites/list.json", TwitterOptions.Default())
                 .ConfigureAwait(false);
 
             return await UpdateUserConnections(statuses).ConfigureAwait(false);
