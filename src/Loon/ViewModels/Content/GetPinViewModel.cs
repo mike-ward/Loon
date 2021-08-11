@@ -38,7 +38,7 @@ namespace Loon.ViewModels.Content
 
         public async ValueTask GetPin()
         {
-            requestToken = await twitterService.GetPin().ConfigureAwait(false);
+            requestToken = await twitterService.TwitterApi.GetPinAsync().ConfigureAwait(false);
             SecondPage   = true;
         }
 
@@ -48,7 +48,7 @@ namespace Loon.ViewModels.Content
 
             if (Pin.IsNullOrWhiteSpace()) { throw new InvalidOperationException("Pin is null"); }
 
-            var access = await twitterService.AuthenticateWithPinAsync(requestToken, Pin!).ConfigureAwait(false);
+            var access = await twitterService.TwitterApi.AuthenticateWithPin(requestToken, Pin!).ConfigureAwait(false);
             GoBack();
 
             Settings.AccessToken       = access.OAuthToken;

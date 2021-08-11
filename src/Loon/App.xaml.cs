@@ -11,6 +11,10 @@ namespace Loon
 {
     internal class App : Application
     {
+        public static ServiceProvider ServiceProvider { get; } = new();
+        public static AppCommands     Commands        { get; } = ServiceProvider.GetService<AppCommands>();
+        public static Window          MainWindow      => ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).MainWindow;
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -18,20 +22,20 @@ namespace Loon
 
         public override void OnFrameworkInitializationCompleted()
         {
-            // Need to check so designer works
+            // Visual designer won't work otherwise
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime app)
             {
-                app.MainWindow = Bootstrapper.ServiceProvider.GetService<MainWindow>();
+                app.MainWindow = ServiceProvider.GetService<MainWindow>();
             }
 
             base.OnFrameworkInitializationCompleted();
         }
 
-        public static AppCommands Commands   { get; } = Bootstrapper.ServiceProvider.GetService<AppCommands>();
-        public static Window      MainWindow => ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).MainWindow;
-
-        public static string GetString(string name) => Current.TryFindResource(name, out var value) && value is string val
-            ? val
-            : $"string resource not found: {name}";
+        public static string GetString(string name)
+        {
+            return Current.TryFindResource(name, out var value) && value is string val
+                ? val
+                : $"string resource not found: {name}";
+        }
     }
 }

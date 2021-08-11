@@ -37,13 +37,13 @@ namespace Loon.Commands
                     {
                         if (user.IsFollowing)
                         {
-                            await TwitterService.Unfollow(screenName).ConfigureAwait(true);
+                            await TwitterService.TwitterApi.Unfollow(screenName).ConfigureAwait(true);
                             user.Followers   = Math.Max(0, user.Followers - 1);
                             user.IsFollowing = false;
                         }
                         else
                         {
-                            await TwitterService.Follow(screenName).ConfigureAwait(true);
+                            await TwitterService.TwitterApi.Follow(screenName).ConfigureAwait(true);
                             user.Followers++;
                             user.IsFollowing = true;
                         }

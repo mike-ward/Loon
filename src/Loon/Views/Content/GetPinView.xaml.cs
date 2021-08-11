@@ -2,7 +2,6 @@
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Jab;
-using Loon.Services;
 using Loon.ViewModels.Content;
 
 namespace Loon.Views.Content
@@ -12,7 +11,7 @@ namespace Loon.Views.Content
         public GetPinView()
         {
             InitializeComponent();
-            DataContext = Bootstrapper.ServiceProvider.GetService<GetPinViewModel>();
+            DataContext = App.ServiceProvider.GetService<GetPinViewModel>();
         }
 
         private void InitializeComponent()

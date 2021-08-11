@@ -26,14 +26,14 @@ namespace Loon.ViewModels.Content.Timelines
 
         public ValueTask<IEnumerable<TwitterStatus>> UpdateSearchTimeline(string screenName)
         {
-            return twitterService.GetUserTimeline(screenName);
+            return twitterService.TwitterApi.GetUserTimeline(screenName);
         }
 
         public async ValueTask OnSearch(string search)
         {
             StatusCollection.Clear();
             IsSearching = true;
-            var tweets = await twitterService.Search(search).ConfigureAwait(true);
+            var tweets = await twitterService.TwitterApi.Search(search).ConfigureAwait(true);
             IsSearching = false;
             StatusCollection.AddRange(tweets.Statuses);
         }

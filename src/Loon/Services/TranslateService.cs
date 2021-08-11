@@ -12,13 +12,6 @@ namespace Loon.Services
 {
     internal static class TranslateService
     {
-        private static readonly JabServiceProvider serviceProvider;
-
-        static TranslateService()
-        {
-            serviceProvider = Bootstrapper.ServiceProvider;
-        }
-
         private const string Endpoint = "https://libretranslate.com/translate";
 
         public static async ValueTask<string> Translate(string? text, string fromLanguage, string toLanguage)
@@ -31,7 +24,7 @@ namespace Loon.Services
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Post, Endpoint);
-                var apiKey  = serviceProvider.GetService<ISettings>().TranslateApiKey ?? string.Empty;
+                var apiKey  = App.ServiceProvider.GetService<ISettings>().TranslateApiKey ?? string.Empty;
 
                 var content = new FormUrlEncodedContent(new[] {
                     new KeyValuePair<string?, string?>("q", Uri.EscapeDataString(text)),
@@ -54,7 +47,10 @@ namespace Loon.Services
 
     internal class TranslatorResult
     {
-        [JsonPropertyName("translatedText")] public string? TranslatedText { get; set; }
-        [JsonPropertyName("error")]          public string? ErrorText      { get; set; }
+        [JsonPropertyName("translatedText")]
+        public string? TranslatedText { get; set; }
+
+        [JsonPropertyName("error")]
+        public string? ErrorText { get; set; }
     }
 }

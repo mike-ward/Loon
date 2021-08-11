@@ -18,7 +18,7 @@ namespace Loon.ViewModels.Content.Timelines
 
         public ValueTask<IEnumerable<TwitterStatus>> GetUserTimeline(string screenName)
         {
-            return twitterService.GetUserTimeline(screenName);
+            return twitterService.TwitterApi.GetUserTimeline(screenName);
         }
     }
 }

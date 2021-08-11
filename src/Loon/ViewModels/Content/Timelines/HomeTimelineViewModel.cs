@@ -26,7 +26,7 @@ namespace Loon.ViewModels.Content.Timelines
             titterService = twitterService;
             var name = App.GetString("tab-home-name");
             homeTimeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
-            
+
             // ReSharper disable once AsyncVoidLambda
             PubSubs.AddStatus.Subscribe(async status => await UpdateStatuses.Execute(new[] { status }, homeTimeline).ConfigureAwait(false));
         }
@@ -45,7 +45,7 @@ namespace Loon.ViewModels.Content.Timelines
         private async ValueTask GetAndUpdateStatusesAsync(Timeline timeline)
         {
             var mentions = await GetMentionsAsync().ConfigureAwait(true);
-            var statuses = await titterService.GetHomeTimeline().ConfigureAwait(true);
+            var statuses = await titterService.TwitterApi.HomeTimeline().ConfigureAwait(true);
             await UpdateStatuses.Execute(statuses.Concat(mentions), timeline).ConfigureAwait(true);
         }
 
@@ -59,7 +59,7 @@ namespace Loon.ViewModels.Content.Timelines
                 if (mentionsCounter++ >= mentionsInterval)
                 {
                     mentionsCounter = 0;
-                    return await titterService.GetMentionsTimeline().ConfigureAwait(true);
+                    return await titterService.TwitterApi.MentionsTimeline(20).ConfigureAwait(true);
                 }
             }
             catch (WebException ex)

@@ -34,7 +34,7 @@ namespace Loon.ViewModels.Content.Timelines
 
         private async ValueTask GetAndUpdateStatusesAsync(Timeline timeline)
         {
-            var statuses = await twitterService.GetFavoritesTimeline().ConfigureAwait(true);
+            var statuses = await twitterService.TwitterApi.FavoritesTimeline().ConfigureAwait(true);
             await UpdateStatuses.Execute(statuses, timeline).ConfigureAwait(true);
         }
     }

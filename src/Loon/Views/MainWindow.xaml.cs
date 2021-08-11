@@ -1,21 +1,20 @@
 ﻿using System;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Jab;
 using Loon.Interfaces;
-using Loon.Services;
 using Loon.ViewModels;
 
 namespace Loon.Views
 {
     internal class MainWindow : Window, IWindow
     {
+        // ReSharper disable once ConvertToConstant.Global (needed to bind in XAML)
         public static readonly string TitleBarName = "TitleBar";
 
         public MainWindow()
         {
-            DataContext = Bootstrapper.ServiceProvider.GetService<MainWindowViewModel>();
+            DataContext = App.ServiceProvider.GetService<MainWindowViewModel>();
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();

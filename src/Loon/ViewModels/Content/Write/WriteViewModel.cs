@@ -78,7 +78,7 @@ namespace Loon.ViewModels.Content.Write
 
             try
             {
-                var status = await twitterService.UpdateStatus(TweetText, ReplyTo?.Id, null, Array.Empty<string>()).ConfigureAwait(true);
+                var status = await twitterService.TwitterApi.UpdateStatus(TweetText, ReplyTo?.Id, null, Array.Empty<string>()).ConfigureAwait(true);
                 PubSubs.AddStatus.Publish(status);
                 PubSubs.OpenPreviousTab.Publish();
                 Reset();
@@ -115,7 +115,7 @@ namespace Loon.ViewModels.Content.Write
         {
             if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && settings.ScreenName is { } screenName)
             {
-                var statuses = await twitterService.GetUserTimeline(screenName).ConfigureAwait(true);
+                var statuses = await twitterService.TwitterApi.GetUserTimeline(screenName).ConfigureAwait(true);
                 Me = statuses?.First();
             }
         }

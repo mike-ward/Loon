@@ -42,13 +42,13 @@ namespace Loon.Commands
 
                         if (status.RetweetedByMe)
                         {
-                            await TwitterService.UnretweetStatus(status.Id).ConfigureAwait(true);
+                            await TwitterService.TwitterApi.UnretweetStatus(status.Id).ConfigureAwait(true);
                             status.RetweetCount  = Math.Max(0, status.RetweetCount - 1);
                             status.RetweetedByMe = false;
                         }
                         else
                         {
-                            await TwitterService.RetweetStatus(status.Id).ConfigureAwait(true);
+                            await TwitterService.TwitterApi.RetweetStatus(status.Id).ConfigureAwait(true);
                             status.RetweetCount++;
                             status.RetweetedByMe = true;
                         }

@@ -43,7 +43,7 @@ namespace Loon.ViewModels.Content.UserProfile
 
         private async ValueTask GetUserInfo(string screenName)
         {
-            UserProfileContext = await twitterService.UserInfo(screenName).ConfigureAwait(true);
+            UserProfileContext = await twitterService.TwitterApi.UserInfo(screenName).ConfigureAwait(true);
         }
     }
 }

@@ -34,13 +34,13 @@ namespace Loon.Commands
 
                     if (status.Favorited)
                     {
-                        await TwitterService.DestroyFavorite(status.Id).ConfigureAwait(true);
+                        await TwitterService.TwitterApi.DestroyFavorite(status.Id).ConfigureAwait(true);
                         status.Favorited     = false;
                         status.FavoriteCount = Math.Max(0, status.FavoriteCount - 1);
                     }
                     else
                     {
-                        await TwitterService.CreateFavorite(status.Id).ConfigureAwait(true);
+                        await TwitterService.TwitterApi.CreateFavorite(status.Id).ConfigureAwait(true);
                         status.Favorited = true;
                         status.FavoriteCount++;
                     }

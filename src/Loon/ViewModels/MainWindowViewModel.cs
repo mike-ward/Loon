@@ -48,7 +48,7 @@ namespace Loon.ViewModels
 
         private void OnSettingsUpdated(object? _, PropertyChangedEventArgs e)
         {
-            twitterService.AuthenticationTokens(
+            twitterService.TwitterApi.AuthenticationTokens(
                 Settings.AccessToken,
                 Settings.AccessTokenSecret);
 

@@ -2,7 +2,6 @@
 using Avalonia.Markup.Xaml;
 using Jab;
 using Loon.Interfaces;
-using Loon.Services;
 
 namespace Loon.Views.Content.AppSettings
 {
@@ -11,7 +10,7 @@ namespace Loon.Views.Content.AppSettings
         public SettingsView()
         {
             InitializeComponent();
-            DataContext = Bootstrapper.ServiceProvider.GetService<ISettings>();
+            DataContext = App.ServiceProvider.GetService<ISettings>();
         }
 
         private void InitializeComponent()

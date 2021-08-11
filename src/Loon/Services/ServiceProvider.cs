@@ -24,10 +24,5 @@ namespace Loon.Services
     [Transient(typeof(UserProfileViewModel))]
     [Singleton(typeof(ISettings), typeof(Settings))]
     [Singleton(typeof(ITwitterService), typeof(TwitterService))]
-    public partial class JabServiceProvider { }
-
-    internal static class Bootstrapper
-    {
-        public static JabServiceProvider ServiceProvider { get; } = new();
-    }
+    public partial class ServiceProvider { }
 }
