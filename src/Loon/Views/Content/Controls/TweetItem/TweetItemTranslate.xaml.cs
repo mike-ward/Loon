@@ -6,6 +6,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Loon.Extensions;
 using Loon.Services;
+using Loon.ViewModels;
 using Twitter.Models;
 
 namespace Loon.Views.Content.Controls.TweetItem
@@ -30,7 +31,13 @@ namespace Loon.Views.Content.Controls.TweetItem
                 var fromLang = tweet.Language ?? "und";
                 var toLang   = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
                 tweet.TranslatedText = App.GetString("translate-text-working");
-                tweet.TranslatedText = await TranslateService.Translate(tweet.FullText, fromLang, toLang).ConfigureAwait(true);
+
+                tweet.TranslatedText = await TranslateService.Translate(
+                        tweet.FullText,
+                        fromLang,
+                        toLang,
+                        (App.MainWindow.DataContext as MainWindowViewModel)?.Settings.TranslateApiKey)
+                    .ConfigureAwait(true);
             }
         }
 

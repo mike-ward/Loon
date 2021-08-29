@@ -36,7 +36,7 @@ namespace Loon.Services
                     }
 
                     return await FromCacheAsync(uri).ConfigureAwait(false)
-                        ?? await TryGetImageAsync(uri).ConfigureAwait(false);
+                        ?? await ImageGetAsync(uri).ConfigureAwait(false);
                 }
                 catch (FormatException ex)
                 {
@@ -69,7 +69,7 @@ namespace Loon.Services
                 var path = GetPath(uri);
 
                 return File.Exists(path)
-                    ? await GetBitmap(path).ConfigureAwait(false)
+                    ? await GetBitmapAsync(path).ConfigureAwait(false)
                     : default;
             }
             catch (Exception ex)
@@ -88,7 +88,7 @@ namespace Loon.Services
                 "loon-" + Convert.ToHexString(hash));
         }
 
-        private static async ValueTask<IImage?> GetBitmap(string url)
+        private static async ValueTask<IImage?> GetBitmapAsync(string url)
         {
             var cts = new CancellationTokenSource();
             cts.CancelAfter(1000);
@@ -97,7 +97,7 @@ namespace Loon.Services
             return new Bitmap(stream);
         }
 
-        private static async ValueTask<IImage?> TryGetImageAsync(string uri)
+        private static async ValueTask<IImage?> ImageGetAsync(string uri)
         {
             var response = await OAuthApiRequest.MyHttpClient.GetStreamAsync(uri).ConfigureAwait(false);
 

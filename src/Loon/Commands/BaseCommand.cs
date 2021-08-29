@@ -10,7 +10,10 @@ namespace Loon.Commands
             return true;
         }
 
-        public virtual void Execute(object? parameter) { }
+        public virtual void Execute(object? parameter)
+        {
+            // this space for rent!
+        }
 
         protected virtual void OnCanExecuteChanged(EventArgs e)
         {
