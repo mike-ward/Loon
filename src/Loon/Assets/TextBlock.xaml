@@ -27,13 +27,14 @@
   <Style Selector="TextBlock.hyperlink">
     <Setter Property="TextWrapping" Value="Wrap" />
     <Setter Property="VerticalAlignment" Value="Bottom" />
+    <Setter Property="Foreground" Value="#da5"></Setter>
   </Style>
 
   <Style Selector="TextBlock.busy">
     <Style.Animations>
       <Animation
         PlaybackDirection="Alternate"
-        RepeatCount="INFINITE"
+        IterationCount="INFINITE"
         Duration="0:0:1">
         <KeyFrame Cue="0%">
           <Setter Property="Opacity" Value="0.1" />
