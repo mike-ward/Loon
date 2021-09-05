@@ -17,28 +17,38 @@
   </UserControl.Styles>
 
   <WrapPanel Orientation="Horizontal">
-    <Button
-      Classes="inline1"
-      Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}, Mode=OneTime}"
-      CommandParameter="{Binding User}"
-      Content="{Binding User.Name}"
-      FontWeight="Bold" />
+    <Grid ColumnDefinitions="Auto,Auto">
+      <Button
+        Grid.Column="0"
+        Classes="inline1"
+        Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}, Mode=OneTime}"
+        CommandParameter="{Binding User}"
+        Content="{Binding User.Name}"
+        FontWeight="Bold" />
 
-    <Path
-      Margin="-1 1 5 0"
-      Classes="verifiedbadge"
-      IsVisible="{Binding User.Verified}" />
+      <Path
+        Grid.Column="1"
+        Margin="-1 1 5 0"
+        Classes="verifiedbadge"
+        IsVisible="{Binding User.Verified}" />
+    </Grid>
 
-    <Button
-      Classes="inline1"
-      Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}, Mode=OneTime}"
-      CommandParameter="{Binding User}"
-      Content="{Binding User.ScreenName, StringFormat='@{0}'}" />
+    <Grid ColumnDefinitions="Auto,Auto,Auto">
+      <Button
+        Grid.Column="0"
+        Classes="inline1"
+        Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}, Mode=OneTime}"
+        CommandParameter="{Binding User}"
+        Content="{Binding User.ScreenName, StringFormat='@{0}'}" />
 
-    <TextBlock Text="•" />
+      <TextBlock
+        Grid.Column="1"
+        Text="•" />
 
-    <co:Hyperlink
-      Link="{Binding StatusLink}"
-      Text="{Binding CreatedDate, Converter={StaticResource TimeAgo}}" />
+      <co:Hyperlink
+        Grid.Column="2"
+        Link="{Binding StatusLink}"
+        Text="{Binding CreatedDate, Converter={StaticResource TimeAgo}}" />
+    </Grid>
   </WrapPanel>
 </UserControl>

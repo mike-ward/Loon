@@ -5,6 +5,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:lt="clr-namespace:Loon.Views.Content.Layouts"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:models="clr-namespace:Loon.Models"
   d:DesignHeight="200"
   d:DesignWidth="300"
   mc:Ignorable="d">
@@ -16,11 +17,11 @@
         <Grid PointerPressed="OpenInViewer">
           <Image
             Name="Image"
-            MaxHeight="300"
             Margin="1"
             Cursor="Hand"
             DataContextChanged="LoadMediaAsync"
-            Stretch="UniformToFill" />
+            Stretch="Uniform"
+            StretchDirection="DownOnly"/>
 
           <Border
             Width="40"
@@ -59,7 +60,7 @@
 
     <ItemsControl.ItemsPanel>
       <ItemsPanelTemplate>
-        <lt:SimpleImageLayout />
+        <lt:SimpleImagePanel MaxHeight="{x:Static models:Constants.ImagePanelHeight}" />
       </ItemsPanelTemplate>
     </ItemsControl.ItemsPanel>
   </ItemsControl>
