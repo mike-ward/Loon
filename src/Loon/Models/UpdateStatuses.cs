@@ -13,6 +13,7 @@ namespace Loon.Models
         {
             // Build a hashset for faster lookups.
             var hashSet = new HashSet<TwitterStatus>(timeline.StatusCollection);
+            var staged = new List<TwitterStatus>();
 
             foreach (var status in statuses.OrderBy(status => status.OriginatingStatus.CreatedDate))
             {
@@ -34,13 +35,13 @@ namespace Loon.Models
                     else
                     {
                         if (timeline.StatusCollection.Count == 0) { timeline.StatusCollection.Insert(0, new TwitterStatus()); }
-
-                        // Insert at zero when ItemsRepeater bug is fixed.
-                        timeline.StatusCollection.Insert(1, clonedStatus);
+                        staged.Insert(0, clonedStatus);
                     }
                 }
             }
 
+            // Insert at zero when ItemsRepeater bug is fixed.
+            timeline.StatusCollection.InsertRange(1, staged);
             return default;
         }
 

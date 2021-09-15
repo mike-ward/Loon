@@ -8,9 +8,9 @@ namespace Loon.Models
         {
             const int maxNumberOfStatuses = 500;
 
-            while (timeline.StatusCollection.Count > maxNumberOfStatuses)
+            if (timeline.StatusCollection.Count > maxNumberOfStatuses)
             {
-                timeline.StatusCollection.RemoveAt(timeline.StatusCollection.Count - 1);
+                timeline.StatusCollection.RemoveRange(maxNumberOfStatuses, timeline.StatusCollection.Count - maxNumberOfStatuses);
             }
 
             return default;
