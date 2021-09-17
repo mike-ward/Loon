@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.VisualTree;
+using Loon.Interfaces;
 using Loon.Services;
 using Twitter.Models;
 
@@ -19,26 +22,22 @@ namespace Loon.Views.Content.Controls.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-#pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
-#pragma warning disable S1144   // (used in XAML) Unused private types or members should be removed
-
         private async void LoadMediaAsync(object? sender, EventArgs e)
         {
-            if (sender is Image image &&
-                image.DataContext is Media media)
+            if (sender is Image { DataContext: Media media } image)
             {
                 try
                 {
                     image.Source = null;
+                    var cancellationTokeSourceProvider = this.FindAncestorOfType<ICancellationTokeSourceProvider>();
+                    var cancellationToken              = cancellationTokeSourceProvider?.CancellationTokenSource.Token ?? CancellationToken.None;
+                    if (cancellationToken.IsCancellationRequested) return;
 
                     var imageSource = await ImageService
-                        .GetImageAsync(media.MediaUrl)
+                        .GetImageAsync(media.MediaUrl, cancellationToken)
                         .ConfigureAwait(true);
 
-                    if (image.Source is null) // check for overlapped request
-                    {
-                        image.Source = imageSource;
-                    }
+                    image.Source ??= imageSource;
                 }
                 catch (Exception ex)
                 {

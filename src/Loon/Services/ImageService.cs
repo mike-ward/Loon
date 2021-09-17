@@ -21,7 +21,7 @@ namespace Loon.Services
     {
         private static readonly string TempPath = Path.GetTempPath();
 
-        public static async ValueTask<IImage?> GetImageAsync(string uri)
+        public static async ValueTask<IImage?> GetImageAsync(string uri, CancellationToken cancellationToken)
         {
             const int retries = 3;
 
@@ -32,11 +32,13 @@ namespace Loon.Services
                     if (retry > 0)
                     {
                         TraceService.Message($"retry image: {retry}");
-                        await Task.Delay(500).ConfigureAwait(false);
+                        await Task.Delay(500, cancellationToken).ConfigureAwait(false);
                     }
 
-                    return await FromCacheAsync(uri).ConfigureAwait(false)
-                        ?? await ImageGetAsync(uri).ConfigureAwait(false);
+                    if (cancellationToken.IsCancellationRequested) return default;
+
+                    return await FromCacheAsync(uri, cancellationToken).ConfigureAwait(false)
+                        ?? await ImageGetAsync(uri, cancellationToken).ConfigureAwait(false);
                 }
                 catch (FormatException ex)
                 {
@@ -62,14 +64,15 @@ namespace Loon.Services
             return default;
         }
 
-        private static async ValueTask<IImage?> FromCacheAsync(string uri)
+        private static async ValueTask<IImage?> FromCacheAsync(string uri, CancellationToken cancellationToken)
         {
             try
             {
+                if (cancellationToken.IsCancellationRequested) return default;
                 var path = GetPath(uri);
 
                 return File.Exists(path)
-                    ? await GetBitmapAsync(path).ConfigureAwait(false)
+                    ? await GetBitmapAsync(path, cancellationToken).ConfigureAwait(false)
                     : default;
             }
             catch (Exception ex)
@@ -88,37 +91,39 @@ namespace Loon.Services
                 "loon-" + Convert.ToHexString(hash));
         }
 
-        private static async ValueTask<IImage?> GetBitmapAsync(string url)
+        private static async ValueTask<IImage?> GetBitmapAsync(string url, CancellationToken cancellationToken)
         {
-            var cts = new CancellationTokenSource();
-            cts.CancelAfter(1000);
-            var             bytes  = await File.ReadAllBytesAsync(url, cts.Token).ConfigureAwait(false);
+            var bytes = await File.ReadAllBytesAsync(url, cancellationToken).ConfigureAwait(false);
+            if (cancellationToken.IsCancellationRequested) return default;
             await using var stream = new MemoryStream(bytes);
             return new Bitmap(stream);
         }
 
-        private static async ValueTask<IImage?> ImageGetAsync(string uri)
+        private static async ValueTask<IImage?> ImageGetAsync(string uri, CancellationToken cancellationToken)
         {
-            var response = await OAuthApiRequest.MyHttpClient.GetStreamAsync(uri).ConfigureAwait(false);
+            var response = await OAuthApiRequest.MyHttpClient.GetStreamAsync(uri, cancellationToken).ConfigureAwait(false);
+            if (cancellationToken.IsCancellationRequested) return default;
 
             await using var ms = new MemoryStream(); // Bitmap constructor needs a seekable stream
-            await response.CopyToAsync(ms).ConfigureAwait(false);
+            await response.CopyToAsync(ms, cancellationToken).ConfigureAwait(false);
+            if (cancellationToken.IsCancellationRequested) return default;
 
             ms.Position = 0;
             var bitmap = new Bitmap(ms);
-            await ToCacheAsync(uri, bitmap).ConfigureAwait(false);
-            return bitmap;
+            await ToCacheAsync(uri, bitmap, cancellationToken).ConfigureAwait(false);
+
+            return cancellationToken.IsCancellationRequested
+                ? default
+                : bitmap;
         }
 
-        private static async ValueTask ToCacheAsync(string uri, Bitmap image)
+        private static async ValueTask ToCacheAsync(string uri, Bitmap image, CancellationToken cancellationToken)
         {
             try
             {
                 await using var ms = new MemoryStream();
                 image.Save(ms);
-                var cts = new CancellationTokenSource();
-                cts.CancelAfter(1000);
-                await File.WriteAllBytesAsync(GetPath(uri), ms.ToArray(), cts.Token).ConfigureAwait(false);
+                await File.WriteAllBytesAsync(GetPath(uri), ms.ToArray(), cancellationToken).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

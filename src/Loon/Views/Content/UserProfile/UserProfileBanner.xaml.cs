@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.VisualTree;
@@ -43,7 +44,7 @@ namespace Loon.Views.Content.UserProfile
 
                         if (uri.IsNotNullOrWhiteSpace())
                         {
-                            image.Source = await ImageService.GetImageAsync(uri!).ConfigureAwait(true);
+                            image.Source = await ImageService.GetImageAsync(uri!, CancellationToken.None).ConfigureAwait(true);
                         }
                     }
                 }
