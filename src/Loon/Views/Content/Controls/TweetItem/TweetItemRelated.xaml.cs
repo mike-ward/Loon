@@ -14,10 +14,5 @@ namespace Loon.Views.Content.Controls.TweetItem
         {
             AvaloniaXamlLoader.Load(this);
         }
-
-        private void OpenUrl(string link)
-        {
-            Services.OpenUrlService.Open(link);
-        }
     }
 }

@@ -37,7 +37,6 @@ namespace Loon.ViewModels.Content.Timelines
                 timeline => GetAndUpdateStatusesAsync(timeline),
                 timeline => TruncateStatusCollectionTask.Execute(timeline),
                 timeline => UpdateTimeStampsTask.Execute(timeline),
-                timeline => FlowContentTask.Execute(timeline),
                 timeline => CollectTask.Execute(timeline)
             };
         }
@@ -64,7 +63,7 @@ namespace Loon.ViewModels.Content.Timelines
             }
             catch (WebException ex)
             {
-                if (ex.Response is HttpWebResponse response && response.StatusCode == HttpStatusCode.TooManyRequests)
+                if (ex.Response is HttpWebResponse { StatusCode: HttpStatusCode.TooManyRequests })
                 {
                     // Probably hit the daily limit
                     // Alerting the user does no good in this instance (IMO)

@@ -26,26 +26,26 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         protected override void OnDataContextChanged(EventArgs e)
         {
-            var cancellationTokeSourceProvider = this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>();
-            cancellationToken = cancellationTokeSourceProvider?.CancellationTokenSource.Token ?? CancellationToken.None;
+            if (this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>() is { } cancellationTokeSourceProvider)
+            {
+                cancellationToken = cancellationTokeSourceProvider.CancellationTokenSource.Token;
+            }
+
             base.OnDataContextChanged(e);
         }
 
         private async void LoadMediaAsync(object? sender, EventArgs e)
         {
             var token = cancellationToken; // make a copy
+            if (token.IsCancellationRequested) return;
             
             if (sender is Image { DataContext: Media media } image)
             {
                 try
                 {
                     image.Source = null;
+                    var imageSource = await ImageService.GetImageAsync(media.MediaUrl, token);
                     if (token.IsCancellationRequested) return;
-
-                    var imageSource = await ImageService
-                        .GetImageAsync(media.MediaUrl, token)
-                        .ConfigureAwait(true);
-
                     image.Source ??= imageSource;
                 }
                 catch (Exception ex)

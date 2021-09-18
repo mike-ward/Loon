@@ -14,15 +14,5 @@ namespace Loon.Views.Content.Controls.TweetItem
         {
             AvaloniaXamlLoader.Load(this);
         }
-
-#pragma warning disable CA1822  // (used in XAML) Mark members as static
-#pragma warning disable IDE0051 // (used in XAML) Remove unused private members
-#pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
-#pragma warning disable S1144   // (used in XAML) Unused private types or members should be removedremoved
-
-        private void OpenInTwitter(string par)
-        {
-            Services.OpenUrlService.Open(par);
-        }
     }
 }

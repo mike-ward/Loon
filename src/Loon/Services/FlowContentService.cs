@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
 using Loon.Extensions;
 using Loon.Models;
 using Twitter.Models;
@@ -14,9 +14,8 @@ namespace Loon.Services
         // Best I can do until Avalonia supports Inlines
         public static IEnumerable<Control> FlowContentInlines(TwitterStatus twitterStatus)
         {
-            var nodes =
-                twitterStatus.FlowContent as IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)> ??
-                FlowContentNodes(twitterStatus);
+            twitterStatus.FlowContent ??= FlowContentNodes(twitterStatus);
+            var nodes = (IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)>)twitterStatus.FlowContent;
 
             foreach (var node in nodes)
                 switch (node.FlowContentNodeType)
@@ -46,7 +45,7 @@ namespace Loon.Services
                 }
         }
 
-        public static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)> FlowContentNodes(
+        private static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)> FlowContentNodes(
             TwitterStatus twitterStatus)
         {
             var start         = 0;
@@ -130,27 +129,12 @@ namespace Loon.Services
             return textBlock;
         }
 
-        private static Control Hyperlink(string text, Action command, ContextMenu? contextMenu = null)
+        private static Control Hyperlink(string text, ICommand command, object commandParamater, ContextMenu? contextMenu = null)
         {
             var button = new Button();
             button.Classes.Add("inline");
-
-            void OnButtonOnClick(object? sender, RoutedEventArgs e)
-            {
-                command();
-            }
-
-            button.AttachedToVisualTree += delegate
-            {
-                button.Click       += OnButtonOnClick;
-                button.ContextMenu =  contextMenu;
-            };
-
-            button.DetachedFromVisualTree += delegate
-            {
-                button.Click       -= OnButtonOnClick;
-                button.ContextMenu =  null;
-            };
+            button.Command          = command;
+            button.CommandParameter = commandParamater;
 
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
@@ -164,7 +148,8 @@ namespace Loon.Services
         {
             return Hyperlink(
                 link.TruncateWithEllipsis(25),
-                () => OpenUrlService.Open(link),
+                App.Commands.OpenUrl,
+                link,
                 ContextMenu(link));
         }
 
@@ -172,7 +157,8 @@ namespace Loon.Services
         {
             return Hyperlink(
                 "@" + screenName,
-                () => App.Commands.SetUserProfileContext.Execute(screenName));
+                App.Commands.SetUserProfileContext,
+                screenName);
         }
 
         private static Control Hashtag(string text)
@@ -180,8 +166,8 @@ namespace Loon.Services
             var link = $"https://twitter.com/hashtag/{text}";
             return Hyperlink(
                 "#" + text,
-                () => OpenUrlService.Open(link),
-                ContextMenu(link));
+                App.Commands.OpenUrl,
+                link);
         }
 
         private static ContextMenu ContextMenu(string link)

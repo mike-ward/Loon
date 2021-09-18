@@ -27,7 +27,6 @@ namespace Loon.ViewModels.Content.Timelines
             return new Func<Timeline, ValueTask>[] {
                 timeline => GetAndUpdateStatusesAsync(timeline),
                 timeline => TruncateStatusCollectionTask.Execute(timeline),
-                timeline => FlowContentTask.Execute(timeline),
                 timeline => UpdateTimeStampsTask.Execute(timeline)
             };
         }

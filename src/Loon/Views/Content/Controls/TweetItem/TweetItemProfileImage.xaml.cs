@@ -32,15 +32,19 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         protected override void OnDataContextChanged(EventArgs e)
         {
-            var cancellationTokeSourceProvider = this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>();
-            cancellationToken = cancellationTokeSourceProvider?.CancellationTokenSource.Token ?? CancellationToken.None;
+            if (this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>() is { } cancellationTokeSourceProvider)
+            {
+                cancellationToken = cancellationTokeSourceProvider.CancellationTokenSource.Token;
+            }
+
             base.OnDataContextChanged(e);
         }
 
         private async void UpdateImage(object? sender, EventArgs _)
         {
             var token = cancellationToken;
-            
+            if (token.IsCancellationRequested) return;
+
             if (sender is Image image)
             {
                 try
@@ -51,10 +55,10 @@ namespace Loon.Views.Content.Controls.TweetItem
                     var imageSource =
                         DataContext is TwitterStatus status &&
                         status.User.ProfileImageUrlBigger is { Length: > 0 } uri
-                            ? await ImageService
-                                .GetImageAsync(uri, token)
-                                .ConfigureAwait(true)
+                            ? await ImageService.GetImageAsync(uri, token)
                             : EmptyBitmap;
+
+                    if (token.IsCancellationRequested) return;
 
                     image.Source = image.Source is null
                         ? imageSource

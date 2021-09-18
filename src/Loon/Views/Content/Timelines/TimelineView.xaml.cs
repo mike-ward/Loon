@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading;
+﻿using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -18,6 +16,11 @@ namespace Loon.Views.Content.Timelines
         {
             InitializeComponent();
 
+            this.FindControl<ItemsRepeater>(ItemsRepeaterName).ElementClearing += (_, args) =>
+            {
+                var tweetItemView = (TweetItemView)args.Element;
+                tweetItemView.CancellationTokenSource.Cancel();
+            };
         }
 
         private void InitializeComponent()
