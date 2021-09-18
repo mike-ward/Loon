@@ -18,17 +18,6 @@ namespace Loon.Views.Content.Timelines
         {
             InitializeComponent();
 
-            var itemsRepeater = this.FindControl<ItemsRepeater>(ItemsRepeaterName);
-            if (itemsRepeater is not null)
-            {
-                itemsRepeater.ElementPrepared += (_, args) => ((TweetItemView)args.Element).CancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(7));
-                itemsRepeater.ElementClearing += (_, args) =>
-                {
-                    var tweetItemView = (TweetItemView)args.Element;
-                    tweetItemView.CancellationTokenSource.Cancel();
-                    tweetItemView.CancellationTokenSource = new CancellationTokenSource();
-                };
-            }
         }
 
         private void InitializeComponent()

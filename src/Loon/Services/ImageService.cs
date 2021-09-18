@@ -23,6 +23,7 @@ namespace Loon.Services
 
         public static async ValueTask<IImage?> GetImageAsync(string uri, CancellationToken cancellationToken)
         {
+            if (cancellationToken.IsCancellationRequested) return default;
             const int retries = 3;
 
             for (var retry = 0; retry < retries; retry++)
@@ -54,6 +55,10 @@ namespace Loon.Services
                 {
                     TraceService.Message(ex.Message);
                     break;
+                }
+                catch (TaskCanceledException)
+                {
+                    // eat it
                 }
                 catch (Exception ex)
                 {
@@ -93,6 +98,7 @@ namespace Loon.Services
 
         private static async ValueTask<IImage?> GetBitmapAsync(string url, CancellationToken cancellationToken)
         {
+            if (cancellationToken.IsCancellationRequested) return default;
             var bytes = await File.ReadAllBytesAsync(url, cancellationToken).ConfigureAwait(false);
             if (cancellationToken.IsCancellationRequested) return default;
             await using var stream = new MemoryStream(bytes);
@@ -101,6 +107,7 @@ namespace Loon.Services
 
         private static async ValueTask<IImage?> ImageGetAsync(string uri, CancellationToken cancellationToken)
         {
+            if (cancellationToken.IsCancellationRequested) return default;
             var response = await OAuthApiRequest.MyHttpClient.GetStreamAsync(uri, cancellationToken).ConfigureAwait(false);
             if (cancellationToken.IsCancellationRequested) return default;
 
@@ -119,16 +126,11 @@ namespace Loon.Services
 
         private static async ValueTask ToCacheAsync(string uri, Bitmap image, CancellationToken cancellationToken)
         {
-            try
-            {
-                await using var ms = new MemoryStream();
-                image.Save(ms);
-                await File.WriteAllBytesAsync(GetPath(uri), ms.ToArray(), cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                TraceService.Message(ex.Message);
-            }
+            if (cancellationToken.IsCancellationRequested) return;
+
+            await using var ms = new MemoryStream();
+            image.Save(ms);
+            await File.WriteAllBytesAsync(GetPath(uri), ms.ToArray(), cancellationToken).ConfigureAwait(false);
         }
 
         private static ImageViewer? imageViewer;

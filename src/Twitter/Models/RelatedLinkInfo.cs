@@ -2,7 +2,9 @@
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Twitter.Services;
@@ -42,18 +44,13 @@ namespace Twitter.Models
                 }
             };
 
-        public static async ValueTask<RelatedLinkInfo?> GetRelatedLinkInfoAsync(TwitterStatus status)
+        public static async ValueTask<RelatedLinkInfo?> GetRelatedLinkInfoAsync(TwitterStatus status, CancellationToken cancellationToken)
         {
-            if (status.IsQuoted)
-            {
-                return status.RelatedLinkInfo;
-            }
+            if (cancellationToken.IsCancellationRequested) return status.RelatedLinkInfo;
+            if (status.IsQuoted) return status.RelatedLinkInfo;
 
             var urls = status.Entities?.Urls;
-            if (urls is null)
-            {
-                return status.RelatedLinkInfo;
-            }
+            if (urls is null) return status.RelatedLinkInfo;
 
             var hasMedia = status.OriginatingStatus.ExtendedEntities?.HasMedia ?? false;
 
@@ -61,9 +58,11 @@ namespace Twitter.Models
             {
                 try
                 {
+                    if (cancellationToken.IsCancellationRequested) break;
                     var uri = url.ExpandedUrl ?? url.Url;
                     if (!UrlValid(uri)) continue;
-                    var relatedLinkInfo = await GetLinkInfoAsync(uri).ConfigureAwait(false);
+                    var relatedLinkInfo = await GetLinkInfoAsync(uri, cancellationToken).ConfigureAwait(false);
+                    if (cancellationToken.IsCancellationRequested) break;
                     if (relatedLinkInfo is null) continue;
 
                     if (hasMedia || !UrlValid(relatedLinkInfo.ImageUrl))
@@ -72,6 +71,14 @@ namespace Twitter.Models
                     }
 
                     return status.RelatedLinkInfo ?? relatedLinkInfo;
+                }
+                catch (TaskCanceledException)
+                {
+                    // eat it
+                }
+                catch (HttpRequestException)
+                {
+                    // eat it
                 }
                 catch (Exception ex)
                 {
@@ -82,17 +89,20 @@ namespace Twitter.Models
             return status.RelatedLinkInfo;
         }
 
-        private static async ValueTask<RelatedLinkInfo?> GetLinkInfoAsync(string url)
+        private static async ValueTask<RelatedLinkInfo?> GetLinkInfoAsync(string url, CancellationToken cancellationToken)
         {
-            using var response = await OAuthApiRequest.MyHttpClient.GetAsync(url).ConfigureAwait(false);
-            using var reader   = new StreamReader(await response.Content.ReadAsStreamAsync().ConfigureAwait(false), Encoding.UTF8);
+            if (cancellationToken.IsCancellationRequested) return null;
+            using var response = await OAuthApiRequest.MyHttpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
+            using var reader   = new StreamReader(await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false), Encoding.UTF8);
+            if (cancellationToken.IsCancellationRequested) return null;
 
             var htmlBuilder = new StringBuilder();
 
             while (true)
             {
+                if (cancellationToken.IsCancellationRequested) return null;
                 var line = await reader.ReadLineAsync().ConfigureAwait(false);
-                if (line is null) break;
+                if (line is null || cancellationToken.IsCancellationRequested) return null;
                 htmlBuilder.AppendLine(line);
 
                 // No need to parse the whole document, only interested in head section
@@ -100,31 +110,39 @@ namespace Twitter.Models
                 if (line.Contains(headCloseTag, StringComparison.OrdinalIgnoreCase)) break;
             }
 
-            var metaInfo = await ParseForSocialTags(url, $"{htmlBuilder}</html>").ConfigureAwait(false);
+            if (cancellationToken.IsCancellationRequested) return null;
+            var metaInfo = ParseForSocialTags(url, $"{htmlBuilder}</html>", cancellationToken);
 
-            return !string.IsNullOrEmpty(metaInfo.Title) && !string.IsNullOrEmpty(metaInfo.Description)
+            return !string.IsNullOrEmpty(metaInfo?.Title) && !string.IsNullOrEmpty(metaInfo.Description)
                 ? metaInfo
                 : null;
         }
 
-        private static async ValueTask<RelatedLinkInfo> ParseForSocialTags(string url, string html)
+        private static RelatedLinkInfo? ParseForSocialTags(string url, string html, CancellationToken cancellationToken)
         {
+            if (cancellationToken.IsCancellationRequested) return null;
             var document = new HtmlDocument();
-            await Task.Run(() => document.LoadHtml(html)).ConfigureAwait(false);
+            document.LoadHtml(html);
+            if (cancellationToken.IsCancellationRequested) return null;
 
             var language = document.DocumentNode.SelectSingleNode("//html")?.Attributes["lang"]?.Value;
+            if (cancellationToken.IsCancellationRequested) return null;
+
             if (string.IsNullOrWhiteSpace(language) || language.Equals("und", StringComparison.OrdinalIgnoreCase))
             {
                 language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
             }
 
             var metaTags = document.DocumentNode.SelectNodes("//meta");
+            if (cancellationToken.IsCancellationRequested) return null;
             var metaInfo = new RelatedLinkInfo { Url = url, Language = Truncate(language, 2) };
 
             if (metaTags is not null)
             {
                 foreach (var tag in metaTags)
                 {
+                    if (cancellationToken.IsCancellationRequested) return null;
+                    
                     var tagName     = tag.Attributes["name"];
                     var tagContent  = tag.Attributes["content"];
                     var tagProperty = tag.Attributes["property"];

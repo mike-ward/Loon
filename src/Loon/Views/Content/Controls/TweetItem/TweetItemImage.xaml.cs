@@ -2,8 +2,8 @@
 using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
-using Avalonia.VisualTree;
 using Loon.Interfaces;
 using Loon.Services;
 using Twitter.Models;
@@ -12,6 +12,8 @@ namespace Loon.Views.Content.Controls.TweetItem
 {
     internal class TweetItemImage : UserControl
     {
+        private CancellationToken cancellationToken = CancellationToken.None;
+
         public TweetItemImage()
         {
             InitializeComponent();
@@ -22,19 +24,26 @@ namespace Loon.Views.Content.Controls.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
+        protected override void OnDataContextChanged(EventArgs e)
+        {
+            var cancellationTokeSourceProvider = this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>();
+            cancellationToken = cancellationTokeSourceProvider?.CancellationTokenSource.Token ?? CancellationToken.None;
+            base.OnDataContextChanged(e);
+        }
+
         private async void LoadMediaAsync(object? sender, EventArgs e)
         {
+            var token = cancellationToken; // make a copy
+            
             if (sender is Image { DataContext: Media media } image)
             {
                 try
                 {
                     image.Source = null;
-                    var cancellationTokeSourceProvider = this.FindAncestorOfType<ICancellationTokeSourceProvider>();
-                    var cancellationToken              = cancellationTokeSourceProvider?.CancellationTokenSource.Token ?? CancellationToken.None;
-                    if (cancellationToken.IsCancellationRequested) return;
+                    if (token.IsCancellationRequested) return;
 
                     var imageSource = await ImageService
-                        .GetImageAsync(media.MediaUrl, cancellationToken)
+                        .GetImageAsync(media.MediaUrl, token)
                         .ConfigureAwait(true);
 
                     image.Source ??= imageSource;

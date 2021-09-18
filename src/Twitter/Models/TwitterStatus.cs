@@ -5,8 +5,6 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
 using Twitter.Services;
 
 namespace Twitter.Models
@@ -131,20 +129,10 @@ namespace Twitter.Models
         [JsonIgnore]
         public string? OverrideLink { get; set; }
 
-        private int checkedRelatedInfo; // Interlocked.CompareExchange() does not support bool
-
         [JsonIgnore]
         public RelatedLinkInfo? RelatedLinkInfo
         {
-            get
-            {
-                if (Interlocked.CompareExchange(ref checkedRelatedInfo, value: 1, comparand: 0) == 0)
-                {
-                    Task.Run(async () => RelatedLinkInfo = await RelatedLinkInfo.GetRelatedLinkInfoAsync(this).ConfigureAwait(false));
-                }
-
-                return relatedLinkInfo;
-            }
+            get => relatedLinkInfo;
             set => SetProperty(ref relatedLinkInfo, value);
         }
 

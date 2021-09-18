@@ -4,10 +4,10 @@ using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using Avalonia.VisualTree;
 using Loon.Interfaces;
 using Loon.Services;
 using Twitter.Models;
@@ -16,8 +16,9 @@ namespace Loon.Views.Content.Controls.TweetItem
 {
     internal class TweetItemProfileImage : UserControl
     {
-        private const           int    profileSize = 73; // Twitter's bigger profile image size is 48x48
-        private static readonly Bitmap EmptyBitmap = new WriteableBitmap(new PixelSize(profileSize, profileSize), new Vector(96, 96), PixelFormat.Bgra8888, AlphaFormat.Premul);
+        private const           int               profileSize       = 73; // Twitter's bigger profile image size is 48x48
+        private                 CancellationToken cancellationToken = CancellationToken.None;
+        private static readonly Bitmap            EmptyBitmap       = new WriteableBitmap(new PixelSize(profileSize, profileSize), new Vector(96, 96), PixelFormat.Bgra8888, AlphaFormat.Premul);
 
         public TweetItemProfileImage()
         {
@@ -29,25 +30,29 @@ namespace Loon.Views.Content.Controls.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
-#pragma warning disable RCS1213 // (used in XAML) Remove unused member declaration.
-#pragma warning disable S1144   // (used in XAML) Unused private types or members should be removedremoved
+        protected override void OnDataContextChanged(EventArgs e)
+        {
+            var cancellationTokeSourceProvider = this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>();
+            cancellationToken = cancellationTokeSourceProvider?.CancellationTokenSource.Token ?? CancellationToken.None;
+            base.OnDataContextChanged(e);
+        }
 
         private async void UpdateImage(object? sender, EventArgs _)
         {
+            var token = cancellationToken;
+            
             if (sender is Image image)
             {
                 try
                 {
                     image.Source = null;
-                    var cancellationTokeSourceProvider = this.FindAncestorOfType<ICancellationTokeSourceProvider>();
-                    var cancellationToken              = cancellationTokeSourceProvider?.CancellationTokenSource.Token ?? CancellationToken.None;
-                    if (cancellationToken.IsCancellationRequested) return;
+                    if (token.IsCancellationRequested) return;
 
                     var imageSource =
                         DataContext is TwitterStatus status &&
                         status.User.ProfileImageUrlBigger is { Length: > 0 } uri
                             ? await ImageService
-                                .GetImageAsync(uri, cancellationToken)
+                                .GetImageAsync(uri, token)
                                 .ConfigureAwait(true)
                             : EmptyBitmap;
 
