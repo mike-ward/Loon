@@ -16,8 +16,13 @@ namespace Loon.Services
         public static IEnumerable<Control> FlowContentInlines(TwitterStatus twitterStatus, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested) yield break;
-            twitterStatus.FlowContent ??= FlowContentNodes(twitterStatus, cancellationToken);
-            if (cancellationToken.IsCancellationRequested) yield break;
+
+            if (twitterStatus.FlowContent is null)
+            {
+                var content = FlowContentNodes(twitterStatus, cancellationToken).ToArray();
+                if (cancellationToken.IsCancellationRequested) yield break;
+                twitterStatus.FlowContent = content;
+            }
 
             var nodes = (IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)>)twitterStatus.FlowContent;
 

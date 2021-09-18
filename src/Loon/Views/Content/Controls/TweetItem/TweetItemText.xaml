@@ -8,7 +8,7 @@
   d:DesignWidth="300"
   mc:Ignorable="d">
 
-  <ItemsControl Name="ItemsControl" DataContextChanged="ItemsControl_OnDataContextChanged">
+  <ItemsControl Name="ItemsControl">
 
     <ItemsControl.ItemsPanel>
       <ItemsPanelTemplate>
