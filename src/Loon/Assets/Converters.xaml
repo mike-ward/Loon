@@ -8,7 +8,6 @@
       <converters:BooleanToDynamicResourceConverter x:Key="BooleanToDynamicResource" />
       <converters:CountConverter x:Key="CountConverter" />
       <converters:DoubleFormatConverter x:Key="DoubleFormat" />
-      <converters:FlowContentConverter x:Key="FlowContent" />
       <converters:MediaHasVideoConverter x:Key="MediaHasVideo" />
       <converters:MultiBoolConverter x:Key="MultiBool" />
       <converters:TabItemWidthConverter x:Key="TabItemWidth" />

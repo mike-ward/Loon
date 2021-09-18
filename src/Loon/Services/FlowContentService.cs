@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Input;
 using Avalonia.Controls;
 using Loon.Extensions;
@@ -12,28 +13,34 @@ namespace Loon.Services
     internal static class FlowContentService
     {
         // Best I can do until Avalonia supports Inlines
-        public static IEnumerable<Control> FlowContentInlines(TwitterStatus twitterStatus)
+        public static IEnumerable<Control> FlowContentInlines(TwitterStatus twitterStatus, CancellationToken cancellationToken)
         {
-            twitterStatus.FlowContent ??= FlowContentNodes(twitterStatus);
+            if (cancellationToken.IsCancellationRequested) yield break;
+            twitterStatus.FlowContent ??= FlowContentNodes(twitterStatus, cancellationToken);
+            if (cancellationToken.IsCancellationRequested) yield break;
+
             var nodes = (IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)>)twitterStatus.FlowContent;
 
-            foreach (var node in nodes)
-                switch (node.FlowContentNodeType)
+            foreach (var (flowContentNodeType, text) in nodes)
+            {
+                if (cancellationToken.IsCancellationRequested) yield break;
+
+                switch (flowContentNodeType)
                 {
                     case FlowContentNodeType.Text:
-                        yield return Run(node.Text);
+                        yield return Run(text);
                         break;
 
                     case FlowContentNodeType.Url:
-                        yield return Link(node.Text);
+                        yield return Link(text);
                         break;
 
                     case FlowContentNodeType.Mention:
-                        yield return Mention(node.Text);
+                        yield return Mention(text);
                         break;
 
                     case FlowContentNodeType.HashTag:
-                        yield return Hashtag(node.Text);
+                        yield return Hashtag(text);
                         break;
 
                     case FlowContentNodeType.Media:
@@ -43,16 +50,20 @@ namespace Loon.Services
                     default:
                         throw new InvalidOperationException();
                 }
+            }
         }
 
         private static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)> FlowContentNodes(
-            TwitterStatus twitterStatus)
+            TwitterStatus twitterStatus,
+            CancellationToken cancellationToken)
         {
             var start         = 0;
             var twitterString = new TwitterString(twitterStatus.FullText ?? twitterStatus.Text ?? string.Empty);
+            if (cancellationToken.IsCancellationRequested) yield break;
 
             foreach (var item in FlowControlItems(twitterStatus.Entities ?? new Entities()))
             {
+                if (cancellationToken.IsCancellationRequested) yield break;
                 if (item.Start >= start)
                 {
                     var len  = item.Start - start;
@@ -67,8 +78,7 @@ namespace Loon.Services
             yield return (FlowContentNodeType.Text, twitterString.Substring(start));
         }
 
-        private static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>
-            FlowControlItems(Entities entities)
+        private static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)> FlowControlItems(Entities entities)
         {
             var urls = entities.Urls
                     ?.Select(url =>
