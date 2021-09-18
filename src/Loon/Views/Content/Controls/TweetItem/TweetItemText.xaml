@@ -9,7 +9,6 @@
   mc:Ignorable="d">
 
   <ItemsControl Name="ItemsControl">
-
     <ItemsControl.ItemsPanel>
       <ItemsPanelTemplate>
         <WrapPanel />

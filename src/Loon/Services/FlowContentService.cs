@@ -24,9 +24,10 @@ namespace Loon.Services
                 twitterStatus.FlowContent = content;
             }
 
-            var nodes = (IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)>)twitterStatus.FlowContent;
-
-            foreach (var (flowContentNodeType, text) in nodes)
+            foreach (
+                var (flowContentNodeType, text)
+                in
+                (IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)>)twitterStatus.FlowContent)
             {
                 if (cancellationToken.IsCancellationRequested) yield break;
 
@@ -150,6 +151,7 @@ namespace Loon.Services
             button.Classes.Add("inline");
             button.Command          = command;
             button.CommandParameter = commandParamater;
+            button.ContextMenu      = contextMenu;
 
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
