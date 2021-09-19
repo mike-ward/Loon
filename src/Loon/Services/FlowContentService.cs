@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Windows.Input;
@@ -24,44 +24,24 @@ namespace Loon.Services
                 twitterStatus.FlowContent = content;
             }
 
-            foreach (
-                var (flowContentNodeType, text)
-                in
-                (IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)>)twitterStatus.FlowContent)
+            foreach (var (nodeType, text) in ((FlowContentNodeType, string )[])twitterStatus.FlowContent)
             {
                 if (cancellationToken.IsCancellationRequested) yield break;
 
-                switch (flowContentNodeType)
-                {
-                    case FlowContentNodeType.Text:
-                        yield return Run(text);
-                        break;
+                var control = nodeType switch {
+                    FlowContentNodeType.Text    => Run(text),
+                    FlowContentNodeType.Url     => Link(text),
+                    FlowContentNodeType.Mention => Mention(text),
+                    FlowContentNodeType.HashTag => Hashtag(text),
+                    FlowContentNodeType.Media   => null, // images handled elsewhere
+                    _                           => throw new ConstraintException("invalid FlowContentNodeType")
+                };
 
-                    case FlowContentNodeType.Url:
-                        yield return Link(text);
-                        break;
-
-                    case FlowContentNodeType.Mention:
-                        yield return Mention(text);
-                        break;
-
-                    case FlowContentNodeType.HashTag:
-                        yield return Hashtag(text);
-                        break;
-
-                    case FlowContentNodeType.Media:
-                        // Media is handled else where
-                        break;
-
-                    default:
-                        throw new InvalidOperationException();
-                }
+                if (control is not null) yield return control;
             }
         }
 
-        private static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text)> FlowContentNodes(
-            TwitterStatus twitterStatus,
-            CancellationToken cancellationToken)
+        private static IEnumerable<(FlowContentNodeType, string)> FlowContentNodes(TwitterStatus twitterStatus, CancellationToken cancellationToken)
         {
             var start         = 0;
             var twitterString = new TwitterString(twitterStatus.FullText ?? twitterStatus.Text ?? string.Empty);
