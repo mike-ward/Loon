@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -34,7 +35,8 @@ namespace Loon.Views.Content.Controls.TweetItem
             base.OnDataContextChanged(e);
         }
 
-        private async void LoadMediaAsync(object? sender, EventArgs e)
+        [SuppressMessage("ReSharper", "UnusedParameter.Local")]
+        private async void LoadMediaAsync(object? sender, EventArgs _)
         {
             var token = cancellationToken; // make a copy
             if (token.IsCancellationRequested) return;

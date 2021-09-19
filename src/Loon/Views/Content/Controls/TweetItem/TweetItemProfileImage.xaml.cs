@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Threading;
 using Avalonia;
@@ -40,29 +41,24 @@ namespace Loon.Views.Content.Controls.TweetItem
             base.OnDataContextChanged(e);
         }
 
+        [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private async void UpdateImage(object? sender, EventArgs _)
         {
-            var token = cancellationToken;
-            if (token.IsCancellationRequested) return;
+            if (cancellationToken.IsCancellationRequested) return;
 
-            if (sender is Image image)
+            if (sender is Image { DataContext: TwitterStatus status } image)
             {
                 try
                 {
                     image.Source = null;
-                    if (token.IsCancellationRequested) return;
 
                     var imageSource =
-                        DataContext is TwitterStatus status &&
                         status.User.ProfileImageUrlBigger is { Length: > 0 } uri
-                            ? await ImageService.GetImageAsync(uri, token)
+                            ? await ImageService.GetImageAsync(uri, cancellationToken)
                             : EmptyBitmap;
 
-                    if (token.IsCancellationRequested) return;
-
-                    image.Source = image.Source is null
-                        ? imageSource
-                        : EmptyBitmap;
+                    if (cancellationToken.IsCancellationRequested) return;
+                    image.Source = imageSource;
                 }
                 catch (Exception ex)
                 {
@@ -72,6 +68,8 @@ namespace Loon.Views.Content.Controls.TweetItem
             }
         }
 
+        [SuppressMessage("ReSharper", "UnusedParameter.Local")]
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(relativeTo: null).Properties.IsLeftButtonPressed &&
