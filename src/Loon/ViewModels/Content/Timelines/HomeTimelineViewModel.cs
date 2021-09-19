@@ -37,7 +37,7 @@ namespace Loon.ViewModels.Content.Timelines
                 timeline => GetAndUpdateStatusesAsync(timeline),
                 timeline => TruncateStatusCollectionTask.Execute(timeline),
                 timeline => UpdateTimeStampsTask.Execute(timeline),
-                timeline => CollectTask.Execute(timeline)
+                timeline => GCTask.Execute(timeline)
             };
         }
 

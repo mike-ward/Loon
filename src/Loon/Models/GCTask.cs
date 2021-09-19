@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace Loon.Models
 {
-    internal static class CollectTask
+    internal static class GCTask
     {
         public static ValueTask Execute(Timeline _)
         {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             GC.Collect();
             return default;
         }
