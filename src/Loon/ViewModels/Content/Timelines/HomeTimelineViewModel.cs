@@ -28,7 +28,7 @@ namespace Loon.ViewModels.Content.Timelines
             homeTimeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
 
             // ReSharper disable once AsyncVoidLambda
-            PubSubs.AddStatus.Subscribe(async status => await UpdateStatuses.Execute(new[] { status }, homeTimeline).ConfigureAwait(false));
+            PubSubs.AddStatus.Subscribe(async status => await UpdateStatusesTask.Execute(new[] { status }, homeTimeline).ConfigureAwait(false));
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()
@@ -45,7 +45,7 @@ namespace Loon.ViewModels.Content.Timelines
         {
             var mentions = await GetMentionsAsync().ConfigureAwait(true);
             var statuses = await titterService.TwitterApi.HomeTimeline().ConfigureAwait(true);
-            await UpdateStatuses.Execute(statuses.Concat(mentions), timeline).ConfigureAwait(true);
+            await UpdateStatusesTask.Execute(statuses.Concat(mentions), timeline).ConfigureAwait(true);
         }
 
         private async ValueTask<IEnumerable<TwitterStatus>> GetMentionsAsync()

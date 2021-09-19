@@ -10,13 +10,13 @@
   mc:Ignorable="d">
 
   <Image
-    Width="35"
-    Height="35"
+    Width="34"
+    Height="34"
     Cursor="Hand"
     DataContextChanged="UpdateImage"
     PointerPressed="OnPointerPressed">
     <Image.Clip>
-      <EllipseGeometry Rect="0 0 35 35" />
+      <EllipseGeometry Rect="0 0 34 34" />
     </Image.Clip>
   </Image>
 </UserControl>

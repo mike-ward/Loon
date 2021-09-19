@@ -40,7 +40,7 @@ namespace Loon.Views.Content
 
         private void OpenPreviousTabHandler()
         {
-            if (this.FindControl<TabControl>(TabControlName) is TabControl tabControl)
+            if (this.FindControl<TabControl>(TabControlName) is { } tabControl)
             {
                 tabControl.SelectedIndex = previousIndex;
             }
@@ -48,7 +48,7 @@ namespace Loon.Views.Content
 
         private void OpenWriteTabHandler(object? _)
         {
-            if (this.FindControl<TabControl>(TabControlName) is TabControl tabControl)
+            if (this.FindControl<TabControl>(TabControlName) is { } tabControl)
             {
                 tabControl.SelectedIndex = tabControl.ItemCount - 1;
             }

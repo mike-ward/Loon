@@ -21,7 +21,7 @@
             Cursor="Hand"
             DataContextChanged="LoadMediaAsync"
             Stretch="Uniform"
-            StretchDirection="DownOnly"/>
+            StretchDirection="DownOnly" />
 
           <Border
             Width="40"
@@ -60,7 +60,9 @@
 
     <ItemsControl.ItemsPanel>
       <ItemsPanelTemplate>
-        <lt:SimpleImagePanel MaxHeight="{x:Static models:Constants.ImagePanelHeight}" />
+        <lt:SimpleImagePanel
+          MaxWidth="{x:Static models:Constants.ImagePanelWidth}"
+          MaxHeight="{x:Static models:Constants.ImagePanelHeight}" />
       </ItemsPanelTemplate>
     </ItemsControl.ItemsPanel>
   </ItemsControl>
