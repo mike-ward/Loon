@@ -32,6 +32,7 @@ namespace Loon.Services
                 {
                     if (retry > 0)
                     {
+                        if (cancellationToken.IsCancellationRequested) return default;
                         TraceService.Message($"retry image: {retry}");
                         await Task.Delay(500, cancellationToken).ConfigureAwait(false);
                     }
@@ -58,7 +59,7 @@ namespace Loon.Services
                 }
                 catch (TaskCanceledException)
                 {
-                    // eat it
+                    break;
                 }
                 catch (Exception ex)
                 {
