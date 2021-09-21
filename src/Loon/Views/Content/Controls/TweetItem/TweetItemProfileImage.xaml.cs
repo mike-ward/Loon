@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -59,6 +60,10 @@ namespace Loon.Views.Content.Controls.TweetItem
 
                     if (cancellationToken.IsCancellationRequested) return;
                     image.Source = imageSource;
+                }
+                catch (TaskCanceledException)
+                {
+                    // return
                 }
                 catch (Exception ex)
                 {

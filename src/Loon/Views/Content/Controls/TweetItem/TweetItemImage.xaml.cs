@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.LogicalTree;
@@ -40,7 +41,7 @@ namespace Loon.Views.Content.Controls.TweetItem
         {
             var token = cancellationToken; // make a copy
             if (token.IsCancellationRequested) return;
-            
+
             if (sender is Image { DataContext: Media media } image)
             {
                 try
@@ -49,6 +50,10 @@ namespace Loon.Views.Content.Controls.TweetItem
                     var imageSource = await ImageService.GetImageAsync(media.MediaUrl, token);
                     if (token.IsCancellationRequested) return;
                     image.Source ??= imageSource;
+                }
+                catch (TaskCanceledException)
+                {
+                    // return
                 }
                 catch (Exception ex)
                 {

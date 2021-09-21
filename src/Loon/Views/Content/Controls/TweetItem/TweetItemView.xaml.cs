@@ -24,9 +24,11 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         private async void OnDataContextChanged(object? sender, EventArgs e)
         {
+            var temp = CancellationTokenSource;
             CancellationTokenSource.Cancel();
-            CancellationTokenSource.Dispose();
             CancellationTokenSource = new CancellationTokenSource();
+
+            temp.Dispose();
             var token = CancellationTokenSource.Token;
 
             if (!token.IsCancellationRequested && DataContext is TwitterStatus status)

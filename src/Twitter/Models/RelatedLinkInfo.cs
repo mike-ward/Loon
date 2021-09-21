@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -16,6 +17,7 @@ namespace Twitter.Models
     /// look for og/twitter meta tags in the links. This info, if present,
     /// is displayed similar to quotes.
     /// </summary>
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class RelatedLinkInfo
     {
         public string  Url         { get; private set; } = string.Empty;
@@ -74,7 +76,7 @@ namespace Twitter.Models
                 }
                 catch (TaskCanceledException)
                 {
-                    // eat it
+                    break;
                 }
                 catch (HttpRequestException)
                 {
@@ -91,9 +93,10 @@ namespace Twitter.Models
 
         private static async ValueTask<RelatedLinkInfo?> GetLinkInfoAsync(string url, CancellationToken cancellationToken)
         {
-            if (cancellationToken.IsCancellationRequested) return null;
             using var response = await OAuthApiRequest.MyHttpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
-            using var reader   = new StreamReader(await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false), Encoding.UTF8);
+            if (cancellationToken.IsCancellationRequested) return null;
+
+            using var reader = new StreamReader(await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false), Encoding.UTF8);
             if (cancellationToken.IsCancellationRequested) return null;
 
             var htmlBuilder = new StringBuilder();
@@ -110,7 +113,6 @@ namespace Twitter.Models
                 if (line.Contains(headCloseTag, StringComparison.OrdinalIgnoreCase)) break;
             }
 
-            if (cancellationToken.IsCancellationRequested) return null;
             var metaInfo = ParseForSocialTags(url, $"{htmlBuilder}</html>", cancellationToken);
 
             return !string.IsNullOrEmpty(metaInfo?.Title) && !string.IsNullOrEmpty(metaInfo.Description)
@@ -142,7 +144,7 @@ namespace Twitter.Models
                 foreach (var tag in metaTags)
                 {
                     if (cancellationToken.IsCancellationRequested) return null;
-                    
+
                     var tagName     = tag.Attributes["name"];
                     var tagContent  = tag.Attributes["content"];
                     var tagProperty = tag.Attributes["property"];
