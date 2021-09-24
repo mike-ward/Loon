@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Loon.Extensions;
 using Loon.Interfaces;
+using Loon.Services;
+using Loon.ViewModels.Content.Timelines;
 using Twitter.Models;
 
 namespace Loon.Commands
@@ -44,6 +46,8 @@ namespace Loon.Commands
                         status.Favorited = true;
                         status.FavoriteCount++;
                     }
+
+                    PubSubs.UpdateLikesTimeline.Publish();
                 }
             }
             finally

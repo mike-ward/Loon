@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Avalonia.Collections;
 using Loon.Interfaces;
 using Loon.Models;
+using Loon.Services;
 using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
@@ -20,6 +21,7 @@ namespace Loon.ViewModels.Content.Timelines
             this.twitterService = twitterService;
             var name = App.GetString("tab-likes-name");
             likesTimeline = new Timeline(name: name, intervalInMinutes: 20, updateTasks: Tasks(), settings: settings);
+            PubSubs.UpdateLikesTimeline.Subscribe(async () => await likesTimeline.UpdateAsync());
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()

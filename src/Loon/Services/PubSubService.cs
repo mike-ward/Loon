@@ -8,6 +8,7 @@ namespace Loon.Services
     internal static class PubSubs
     {
         public static PubSubService                 OpenPreviousTab       { get; } = new();
+        public static PubSubService                 UpdateLikesTimeline   { get; } = new();
         public static PubSubService<TwitterStatus>  AddStatus             { get; } = new();
         public static PubSubService<TwitterStatus?> OpenWriteTab          { get; } = new();
         public static PubSubService<object?>        SetUserProfileContext { get; } = new(); // waiting for discriminated unions

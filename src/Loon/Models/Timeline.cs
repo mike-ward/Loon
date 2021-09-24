@@ -56,7 +56,7 @@ namespace Loon.Models
             await UpdateAsync().ConfigureAwait(false);
         }
 
-        private async ValueTask UpdateAsync()
+        public async ValueTask UpdateAsync()
         {
             try
             {
