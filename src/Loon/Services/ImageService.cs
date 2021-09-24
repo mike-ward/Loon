@@ -176,7 +176,7 @@ namespace Loon.Services
                     FileName        = "vlc",
                     Arguments       = $"--loop --quiet --no-osd {videoUrl}",
                     UseShellExecute = true,
-                    CreateNoWindow  = false
+                    CreateNoWindow  = true
                 };
                 process = Process.Start(pi);
             }
