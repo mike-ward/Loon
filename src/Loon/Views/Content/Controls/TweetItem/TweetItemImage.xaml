@@ -6,6 +6,7 @@
   xmlns:lt="clr-namespace:Loon.Views.Content.Layouts"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Loon.Models"
+  xmlns:views="clr-namespace:Loon.Views"
   d:DesignHeight="200"
   d:DesignWidth="300"
   mc:Ignorable="d">
@@ -15,6 +16,14 @@
     <ItemsControl.ItemTemplate>
       <DataTemplate>
         <Grid PointerPressed="OpenInViewer">
+          
+          <Grid.IsVisible>
+            <MultiBinding Converter="{StaticResource IsHiddenImage}">
+              <Binding Path="MediaUrl" />
+              <Binding Path="$parent[views:MainWindow].DataContext.Settings.HiddenImagesSet" />
+            </MultiBinding>
+          </Grid.IsVisible>
+
           <Image
             Name="Image"
             Margin="1"

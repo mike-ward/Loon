@@ -12,6 +12,7 @@
   SizeToContent="WidthAndHeight"
   SystemDecorations="BorderOnly"
   WindowStartupLocation="CenterOwner"
+  Topmost="True"
   mc:Ignorable="d">
 
   <StackPanel>

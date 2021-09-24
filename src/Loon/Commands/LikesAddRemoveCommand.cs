@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Services;
-using Loon.ViewModels.Content.Timelines;
 using Twitter.Models;
 
 namespace Loon.Commands

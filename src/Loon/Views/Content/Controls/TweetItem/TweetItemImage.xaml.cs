@@ -9,6 +9,7 @@ using Avalonia.Markup.Xaml;
 using Loon.Interfaces;
 using Loon.Services;
 using Twitter.Models;
+using Key = Avalonia.Remote.Protocol.Input.Key;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
@@ -63,7 +64,17 @@ namespace Loon.Views.Content.Controls.TweetItem
                 sender is Grid grid &&
                 grid.Children[0] is Image image)
             {
-                ImageService.OpenInViewer(image);
+                e.Handled = true;
+
+                if ((e.KeyModifiers & KeyModifiers.Control) != 0)
+                {
+                    var mediaUrl = (image.DataContext as Media)?.MediaUrl;
+                    App.Commands.AddToHiddenImages.Execute(mediaUrl);
+                }
+                else
+                {
+                    ImageService.OpenInViewer(image);
+                }
             }
         }
     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
@@ -150,6 +152,8 @@ namespace Loon.Models
 
         public string? TranslateApiKey { get; set; }
 
+        public ObservableHashSet<string> HiddenImagesSet { get; set; } = new();
+
         [JsonIgnore]
         public string SettingsFilePath => Path.Combine(
             AppContext.BaseDirectory,
@@ -162,6 +166,10 @@ namespace Loon.Models
                 var json     = File.ReadAllText(SettingsFilePath);
                 var settings = JsonSerializer.Deserialize<Settings>(json)!;
                 settings.CopyPropertiesTo(this);
+
+                void OnHiddenImageSetOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => OnPropertyChanged(nameof(HiddenImagesSet));
+                HiddenImagesSet.CollectionChanged -= OnHiddenImageSetOnCollectionChanged;
+                HiddenImagesSet.CollectionChanged += OnHiddenImageSetOnCollectionChanged;
             }
             catch (Exception ex)
             {

@@ -59,7 +59,7 @@ namespace Loon.Views.Content.Controls
                 AddButton("Cancel", MessageBoxResult.Cancel, isDefaultButton: true);
             }
 
-            await msgbox.ShowDialog(App.MainWindow).ConfigureAwait(false);
+            await msgbox.ShowDialog(App.MainWindow);
             autoFocusControl?.Focus();
             return messageBoxResult;
 
