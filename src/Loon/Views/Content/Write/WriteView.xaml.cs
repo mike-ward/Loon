@@ -9,13 +9,8 @@ namespace Loon.Views.Content.Write
     {
         public WriteView()
         {
-            InitializeComponent();
-            DataContext = App.ServiceProvider.GetService<WriteViewModel>();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
+            DataContext = App.ServiceProvider.GetService<WriteViewModel>();
         }
     }
 }

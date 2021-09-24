@@ -9,13 +9,8 @@ namespace Loon.Views.Content.Timelines
     {
         public LikesTimelineView()
         {
-            InitializeComponent();
-            DataContext = App.ServiceProvider.GetService<LikesTimelineViewModel>();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
+            DataContext = App.ServiceProvider.GetService<LikesTimelineViewModel>();
         }
     }
 }

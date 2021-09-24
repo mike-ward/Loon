@@ -7,11 +7,6 @@ namespace Loon.Views
     {
         public TitleBar()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
 

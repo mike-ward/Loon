@@ -7,11 +7,6 @@ namespace Loon.Views.Content.AppSettings
     {
         public SettingsFontSize()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
     }

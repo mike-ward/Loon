@@ -7,11 +7,6 @@ namespace Loon.Views.Content.Controls.TweetItem
     {
         public TweetItemCompactView()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
     }

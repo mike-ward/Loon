@@ -24,11 +24,6 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         public TweetItemProfileImage()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
 
@@ -45,7 +40,8 @@ namespace Loon.Views.Content.Controls.TweetItem
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private async void UpdateImage(object? sender, EventArgs _)
         {
-            if (cancellationToken.IsCancellationRequested) return;
+            var token = cancellationToken; // make a copy
+            if (token.IsCancellationRequested) return;
 
             if (sender is Image { DataContext: TwitterStatus status } image)
             {
@@ -55,10 +51,10 @@ namespace Loon.Views.Content.Controls.TweetItem
 
                     var imageSource =
                         status.User.ProfileImageUrlBigger is { Length: > 0 } uri
-                            ? await ImageService.GetImageAsync(uri, cancellationToken)
+                            ? await ImageService.GetImageAsync(uri, token)
                             : EmptyBitmap;
 
-                    if (cancellationToken.IsCancellationRequested) return;
+                    if (token.IsCancellationRequested) return;
                     image.Source = imageSource;
                 }
                 catch (TaskCanceledException)

@@ -15,11 +15,6 @@ namespace Loon.Views.Content.Controls.TweetItem
     {
         public TweetItemTranslate()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
 

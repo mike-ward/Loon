@@ -15,11 +15,6 @@ namespace Loon.Views.Content.UserProfile
 
         public UserProfileBanner()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
 

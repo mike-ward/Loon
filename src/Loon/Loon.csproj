@@ -422,12 +422,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Update="Assets\Windows\mpv.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  
-  <ItemGroup>
+    <Folder Include="Assets\Windows" />
     <Folder Include="ViewModels\Controls" />
   </ItemGroup>
 </Project>

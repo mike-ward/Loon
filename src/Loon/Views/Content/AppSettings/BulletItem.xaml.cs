@@ -16,11 +16,6 @@ namespace Loon.Views.Content.AppSettings
 
         public BulletItem()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
     }

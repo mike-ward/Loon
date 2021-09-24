@@ -7,11 +7,6 @@ namespace Loon.Views.Content.UserProfile
     {
         public UserProfileInfo()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
     }

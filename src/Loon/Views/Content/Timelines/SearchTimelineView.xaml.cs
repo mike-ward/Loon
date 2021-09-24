@@ -13,13 +13,8 @@ namespace Loon.Views.Content.Timelines
 
         public SearchTimelineView()
         {
-            InitializeComponent();
-            DataContext = App.ServiceProvider.GetService<SearchTimelineViewModel>();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
+            DataContext = App.ServiceProvider.GetService<SearchTimelineViewModel>();
         }
 
         public async void OnKeyDown(object? sender, KeyEventArgs e)

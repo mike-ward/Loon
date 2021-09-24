@@ -16,7 +16,6 @@
   mc:Ignorable="d">
 
   <Image
-    HorizontalAlignment="Center"
-    Source="{Binding $parent[Window].Source}"
-    Stretch="None" />
+    Stretch="None"
+    Source="{Binding $parent[Window].Source}" />
 </Window>

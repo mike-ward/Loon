@@ -43,24 +43,23 @@ namespace Loon.Views.Content.Controls
 
             var buttonPanel = msgbox.FindControl<StackPanel>(ButtonsName);
 
-            if (buttons == MessageBoxButtons.Ok || buttons == MessageBoxButtons.OkCancel)
+            if (buttons is MessageBoxButtons.Ok or MessageBoxButtons.OkCancel)
             {
                 AddButton("OK", MessageBoxResult.Ok, isDefaultButton: true);
             }
 
-            if (buttons == MessageBoxButtons.YesNo || buttons == MessageBoxButtons.YesNoCancel)
+            if (buttons is MessageBoxButtons.YesNo or MessageBoxButtons.YesNoCancel)
             {
                 AddButton("Yes", MessageBoxResult.Yes);
                 AddButton("No", MessageBoxResult.No, isDefaultButton: true);
             }
 
-            if (buttons == MessageBoxButtons.OkCancel || buttons == MessageBoxButtons.YesNoCancel)
+            if (buttons is MessageBoxButtons.OkCancel or MessageBoxButtons.YesNoCancel)
             {
                 AddButton("Cancel", MessageBoxResult.Cancel, isDefaultButton: true);
             }
 
             await msgbox.ShowDialog(App.MainWindow).ConfigureAwait(false);
-
             autoFocusControl?.Focus();
             return messageBoxResult;
 

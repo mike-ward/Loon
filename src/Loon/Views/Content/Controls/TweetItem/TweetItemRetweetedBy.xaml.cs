@@ -7,11 +7,6 @@ namespace Loon.Views.Content.Controls.TweetItem
     {
         public TweetItemRetweetedBy()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
     }

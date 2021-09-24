@@ -7,11 +7,6 @@ namespace Loon.Views.Content
     {
         public AppView()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
     }

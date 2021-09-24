@@ -17,13 +17,8 @@ namespace Loon.Views.Content.UserProfile
 
         public UserProfileTimeline()
         {
-            InitializeComponent();
-            this.FindControl<TimelineView>(UserTimelineName).DataContext = App.ServiceProvider.GetService<UserProfileTimelineViewModel>();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
+            this.FindControl<TimelineView>(UserTimelineName).DataContext = App.ServiceProvider.GetService<UserProfileTimelineViewModel>();
         }
 
         protected override async void OnDataContextChanged(EventArgs e)

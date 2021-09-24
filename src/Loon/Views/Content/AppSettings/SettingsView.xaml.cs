@@ -9,13 +9,8 @@ namespace Loon.Views.Content.AppSettings
     {
         public SettingsView()
         {
-            InitializeComponent();
-            DataContext = App.ServiceProvider.GetService<ISettings>();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
+            DataContext = App.ServiceProvider.GetService<ISettings>();
         }
     }
 }

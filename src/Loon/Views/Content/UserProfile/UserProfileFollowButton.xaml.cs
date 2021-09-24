@@ -13,11 +13,6 @@ namespace Loon.Views.Content.UserProfile
 
         public UserProfileFollowButton()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
 

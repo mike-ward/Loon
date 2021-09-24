@@ -9,11 +9,6 @@ namespace Loon.Views.Content.Write
 
         public WriteEditSection()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
     }

@@ -14,18 +14,13 @@ namespace Loon.Views.Content.Timelines
 
         public TimelineView()
         {
-            InitializeComponent();
-
+            AvaloniaXamlLoader.Load(this);
+            
             this.FindControl<ItemsRepeater>(ItemsRepeaterName).ElementClearing += (_, args) =>
             {
                 var tweetItemView = (TweetItemView)args.Element;
                 tweetItemView.CancellationTokenSource.Cancel();
             };
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
         }
 
         protected override void OnPointerReleased(PointerReleasedEventArgs e)

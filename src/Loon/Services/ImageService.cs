@@ -75,7 +75,7 @@ namespace Loon.Services
             try
             {
                 if (cancellationToken.IsCancellationRequested) return default;
-                var path = GetPath(uri);
+                var path = CachePathFromUrl(uri);
 
                 return File.Exists(path)
                     ? await GetBitmapAsync(path, cancellationToken).ConfigureAwait(false)
@@ -88,13 +88,11 @@ namespace Loon.Services
             }
         }
 
-        private static string GetPath(string uri)
+        private static string CachePathFromUrl(string uri)
         {
-            var hash = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(uri));
-
-            return Path.Combine(
-                TempPath,
-                "loon-" + Convert.ToHexString(hash));
+            using var md5  = MD5.Create();
+            var       hash = md5.ComputeHash(Encoding.UTF8.GetBytes(uri));
+            return Path.Combine(TempPath, "loon-" + Convert.ToHexString(hash));
         }
 
         private static async ValueTask<IImage?> GetBitmapAsync(string url, CancellationToken cancellationToken)
@@ -131,7 +129,7 @@ namespace Loon.Services
 
             await using var ms = new MemoryStream();
             image.Save(ms);
-            await File.WriteAllBytesAsync(GetPath(uri), ms.ToArray(), cancellationToken).ConfigureAwait(false);
+            await File.WriteAllBytesAsync(CachePathFromUrl(uri), ms.ToArray(), cancellationToken).ConfigureAwait(false);
         }
 
         private static ImageViewer? imageViewer;
@@ -165,33 +163,22 @@ namespace Loon.Services
 
         public static void OpenInViewer(Image image)
         {
+            process?.Kill();
+            process?.Close();
+            process = null;
+
             var viewer   = GetImageViewer(); // call here to close now
             var videoUrl = VideoUrl((image.DataContext) as Media);
 
             if (videoUrl.IsNotNullOrWhiteSpace())
             {
-                var pi = new ProcessStartInfo();
-
-                if (OperatingSystem.IsWindows())
-                {
-                    pi.FileName = Path.Combine(
-                        AppContext.BaseDirectory,
-                        "Assets/Windows/mpv.exe");
-
-                    pi.Arguments = $"--ontop --no-border --autofit-smaller=640x480 --keep-open --script-opts=osc-scalewindowed=3 {videoUrl}";
-                }
-                else if (OperatingSystem.IsLinux())
-                {
-                    pi.UseShellExecute = true;
-                    pi.FileName        = videoUrl;
-                }
-                else
-                {
-                    return;
-                }
-
-                pi.CreateNoWindow = false;
-                process           = Process.Start(pi);
+                var pi = new ProcessStartInfo {
+                    FileName        = "vlc",
+                    Arguments       = $"--loop --quiet --no-osd {videoUrl}",
+                    UseShellExecute = true,
+                    CreateNoWindow  = false
+                };
+                process = Process.Start(pi);
             }
             else if (image.Source is not null)
             {

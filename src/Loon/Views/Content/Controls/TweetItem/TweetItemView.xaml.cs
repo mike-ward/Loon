@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Loon.Interfaces;
@@ -14,7 +15,7 @@ namespace Loon.Views.Content.Controls.TweetItem
         public const string TweetItemQuotedName       = nameof(TweetItemQuoted);
         public const string TweetItemRelatedName      = nameof(TweetItemRelated);
 
-        public CancellationTokenSource CancellationTokenSource { get; set; } = new();
+        public CancellationTokenSource CancellationTokenSource { get; private set; } = new();
 
         public TweetItemView()
         {
@@ -31,10 +32,17 @@ namespace Loon.Views.Content.Controls.TweetItem
             temp.Dispose();
             var token = CancellationTokenSource.Token;
 
-            if (!token.IsCancellationRequested && DataContext is TwitterStatus status)
+            try
             {
-                status.OriginatingStatus.RelatedLinkInfo ??= await RelatedLinkInfo
-                    .GetRelatedLinkInfoAsync(status.OriginatingStatus, token);
+                if (!token.IsCancellationRequested && DataContext is TwitterStatus status)
+                {
+                    status.OriginatingStatus.RelatedLinkInfo ??= await RelatedLinkInfo
+                        .GetRelatedLinkInfoAsync(status.OriginatingStatus, token);
+                }
+            }
+            catch (TaskCanceledException)
+            {
+                // expected
             }
         }
     }

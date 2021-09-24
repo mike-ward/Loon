@@ -8,11 +8,6 @@ namespace Loon.Views.Content.Controls
     {
         public Hyperlink()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
         }
 

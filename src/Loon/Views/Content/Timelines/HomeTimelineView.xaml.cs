@@ -9,13 +9,8 @@ namespace Loon.Views.Content.Timelines
     {
         public HomeTimelineView()
         {
-            InitializeComponent();
-            DataContext = App.ServiceProvider.GetService<HomeTimelineViewModel>();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
+            DataContext = App.ServiceProvider.GetService<HomeTimelineViewModel>();
         }
     }
 }

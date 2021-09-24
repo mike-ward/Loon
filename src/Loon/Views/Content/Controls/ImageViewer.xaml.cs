@@ -10,13 +10,7 @@ namespace Loon.Views.Content.Controls
     internal class ImageViewer : Window
     {
         public bool IsClosed { get; private set; }
-
         public ImageViewer()
-        {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }

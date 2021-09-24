@@ -9,13 +9,8 @@ namespace Loon.Views.Content.UserProfile
     {
         public UserProfileView()
         {
-            InitializeComponent();
-            DataContext = App.ServiceProvider.GetService<UserProfileViewModel>();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
+            DataContext = App.ServiceProvider.GetService<UserProfileViewModel>();
         }
     }
 }
