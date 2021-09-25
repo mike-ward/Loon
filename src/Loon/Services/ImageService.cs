@@ -136,11 +136,8 @@ namespace Loon.Services
 
         private static ImageViewer GetImageViewer()
         {
-            if (imageViewer is null || imageViewer.IsClosed)
-            {
-                imageViewer = new ImageViewer();
-            }
-
+            imageViewer?.Close(); 
+            imageViewer = new ImageViewer();
             imageViewer.Hide();
 
             process?.Kill();

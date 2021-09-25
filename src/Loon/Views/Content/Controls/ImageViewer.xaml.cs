@@ -25,8 +25,7 @@ namespace Loon.Views.Content.Controls
 
         public void HideWindow(object? sender, PointerPressedEventArgs e)
         {
-            Hide();
-            Source = null;
+            Close();
         }
 
         protected override void OnClosed(EventArgs e)
