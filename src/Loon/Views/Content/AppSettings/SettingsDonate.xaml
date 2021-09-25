@@ -8,7 +8,8 @@
   d:DesignWidth="210"
   mc:Ignorable="d">
   <Button
-    Width="100"
+    Margin="5,0"
+    MaxWidth="100"
     Command="{Binding $parent[UserControl].OnDonate}"
     CommandParameter="http://mike-ward.net/donate"
     Content="{StaticResource donate}" />

@@ -8,7 +8,8 @@
   d:DesignWidth="210"
   mc:Ignorable="d">
   <Button
-    Width="125"
+    Margin="5,0"
+    MaxWidth="200"
     Command="{Binding $parent[UserControl].OpenSettings}"
     CommandParameter="{Binding SettingsFilePath}"
     Content="{StaticResource open-settings-file}" />

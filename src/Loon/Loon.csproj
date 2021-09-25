@@ -137,6 +137,9 @@
     <AvaloniaXaml Include="Views\Content\AppSettings\BulletItem.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
+    <AvaloniaXaml Include="Views\Content\AppSettings\SettingsClearHiddenImageCache.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
     <AvaloniaXaml Include="Views\Content\AppSettings\SettingsClearImageCache.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>

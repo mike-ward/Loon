@@ -5,6 +5,7 @@ namespace Loon.Commands
     internal class AppCommands
     {
         public AddToHiddenImagesCommand     AddToHiddenImages     { get; }
+        public ClearHiddenImageCacheCommand ClearHiddenImageCache { get; }
         public ClearImageCacheCommand       ClearImageCache       { get; }
         public CloseAppCommand              CloseApp              { get; }
         public CopyToClipboardCommand       CopyToClipboard       { get; }
@@ -21,6 +22,7 @@ namespace Loon.Commands
         public AppCommands(ITwitterService twitterService, ISettings settings)
         {
             AddToHiddenImages     = new AddToHiddenImagesCommand(settings);
+            ClearHiddenImageCache = new ClearHiddenImageCacheCommand(settings);
             ClearImageCache       = new ClearImageCacheCommand();
             CloseApp              = new CloseAppCommand();
             CopyToClipboard       = new CopyToClipboardCommand();

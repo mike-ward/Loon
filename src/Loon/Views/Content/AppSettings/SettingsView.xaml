@@ -30,6 +30,7 @@
       <l:SettingsDonate />
       <l:SettingsOpenSettings />
       <l:SettingsClearImageCache />
+      <l:SettingsClearHiddenImageCache />
 
       <Separator />
 

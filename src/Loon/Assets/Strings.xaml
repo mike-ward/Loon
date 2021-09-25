@@ -106,6 +106,7 @@
       <sys:String x:Key="donate">Donate</sys:String>
       <sys:String x:Key="sign-out">Sign Out</sys:String>
       <sys:String x:Key="clear-image-cache">Clear Image Cache</sys:String>
+      <sys:String x:Key="clear-hidden-image-cache">Clear Hidden Image Cache</sys:String>
       <sys:String x:Key="open-settings-file">Open Settings...</sys:String>
       <sys:String x:Key="show-in-system-tray">Show in system tray</sys:String>
       <sys:String x:Key="always-on-top">Always on top</sys:String>
@@ -114,6 +115,7 @@
       <sys:String x:Key="get-the-update">Get the Update</sys:String>
       <sys:String x:Key="try-again">Try again?</sys:String>
       <sys:String x:Key="always-hide-image">Always hide this image?</sys:String>
+      <sys:String x:Key="settings-sure">Sure?</sys:String>
 
       <!--  <Tooltips  -->
 
