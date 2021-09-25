@@ -15,31 +15,45 @@
   Topmost="True"
   mc:Ignorable="d">
 
-  <StackPanel>
+  <Border
+    BorderThickness="2"
+    BorderBrush="Gray">
 
-    <TextBlock
-      Name="{x:Static l:MessageBox.TitleName}"
-      Padding="10 1 0 3"
-      Background="{DynamicResource ThemeControlMidBrush}" />
+    <StackPanel>
+      <TextBlock
+        Name="{x:Static l:MessageBox.TitleName}"
+        Padding="10 1 0 3"
+        Background="{DynamicResource ThemeControlMidBrush}" />
 
-    <TextBlock
-      Name="{x:Static l:MessageBox.TextName}"
-      Margin="10"
-      TextWrapping="Wrap" />
+      <Grid ColumnDefinitions="Auto,*"
+            VerticalAlignment="Center"
+            Margin="0 10 0 0">
+        <Image
+          Width="22"
+          Margin="15 0 0 0"
+          Source="/app.ico" />
 
-    <StackPanel
-      Name="{x:Static l:MessageBox.ButtonsName}"
-      Margin="10 0 10 10"
-      HorizontalAlignment="Right"
-      Orientation="Horizontal">
+        <TextBlock
+          Name="{x:Static l:MessageBox.TextName}"
+          Margin="10"
+          TextWrapping="Wrap"
+          Grid.Column="1" />
+      </Grid>
 
-      <StackPanel.Styles>
-        <Style Selector="Button">
-          <Setter Property="Margin" Value="10 0 0 0" />
-        </Style>
-      </StackPanel.Styles>
+      <StackPanel
+        Name="{x:Static l:MessageBox.ButtonsName}"
+        Margin="10 0 10 10"
+        HorizontalAlignment="Right"
+        Orientation="Horizontal">
 
-      <!--  Buttons added in by code behind  -->
+        <StackPanel.Styles>
+          <Style Selector="Button">
+            <Setter Property="Margin" Value="10 0 0 0" />
+          </Style>
+        </StackPanel.Styles>
+
+        <!--  Buttons added in by code behind  -->
+      </StackPanel>
     </StackPanel>
-  </StackPanel>
+  </Border>
 </Window>

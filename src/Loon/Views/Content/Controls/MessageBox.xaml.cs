@@ -65,7 +65,7 @@ namespace Loon.Views.Content.Controls
 
             void AddButton(string caption, MessageBoxResult mbr, bool isDefaultButton = false)
             {
-                var btn = new Button { Content = caption };
+                var btn = new Button { Content = caption, MinWidth = 50 };
 
                 btn.Click += delegate
                 {

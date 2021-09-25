@@ -32,7 +32,7 @@
       Grid.Column="0"
       Width="18"
       Margin="6 0 7 0"
-      Source="../app.ico" />
+      Source="/app.ico" />
 
     <TextBlock
       Grid.Column="1"
