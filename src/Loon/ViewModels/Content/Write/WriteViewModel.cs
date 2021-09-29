@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Loon.Extensions;
 using Loon.Interfaces;
@@ -115,8 +116,15 @@ namespace Loon.ViewModels.Content.Write
         {
             if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && settings.ScreenName is { } screenName)
             {
-                var statuses = await twitterService.TwitterApi.GetUserTimeline(screenName).ConfigureAwait(true);
-                Me = statuses?.First();
+                try
+                {
+                    var statuses = await twitterService.TwitterApi.GetUserTimeline(screenName).ConfigureAwait(true);
+                    Me = statuses?.First();
+                }
+                catch (HttpRequestException)
+                {
+                    // eat it
+                }
             }
         }
     }

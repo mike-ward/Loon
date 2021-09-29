@@ -27,6 +27,7 @@ namespace Loon.Views.Content.Controls
             No
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public MessageBox()
         {
             AvaloniaXamlLoader.Load(this);

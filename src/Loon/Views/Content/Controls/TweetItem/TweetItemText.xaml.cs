@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
@@ -25,18 +24,9 @@ namespace Loon.Views.Content.Controls.TweetItem
             {
                 var token = cancellationTokeSourceProvider.CancellationTokenSource.Token;
                 if (token.IsCancellationRequested) return;
-
                 var itemsControl = this.FindControl<ItemsControl>("ItemsControl");
                 if (token.IsCancellationRequested) return;
-
-                try
-                {
-                    itemsControl.Items = FlowContentService.FlowContentInlines(status, token);
-                }
-                catch (TaskCanceledException)
-                {
-                    // eat it.
-                }
+                itemsControl.Items = FlowContentService.FlowContentInlines(status, token);
             }
         }
     }

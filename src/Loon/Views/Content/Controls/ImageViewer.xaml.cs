@@ -1,5 +1,4 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -9,12 +8,12 @@ namespace Loon.Views.Content.Controls
 {
     internal class ImageViewer : Window
     {
-        public bool IsClosed { get; private set; }
         public ImageViewer()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public static readonly StyledProperty<IImage?> SourceProperty = AvaloniaProperty.Register<ImageViewer, IImage?>(nameof(Source));
 
         public IImage? Source
@@ -26,12 +25,6 @@ namespace Loon.Views.Content.Controls
         public void HideWindow(object? sender, PointerPressedEventArgs e)
         {
             Close();
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            IsClosed = true;
         }
     }
 }

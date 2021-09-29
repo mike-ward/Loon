@@ -9,7 +9,6 @@ using Avalonia.Markup.Xaml;
 using Loon.Interfaces;
 using Loon.Services;
 using Twitter.Models;
-using Key = Avalonia.Remote.Protocol.Input.Key;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
