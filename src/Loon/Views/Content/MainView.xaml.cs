@@ -38,7 +38,7 @@ namespace Loon.Views.Content
             App.Commands.OpenWriteTab.Execute(null); // wanted side-effect; clear replyTo in write tab.
         }
 
-        private void OpenPreviousTabHandler()
+        private void OpenPreviousTabHandler(object? _)
         {
             if (this.FindControl<TabControl>(TabControlName) is { } tabControl)
             {

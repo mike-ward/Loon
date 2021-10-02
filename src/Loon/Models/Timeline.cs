@@ -9,6 +9,8 @@ using Loon.Interfaces;
 using Loon.Services;
 using Twitter.Models;
 
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace Loon.Models
 {
     internal class Timeline : NotifyPropertyChanged
@@ -119,7 +121,7 @@ namespace Loon.Models
         {
             return Dispatcher.UIThread.InvokeAsync(() =>
             {
-                updateTimer?.Stop();
+                updateTimer.Stop();
                 AlreadyAdded.Clear();
                 StatusCollection.Clear();
             });

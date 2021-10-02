@@ -45,7 +45,6 @@ namespace Loon.Services
         {
             var start         = 0;
             var twitterString = new TwitterString(twitterStatus.FullText ?? twitterStatus.Text ?? string.Empty);
-            if (cancellationToken.IsCancellationRequested) yield break;
 
             foreach (var item in FlowControlItems(twitterStatus.Entities ?? new Entities()))
             {
@@ -61,6 +60,7 @@ namespace Loon.Services
                 start = item.End;
             }
 
+            if (cancellationToken.IsCancellationRequested) yield break;
             yield return (FlowContentNodeType.Text, twitterString.Substring(start));
         }
 
@@ -184,8 +184,7 @@ namespace Loon.Services
             var shareLinkTwitter = new MenuItem {
                 Header           = App.GetString("share-link-twitter"),
                 CommandParameter = link,
-                Icon = new TextBlock
-                    { Classes = new Classes("symbol1", "padleft"), Text = App.GetString("TwitterSymbol") }
+                Icon             = new TextBlock { Classes = new Classes("symbol1", "padleft"), Text = App.GetString("TwitterSymbol") }
             };
 
             return new ContextMenu {

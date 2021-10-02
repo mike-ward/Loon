@@ -34,15 +34,15 @@ namespace Loon.Models
                     }
                     else
                     {
-                        if (timeline.StatusCollection.Count == 0)
-                        {
-                            // Remove when ItemsRepeater bug is fixed.
-                            timeline.StatusCollection.Insert(0, new TwitterStatus());
-                        }
-
                         staged.Insert(0, clonedStatus);
                     }
                 }
+            }
+
+            // Remove when ItemsRepeater bug is fixed.
+            if (timeline.StatusCollection.Count == 0)
+            {
+                timeline.StatusCollection.Insert(0, new TwitterStatus());
             }
 
             // Insert at zero when ItemsRepeater bug is fixed.

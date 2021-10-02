@@ -16,7 +16,7 @@
     <ItemsControl.ItemTemplate>
       <DataTemplate>
         <Grid PointerPressed="OpenInViewer">
-          
+
           <Grid.IsVisible>
             <MultiBinding Converter="{StaticResource IsHiddenImage}">
               <Binding Path="MediaUrl" />
@@ -25,7 +25,6 @@
           </Grid.IsVisible>
 
           <Image
-            Name="Image"
             Margin="1"
             Cursor="Hand"
             DataContextChanged="LoadMediaAsync"

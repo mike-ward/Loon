@@ -41,7 +41,6 @@ namespace Loon.Views.Content.Controls.TweetItem
             {
                 try
                 {
-                    image.Source = null;
                     var imageSource = await ImageService.GetImageAsync(media.MediaUrl, token);
                     if (token.IsCancellationRequested) return;
                     image.Source ??= imageSource;

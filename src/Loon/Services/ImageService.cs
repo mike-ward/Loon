@@ -23,7 +23,6 @@ namespace Loon.Services
 
         public static async ValueTask<IImage?> GetImageAsync(string uri, CancellationToken cancellationToken)
         {
-            if (cancellationToken.IsCancellationRequested) return default;
             const int retries = 3;
 
             for (var retry = 0; retry < retries; retry++)

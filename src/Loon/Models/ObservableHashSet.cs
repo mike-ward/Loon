@@ -1,11 +1,20 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Runtime.Serialization;
 
 namespace Loon.Models
 {
+    [Serializable]
     public class ObservableHashSet<T> : HashSet<T>, INotifyCollectionChanged
     {
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
+
+        public ObservableHashSet()
+            : base() { }
+
+        protected ObservableHashSet(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public new bool Add(T item)
         {

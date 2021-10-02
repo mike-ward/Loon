@@ -2,6 +2,8 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Loon.Models;
+using Loon.Services;
 using Loon.Views.Content.Controls.TweetItem;
 
 namespace Loon.Views.Content.Timelines
@@ -32,6 +34,15 @@ namespace Loon.Views.Content.Timelines
             }
 
             base.OnPointerReleased(e);
+        }
+
+        private void OnScrollChanged(object? sender, ScrollChangedEventArgs e)
+        {
+            if (sender is ScrollViewer scrollViewer &&
+                DataContext is Timeline timeline)
+            {
+                timeline.IsScrolled = scrollViewer.Offset.Y != 0;
+            }
         }
     }
 }

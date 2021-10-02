@@ -65,7 +65,7 @@
 
       <Separator
         Margin="0 10 0 0"
-        IsVisible="{Binding $parent[m:MainWindow].DataContext.Settings.HideProfileImages}" />
+        IsVisible="{Binding $parent[m:MainWindow].DataContext.Settings.HideProfileImages, FallbackValue=False}" />
     </StackPanel>
   </Grid>
 </UserControl>

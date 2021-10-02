@@ -29,13 +29,12 @@ namespace Loon.Views.Content.Controls.TweetItem
             CancellationTokenSource.Dispose();
             CancellationTokenSource = new CancellationTokenSource();
 
-            var token = CancellationTokenSource.Token;
-            if (!token.IsCancellationRequested && DataContext is TwitterStatus status)
+            if (DataContext is TwitterStatus status)
             {
                 try
                 {
                     status.OriginatingStatus.RelatedLinkInfo ??= await RelatedLinkInfo
-                        .GetRelatedLinkInfoAsync(status.OriginatingStatus, token);
+                        .GetRelatedLinkInfoAsync(status.OriginatingStatus, CancellationTokenSource.Token);
                 }
                 catch (TaskCanceledException)
                 {
