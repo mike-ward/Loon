@@ -3,8 +3,13 @@ using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Windows.Input;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
+using Jab;
+using Loon.Converters;
 using Loon.Extensions;
+using Loon.Interfaces;
 using Loon.Models;
 using Twitter.Models;
 
@@ -125,7 +130,12 @@ namespace Loon.Services
             return textBlock;
         }
 
-        private static Control Hyperlink(string text, ICommand command, object commandParamater, ContextMenu? contextMenu = null)
+        private static Control Hyperlink(
+            string text,
+            ICommand command,
+            object commandParamater,
+            bool UseBindingForText = false,
+            ContextMenu? contextMenu = null)
         {
             var button = new Button();
             button.Classes.Add("inline");
@@ -135,7 +145,23 @@ namespace Loon.Services
 
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
-            textBlock.Text = text.HtmlDecode();
+
+            if (UseBindingForText)
+            {
+                var settings = App.ServiceProvider.GetService<ISettings>();
+                var binding = new Binding {
+                    Source             = settings,
+                    Path               = nameof(settings.ShortLinks),
+                    Mode               = BindingMode.OneWay,
+                    Converter          = new ShortLinkConverter(),
+                    ConverterParameter = text.HtmlDecode()
+                };
+                textBlock.Bind(TextBlock.TextProperty, binding);
+            }
+            else
+            {
+                textBlock.Text = text.HtmlDecode();
+            }
 
             button.Content = textBlock;
             return button;
@@ -147,6 +173,7 @@ namespace Loon.Services
                 link.TruncateWithEllipsis(25),
                 App.Commands.OpenUrl,
                 link,
+                true,
                 ContextMenu(link));
         }
 

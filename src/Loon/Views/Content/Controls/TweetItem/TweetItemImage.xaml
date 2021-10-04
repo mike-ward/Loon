@@ -25,6 +25,7 @@
           </Grid.IsVisible>
 
           <Image
+            Name="Image"
             Margin="1"
             Cursor="Hand"
             DataContextChanged="LoadMediaAsync"

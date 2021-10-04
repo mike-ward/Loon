@@ -38,18 +38,14 @@
       <TextBlock Text="{StaticResource always-on-top}" />
     </CheckBox>
 
-    <CheckBox IsChecked="{Binding SystemState.IsRegisteredInStartup}">
-      <TextBlock Text="{StaticResource run-on-startup}" />
-    </CheckBox>
-
-    <CheckBox IsChecked="{Binding ShowInSystemTray}">
-      <TextBlock Text="{StaticResource show-in-system-tray}" />
-    </CheckBox>
-
     <CheckBox IsChecked="{Binding UseLightTheme}">
       <TextBlock Text="{StaticResource use-light-theme}" />
     </CheckBox>
 
+    <CheckBox IsChecked="{Binding ShortLinks}">
+      <TextBlock Text="{StaticResource show-short-links}" />
+    </CheckBox>
+    
     <CheckBox IsChecked="{Binding Donated}">
       <TextBlock Text="{StaticResource donated}" />
     </CheckBox>

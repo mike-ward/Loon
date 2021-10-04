@@ -21,6 +21,8 @@ namespace Loon.Interfaces
         bool                      AlwaysOnTop           { get; set; }
         double                    FontSize              { get; set; }
         bool                      UseLightTheme         { get; }
+        bool                      ShortLinks            { get; set; }
+        bool                      ImagesAsLinks         { get; set; }
         bool                      Donated               { get; }
         WindowLocation            Location              { get; set; }
         ObservableHashSet<string> HiddenImagesSet       { get; set; }

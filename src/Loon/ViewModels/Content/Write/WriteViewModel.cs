@@ -81,7 +81,7 @@ namespace Loon.ViewModels.Content.Write
             {
                 var status = await twitterService.TwitterApi.UpdateStatus(TweetText, ReplyTo?.Id, null, Array.Empty<string>()).ConfigureAwait(true);
                 PubSubs.AddStatus.Publish(status);
-                PubSubs.OpenPreviousTab.Publish(new Unit());
+                PubSubs.OpenPreviousTab.Publish(Unit._);
                 Reset();
             }
             catch (WebException ex)

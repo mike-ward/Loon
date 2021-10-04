@@ -47,7 +47,7 @@ namespace Loon.Commands
                         status.FavoriteCount++;
                     }
 
-                    PubSubs.UpdateLikesTimeline.Publish(new Unit());
+                    PubSubs.UpdateLikesTimeline.Publish(Unit._);
                 }
             }
             finally

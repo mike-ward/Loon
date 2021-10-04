@@ -59,6 +59,14 @@ namespace Loon.Models
             set => SetProperty(ref alwaysOnTop, value);
         }
 
+        private bool imagesAsLinks;
+
+        public bool ImagesAsLinks
+        {
+            get => imagesAsLinks;
+            set => SetProperty(ref imagesAsLinks, value);
+        }
+
         private bool donated;
 
         public bool Donated
@@ -131,6 +139,14 @@ namespace Loon.Models
             set => SetProperty(ref useLightTheme, value);
         }
 
+        private bool shortLinks;
+
+        public bool ShortLinks
+        {
+            get => shortLinks;
+            set => SetProperty(ref shortLinks, value);
+        }
+
         private double fontSize = 12;
 
         public double FontSize
@@ -147,7 +163,12 @@ namespace Loon.Models
             set => SetProperty(ref screenName, value);
         }
 
-        public WindowLocation Location { get; set; } = new() { X = 200, Y = 200, Width = 300, Height = 500 };
+        public WindowLocation Location { get; set; } = new() {
+            X      = 200,
+            Y      = 200,
+            Width  = 300,
+            Height = 500
+        };
 
         public string? TranslateApiKey { get; set; }
 
