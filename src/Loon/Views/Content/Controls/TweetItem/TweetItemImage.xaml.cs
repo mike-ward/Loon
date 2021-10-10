@@ -56,6 +56,7 @@ namespace Loon.Views.Content.Controls.TweetItem
             }
         }
 
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         private void OpenInViewer(object? sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed &&

@@ -16,6 +16,7 @@
   </Style>
 
   <Style Selector="TextBlock.symbol1">
+    <Setter Property="ClipToBounds" Value="False" />
     <Setter Property="VerticalAlignment" Value="Bottom" />
     <Setter Property="FontFamily" Value="{DynamicResource SymbolFont1}" />
   </Style>

@@ -42,7 +42,8 @@ namespace Loon.Services
                     _                           => throw new ConstraintException("invalid FlowContentNodeType")
                 };
 
-                if (control is not null) yield return control;
+                if (control is null) continue;
+                yield return control;
             }
         }
 
