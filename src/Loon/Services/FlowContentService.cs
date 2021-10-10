@@ -143,9 +143,12 @@ namespace Loon.Services
             button.Command          = command;
             button.CommandParameter = commandParamater;
             button.ContextMenu      = contextMenu;
-
+            
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
+            textBlock.Tag = commandParamater; // LongUrlService needs this
+            textBlock.SetValue(ToolTip.TipProperty, commandParamater);
+            textBlock.SetValue(ToolTip.ShowDelayProperty, 400);
 
             if (UseBindingForText)
             {

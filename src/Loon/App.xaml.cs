@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.Runtime.CompilerServices;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -25,6 +26,7 @@ namespace Loon
             // Visual designer won't work otherwise
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime app)
             {
+                RuntimeHelpers.RunClassConstructor(typeof(LongUrlService).TypeHandle);
                 app.MainWindow = ServiceProvider.GetService<MainWindow>();
             }
 
