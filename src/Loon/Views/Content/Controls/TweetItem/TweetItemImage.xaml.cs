@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.LogicalTree;
@@ -68,7 +69,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                 if ((e.KeyModifiers & KeyModifiers.Control) != 0)
                 {
                     var mediaUrl = (image.DataContext as Media)?.MediaUrl;
-                    App.Commands.AddToHiddenImages.Execute(mediaUrl);
+                    App.Commands.AddToHiddenImages.Execute((mediaUrl, this.PointToScreen(e.GetCurrentPoint(this).Position)));
                 }
                 else
                 {

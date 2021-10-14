@@ -426,6 +426,5 @@
   
   <ItemGroup>
     <Folder Include="Assets\Windows" />
-    <Folder Include="ViewModels\Controls" />
   </ItemGroup>
 </Project>

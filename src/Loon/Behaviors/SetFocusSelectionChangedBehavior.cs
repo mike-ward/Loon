@@ -27,7 +27,7 @@ namespace Loon.Behaviors
 
         private static string FocusType(IAvaloniaObject element, string name)
         {
-            if (element is IControl tabItem && tabItem.Parent is TabControl tabControl)
+            if (element is IControl { Parent: TabControl tabControl })
             {
                 tabControl.RemoveHandler(SelectingItemsControl.SelectionChangedEvent, Handler);
                 tabControl.AddHandler(SelectingItemsControl.SelectionChangedEvent, Handler);
@@ -37,9 +37,9 @@ namespace Loon.Behaviors
 
             async void Handler(object? s, SelectionChangedEventArgs e)
             {
-                if (e.AddedItems.Cast<IControl>().FirstOrDefault() is TabItem tabItem)
+                if (e.AddedItems.Cast<IControl>().FirstOrDefault() is TabItem tab)
                 {
-                    var timeline = tabItem.Content as ILogical;
+                    var timeline = tab.Content as ILogical;
 
                     foreach (var descendant in timeline.GetLogicalDescendants())
                     {

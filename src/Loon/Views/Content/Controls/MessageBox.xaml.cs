@@ -1,15 +1,20 @@
 ﻿using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform;
+using Avalonia.Skia;
 
 namespace Loon.Views.Content.Controls
 {
     internal class MessageBox : Window
     {
+        // ReSharper disable ConvertToConstant.Global
         public static readonly string TextName    = "Text";
         public static readonly string TitleName   = "Title";
         public static readonly string ButtonsName = "Buttons";
+        // ReSharper restore ConvertToConstant.Global
 
         public enum MessageBoxButtons
         {
@@ -33,17 +38,25 @@ namespace Loon.Views.Content.Controls
             AvaloniaXamlLoader.Load(this);
         }
 
-        public static async Task<MessageBoxResult> Show(string text, MessageBoxButtons buttons)
+        public static async Task<MessageBoxResult> Show(string text, MessageBoxButtons buttons, PixelPoint? pixelPoint = null)
         {
             ContentControl? autoFocusControl = null;
             var             messageBoxResult = MessageBoxResult.Ok;
 
             var msgbox = new MessageBox();
+            
+            if (pixelPoint is not null)
+            {
+                msgbox.WindowStartupLocation = WindowStartupLocation.Manual;
+                msgbox.Position = pixelPoint.Value;
+            }
+            
             msgbox.FindControl<TextBlock>(TitleName).Text = App.GetString("title");
             msgbox.FindControl<TextBlock>(TextName).Text  = text;
 
             var buttonPanel = msgbox.FindControl<StackPanel>(ButtonsName);
 
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (buttons is MessageBoxButtons.Ok or MessageBoxButtons.OkCancel)
             {
                 AddButton("OK", MessageBoxResult.Ok, isDefaultButton: true);
