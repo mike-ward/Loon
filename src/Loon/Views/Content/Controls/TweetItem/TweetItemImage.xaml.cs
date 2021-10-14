@@ -69,7 +69,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                 if ((e.KeyModifiers & KeyModifiers.Control) != 0)
                 {
                     var mediaUrl = (image.DataContext as Media)?.MediaUrl;
-                    App.Commands.AddToHiddenImages.Execute((mediaUrl, this.PointToScreen(e.GetCurrentPoint(this).Position)));
+                    App.Commands.AddToHiddenImages.Execute((mediaUrl, this.PointToScreen(new Point())));
                 }
                 else
                 {

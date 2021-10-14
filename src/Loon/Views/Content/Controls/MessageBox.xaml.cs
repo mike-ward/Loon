@@ -5,6 +5,7 @@ using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Avalonia.Skia;
+using Avalonia.VisualTree;
 
 namespace Loon.Views.Content.Controls
 {
@@ -106,6 +107,11 @@ namespace Loon.Views.Content.Controls
             }
 
             base.OnKeyDown(e);
+        }
+
+        private void OnPointerPressed(object? _, PointerPressedEventArgs e)
+        {
+            BeginMoveDrag(e);
         }
     }
 }
