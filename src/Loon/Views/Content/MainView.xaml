@@ -21,11 +21,24 @@
 
     <TabItem>
       <TabItem.Header>
+        <Grid>
         <TextBlock
           Text="{StaticResource HomeSymbol}"
           ToolTip.Tip="{StaticResource tab-home-name}" />
+        <TextBlock 
+          Text="⬤"
+          FontSize="12"
+          TextAlignment="Center"
+          Foreground="Green"
+          Background="Transparent"
+          IsVisible="{Binding #HomeTimelineView.DataContext.HomeTimeline.PendingStatusesAvailable, FallbackValue=False}">
+          <TextBlock.RenderTransform>
+            <TranslateTransform Y="-1" />
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        </Grid>
       </TabItem.Header>
-      <t:HomeTimelineView />
+      <t:HomeTimelineView Name="HomeTimelineView" />
     </TabItem>
 
     <TabItem>

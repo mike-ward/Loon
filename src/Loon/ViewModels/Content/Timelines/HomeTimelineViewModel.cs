@@ -16,19 +16,20 @@ namespace Loon.ViewModels.Content.Timelines
         private const int mentionsInterval = 60;
         private       int mentionsCounter  = mentionsInterval;
 
-        private readonly Timeline        homeTimeline;
+        // ReSharper disable once MemberCanBePrivate.Global
+        public           Timeline        HomeTimeline { get; }
         private readonly ITwitterService titterService;
 
-        public IAvaloniaList<TwitterStatus> StatusCollection => homeTimeline.StatusCollection;
+        public IAvaloniaList<TwitterStatus> StatusCollection => HomeTimeline.StatusCollection;
 
         public HomeTimelineViewModel(ISettings settings, ITwitterService twitterService)
         {
             titterService = twitterService;
             var name = App.GetString("tab-home-name");
-            homeTimeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
+            HomeTimeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
 
             // ReSharper disable once AsyncVoidLambda
-            PubSubs.AddStatus.Subscribe(async status => await UpdateStatusesTask.Execute(new[] { status }, homeTimeline).ConfigureAwait(false));
+            PubSubs.AddStatus.Subscribe(async status => await UpdateStatusesTask.Execute(new[] { status }, HomeTimeline).ConfigureAwait(false));
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()
