@@ -21,21 +21,21 @@
 
     <TabItem>
       <TabItem.Header>
-        <Grid>
-        <TextBlock
-          Text="{StaticResource HomeSymbol}"
-          ToolTip.Tip="{StaticResource tab-home-name}" />
-        <TextBlock 
-          Text="⬤"
-          FontSize="12"
-          TextAlignment="Center"
-          Foreground="Green"
-          Background="Transparent"
-          IsVisible="{Binding #HomeTimelineView.DataContext.HomeTimeline.PendingStatusesAvailable, FallbackValue=False}">
-          <TextBlock.RenderTransform>
-            <TranslateTransform Y="-1" />
-          </TextBlock.RenderTransform>
-        </TextBlock>
+        <Grid PointerPressed="TabItemHeader_OnPointerPressed">
+          <TextBlock
+            Text="{StaticResource HomeSymbol}"
+            ToolTip.Tip="{StaticResource tab-home-name}" />
+          <TextBlock
+            Text="⬤"
+            FontSize="12"
+            TextAlignment="Center"
+            Foreground="Green"
+            Background="Transparent"
+            IsVisible="{Binding #HomeTimelineView.DataContext.HomeTimeline.PendingStatusesAvailable, FallbackValue=False}">
+            <TextBlock.RenderTransform>
+              <TranslateTransform Y="-1" />
+            </TextBlock.RenderTransform>
+          </TextBlock>
         </Grid>
       </TabItem.Header>
       <t:HomeTimelineView Name="HomeTimelineView" />
@@ -48,7 +48,8 @@
           Classes="symbol1"
           FontSize="19"
           Text="{StaticResource LikeSymbol}"
-          ToolTip.Tip="{StaticResource tab-likes-name}" />
+          ToolTip.Tip="{StaticResource tab-likes-name}"
+          PointerPressed="TabItemHeader_OnPointerPressed" />
       </TabItem.Header>
       <t:LikesTimelineView />
     </TabItem>

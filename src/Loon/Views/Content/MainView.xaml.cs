@@ -2,8 +2,10 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.VisualTree;
 using Loon.Extensions;
 using Loon.Services;
+using Loon.Views.Content.Timelines;
 
 namespace Loon.Views.Content
 {
@@ -52,6 +54,15 @@ namespace Loon.Views.Content
             {
                 tabControl.SelectedIndex = tabControl.ItemCount - 1;
             }
+        }
+
+        // ReSharper disable once UnusedParameter.Local
+        private void TabItemHeader_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            var tabItem      = (sender as IVisual)?.FindAncestorOfType<TabItem>();
+            var timelineView = (tabItem?.Content as UserControl)?.Content as TimelineView;
+            var scrollViewer = timelineView?.FindDescendantOfType<ScrollViewer>();
+            scrollViewer?.ScrollToHome();
         }
     }
 }
