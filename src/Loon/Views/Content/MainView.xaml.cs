@@ -57,10 +57,13 @@ namespace Loon.Views.Content
         }
 
         // ReSharper disable once UnusedParameter.Local
-        private void TabItemHeader_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+        private void TabItem_OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            var tabItem      = (sender as IVisual)?.FindAncestorOfType<TabItem>();
-            var timelineView = (tabItem?.Content as UserControl)?.Content as TimelineView;
+            var tabItem = sender as TabItem;
+            var content = (tabItem?.Content as UserControl)?.Content as IVisual;
+            var timelineView = content is TimelineView view
+                ? view
+                : content.FindAncestorOfType<TimelineView>();
             var scrollViewer = timelineView?.FindDescendantOfType<ScrollViewer>();
             scrollViewer?.ScrollToHome();
         }

@@ -19,9 +19,9 @@
     Margin="3 0 0 0"
     PropertyChanged="OnPropertyChanged">
 
-    <TabItem>
+    <TabItem PointerPressed="TabItem_OnPointerPressed">
       <TabItem.Header>
-        <Grid PointerPressed="TabItemHeader_OnPointerPressed">
+        <Grid>
           <TextBlock
             Text="{StaticResource HomeSymbol}"
             ToolTip.Tip="{StaticResource tab-home-name}" />
@@ -41,20 +41,21 @@
       <t:HomeTimelineView Name="HomeTimelineView" />
     </TabItem>
 
-    <TabItem>
+    <TabItem PointerPressed="TabItem_OnPointerPressed">
       <TabItem.Header>
         <TextBlock
           Padding="0 3 0 0"
           Classes="symbol1"
           FontSize="19"
           Text="{StaticResource LikeSymbol}"
-          ToolTip.Tip="{StaticResource tab-likes-name}"
-          PointerPressed="TabItemHeader_OnPointerPressed" />
+          ToolTip.Tip="{StaticResource tab-likes-name}" />
       </TabItem.Header>
       <t:LikesTimelineView />
     </TabItem>
 
-    <TabItem b:SetFocusSelectionChangedBehavior.Name="{x:Static t:SearchTimelineView.SearchTextBoxName}">
+    <TabItem
+      PointerPressed="TabItem_OnPointerPressed"
+      b:SetFocusSelectionChangedBehavior.Name="{x:Static t:SearchTimelineView.SearchTextBoxName}">
       <TabItem.Header>
         <TextBlock
           Text="{StaticResource SearchSymbol}"
