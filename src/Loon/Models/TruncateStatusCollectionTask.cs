@@ -6,7 +6,7 @@ namespace Loon.Models
     {
         public static ValueTask Execute(Timeline timeline)
         {
-            const int maxNumberOfStatuses = 500;
+            const int maxNumberOfStatuses = 75; // set back to 500 when ItemsRepeater virtualization fixed
 
             if (timeline.StatusCollection.Count > maxNumberOfStatuses)
             {

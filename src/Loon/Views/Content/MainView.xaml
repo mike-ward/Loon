@@ -74,8 +74,8 @@
     </TabItem>
 
     <TabItem
-      b:SetFocusSelectionChangedBehavior.Name="{x:Static w:WriteEditSection.WriteTextBoxName}"
-      PointerPressed="OnWriteTabClicked">
+      PointerPressed="OnWriteTabClicked"
+      b:SetFocusSelectionChangedBehavior.Name="{x:Static w:WriteEditSection.WriteTextBoxName}">
       <TabItem.Header>
         <TextBlock
           Text="{StaticResource WriteSymbol}"

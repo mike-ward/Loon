@@ -17,11 +17,11 @@ namespace Loon.Views.Content.Timelines
         {
             AvaloniaXamlLoader.Load(this);
 
-            this.FindControl<ItemsRepeater>(ItemsRepeaterName).ElementClearing += (_, args) =>
-            {
-                var tweetItemView = (TweetItemView)args.Element;
-                tweetItemView.CancellationTokenSource.Cancel();
-            };
+            // this.FindControl<ItemsControl>(ItemsRepeaterName).ElementClearing += (_, args) =>
+            // {
+            //     var tweetItemView = (TweetItemView)args.Element;
+            //     tweetItemView.CancellationTokenSource.Cancel();
+            // };
         }
 
         protected override void OnPointerReleased(PointerReleasedEventArgs e)
