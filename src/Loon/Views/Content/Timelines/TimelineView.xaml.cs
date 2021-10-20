@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Loon.ViewModels.Content.Timelines;
-using Loon.Views.Content.Controls.TweetItem;
 
 namespace Loon.Views.Content.Timelines
 {
@@ -50,6 +49,18 @@ namespace Loon.Views.Content.Timelines
                     timeline.PendingStatusesAvailable = false;
                 }
             }
+        }
+
+        private void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
+        {
+            var scrollViewer = (sender as Control)?.Parent as ScrollViewer;
+
+            // Scroll faster
+            
+            if (e.Delta.Y < 0)
+                scrollViewer?.LineDown();
+            else
+                scrollViewer?.LineUp();
         }
     }
 }
