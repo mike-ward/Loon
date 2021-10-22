@@ -58,7 +58,7 @@ namespace Loon.Views.Content.Controls.TweetItem
         }
 
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
-        private void OpenInViewer(object? sender, PointerPressedEventArgs e)
+        private async void OpenInViewer(object? sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed &&
                 sender is Grid grid &&
@@ -73,7 +73,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                 }
                 else
                 {
-                    ImageService.OpenInViewer(image);
+                    await ImageService.OpenInViewer(image);
                 }
             }
         }

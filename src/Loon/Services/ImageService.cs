@@ -157,7 +157,7 @@ namespace Loon.Services
 
         private static Process? process;
 
-        public static void OpenInViewer(Image image)
+        public static async Task OpenInViewer(Image image)
         {
             process?.Kill();
             process?.Close();
@@ -175,6 +175,7 @@ namespace Loon.Services
                     CreateNoWindow  = true
                 };
                 process = Process.Start(pi);
+                if (process is null) await MessageBox.Show(App.GetString("install-vlc"), MessageBox.MessageBoxButtons.Ok);
             }
             else if (image.Source is not null)
             {

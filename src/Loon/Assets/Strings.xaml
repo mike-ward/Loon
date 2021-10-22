@@ -166,6 +166,11 @@
       <sys:String x:Key="copy-link-address">Copy link address</sys:String>
       <sys:String x:Key="email-link">Email link…</sys:String>
       <sys:String x:Key="share-link-twitter">Share link on Twitter…</sys:String>
+      
+      <!-- Misc -->
+
+      <sys:String x:Key="install-vlc">Install VLC video player to view videos</sys:String>
+
     </Style.Resources>
   </Style>
 </Styles>

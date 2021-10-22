@@ -35,7 +35,7 @@ namespace Loon.Services
 
                 var control = nodeType switch {
                     FlowContentNodeType.Text    => Run(text),
-                    FlowContentNodeType.Url     => Link(text),
+                    FlowContentNodeType.Url     => Url(text),
                     FlowContentNodeType.Mention => Mention(text),
                     FlowContentNodeType.HashTag => Hashtag(text),
                     FlowContentNodeType.Media   => null, // images handled elsewhere
@@ -131,11 +131,35 @@ namespace Loon.Services
             return textBlock;
         }
 
-        private static Control Hyperlink(
+        private static Control Url(string link)
+        {
+            return LinkControl(
+                link.TruncateWithEllipsis(25),
+                App.Commands.OpenUrl,
+                link,
+                ContextMenu(link));
+        }
+
+        private static Control Mention(string screenName)
+        {
+            return LinkControl(
+                "@" + screenName,
+                App.Commands.SetUserProfileContext,
+                screenName);
+        }
+
+        private static Control Hashtag(string text)
+        {
+            return LinkControl(
+                "#" + text,
+                App.Commands.OpenUrl,
+                $"https://twitter.com/hashtag/{text}");
+        }
+
+        private static Control LinkControl(
             string text,
             ICommand command,
             object commandParamater,
-            bool UseBindingForText = false,
             ContextMenu? contextMenu = null)
         {
             var button = new Button();
@@ -150,7 +174,7 @@ namespace Loon.Services
             textBlock.SetValue(ToolTip.TipProperty, commandParamater);
             textBlock.SetValue(ToolTip.ShowDelayProperty, 400);
 
-            if (UseBindingForText)
+            if (command == App.Commands.OpenUrl)
             {
                 var settings = App.ServiceProvider.GetService<ISettings>();
                 var binding = new Binding {
@@ -169,33 +193,6 @@ namespace Loon.Services
 
             button.Content = textBlock;
             return button;
-        }
-
-        private static Control Link(string link)
-        {
-            return Hyperlink(
-                link.TruncateWithEllipsis(25),
-                App.Commands.OpenUrl,
-                link,
-                true,
-                ContextMenu(link));
-        }
-
-        private static Control Mention(string screenName)
-        {
-            return Hyperlink(
-                "@" + screenName,
-                App.Commands.SetUserProfileContext,
-                screenName);
-        }
-
-        private static Control Hashtag(string text)
-        {
-            var link = $"https://twitter.com/hashtag/{text}";
-            return Hyperlink(
-                "#" + text,
-                App.Commands.OpenUrl,
-                link);
         }
 
         private static ContextMenu ContextMenu(string link)
