@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -56,11 +57,17 @@ namespace Loon.Views.Content.Timelines
             var scrollViewer = (sender as Control)?.Parent as ScrollViewer;
 
             // Scroll faster
-            
+
             if (e.Delta.Y < 0)
+            {
                 scrollViewer?.LineDown();
+                scrollViewer?.LineDown();
+            }
             else
+            {
                 scrollViewer?.LineUp();
+                scrollViewer?.LineUp();
+            }
         }
     }
 }
