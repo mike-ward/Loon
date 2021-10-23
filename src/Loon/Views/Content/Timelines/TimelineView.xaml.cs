@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -10,18 +9,12 @@ namespace Loon.Views.Content.Timelines
     [SuppressMessage("ReSharper", "ConvertToConstant.Global")]
     internal class TimelineView : UserControl
     {
-        public static readonly string ScrollViewerName  = "ScrollViewer";
-        public static readonly string ItemsRepeaterName = "ItemsRepeater";
+        public static readonly string ScrollViewerName = "ScrollViewer";
+        public static readonly string ItemsControlName = "ItemsControl";
 
         public TimelineView()
         {
             AvaloniaXamlLoader.Load(this);
-
-            // this.FindControl<ItemsControl>(ItemsRepeaterName).ElementClearing += (_, args) =>
-            // {
-            //     var tweetItemView = (TweetItemView)args.Element;
-            //     tweetItemView.CancellationTokenSource.Cancel();
-            // };
         }
 
         protected override void OnPointerReleased(PointerReleasedEventArgs e)

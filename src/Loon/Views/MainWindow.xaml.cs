@@ -16,17 +16,17 @@ namespace Loon.Views
         public MainWindow()
         {
             DataContext = App.ServiceProvider.GetService<MainWindowViewModel>();
-            InitializeComponent();
+            AvaloniaXamlLoader.Load(this);
+        }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            ((MainWindowViewModel)DataContext!).Load(this);
+            LinuxSetup();
 #if DEBUG
             this.AttachDevTools();
 #endif
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-            ((MainWindowViewModel)DataContext!).Load(this);
-            LinuxSetup();
         }
 
         private void LinuxSetup()
