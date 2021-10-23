@@ -1,5 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Avalonia;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -35,6 +35,7 @@ namespace Loon.Views.Content.Timelines
             base.OnPointerReleased(e);
         }
 
+        // ReSharper disable once UnusedParameter.Local
         private void OnScrollChanged(object? sender, ScrollChangedEventArgs e)
         {
             if (sender is ScrollViewer scrollViewer &&
@@ -45,7 +46,7 @@ namespace Loon.Views.Content.Timelines
 
                 if (!timeline.IsScrolled && timeline.PendingStatusesAvailable)
                 {
-                    timeline.StatusCollection.InsertRange(1, timeline.PendingStatusCollection);
+                    timeline.StatusCollection.InsertRange(0, timeline.PendingStatusCollection);
                     timeline.PendingStatusCollection.Clear();
                     timeline.PendingStatusesAvailable = false;
                 }

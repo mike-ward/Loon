@@ -39,14 +39,7 @@ namespace Loon.Models
                 }
             }
 
-            // Remove when ItemsRepeater bug is fixed.
-            if (timeline.StatusCollection.Count == 0)
-            {
-                timeline.StatusCollection.Insert(0, new TwitterStatus());
-            }
-
-            // Insert at zero when ItemsRepeater bug is fixed.
-            timeline.StatusCollection.InsertRange(1, staged);
+            timeline.StatusCollection.InsertRange(0, staged);
             return default;
         }
 
