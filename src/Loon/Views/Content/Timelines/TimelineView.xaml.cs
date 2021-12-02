@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -48,19 +49,19 @@ namespace Loon.Views.Content.Timelines
 
         private void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
         {
-            var scrollViewer = (sender as Control)?.Parent as ScrollViewer;
-
             // Scroll faster
+            if ((sender as Control)?.Parent is ScrollViewer scrollViewer)
+            {
+                var offset = new Vector(0, 100); // 100 feels about right scroll-wise
 
-            if (e.Delta.Y < 0)
-            {
-                scrollViewer?.LineDown();
-                scrollViewer?.LineDown();
-            }
-            else
-            {
-                scrollViewer?.LineUp();
-                scrollViewer?.LineUp();
+                if (e.Delta.Y < 0)
+                {
+                    scrollViewer.Offset += offset;
+                }
+                else
+                {
+                    scrollViewer.Offset -= offset;
+                }
             }
         }
     }

@@ -23,7 +23,7 @@
 
       <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
-          <WrapPanel /> <!-- Oddly WrapPanel seems more preformant the StackPanel here -->
+          <StackPanel />
         </ItemsPanelTemplate>
       </ItemsControl.ItemsPanel>
 
