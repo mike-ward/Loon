@@ -10,12 +10,6 @@
   d:DesignWidth="300"
   mc:Ignorable="d">
 
-  <UserControl.Styles>
-    <Style Selector="TextBlock">
-      <Setter Property="Margin" Value="0 0 5 0" />
-    </Style>
-  </UserControl.Styles>
-
   <WrapPanel Orientation="Horizontal">
     <Grid ColumnDefinitions="Auto,Auto">
       <Button
@@ -28,14 +22,16 @@
 
       <Path
         Grid.Column="1"
-        Margin="-1 1 5 0"
+        Margin="3 1 0 0"
         Classes="verifiedbadge"
         IsVisible="{Binding User.Verified}" />
     </Grid>
 
-    <Grid ColumnDefinitions="Auto,Auto,Auto">
+    <Grid 
+      ColumnDefinitions="Auto,Auto,Auto">
       <Button
         Grid.Column="0"
+        Margin="5 0 0 0"
         Classes="inline1"
         Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}, Mode=OneTime}"
         CommandParameter="{Binding User}"
@@ -43,10 +39,12 @@
 
       <TextBlock
         Grid.Column="1"
+        Margin="5 0 0 0"
         Text="•" />
 
       <co:Hyperlink
         Grid.Column="2"
+        Margin="5 0 0 0"
         Link="{Binding StatusLink}"
         Text="{Binding CreatedDate, Converter={StaticResource TimeAgo}}" />
     </Grid>

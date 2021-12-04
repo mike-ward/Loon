@@ -115,20 +115,27 @@ namespace Loon.Services
 
             ms.Position = 0;
             var bitmap = new Bitmap(ms);
-            await ToCacheAsync(uri, bitmap, cancellationToken).ConfigureAwait(false);
+            await Task.Factory.StartNew(() => ToCache(uri, bitmap, cancellationToken), cancellationToken).ConfigureAwait(false);
 
             return cancellationToken.IsCancellationRequested
                 ? default
                 : bitmap;
         }
 
-        private static async ValueTask ToCacheAsync(string uri, Bitmap image, CancellationToken cancellationToken)
+        private static void ToCache(string uri, Bitmap image, CancellationToken cancellationToken)
         {
-            if (cancellationToken.IsCancellationRequested) return;
+            try
+            {
+                if (cancellationToken.IsCancellationRequested) return;
 
-            await using var ms = new MemoryStream();
-            image.Save(ms);
-            await File.WriteAllBytesAsync(CachePathFromUrl(uri), ms.ToArray(), cancellationToken).ConfigureAwait(false);
+                using var ms = new MemoryStream();
+                image.Save(ms);
+                File.WriteAllBytes(CachePathFromUrl(uri), ms.ToArray());
+            }
+            catch (Exception ex)
+            {
+                TraceService.Message(ex.Message);
+            }
         }
 
         private static ImageViewer? imageViewer;
