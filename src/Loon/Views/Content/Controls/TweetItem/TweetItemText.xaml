@@ -8,11 +8,5 @@
   d:DesignWidth="300"
   mc:Ignorable="d">
 
-  <ItemsControl Name="ItemsControl">
-    <ItemsControl.ItemsPanel>
-      <ItemsPanelTemplate>
-        <WrapPanel />
-      </ItemsPanelTemplate>
-    </ItemsControl.ItemsPanel>
-  </ItemsControl>
+  <WrapPanel Name="Container" />
 </UserControl>
