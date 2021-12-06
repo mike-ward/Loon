@@ -10,7 +10,7 @@ namespace Loon.Commands
     {
         public override void Execute(object? parameter)
         {
-            var useLight = parameter is bool val && val;
+            var useLight = parameter is true;
 
             // This is slated to change in future release of Avalonia
             var styles = new StyleInclude(new Uri("resm:Styles")) {

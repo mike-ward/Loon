@@ -11,22 +11,28 @@ namespace Loon.Views
     internal class MainWindow : Window, IWindow
     {
         // ReSharper disable once ConvertToConstant.Global (needed to bind in XAML)
-        public static readonly string TitleBarName = "TitleBar";
+        public static readonly string              TitleBarName = "TitleBar";
+        private                MainWindowViewModel ViewModel => (MainWindowViewModel)(DataContext ??= App.ServiceProvider.GetService<MainWindowViewModel>());
 
         public MainWindow()
         {
-            DataContext = App.ServiceProvider.GetService<MainWindowViewModel>();
             AvaloniaXamlLoader.Load(this);
         }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            ((MainWindowViewModel)DataContext!).Load(this);
+            ViewModel.Load(this);
             LinuxSetup();
 #if DEBUG
             this.AttachDevTools();
 #endif
+        }
+
+        protected override void OnOpened(EventArgs e)
+        {
+            base.OnOpened(e);
+            ViewModel.SetWindowLocation(this);
         }
 
         private void LinuxSetup()

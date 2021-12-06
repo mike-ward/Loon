@@ -31,7 +31,7 @@ namespace Loon.ViewModels
             Settings.Save();
         }
 
-        private void SetWindowLocation(IWindow window)
+        public void SetWindowLocation(IWindow window)
         {
             window.Width    = Settings.Location.Width;
             window.Height   = Settings.Location.Height;

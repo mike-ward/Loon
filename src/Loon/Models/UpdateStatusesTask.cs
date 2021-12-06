@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Twitter.Models;
 
@@ -11,43 +10,34 @@ namespace Loon.Models
     {
         public static ValueTask Execute(IEnumerable<TwitterStatus> statuses, Timeline timeline)
         {
-            // Build a hashset for faster lookups.
-            var hashSet = new HashSet<TwitterStatus>(timeline.StatusCollection);
-            var staged  = new List<TwitterStatus>();
+            var current = new HashSet<TwitterStatus>(timeline.StatusCollection); // faster lookups
+            var latest  = new List<TwitterStatus>();
 
             foreach (var status in statuses.OrderBy(status => status.CreatedDate))
             {
-                if (hashSet.TryGetValue(status, out var statusToUpdate))
+                if (current.TryGetValue(status, out var statusToUpdate))
                 {
                     statusToUpdate.UpdateFromStatus(status);
                 }
                 else if (!timeline.AlreadyAdded.Contains(status.Id))
                 {
-                    var clonedStatus = Clone(status);
-                    timeline.AlreadyAdded.Add(clonedStatus.Id);
-                    clonedStatus.UpdateAboutMeProperties(timeline.Settings.ScreenName);
+                    timeline.AlreadyAdded.Add(status.Id);
+                    status.UpdateAboutMeProperties(timeline.Settings.ScreenName);
 
                     if (timeline.IsScrolled)
                     {
-                        timeline.PendingStatusCollection.Add(clonedStatus);
+                        timeline.PendingStatusCollection.Add(status);
                         timeline.PendingStatusesAvailable = true;
                     }
                     else
                     {
-                        staged.Insert(0, clonedStatus);
+                        latest.Insert(0, status);
                     }
                 }
             }
 
-            timeline.StatusCollection.InsertRange(0, staged);
+            timeline.StatusCollection.InsertRange(0, latest);
             return default;
-        }
-
-        private static TwitterStatus Clone(TwitterStatus twitterStatus)
-        {
-            var bytes = JsonSerializer.SerializeToUtf8Bytes(twitterStatus);
-            var span  = new ReadOnlySpan<byte>(bytes);
-            return JsonSerializer.Deserialize<TwitterStatus>(span)!;
         }
     }
 }

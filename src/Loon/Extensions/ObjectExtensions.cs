@@ -6,7 +6,10 @@ namespace Loon.Extensions
 {
     internal static class ObjectExtensions
     {
-        public static string ToStringInvariant(this object obj) => Convert.ToString(obj, CultureInfo.InvariantCulture) ?? "{null}";
+        public static string ToStringInvariant(this object obj)
+        {
+            return Convert.ToString(obj, CultureInfo.InvariantCulture) ?? "{null}";
+        }
 
         public static void CopyPropertiesTo<T, TU>(this T source, TU dest)
         {
