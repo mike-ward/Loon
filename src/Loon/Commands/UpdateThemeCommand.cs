@@ -6,7 +6,7 @@ using Avalonia.Markup.Xaml.Styling;
 
 namespace Loon.Commands
 {
-    internal class UpdateThemeCommand : BaseCommand
+    public class UpdateThemeCommand : BaseCommand
     {
         public override void Execute(object? parameter)
         {

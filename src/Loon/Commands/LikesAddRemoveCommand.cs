@@ -8,7 +8,7 @@ using Twitter.Models;
 
 namespace Loon.Commands
 {
-    internal class LikesAddRemoveCommand : BaseCommand
+    public class LikesAddRemoveCommand : BaseCommand
     {
         private bool            inCommand;
         private ITwitterService TwitterService { get; }

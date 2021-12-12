@@ -4,7 +4,7 @@ using Loon.Views.Content.Controls;
 
 namespace Loon.Commands
 {
-    internal class ClearImageCacheCommand : BaseCommand
+    public class ClearImageCacheCommand : BaseCommand
     {
         public override async void Execute(object? parameter)
         {

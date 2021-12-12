@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.AppSettings
 {
-    internal class SettingsOpenSettings : UserControl
+    public class SettingsOpenSettings : UserControl
     {
         public SettingsOpenSettings()
         {

@@ -1,12 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using Jab;
 using Loon.ViewModels.Content;
 
 namespace Loon.Views.Content
 {
-    internal class GetPinView : UserControl
+    public class GetPinView : UserControl
     {
         public GetPinView()
         {

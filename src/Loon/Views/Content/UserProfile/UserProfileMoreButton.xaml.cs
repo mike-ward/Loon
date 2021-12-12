@@ -4,7 +4,7 @@ using Avalonia.VisualTree;
 
 namespace Loon.Views.Content.UserProfile
 {
-    internal class UserProfileMoreButton : UserControl
+    public class UserProfileMoreButton : UserControl
     {
         public UserProfileMoreButton()
         {

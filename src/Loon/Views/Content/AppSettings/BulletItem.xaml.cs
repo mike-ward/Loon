@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.AppSettings
 {
-    internal class BulletItem : UserControl
+    public class BulletItem : UserControl
     {
         public static readonly StyledProperty<string> BulletTextProperty = AvaloniaProperty.Register<BulletItem, string>(nameof(BulletText));
 

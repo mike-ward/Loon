@@ -4,7 +4,7 @@ using Loon.Models;
 
 namespace Loon.Interfaces
 {
-    internal interface ISettings : INotifyPropertyChanged
+    public interface ISettings : INotifyPropertyChanged
     {
         bool                      IsAuthenticated       { get; }
         string?                   AccessToken           { get; set; }

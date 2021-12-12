@@ -1,11 +1,10 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Jab;
 using Loon.ViewModels.Content.Timelines;
 
 namespace Loon.Views.Content.Timelines
 {
-    internal class HomeTimelineView : UserControl
+    public class HomeTimelineView : UserControl
     {
         public HomeTimelineView()
         {

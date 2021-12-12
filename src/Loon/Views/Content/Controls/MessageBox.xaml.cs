@@ -3,17 +3,15 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Avalonia.Platform;
-using Avalonia.Skia;
-using Avalonia.VisualTree;
 
 namespace Loon.Views.Content.Controls
 {
-    internal class MessageBox : Window
+    public class MessageBox : Window
     {
         // ReSharper disable ConvertToConstant.Global
-        public static readonly string TextName    = "Text";
-        public static readonly string TitleName   = "Title";
+        public static readonly string TextName  = "Text";
+        public static readonly string TitleName = "Title";
+
         public static readonly string ButtonsName = "Buttons";
         // ReSharper restore ConvertToConstant.Global
 
@@ -45,13 +43,13 @@ namespace Loon.Views.Content.Controls
             var             messageBoxResult = MessageBoxResult.Ok;
 
             var msgbox = new MessageBox();
-            
+
             if (pixelPoint is not null)
             {
                 msgbox.WindowStartupLocation = WindowStartupLocation.Manual;
-                msgbox.Position = pixelPoint.Value;
+                msgbox.Position              = pixelPoint.Value;
             }
-            
+
             msgbox.FindControl<TextBlock>(TitleName).Text = App.GetString("title");
             msgbox.FindControl<TextBlock>(TextName).Text  = text;
 

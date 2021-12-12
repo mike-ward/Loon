@@ -1,12 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Jab;
 using Loon.ViewModels.Content.Timelines;
 
 namespace Loon.Views.Content.Timelines
 {
-    internal class SearchTimelineView : UserControl
+    public class SearchTimelineView : UserControl
     {
         // ReSharper disable once ConvertToConstant.Global (used in XAML)
         public static readonly string SearchTextBoxName = "SearchTextBox";

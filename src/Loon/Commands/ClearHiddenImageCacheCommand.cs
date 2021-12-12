@@ -4,7 +4,7 @@ using Loon.Views.Content.Controls;
 
 namespace Loon.Commands
 {
-    internal class ClearHiddenImageCacheCommand : BaseCommand
+    public class ClearHiddenImageCacheCommand : BaseCommand
     {
         private ISettings Settings { get; }
 

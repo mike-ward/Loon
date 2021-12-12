@@ -2,7 +2,7 @@
 
 namespace Loon.Commands
 {
-    internal class MinimizeAppCommand : BaseCommand
+    public class MinimizeAppCommand : BaseCommand
     {
         public override void Execute(object? parameter)
         {

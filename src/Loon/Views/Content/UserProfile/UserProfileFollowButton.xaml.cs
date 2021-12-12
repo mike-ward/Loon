@@ -7,7 +7,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.UserProfile
 {
-    internal class UserProfileFollowButton : UserControl
+    public class UserProfileFollowButton : UserControl
     {
         public static readonly string TextBlockName = "tbn";
 

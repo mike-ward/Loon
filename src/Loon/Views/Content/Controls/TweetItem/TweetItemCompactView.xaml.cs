@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
-    internal class TweetItemCompactView : UserControl
+    public class TweetItemCompactView : UserControl
     {
         public TweetItemCompactView()
         {

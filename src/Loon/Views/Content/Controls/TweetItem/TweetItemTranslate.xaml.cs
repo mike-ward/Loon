@@ -11,7 +11,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
-    internal class TweetItemTranslate : UserControl
+    public class TweetItemTranslate : UserControl
     {
         public TweetItemTranslate()
         {

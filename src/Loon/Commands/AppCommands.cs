@@ -2,7 +2,7 @@
 
 namespace Loon.Commands
 {
-    internal class AppCommands
+    public class AppCommands
     {
         public AddToHiddenImagesCommand     AddToHiddenImages     { get; }
         public ClearHiddenImageCacheCommand ClearHiddenImageCache { get; }

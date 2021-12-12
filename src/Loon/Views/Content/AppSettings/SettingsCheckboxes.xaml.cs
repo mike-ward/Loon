@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.AppSettings
 {
-    internal class SettingsCheckboxes : UserControl
+    public class SettingsCheckboxes : UserControl
     {
         public SettingsCheckboxes()
         {

@@ -3,14 +3,13 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Jab;
 using Loon.Commands;
 using Loon.Services;
 using Loon.Views;
 
 namespace Loon
 {
-    internal class App : Application
+    public class App : Application
     {
         public static ServiceProvider ServiceProvider { get; } = new();
         public static AppCommands     Commands        { get; } = ServiceProvider.GetService<AppCommands>();

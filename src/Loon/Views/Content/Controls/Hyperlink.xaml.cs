@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.Controls
 {
-    internal class Hyperlink : UserControl
+    public class Hyperlink : UserControl
     {
         public Hyperlink()
         {

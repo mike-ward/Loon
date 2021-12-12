@@ -9,9 +9,12 @@ using Loon.Views.Content.Timelines;
 
 namespace Loon.Views.Content
 {
-    internal class MainView : UserControl
+    public class MainView : UserControl
     {
-        private                int    previousIndex;
+        private int previousIndex;
+
+        // ReSharper disable once ConvertToConstant.Global
+        // Referenced in XAML, can't be constant
         public static readonly string TabControlName = "TabControl";
 
         public MainView()

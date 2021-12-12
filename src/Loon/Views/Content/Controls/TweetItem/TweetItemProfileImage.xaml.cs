@@ -16,7 +16,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
-    internal class TweetItemProfileImage : UserControl
+    public class TweetItemProfileImage : UserControl
     {
         private const           int               profileSize       = 73; // Twitter's bigger profile image size is 48x48
         private                 CancellationToken cancellationToken = CancellationToken.None;

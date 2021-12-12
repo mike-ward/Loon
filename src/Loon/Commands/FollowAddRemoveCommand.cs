@@ -6,7 +6,7 @@ using Twitter.Models;
 
 namespace Loon.Commands
 {
-    internal class FollowAddRemoveCommand : BaseCommand
+    public class FollowAddRemoveCommand : BaseCommand
     {
         private bool            inCommand;
         private ITwitterService TwitterService { get; }

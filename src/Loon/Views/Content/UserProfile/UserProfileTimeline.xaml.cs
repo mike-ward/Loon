@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Jab;
 using Loon.ViewModels.Content.Timelines;
 using Loon.Views.Content.Controls;
 using Loon.Views.Content.Timelines;
@@ -11,7 +10,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.UserProfile
 {
-    internal class UserProfileTimeline : UserControl
+    public class UserProfileTimeline : UserControl
     {
         public static readonly string UserTimelineName = "UserTimeline";
 

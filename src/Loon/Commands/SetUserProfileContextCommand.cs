@@ -3,7 +3,7 @@ using Loon.Services;
 
 namespace Loon.Commands
 {
-    internal class SetUserProfileContextCommand : BaseCommand
+    public class SetUserProfileContextCommand : BaseCommand
     {
         private readonly ITwitterService twitterService;
 

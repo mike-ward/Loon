@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content
 {
-    internal class AppView : UserControl
+    public class AppView : UserControl
     {
         public AppView()
         {

@@ -2,7 +2,7 @@
 
 namespace Loon.Models
 {
-    internal record WindowLocation
+    public record WindowLocation
     {
         private int    x;
         private int    y;

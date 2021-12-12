@@ -3,7 +3,7 @@ using Loon.Extensions;
 
 namespace Loon.Commands
 {
-    internal class CopyToClipboardCommand : BaseCommand
+    public class CopyToClipboardCommand : BaseCommand
     {
         public override void Execute(object? parameter)
         {

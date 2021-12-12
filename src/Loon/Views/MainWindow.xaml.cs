@@ -2,13 +2,12 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Jab;
 using Loon.Interfaces;
 using Loon.ViewModels;
 
 namespace Loon.Views
 {
-    internal class MainWindow : Window, IWindow
+    public class MainWindow : Window, IWindow
     {
         // ReSharper disable once ConvertToConstant.Global (needed to bind in XAML)
         public static readonly string              TitleBarName = "TitleBar";
@@ -24,9 +23,9 @@ namespace Loon.Views
             base.OnInitialized();
             ViewModel.Load(this);
             LinuxSetup();
-#if DEBUG
+            #if DEBUG
             this.AttachDevTools();
-#endif
+            #endif
         }
 
         protected override void OnOpened(EventArgs e)
