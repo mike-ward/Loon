@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -112,19 +114,27 @@ namespace Loon.ViewModels.Content.Write
             TweetButtonText = tweetButtonText;
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && settings.ScreenName is { } screenName)
+            try
             {
-                try
+                if (e.PropertyName.IsEqualTo(nameof(ISettings.ScreenName)) && settings.ScreenName is { } screenName)
                 {
-                    var statuses = await twitterService.TwitterApi.GetUserTimeline(screenName).ConfigureAwait(true);
-                    Me = statuses?.First();
+                    try
+                    {
+                        var statuses = await twitterService.TwitterApi.GetUserTimeline(screenName).ConfigureAwait(true);
+                        Me = statuses?.First();
+                    }
+                    catch (HttpRequestException)
+                    {
+                        // eat it
+                    }
                 }
-                catch (HttpRequestException)
-                {
-                    // eat it
-                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
     }

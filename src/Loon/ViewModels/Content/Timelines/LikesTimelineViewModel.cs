@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Avalonia.Collections;
 using Loon.Interfaces;
@@ -24,9 +26,17 @@ namespace Loon.ViewModels.Content.Timelines
             PubSubs.UpdateLikesTimeline.Subscribe(UpdateAsync);
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void UpdateAsync(Unit _)
         {
-            await likesTimeline.UpdateAsync();
+            try
+            {
+                await likesTimeline.UpdateAsync();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()

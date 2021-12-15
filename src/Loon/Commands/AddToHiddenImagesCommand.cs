@@ -1,3 +1,6 @@
+using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using Avalonia;
 using Loon.Interfaces;
 using Loon.Views.Content.Controls;
@@ -13,13 +16,21 @@ namespace Loon.Commands
             Settings = settings;
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         public override async void Execute(object? parameter)
         {
-            if (parameter is (string url, PixelPoint pixelPoint) &&
-                await MessageBox.Show(App.GetString("always-hide-image"), MessageBox.MessageBoxButtons.YesNo, pixelPoint) == MessageBox.MessageBoxResult.Yes &&
-                Settings.HiddenImagesSet.Add(url))
+            try
             {
-                Settings.Save();
+                if (parameter is (string url, PixelPoint pixelPoint) &&
+                    await MessageBox.Show(App.GetString("always-hide-image"), MessageBox.MessageBoxButtons.YesNo, pixelPoint) == MessageBox.MessageBoxResult.Yes &&
+                    Settings.HiddenImagesSet.Add(url))
+                {
+                    Settings.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
             }
         }
     }

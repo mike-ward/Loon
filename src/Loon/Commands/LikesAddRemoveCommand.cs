@@ -22,7 +22,7 @@ namespace Loon.Commands
         {
             if (parameter is TwitterStatus status)
             {
-                ExecuteAsync(status).FireAndForget();
+                var unused = ExecuteAsync(status).FireAndForget();
             }
         }
 

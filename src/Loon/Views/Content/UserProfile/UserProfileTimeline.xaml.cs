@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -20,28 +22,36 @@ namespace Loon.Views.Content.UserProfile
             this.FindControl<TimelineView>(UserTimelineName).DataContext = App.ServiceProvider.GetService<UserProfileTimelineViewModel>();
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         protected override async void OnDataContextChanged(EventArgs e)
         {
-            if (this.FindControl<TimelineView>(UserTimelineName) is { DataContext: UserProfileTimelineViewModel vm })
+            try
             {
-                vm.StatusCollection.Clear();
-
-                if (DataContext is User user)
+                if (this.FindControl<TimelineView>(UserTimelineName) is { DataContext: UserProfileTimelineViewModel vm })
                 {
-                    await Task.Delay(500).ConfigureAwait(true);
-                    try
+                    vm.StatusCollection.Clear();
+
+                    if (DataContext is User user)
                     {
-                        var statuses = await vm.GetUserTimeline(user.ScreenName!).ConfigureAwait(true);
-                        vm.StatusCollection.AddRange(statuses.OrderByDescending(status => status.OriginatingStatus.CreatedDate));
-                    }
-                    catch (Exception ex)
-                    {
-                        await MessageBox.Show(ex.Message, MessageBox.MessageBoxButtons.Ok);
+                        await Task.Delay(500).ConfigureAwait(true);
+                        try
+                        {
+                            var statuses = await vm.GetUserTimeline(user.ScreenName!).ConfigureAwait(true);
+                            vm.StatusCollection.AddRange(statuses.OrderByDescending(status => status.OriginatingStatus.CreatedDate));
+                        }
+                        catch (Exception ex)
+                        {
+                            await MessageBox.Show(ex.Message, MessageBox.MessageBoxButtons.Ok);
+                        }
                     }
                 }
-            }
 
-            base.OnDataContextChanged(e);
+                base.OnDataContextChanged(e);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
         }
     }
 }

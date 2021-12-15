@@ -33,7 +33,7 @@ namespace Loon.ViewModels.Content.UserProfile
                     UserProfileContext = user;
                     break;
                 case string screenName:
-                    GetUserInfo(screenName).FireAndForget();
+                    var unused = GetUserInfo(screenName).FireAndForget();
                     break;
                 default:
                     UserProfileContext = null;

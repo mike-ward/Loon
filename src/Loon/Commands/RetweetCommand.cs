@@ -22,7 +22,7 @@ namespace Loon.Commands
         {
             if (parameter is TwitterStatus status)
             {
-                ExecuteAsync(status).FireAndForget();
+                var unused = ExecuteAsync(status).FireAndForget();
             }
         }
 
@@ -34,8 +34,7 @@ namespace Loon.Commands
                 {
                     inCommand = true;
 
-                    if (status is not null &&
-                        !status.IsMyTweet &&
+                    if (status.IsMyTweet is false &&
                         status.OriginatingStatus.User.ScreenName.IsNotEqualTo(Settings.ScreenName))
                     {
                         if (status.IsMyTweet) return;

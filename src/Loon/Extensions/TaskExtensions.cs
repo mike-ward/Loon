@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Loon.Services;
 
@@ -9,7 +10,8 @@ namespace Loon.Extensions
 {
     internal static class TaskExtensions
     {
-        public static async void FireAndForget(this Task task)
+        [SuppressMessage("Usage", "VSTHRD003", MessageId = "Avoid awaiting foreign Tasks")]
+        public static async Task FireAndForget(this Task task)
         {
             try
             {
@@ -21,7 +23,7 @@ namespace Loon.Extensions
             }
         }
 
-        public static async void FireAndForget(this ValueTask task)
+        public static async Task FireAndForget(this ValueTask task)
         {
             try
             {

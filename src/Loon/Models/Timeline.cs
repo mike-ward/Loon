@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Avalonia.Collections;
 using Avalonia.Threading;
@@ -53,9 +55,17 @@ namespace Loon.Models
             Settings.PropertyChanged += CheckAuthentication;
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void UpdateTimerTick(object? sender, EventArgs e)
         {
-            await UpdateAsync().ConfigureAwait(false);
+            try
+            {
+                await UpdateAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
         }
 
         public async ValueTask UpdateAsync()
@@ -89,18 +99,26 @@ namespace Loon.Models
             }
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void CheckAuthentication(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.IsEqualTo(nameof(ISettings.IsAuthenticated)))
+            try
             {
-                if (Settings.IsAuthenticated)
+                if (e.PropertyName.IsEqualTo(nameof(ISettings.IsAuthenticated)))
                 {
-                    await Start().ConfigureAwait(false);
+                    if (Settings.IsAuthenticated)
+                    {
+                        await Start().ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        await Stop().ConfigureAwait(false);
+                    }
                 }
-                else
-                {
-                    await Stop().ConfigureAwait(false);
-                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
 

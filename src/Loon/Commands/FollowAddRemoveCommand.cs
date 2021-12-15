@@ -20,7 +20,7 @@ namespace Loon.Commands
         {
             if (parameter is User user)
             {
-                ExecuteAsync(user).FireAndForget();
+                var unused = ExecuteAsync(user).FireAndForget();
             }
         }
 

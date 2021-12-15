@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using Loon.Interfaces;
 using Loon.Views.Content.Controls;
 
@@ -13,13 +15,21 @@ namespace Loon.Commands
             Settings = settings;
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         public override async void Execute(object? parameter)
         {
-            if (await MessageBox.Show(App.GetString("settings-sure"), MessageBox.MessageBoxButtons.YesNo) == MessageBox.MessageBoxResult.Yes)
+            try
             {
-                Settings.HiddenImagesSet.Clear();
-                Settings.Save();
-                Console.Beep();
+                if (await MessageBox.Show(App.GetString("settings-sure"), MessageBox.MessageBoxButtons.YesNo) == MessageBox.MessageBoxResult.Yes)
+                {
+                    Settings.HiddenImagesSet.Clear();
+                    Settings.Save();
+                    Console.Beep();
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
     }

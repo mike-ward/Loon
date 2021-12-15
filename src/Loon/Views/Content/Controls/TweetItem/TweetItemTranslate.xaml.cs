@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
@@ -18,21 +20,29 @@ namespace Loon.Views.Content.Controls.TweetItem
             AvaloniaXamlLoader.Load(this);
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void OnTranslateClick(object? _, RoutedEventArgs __)
         {
-            if (DataContext is not null)
+            try
             {
-                var tweet    = (TwitterStatus)DataContext;
-                var fromLang = tweet.Language ?? "und";
-                var toLang   = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
-                tweet.TranslatedText = App.GetString("translate-text-working");
+                if (DataContext is not null)
+                {
+                    var tweet    = (TwitterStatus)DataContext;
+                    var fromLang = tweet.Language ?? "und";
+                    var toLang   = CultureInfo.InstalledUICulture.TwoLetterISOLanguageName;
+                    tweet.TranslatedText = App.GetString("translate-text-working");
 
-                tweet.TranslatedText = await TranslateService.Translate(
-                        tweet.FullText,
-                        fromLang,
-                        toLang,
-                        (App.MainWindow.DataContext as MainWindowViewModel)?.Settings.TranslateApiKey)
-                    .ConfigureAwait(true);
+                    tweet.TranslatedText = await TranslateService.Translate(
+                            tweet.FullText,
+                            fromLang,
+                            toLang,
+                            (App.MainWindow.DataContext as MainWindowViewModel)?.Settings.TranslateApiKey)
+                        .ConfigureAwait(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
 

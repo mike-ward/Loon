@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,13 +59,21 @@ namespace Loon.Services
             return link;
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private static async void IsOpenChanged(AvaloniaPropertyChangedEventArgs e)
         {
-            var control = e.Sender as TextBlock;
-            if (control?.Tag is string link && e.NewValue is true)
+            try
             {
-                var tip = await TryGetLongUrlAsync(link);
-                control.SetValue(ToolTip.TipProperty, tip);
+                var control = e.Sender as TextBlock;
+                if (control?.Tag is string link && e.NewValue is true)
+                {
+                    var tip = await TryGetLongUrlAsync(link);
+                    control.SetValue(ToolTip.TipProperty, tip);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
     }

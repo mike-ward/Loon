@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -18,35 +20,43 @@ namespace Loon.Views.Content.UserProfile
             AvaloniaXamlLoader.Load(this);
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         public async void LoadImageAsync(object? sender, EventArgs e)
         {
-            if (sender is Image image)
+            try
             {
-                try
+                if (sender is Image image)
                 {
-                    image.Source = null;
-
-                    if (image.DataContext is User user &&
-                        image.Tag is string which)
+                    try
                     {
-                        CollapseHeightIfNoBanner(user);
+                        image.Source = null;
 
-                        var uri = which switch {
-                            "profile" => user.ProfileImageUrlBigger,
-                            "banner"  => user.ProfileBannerUrlSmall,
-                            _         => null
-                        };
-
-                        if (uri.IsNotNullOrWhiteSpace())
+                        if (image.DataContext is User user &&
+                            image.Tag is string which)
                         {
-                            image.Source = await ImageService.GetImageAsync(uri!, CancellationToken.None).ConfigureAwait(true);
+                            CollapseHeightIfNoBanner(user);
+
+                            var uri = which switch {
+                                "profile" => user.ProfileImageUrlBigger,
+                                "banner"  => user.ProfileBannerUrlSmall,
+                                _         => null
+                            };
+
+                            if (uri.IsNotNullOrWhiteSpace())
+                            {
+                                image.Source = await ImageService.GetImageAsync(uri!, CancellationToken.None).ConfigureAwait(true);
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        TraceService.Message(ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    TraceService.Message(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
 

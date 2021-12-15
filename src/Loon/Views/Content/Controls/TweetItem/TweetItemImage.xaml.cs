@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,48 +34,64 @@ namespace Loon.Views.Content.Controls.TweetItem
         }
 
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void LoadMediaAsync(object? sender, EventArgs _)
         {
-            var token = cancellationToken; // make a copy
-            if (token.IsCancellationRequested) return;
-
-            if (sender is Image { DataContext: Media media } image)
+            try
             {
-                try
+                var token = cancellationToken; // make a copy
+                if (token.IsCancellationRequested) return;
+
+                if (sender is Image { DataContext: Media media } image)
                 {
-                    var imageSource = await ImageService.GetImageAsync(media.MediaUrl, token);
-                    if (token.IsCancellationRequested) return;
-                    image.Source ??= imageSource;
+                    try
+                    {
+                        var imageSource = await ImageService.GetImageAsync(media.MediaUrl, token);
+                        if (token.IsCancellationRequested) return;
+                        image.Source ??= imageSource;
+                    }
+                    catch (TaskCanceledException)
+                    {
+                        // return
+                    }
+                    catch (Exception ex)
+                    {
+                        TraceService.Message(ex.Message);
+                    }
                 }
-                catch (TaskCanceledException)
-                {
-                    // return
-                }
-                catch (Exception ex)
-                {
-                    TraceService.Message(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
 
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void OpenInViewer(object? sender, PointerPressedEventArgs e)
         {
-            if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed &&
-                sender is Grid grid &&
-                grid.Children[0] is Image image)
+            try
             {
-                e.Handled = true;
+                if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed &&
+                    sender is Grid grid &&
+                    grid.Children[0] is Image image)
+                {
+                    e.Handled = true;
 
-                if ((e.KeyModifiers & KeyModifiers.Control) != 0)
-                {
-                    var mediaUrl = (image.DataContext as Media)?.MediaUrl;
-                    App.Commands.AddToHiddenImages.Execute((mediaUrl, this.PointToScreen(new Point(5,10))));
+                    if ((e.KeyModifiers & KeyModifiers.Control) != 0)
+                    {
+                        var mediaUrl = (image.DataContext as Media)?.MediaUrl;
+                        App.Commands.AddToHiddenImages.Execute((mediaUrl, this.PointToScreen(new Point(5,10))));
+                    }
+                    else
+                    {
+                        await ImageService.OpenInViewer(image);
+                    }
                 }
-                else
-                {
-                    await ImageService.OpenInViewer(image);
-                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
     }

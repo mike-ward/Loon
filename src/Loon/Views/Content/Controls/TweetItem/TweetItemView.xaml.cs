@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -23,23 +25,31 @@ namespace Loon.Views.Content.Controls.TweetItem
             DataContextChanged += OnDataContextChanged;
         }
 
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void OnDataContextChanged(object? sender, EventArgs e)
         {
-            CancellationTokenSource.Cancel();
-            CancellationTokenSource.Dispose();
-            CancellationTokenSource = new CancellationTokenSource();
-
-            if (DataContext is TwitterStatus status)
+            try
             {
-                try
+                CancellationTokenSource.Cancel();
+                CancellationTokenSource.Dispose();
+                CancellationTokenSource = new CancellationTokenSource();
+
+                if (DataContext is TwitterStatus status)
                 {
-                    status.OriginatingStatus.RelatedLinkInfo ??= await RelatedLinkInfo
-                        .GetRelatedLinkInfoAsync(status.OriginatingStatus, CancellationTokenSource.Token);
+                    try
+                    {
+                        status.OriginatingStatus.RelatedLinkInfo ??= await RelatedLinkInfo
+                            .GetRelatedLinkInfoAsync(status.OriginatingStatus, CancellationTokenSource.Token);
+                    }
+                    catch (TaskCanceledException)
+                    {
+                        // expected
+                    }
                 }
-                catch (TaskCanceledException)
-                {
-                    // expected
-                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
     }

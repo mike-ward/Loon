@@ -29,7 +29,10 @@ namespace Loon.ViewModels.Content.Timelines
             HomeTimeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
 
             // ReSharper disable once AsyncVoidLambda
-            PubSubs.AddStatus.Subscribe(async status => await UpdateStatusesTask.Execute(new[] { status }, HomeTimeline).ConfigureAwait(false));
+            PubSubs.AddStatus.Subscribe(status =>
+            {
+                var unused = UpdateStatusesTask.Execute(new[] { status }, HomeTimeline);
+            });
         }
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()

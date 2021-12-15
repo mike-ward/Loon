@@ -115,7 +115,7 @@ namespace Loon.Services
 
             ms.Position = 0;
             var bitmap = new Bitmap(ms);
-            await Task.Factory.StartNew(() => ToCache(uri, bitmap, cancellationToken), cancellationToken).ConfigureAwait(false);
+            await Task.Factory.StartNew(() => ToCache(uri, bitmap, cancellationToken), cancellationToken, TaskCreationOptions.None, TaskScheduler.Default).ConfigureAwait(false);
 
             return cancellationToken.IsCancellationRequested
                 ? default
@@ -158,7 +158,7 @@ namespace Loon.Services
             if (Source is not null)
             {
                 // This space for rent
-                Application.Current.Clipboard.SetTextAsync("bitmap copying not implemented");
+                var unused = Application.Current.Clipboard.SetTextAsync("bitmap copying not implemented");
             }
         }
 

@@ -113,7 +113,7 @@ namespace Twitter.Services
             await TextParameterAsync(stream, boundary, "segment_index", segmentIndex.ToString(CultureInfo.InvariantCulture)).ConfigureAwait(false);
             await BinaryParameterAsync(stream, boundary, "media", payload).ConfigureAwait(false);
             await WriteTextToStreamAsync(stream, $"--{boundary}--\r\n").ConfigureAwait(false);
-            stream.Flush();
+            await stream.FlushAsync();
 
             request.Content = new StreamContent(stream);
             await MyHttpClient.SendAsync(request).ConfigureAwait(false);

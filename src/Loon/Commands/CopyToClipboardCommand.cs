@@ -9,7 +9,7 @@ namespace Loon.Commands
         {
             if (parameter is string text)
             {
-                Application.Current.Clipboard.SetTextAsync(text).FireAndForget();
+                var unused = Application.Current.Clipboard.SetTextAsync(text).FireAndForget();
             }
         }
     }

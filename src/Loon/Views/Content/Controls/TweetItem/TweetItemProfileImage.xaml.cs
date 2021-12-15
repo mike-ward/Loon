@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Threading;
@@ -38,34 +39,42 @@ namespace Loon.Views.Content.Controls.TweetItem
         }
 
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
+        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void UpdateImage(object? sender, EventArgs _)
         {
-            var token = cancellationToken; // make a copy
-            if (token.IsCancellationRequested) return;
-
-            if (sender is Image { DataContext: TwitterStatus status } image)
+            try
             {
-                try
-                {
-                    image.Source = null;
+                var token = cancellationToken; // make a copy
+                if (token.IsCancellationRequested) return;
 
-                    var imageSource =
-                        status.User.ProfileImageUrlBigger is { Length: > 0 } uri
-                            ? await ImageService.GetImageAsync(uri, token)
-                            : EmptyBitmap;
+                if (sender is Image { DataContext: TwitterStatus status } image)
+                {
+                    try
+                    {
+                        image.Source = null;
 
-                    if (token.IsCancellationRequested) return;
-                    image.Source = imageSource;
+                        var imageSource =
+                            status.User.ProfileImageUrlBigger is { Length: > 0 } uri
+                                ? await ImageService.GetImageAsync(uri, token)
+                                : EmptyBitmap;
+
+                        if (token.IsCancellationRequested) return;
+                        image.Source = imageSource;
+                    }
+                    catch (TaskCanceledException)
+                    {
+                        // return
+                    }
+                    catch (Exception ex)
+                    {
+                        image.Source = EmptyBitmap;
+                        TraceService.Message(ex.Message);
+                    }
                 }
-                catch (TaskCanceledException)
-                {
-                    // return
-                }
-                catch (Exception ex)
-                {
-                    image.Source = EmptyBitmap;
-                    TraceService.Message(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
             }
         }
 
@@ -82,8 +91,8 @@ namespace Loon.Views.Content.Controls.TweetItem
             // Useful for debugging twitter oddities
             //
             else if (e.GetCurrentPoint(relativeTo: null).Properties.IsRightButtonPressed &&
-                e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
-                DataContext is TwitterStatus status1)
+                     e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
+                     DataContext is TwitterStatus status1)
             {
                 e.Handled = true;
                 var json = JsonSerializer.Serialize(status1, new JsonSerializerOptions { WriteIndented = true });
