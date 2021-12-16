@@ -22,8 +22,7 @@ namespace Loon.Views
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            ViewModel.Load(this);
-            LinuxSetup();
+            ViewModel.Load(this); 
 #if DEBUG
             this.AttachDevTools();
 #endif
@@ -32,6 +31,7 @@ namespace Loon.Views
         protected override void OnOpened(EventArgs e)
         {
             base.OnOpened(e);
+            LinuxSetup();
             ViewModel.SetWindowLocation(this);
         }
 
