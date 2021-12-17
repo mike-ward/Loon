@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Loon.Interfaces;
+using Loon.Services;
 using Twitter.Models;
 
 namespace Loon.Views.Content.Controls.TweetItem
@@ -49,7 +49,7 @@ namespace Loon.Views.Content.Controls.TweetItem
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
     }

@@ -1,8 +1,8 @@
 using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Avalonia;
 using Loon.Interfaces;
+using Loon.Services;
 using Loon.Views.Content.Controls;
 
 namespace Loon.Commands
@@ -30,7 +30,7 @@ namespace Loon.Commands
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex.Message);
+                TraceService.Message(ex.Message);
             }
         }
     }

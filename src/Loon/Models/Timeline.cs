@@ -64,7 +64,7 @@ namespace Loon.Models
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
 
@@ -118,7 +118,7 @@ namespace Loon.Models
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
 

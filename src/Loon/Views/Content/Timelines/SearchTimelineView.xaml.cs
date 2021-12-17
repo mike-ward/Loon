@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Loon.Services;
 using Loon.ViewModels.Content.Timelines;
 
 namespace Loon.Views.Content.Timelines
@@ -33,7 +33,7 @@ namespace Loon.Views.Content.Timelines
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
     }

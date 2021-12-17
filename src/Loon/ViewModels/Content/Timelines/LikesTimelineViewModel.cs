@@ -35,7 +35,7 @@ namespace Loon.ViewModels.Content.Timelines
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
 

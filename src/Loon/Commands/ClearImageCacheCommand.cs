@@ -21,7 +21,7 @@ namespace Loon.Commands
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
     }

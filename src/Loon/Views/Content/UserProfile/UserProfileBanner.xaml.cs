@@ -56,7 +56,7 @@ namespace Loon.Views.Content.UserProfile
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
 

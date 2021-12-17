@@ -62,7 +62,7 @@ namespace Loon.Views.Content.Controls.TweetItem
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
 
@@ -91,7 +91,7 @@ namespace Loon.Views.Content.Controls.TweetItem
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
     }

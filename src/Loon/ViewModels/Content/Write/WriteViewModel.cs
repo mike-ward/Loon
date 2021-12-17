@@ -134,7 +134,7 @@ namespace Loon.ViewModels.Content.Write
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
     }

@@ -73,7 +73,7 @@ namespace Loon.Services
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
     }

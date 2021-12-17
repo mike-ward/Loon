@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Loon.Services;
 using Loon.ViewModels.Content.Timelines;
 using Loon.Views.Content.Controls;
 using Loon.Views.Content.Timelines;
@@ -50,7 +50,7 @@ namespace Loon.Views.Content.UserProfile
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                TraceService.Message(ex.Message);
             }
         }
     }
