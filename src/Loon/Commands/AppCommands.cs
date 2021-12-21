@@ -32,7 +32,7 @@ namespace Loon.Commands
             MinimizeApp           = new MinimizeAppCommand();
             OpenUrl               = new OpenUrlCommand();
             Retweet               = new RetweetCommand(settings, twitterService);
-            SetUserProfileContext = new SetUserProfileContextCommand(twitterService);
+            SetUserProfileContext = new SetUserProfileContextCommand();
             Signout               = new SignoutCommand(settings);
             UpdateTheme           = new UpdateThemeCommand();
         }

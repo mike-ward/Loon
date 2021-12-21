@@ -19,7 +19,7 @@ namespace Loon.Commands
                     : new Uri("avares://Avalonia.Themes.Default/Accents/BaseDark.xaml")
             };
 
-            Application.Current.Styles[1] = styles;
+            Application.Current!.Styles[1] = styles;
 
             var overrides = new StyleInclude(new Uri("resm:Styles")) {
                 Source = useLight
@@ -27,7 +27,7 @@ namespace Loon.Commands
                     : new Uri("avares://Loon/Assets/DarkThemeOverrides.xaml")
             };
 
-            Application.Current.Styles[2] = overrides;
+            Application.Current!.Styles[2] = overrides;
         }
     }
 }

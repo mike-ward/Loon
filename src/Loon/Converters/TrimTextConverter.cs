@@ -6,7 +6,7 @@ namespace Loon.Converters
 {
     internal class TrimTextConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             var       text      = value as string ?? string.Empty;
             const int maxLength = 300;
@@ -16,7 +16,7 @@ namespace Loon.Converters
                 : text;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             return value;
         }

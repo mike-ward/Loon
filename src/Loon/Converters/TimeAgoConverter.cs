@@ -6,7 +6,7 @@ namespace Loon.Converters
 {
     internal class TimeAgoConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             var time = value is DateTime val
                 ? val
@@ -23,7 +23,7 @@ namespace Loon.Converters
             };
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             return value;
         }

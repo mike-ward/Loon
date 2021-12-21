@@ -96,7 +96,7 @@ namespace Loon.Views.Content.Controls.TweetItem
             {
                 e.Handled = true;
                 var json = JsonSerializer.Serialize(status1, new JsonSerializerOptions { WriteIndented = true });
-                _ = Application.Current.Clipboard.SetTextAsync(json);
+                _ = Application.Current!.Clipboard!.SetTextAsync(json);
             }
         }
     }

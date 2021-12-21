@@ -13,7 +13,7 @@ namespace Loon
     {
         public static ServiceProvider ServiceProvider { get; } = new();
         public static AppCommands     Commands        { get; } = ServiceProvider.GetService<AppCommands>();
-        public static Window          MainWindow      => ((IClassicDesktopStyleApplicationLifetime)Current.ApplicationLifetime).MainWindow;
+        public static Window          MainWindow      => ((IClassicDesktopStyleApplicationLifetime)Current!.ApplicationLifetime!).MainWindow;
 
         public override void Initialize()
         {
@@ -34,7 +34,7 @@ namespace Loon
 
         public static string GetString(string name)
         {
-            return Current.TryFindResource(name, out var value) && value is string val
+            return Current!.TryFindResource(name, out var value) && value is string val
                 ? val
                 : $"string resource not found: {name}";
         }

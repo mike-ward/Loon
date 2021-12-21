@@ -155,7 +155,7 @@ namespace Loon.Services
 
         public static void CopyImageToClipboard(IImage? Source)
         {
-            if (Source is not null)
+            if (Source is not null && Application.Current?.Clipboard is not null)
             {
                 // This space for rent
                 var unused = Application.Current.Clipboard.SetTextAsync("bitmap copying not implemented");

@@ -35,7 +35,7 @@ namespace Loon.Views.Content.UserProfile
                 user.IsFollowing &&
                 this.FindControl<TextBlock>(TextBlockName) is TextBlock textBlock)
             {
-                border.Background = Application.Current.TryFindResource("RedHoverBrush", out var brush)
+                border.Background = Application.Current!.TryFindResource("RedHoverBrush", out var brush)
                     ? (IBrush)brush!
                     : Brushes.Black;
                 textBlock.Text = App.GetString("profile-unfollow");
@@ -46,9 +46,9 @@ namespace Loon.Views.Content.UserProfile
         {
             if (sender is Border border &&
                 DataContext is User user &&
-                this.FindControl<TextBlock>(TextBlockName) is TextBlock textBlock)
+                this.FindControl<TextBlock>(TextBlockName) is { } textBlock)
             {
-                border.Background = Application.Current.TryFindResource("TwitterBlueBrush", out var brush)
+                border.Background = Application.Current!.TryFindResource("TwitterBlueBrush", out var brush)
                     ? (IBrush)brush!
                     : Brushes.Black;
                 textBlock.Text = App.GetString(user.IsFollowing

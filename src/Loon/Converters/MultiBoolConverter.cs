@@ -8,7 +8,7 @@ namespace Loon.Converters
 {
     internal class MultiBoolConverter : IMultiValueConverter
     {
-        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture)
         {
             return values.All(value => value is true);
         }
