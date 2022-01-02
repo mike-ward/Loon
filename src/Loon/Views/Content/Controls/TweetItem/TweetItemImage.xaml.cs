@@ -35,7 +35,7 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
-        private async void LoadMediaAsync(object? sender, EventArgs _)
+        private async void LoadMediaAsync(object? sender, EventArgs unused)
         {
             try
             {

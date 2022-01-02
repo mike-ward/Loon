@@ -127,7 +127,6 @@ namespace Loon.Services
             try
             {
                 if (cancellationToken.IsCancellationRequested) return;
-
                 using var ms = new MemoryStream();
                 image.Save(ms);
                 File.WriteAllBytes(CachePathFromUrl(uri), ms.ToArray());

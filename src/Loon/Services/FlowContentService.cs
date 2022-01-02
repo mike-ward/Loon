@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
-using Jab;
 using Loon.Converters;
 using Loon.Extensions;
 using Loon.Interfaces;
@@ -167,7 +166,7 @@ namespace Loon.Services
             button.Command          = command;
             button.CommandParameter = commandParamater;
             button.ContextMenu      = contextMenu;
-            
+
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
             textBlock.Tag = commandParamater; // LongUrlService needs this
