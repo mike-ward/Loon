@@ -25,6 +25,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                 var token = cancellationTokeSourceProvider.CancellationTokenSource.Token;
                 if (token.IsCancellationRequested) return;
                 var wrapPanel = this.FindControl<WrapPanel>("Container");
+                wrapPanel.Children.Clear();
                 wrapPanel.Children.AddRange(FlowContentService.FlowContentInlines(status, token));
             }
         }

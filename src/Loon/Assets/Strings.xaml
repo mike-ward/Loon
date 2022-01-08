@@ -170,6 +170,7 @@
       <!-- Misc -->
 
       <sys:String x:Key="install-vlc">Install VLC video player to view videos</sys:String>
+      <sys:String x:Key="announce_timeline">🦇 Atomic batteries to power, turbines to speed 🦇</sys:String>
 
     </Style.Resources>
   </Style>

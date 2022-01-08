@@ -3,23 +3,11 @@ using System.Windows.Input;
 
 namespace Loon.Commands
 {
-    public class BaseCommand : ICommand
+    public abstract class BaseCommand : ICommand
     {
-        public virtual bool CanExecute(object? parameter)
-        {
-            return true;
-        }
-
-        public virtual void Execute(object? parameter)
-        {
-            // this space for rent!
-        }
-
-        protected virtual void OnCanExecuteChanged(EventArgs e)
-        {
-            CanExecuteChanged?.Invoke(this, e);
-        }
-
+        public abstract void Execute(object? parameter);
+        public bool CanExecute(object? parameter) => true;
         public event EventHandler? CanExecuteChanged;
+        protected void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 }

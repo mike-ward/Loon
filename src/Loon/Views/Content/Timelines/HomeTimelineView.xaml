@@ -8,5 +8,12 @@
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
-  <t:TimelineView />
+  <Grid>
+    <t:TimelineView />
+    <TextBlock Name="Announce"
+               Text="{StaticResource announce_timeline}"
+               TextAlignment="Center"
+               Margin="0 20 0 0">
+    </TextBlock>
+  </Grid>
 </UserControl>
