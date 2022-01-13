@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Avalonia.Collections;
@@ -41,11 +40,9 @@ namespace Loon.ViewModels.Content.Timelines
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()
         {
-            return new Func<Timeline, ValueTask>[] {
-                timeline => GetAndUpdateStatusesAsync(timeline),
-                timeline => TruncateStatusCollectionTask.Execute(timeline),
-                timeline => UpdateTimeStampsTask.Execute(timeline)
-            };
+            yield return timeline => GetAndUpdateStatusesAsync(timeline);
+            yield return timeline => TruncateStatusCollectionTask.Execute(timeline);
+            yield return timeline => UpdateTimeStampsTask.Execute(timeline);
         }
 
         private async ValueTask GetAndUpdateStatusesAsync(Timeline timeline)

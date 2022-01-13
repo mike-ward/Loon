@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Loon.Models
@@ -8,11 +9,11 @@ namespace Loon.Models
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void SetProperty<T>(ref T item, T value, [CallerMemberName] string? propertyName = null)
+        protected void SetProperty<T>([NotNullIfNotNull("newValue")] ref T field, T newValue, [CallerMemberName] string? propertyName = null)
         {
-            if (!EqualityComparer<T>.Default.Equals(item, value))
+            if (!EqualityComparer<T>.Default.Equals(field, newValue))
             {
-                item = value;
+                field = newValue;
                 OnPropertyChanged(propertyName);
             }
         }
