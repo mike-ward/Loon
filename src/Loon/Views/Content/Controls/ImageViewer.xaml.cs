@@ -25,6 +25,7 @@ namespace Loon.Views.Content.Controls
         public void HideWindow(object? sender, PointerPressedEventArgs e)
         {
             Close();
+            Source = null;
         }
     }
 }
