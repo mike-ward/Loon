@@ -21,22 +21,6 @@
       Name="{x:Static l:TimelineView.ItemsControlName}"
       PointerWheelChanged="OnPointerWheelChanged">
 
-      <ItemsControl.Template>
-        <ControlTemplate>
-          <Border Background="{TemplateBinding Background}"
-                  BorderBrush="{TemplateBinding BorderBrush}"
-                  BorderThickness="{TemplateBinding BorderThickness}"
-                  CornerRadius="{TemplateBinding CornerRadius}"
-                  Padding="{TemplateBinding Padding}">
-            <ItemsPresenter Name="PART_ItemsPresenter"
-                            Items="{TemplateBinding Items}"
-                            ItemsPanel="{TemplateBinding ItemsPanel}"
-                            ItemTemplate="{TemplateBinding ItemTemplate}"
-                            VirtualizationMode="Simple"/>
-          </Border>
-        </ControlTemplate>
-      </ItemsControl.Template>
-
       <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
           <VirtualizingStackPanel />
