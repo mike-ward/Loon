@@ -52,16 +52,13 @@ namespace Loon.Views.Content.Timelines
             // Scroll faster
             if ((sender as Control)?.Parent is ScrollViewer scrollViewer)
             {
-                var offset = new Vector(0, 100); // 100 feels about right scroll-wise
+                const int offset = 100; // 100 feels about right scroll-wise
 
-                if (e.Delta.Y < 0)
-                {
-                    scrollViewer.Offset += offset;
-                }
-                else
-                {
-                    scrollViewer.Offset -= offset;
-                }
+                var y = e.Delta.Y < 0
+                    ? offset
+                    : -offset;
+
+                scrollViewer.Offset += new Vector(0, y);
             }
         }
     }

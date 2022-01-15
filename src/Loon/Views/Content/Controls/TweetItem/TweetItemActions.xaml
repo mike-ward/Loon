@@ -75,9 +75,10 @@
       CommandParameter="{Binding User}"
       ToolTip.Tip="{StaticResource follow-tooltip}">
       <StackPanel Orientation="Horizontal">
+        <!-- ReSharper disable once Xaml.DynamicResourceError -->
         <TextBlock
           Classes="symbol1"
-          Foreground="{Binding User.IsFollowing, Converter={StaticResource BooleanToDynamicResource}, ConverterParameter={StaticResource TwitterBlueBrush}}"
+          Foreground="{Binding User.IsFollowing, Converter={StaticResource BooleanToDynamicResource}, ConverterParameter={DynamicResource TwitterBlueBrush}}"
           Text="{DynamicResource AddFriendSymbol}" />
         <TextBlock
           Classes="padleft"
