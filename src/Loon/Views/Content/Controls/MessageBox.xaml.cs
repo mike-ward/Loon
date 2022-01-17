@@ -9,10 +9,11 @@ namespace Loon.Views.Content.Controls
     public class MessageBox : Window
     {
         // ReSharper disable ConvertToConstant.Global
-        public static readonly string TextName  = "Text";
-        public static readonly string TitleName = "Title";
 
+        public static readonly string TextName    = "Text";
+        public static readonly string TitleName   = "Title";
         public static readonly string ButtonsName = "Buttons";
+
         // ReSharper restore ConvertToConstant.Global
 
         public enum MessageBoxButtons

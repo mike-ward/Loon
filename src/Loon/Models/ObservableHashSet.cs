@@ -10,8 +10,7 @@ namespace Loon.Models
     {
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
-        public ObservableHashSet()
-            : base() { }
+        public ObservableHashSet() { }
 
         protected ObservableHashSet(SerializationInfo info, StreamingContext context)
             : base(info, context) { }

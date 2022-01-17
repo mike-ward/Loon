@@ -60,7 +60,6 @@ namespace Loon.Services
                     var text = twitterString.Substring(start, len);
                     yield return (FlowContentNodeType.Text, text);
                 }
-
                 yield return (item.FlowContentNodeType, item.Text);
                 start = item.End;
             }
