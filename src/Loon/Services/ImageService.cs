@@ -89,8 +89,7 @@ namespace Loon.Services
 
         private static string CachePathFromUrl(string uri)
         {
-            using var md5  = MD5.Create();
-            var       hash = md5.ComputeHash(Encoding.UTF8.GetBytes(uri));
+            var hash = MD5.HashData(Encoding.UTF8.GetBytes(uri));
             return Path.Combine(TempPath, "loon-" + Convert.ToHexString(hash));
         }
 

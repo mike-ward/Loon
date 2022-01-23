@@ -43,32 +43,32 @@ namespace Twitter.Services
         }
 
         public static string Signature(
-            string httpMethod,
-            string url,
-            string nonce,
-            string timestamp,
-            string consumerKey,
-            string consumerSecret,
-            string accessToken,
-            string accessTokenSecret,
+            string                         httpMethod,
+            string                         url,
+            string                         nonce,
+            string                         timestamp,
+            string                         consumerKey,
+            string                         consumerSecret,
+            string                         accessToken,
+            string                         accessTokenSecret,
             IEnumerable<(string, string)>? parameters)
         {
-            var       parameterList       = OrderedParameters(nonce, timestamp, consumerKey, accessToken, signature: null, parameters);
-            var       parameterStrings    = parameterList.Select(p => $"{p.Item1}={p.Item2}");
-            var       parameterString     = string.Join("&", parameterStrings);
-            var       signatureBaseString = $"{httpMethod}&{UrlEncode(url)}&{UrlEncode(parameterString)}";
-            var       compositeKey        = $"{UrlEncode(consumerSecret)}&{UrlEncode(accessTokenSecret)}";
-            using var hmac                = new HMACSHA1(Encoding.UTF8.GetBytes(compositeKey));
-            var       result              = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(signatureBaseString)));
+            var parameterList       = OrderedParameters(nonce, timestamp, consumerKey, accessToken, null, parameters);
+            var parameterStrings    = parameterList.Select(p => $"{p.Item1}={p.Item2}");
+            var parameterString     = string.Join("&", parameterStrings);
+            var signatureBaseString = $"{httpMethod}&{UrlEncode(url)}&{UrlEncode(parameterString)}";
+            var compositeKey        = $"{UrlEncode(consumerSecret)}&{UrlEncode(accessTokenSecret)}";
+            var hash                = HMACSHA1.HashData(Encoding.UTF8.GetBytes(compositeKey), Encoding.UTF8.GetBytes(signatureBaseString));
+            var result              = Convert.ToBase64String(hash);
             return result;
         }
 
         public static string AuthorizationHeader(
-            string nonce,
-            string timestamp,
-            string consumerKey,
-            string? accessToken,
-            string? signature,
+            string                         nonce,
+            string                         timestamp,
+            string                         consumerKey,
+            string?                        accessToken,
+            string?                        signature,
             IEnumerable<(string, string)>? parameters = null)
         {
             var parameterList    = OrderedParameters(nonce, timestamp, consumerKey, accessToken, signature, parameters);
@@ -78,11 +78,11 @@ namespace Twitter.Services
         }
 
         private static IEnumerable<(string, string)> OrderedParameters(
-            string nonce,
-            string timestamp,
-            string consumerKey,
-            string? accessToken,
-            string? signature,
+            string                         nonce,
+            string                         timestamp,
+            string                         consumerKey,
+            string?                        accessToken,
+            string?                        signature,
             IEnumerable<(string, string)>? parameters)
         {
             return
@@ -91,11 +91,11 @@ namespace Twitter.Services
         }
 
         private static IEnumerable<(string, string)> Parameters(
-            string nonce,
-            string timestamp,
-            string consumerKey,
-            string? accessToken,
-            string? signature,
+            string                         nonce,
+            string                         timestamp,
+            string                         consumerKey,
+            string?                        accessToken,
+            string?                        signature,
             IEnumerable<(string, string)>? parameters)
         {
             yield return ("oauth_version", "1.0");
@@ -114,12 +114,11 @@ namespace Twitter.Services
                 yield return ("oauth_token", UrlEncode(accessToken));
             }
 
-            if (parameters is not null)
+            if (parameters is null) yield break;
+
+            foreach (var par in parameters.Select(par => (UrlEncode(par.Item1), UrlEncode(par.Item2))))
             {
-                foreach (var par in parameters.Select(par => (UrlEncode(par.Item1), UrlEncode(par.Item2))))
-                {
-                    yield return par;
-                }
+                yield return par;
             }
         }
     }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Avalonia.Collections;
@@ -49,7 +48,10 @@ namespace Loon.Models
             UpdateTasks  = updateTasks;
             Settings     = settings;
 
-            updateTimer      =  new DispatcherTimer { Interval = TimeSpan.FromMinutes(intervalInMinutes) };
+            updateTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(intervalInMinutes)
+            };
             updateTimer.Tick += UpdateTimerTick;
 
             Settings.PropertyChanged += CheckAuthentication;

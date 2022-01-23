@@ -157,19 +157,19 @@ namespace Loon.Services
         private static Control LinkControl(
             string text,
             ICommand command,
-            object commandParamater,
+            object commandParameter,
             ContextMenu? contextMenu = null)
         {
             var button = new Button();
             button.Classes.Add("inline");
             button.Command          = command;
-            button.CommandParameter = commandParamater;
+            button.CommandParameter = commandParameter;
             button.ContextMenu      = contextMenu;
 
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
-            textBlock.Tag = commandParamater; // LongUrlService needs this
-            textBlock.SetValue(ToolTip.TipProperty, commandParamater);
+            textBlock.Tag = commandParameter; // LongUrlService needs this
+            textBlock.SetValue(ToolTip.TipProperty, commandParameter);
             textBlock.SetValue(ToolTip.ShowDelayProperty, 400);
 
             if (command == App.Commands.OpenUrl)
