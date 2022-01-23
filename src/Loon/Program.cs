@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 
 namespace Loon
 {
@@ -9,8 +10,15 @@ namespace Loon
         // yet and stuff might break.
         public static void Main(string[] args)
         {
-            BuildAvaloniaApp()
-                .StartWithClassicDesktopLifetime(args);
+            try
+            {
+                BuildAvaloniaApp()
+                    .StartWithClassicDesktopLifetime(args);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
         }
 
         // ReSharper disable once MemberCanBePrivate.Global

@@ -44,7 +44,6 @@
           FontSize="14"
           FontWeight="Bold"
           Text="{Binding Pin, Mode=TwoWay}"
-          TextAlignment="Center"
           Watermark="PIN" />
 
         <Button
