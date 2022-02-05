@@ -9,6 +9,8 @@
   xmlns:s="clr-namespace:Loon.Views.Content.AppSettings"
   xmlns:t="clr-namespace:Loon.Views.Content.Timelines"
   xmlns:w="clr-namespace:Loon.Views.Content.Write"
+  xmlns:timelines="clr-namespace:Loon.ViewModels.Content.Timelines"
+  xmlns:viewModels="clr-namespace:Loon.ViewModels"
   d:DesignHeight="450"
   d:DesignWidth="300"
   Background="{DynamicResource ThemeBackgroundBrush}"
@@ -19,7 +21,8 @@
     Margin="3 0 0 0"
     PropertyChanged="OnPropertyChanged">
 
-    <TabItem PointerPressed="TabItem_OnPointerPressed">
+    <TabItem PointerPressed="TabItem_OnPointerPressed"
+             x:DataType="timelines:HomeTimelineViewModel">
       <TabItem.Header>
         <Grid>
           <TextBlock
@@ -31,14 +34,14 @@
             TextAlignment="Center"
             Foreground="Green"
             Background="Transparent"
-            IsVisible="{Binding #HomeTimelineView.DataContext.HomeTimeline.PendingStatusesAvailable, FallbackValue=False}">
+            IsVisible="{Binding HomeTimeline.PendingStatusesAvailable, FallbackValue=False}">
             <TextBlock.RenderTransform>
               <TranslateTransform Y="-1" />
             </TextBlock.RenderTransform>
           </TextBlock>
         </Grid>
       </TabItem.Header>
-      <t:HomeTimelineView Name="HomeTimelineView" />
+      <t:HomeTimelineView />
     </TabItem>
 
     <TabItem PointerPressed="TabItem_OnPointerPressed">

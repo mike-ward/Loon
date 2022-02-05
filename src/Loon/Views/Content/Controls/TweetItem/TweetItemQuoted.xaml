@@ -1,11 +1,14 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.Controls.TweetItem.TweetItemQuoted"
+  x:DataType="models:TwitterStatus"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:l="clr-namespace:Loon.Views.Content.Controls.TweetItem"
   xmlns:m="clr-namespace:Loon.Views"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:models="clr-namespace:Twitter.Models;assembly=Twitter"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
@@ -25,7 +28,7 @@
         Name="{x:Static l:TweetItemView.TweetItemImageName}"
         Margin="0 5 5 5"
         DataContext="{Binding ExtendedEntities}"
-        IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideImages}" />
+        IsVisible="{ReflectionBinding !$parent[m:MainWindow].DataContext.Settings.HideImages}" />
     </StackPanel>
   </Border>
 </UserControl>

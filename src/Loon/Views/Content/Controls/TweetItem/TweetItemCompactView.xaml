@@ -1,11 +1,14 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.Controls.TweetItem.TweetItemCompactView"
+  x:DataType="models:TwitterStatus"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:l="clr-namespace:Loon.Views.Content.Controls.TweetItem"
   xmlns:m="clr-namespace:Loon.Views"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:models="clr-namespace:Twitter.Models;assembly=Twitter"
   MinHeight="2"
   d:DesignHeight="450"
   d:DesignWidth="300"
@@ -23,7 +26,7 @@
         Name="TweetItemProfileImage"
         VerticalAlignment="Top"
         DataContext="{Binding OriginatingStatus}"
-        IsVisible="{Binding !$parent[m:MainWindow].DataContext.Settings.HideProfileImages}" />
+        IsVisible="{ReflectionBinding !$parent[m:MainWindow].DataContext.Settings.HideProfileImages}" />
 
       <Grid
         Grid.Row="1"
@@ -42,9 +45,7 @@
       Margin="7 0 0 10">
 
       <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
-
       <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
-
       <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
       <l:TweetItemTranslate DataContext="{Binding OriginatingStatus}" />
     </StackPanel>

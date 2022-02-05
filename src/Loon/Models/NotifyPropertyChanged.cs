@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Loon.Models
 {
-    internal class NotifyPropertyChanged : INotifyPropertyChanged
+    public class NotifyPropertyChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

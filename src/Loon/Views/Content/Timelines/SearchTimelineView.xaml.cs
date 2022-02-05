@@ -15,8 +15,8 @@ namespace Loon.Views.Content.Timelines
 
         public SearchTimelineView()
         {
-            AvaloniaXamlLoader.Load(this);
             DataContext = App.ServiceProvider.GetService<SearchTimelineViewModel>();
+            AvaloniaXamlLoader.Load(this);
         }
 
         [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]

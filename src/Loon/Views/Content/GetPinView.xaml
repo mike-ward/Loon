@@ -1,9 +1,12 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.GetPinView"
+  x:DataType="content:GetPinViewModel"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:content="clr-namespace:Loon.ViewModels.Content"
   d:DesignHeight="450"
   d:DesignWidth="300"
   Background="{DynamicResource ThemeBackgroundBrush}"
@@ -23,7 +26,7 @@
         <Button
           MaxWidth="100"
           Margin="20"
-          Command="{Binding GetPin, Mode=OneTime}"
+          Command="{ReflectionBinding GetPin, Mode=OneTime}"
           Content="{StaticResource pin-get-pin}" />
       </StackPanel>
     </Grid>
@@ -49,7 +52,7 @@
         <Button
           MaxWidth="100"
           Margin="20"
-          Command="{Binding SignIn, Mode=OneTime}"
+          Command="{ReflectionBinding SignIn, Mode=OneTime}"
           Content="{StaticResource pin-sign-in}" />
 
         <TextBlock
@@ -60,7 +63,7 @@
         <Button
           MaxWidth="100"
           Margin="20"
-          Command="{Binding GoBack, Mode=OneTime}"
+          Command="{ReflectionBinding GoBack, Mode=OneTime}"
           Content="&#x25c0;" />
       </StackPanel>
     </Grid>

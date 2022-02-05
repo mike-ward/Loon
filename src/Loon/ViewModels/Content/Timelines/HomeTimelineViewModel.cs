@@ -11,7 +11,7 @@ using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    internal class HomeTimelineViewModel
+    public class HomeTimelineViewModel
     {
         private const int mentionsInterval = 60;
         private       int mentionsCounter  = mentionsInterval;

@@ -1,10 +1,13 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.Controls.TweetItem.TweetItemActions"
+  x:DataType="models:TwitterStatus"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:models="clr-namespace:Twitter.Models;assembly=Twitter"
   d:DesignHeight="50"
   d:DesignWidth="200"
   mc:Ignorable="d">

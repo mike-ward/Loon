@@ -1,16 +1,19 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.AppSettings.SettingsOpenSettings"
+  x:DataType="models:Settings"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:models="clr-namespace:Loon.Models"
   d:DesignHeight="50"
   d:DesignWidth="210"
   mc:Ignorable="d">
   <Button
     Margin="5,0"
     MaxWidth="200"
-    Command="{Binding $parent[UserControl].OpenSettings}"
+    Command="{ReflectionBinding $parent[UserControl].OpenSettings}"
     CommandParameter="{Binding SettingsFilePath}"
     Content="{StaticResource open-settings-file}" />
 </UserControl>

@@ -1,16 +1,19 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.UserProfile.UserProfileMoreButton"
+  x:DataType="models:User"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:models="clr-namespace:Twitter.Models;assembly=Twitter"
   d:DesignHeight="300"
   d:DesignWidth="200"
   mc:Ignorable="d">
 
   <Button
     Classes="inline"
-    Command="{Binding $parent[UserControl].OpenMenu, Mode=OneTime}">
+    Command="{ReflectionBinding $parent[UserControl].OpenMenu, Mode=OneTime}">
 
     <Button.ContextMenu>
       <ContextMenu

@@ -19,11 +19,6 @@ namespace Loon.Views.Content
 
         public MainView()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
             AvaloniaXamlLoader.Load(this);
             PubSubs.OpenWriteTab.Subscribe(OpenWriteTabHandler);
             PubSubs.OpenPreviousTab.Subscribe(OpenPreviousTabHandler);

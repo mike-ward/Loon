@@ -2,18 +2,24 @@
 using Avalonia;
 using Loon.Extensions;
 using Loon.Interfaces;
+using Loon.Models;
 
 namespace Loon.ViewModels
 {
-    internal class MainWindowViewModel
+    public class MainWindowViewModel : NotifyPropertyChanged
     {
+        private          ISettings       settings;
         private readonly ITwitterService twitterService;
 
-        public ISettings Settings { get; }
+        public ISettings Settings
+        {
+            get => settings;
+            set => SetProperty(ref settings, value);
+        }
 
         public MainWindowViewModel(ISettings settings, ITwitterService twitterService)
         {
-            Settings                 =  settings;
+            this.settings            =  settings;
             this.twitterService      =  twitterService;
             settings.PropertyChanged += OnSettingsUpdated;
         }
@@ -22,7 +28,10 @@ namespace Loon.ViewModels
         {
             Settings.Load();
             SetWindowLocation(window);
-            window.Closing += delegate { Save(window); };
+            window.Closing += delegate
+            {
+                Save(window);
+            };
         }
 
         private void Save(IWindow window)

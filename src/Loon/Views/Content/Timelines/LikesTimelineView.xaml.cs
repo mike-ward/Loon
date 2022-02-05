@@ -8,8 +8,8 @@ namespace Loon.Views.Content.Timelines
     {
         public LikesTimelineView()
         {
-            AvaloniaXamlLoader.Load(this);
             DataContext = App.ServiceProvider.GetService<LikesTimelineViewModel>();
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

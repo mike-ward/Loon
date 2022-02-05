@@ -9,8 +9,8 @@ namespace Loon.Views.Content
     {
         public GetPinView()
         {
-            InitializeComponent();
             DataContext = App.ServiceProvider.GetService<GetPinViewModel>();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

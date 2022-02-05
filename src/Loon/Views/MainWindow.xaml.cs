@@ -11,10 +11,11 @@ namespace Loon.Views
     {
         // ReSharper disable once ConvertToConstant.Global (needed to bind in XAML)
         public static readonly string              TitleBarName = "TitleBar";
-        private                MainWindowViewModel ViewModel => (MainWindowViewModel)(DataContext ??= App.ServiceProvider.GetService<MainWindowViewModel>());
+        private                MainWindowViewModel ViewModel => (MainWindowViewModel)DataContext!;
 
         public MainWindow()
         {
+            DataContext = App.ServiceProvider.GetService<MainWindowViewModel>();
             AvaloniaXamlLoader.Load(this);
         }
 

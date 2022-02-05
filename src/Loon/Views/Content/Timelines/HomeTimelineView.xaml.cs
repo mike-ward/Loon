@@ -10,8 +10,8 @@ namespace Loon.Views.Content.Timelines
     {
         public HomeTimelineView()
         {
-            AvaloniaXamlLoader.Load(this);
             DataContext = App.ServiceProvider.GetService<HomeTimelineViewModel>();
+            AvaloniaXamlLoader.Load(this);
             ((HomeTimelineViewModel)DataContext).StatusCollection.CollectionChanged += StatusCollectionOnCollectionChanged;
         }
 

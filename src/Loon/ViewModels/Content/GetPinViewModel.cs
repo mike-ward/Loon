@@ -7,7 +7,7 @@ using Twitter.Services;
 
 namespace Loon.ViewModels.Content
 {
-    internal class GetPinViewModel : NotifyPropertyChanged
+    public class GetPinViewModel : NotifyPropertyChanged
     {
         private          OAuthTokens?    requestToken;
         private readonly ITwitterService twitterService;
@@ -20,7 +20,7 @@ namespace Loon.ViewModels.Content
             set => SetProperty(ref pin, value);
         }
 
-        private bool secondPage;
+        private          bool      secondPage;
 
         public bool SecondPage
         {

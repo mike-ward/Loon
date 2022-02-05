@@ -1,18 +1,22 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.AppView"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:p="clr-namespace:Loon.Views.Content.UserProfile"
   xmlns:v="clr-namespace:Loon.Views.Content"
+  xmlns:content="clr-namespace:Loon.ViewModels.Content"
+  xmlns:viewModels="clr-namespace:Loon.ViewModels"
+  xmlns:userProfile="clr-namespace:Loon.ViewModels.Content.UserProfile"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
 
   <Grid>
-    <v:GetPinView IsVisible="{Binding !Settings.IsAuthenticated, FallbackValue=True}" />
-    <v:MainView IsVisible="{Binding Settings.IsAuthenticated, FallbackValue=False}" />
-    <p:UserProfileView IsVisible="{Binding UserProfileContext, Converter={x:Static ObjectConverters.IsNotNull}}" />
+    <v:GetPinView IsVisible="{Binding !Settings.IsAuthenticated, FallbackValue=True}" x:DataType="content:GetPinViewModel" />
+    <v:MainView IsVisible="{Binding Settings.IsAuthenticated, FallbackValue=False}" x:DataType="viewModels:MainWindowViewModel" />
+    <p:UserProfileView IsVisible="{Binding UserProfileContext, Converter={x:Static ObjectConverters.IsNotNull}}" x:DataType="userProfile:UserProfileViewModel" />
   </Grid>
 </UserControl>
