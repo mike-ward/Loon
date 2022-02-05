@@ -8,8 +8,8 @@ namespace Loon.Views.Content.Write
     {
         public WriteView()
         {
-            AvaloniaXamlLoader.Load(this);
             DataContext = App.ServiceProvider.GetService<WriteViewModel>();
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

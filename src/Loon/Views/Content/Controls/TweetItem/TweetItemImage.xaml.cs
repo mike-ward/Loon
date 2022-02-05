@@ -25,11 +25,7 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         protected override void OnDataContextChanged(EventArgs e)
         {
-            if (this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>() is { } cancellationTokeSourceProvider)
-            {
-                cancellationToken = cancellationTokeSourceProvider.CancellationTokenSource.Token;
-            }
-
+            cancellationToken = this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>()?.CancellationTokenSource.Token ?? CancellationToken.None;
             base.OnDataContextChanged(e);
         }
 

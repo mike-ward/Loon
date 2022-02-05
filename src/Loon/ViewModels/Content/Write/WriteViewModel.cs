@@ -15,7 +15,7 @@ using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Write
 {
-    internal class WriteViewModel : NotifyPropertyChanged
+    public class WriteViewModel : NotifyPropertyChanged
     {
         private readonly ISettings       settings;
         private readonly ITwitterService twitterService;

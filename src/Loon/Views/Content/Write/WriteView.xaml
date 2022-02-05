@@ -1,29 +1,32 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.Write.WriteView"
+  x:DataType="write:WriteViewModel"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:t="clr-namespace:Loon.Views.Content.Controls.TweetItem"
   xmlns:w="clr-namespace:Loon.Views.Content.Write"
+  xmlns:write="clr-namespace:Loon.ViewModels.Content.Write"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
 
   <StackPanel
     Margin="10 0"
-    Spacing="10">
+    Spacing="10"
+    DataContext="{Binding ReplyTo}">
 
     <t:TweetItemCompactView
-      DataContext="{Binding ReplyTo}"
       IsVisible="{Binding ., Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
 
     <TextBlock
       Margin="50 0 0 0"
       Foreground="{StaticResource ThemeForegroundLowBrush}"
       IsVisible="{Binding ., Converter={x:Static ObjectConverters.IsNotNull}}"
-      Text="{Binding ReplyTo.User.ScreenName, StringFormat=Replying to @{0}}" />
+      Text="{Binding User.ScreenName, StringFormat=Replying to @{0}}" />
 
-    <w:WriteEditSection />
+    <w:WriteEditSection DataContext="{ReflectionBinding $parent[UserControl].DataContext}" />
   </StackPanel>
 </UserControl>

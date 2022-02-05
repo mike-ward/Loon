@@ -1,11 +1,14 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.Write.WriteEditSection"
+  x:DataType="write:WriteViewModel"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ti="clr-namespace:Loon.Views.Content.Controls.TweetItem"
   xmlns:w="clr-namespace:Loon.Views.Content.Write"
+  xmlns:write="clr-namespace:Loon.ViewModels.Content.Write"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
@@ -35,7 +38,7 @@
 
         <TextBlock
           Margin="5 0"
-          Text="{Binding Text.Length, ElementName={x:Static w:WriteEditSection.WriteTextBoxName}}" />
+          Text="{Binding TweetText.Length}" />
 
         <Button
           Grid.Column="1"
@@ -52,7 +55,7 @@
           HorizontalAlignment="Right"
           Background="{StaticResource TwitterBlueBrush}"
           Classes="blue"
-          Command="{Binding OnTweet}">
+          Command="{ReflectionBinding OnTweet}">
 
           <Button.IsEnabled>
             <MultiBinding Converter="{StaticResource MultiBool}">
