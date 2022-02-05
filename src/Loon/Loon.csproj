@@ -88,6 +88,7 @@
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\MessageBox.xaml" />
     <None Remove="Views\TitleBar.xaml" />
+    <None Remove="Assets\Windows\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -271,6 +272,7 @@
     <AvaloniaXaml Include="Views\TitleBar.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
+    <AvaloniaXaml Remove="Assets\Windows\**" />
   </ItemGroup>
   
   <ItemGroup>
@@ -428,9 +430,10 @@
     <Compile Update="Views\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>
     </Compile>
+    <Compile Remove="Assets\Windows\**" />
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="Assets\Windows" />
+    <EmbeddedResource Remove="Assets\Windows\**" />
   </ItemGroup>
 </Project>

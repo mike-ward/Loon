@@ -28,7 +28,7 @@
         Name="{x:Static l:TweetItemView.TweetItemImageName}"
         Margin="0 5 5 5"
         DataContext="{Binding ExtendedEntities}"
-        IsVisible="{ReflectionBinding !$parent[m:MainWindow].DataContext.Settings.HideImages}" />
+        IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideImages}" />
     </StackPanel>
   </Border>
 </UserControl>

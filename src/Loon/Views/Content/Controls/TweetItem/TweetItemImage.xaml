@@ -21,7 +21,7 @@
           <Grid.IsVisible>
             <MultiBinding Converter="{StaticResource IsHiddenImage}">
               <Binding Path="MediaUrl" />
-              <ReflectionBinding Path="$parent[views:MainWindow].DataContext.Settings.HiddenImagesSet" />
+              <ReflectionBinding Path="$parent[views:MainWindow].ViewModel.Settings.HiddenImagesSet" />
             </MultiBinding>
           </Grid.IsVisible>
 

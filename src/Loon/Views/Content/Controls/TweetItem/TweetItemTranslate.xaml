@@ -7,9 +7,10 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Twitter.Models;assembly=Twitter"
+  xmlns:v="clr-namespace:Loon.Views"
   d:DesignHeight="450"
   d:DesignWidth="300"
-  Tag="{ReflectionBinding $parent[Window].DataContext.Settings.HideTranslate}"
+  Tag="{ReflectionBinding $parent[v:MainWindow].ViewModel.Settings.HideTranslate}"
   mc:Ignorable="d">
 
   <StackPanel>

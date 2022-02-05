@@ -10,7 +10,6 @@
   xmlns:t="clr-namespace:Loon.Views.Content.Timelines"
   xmlns:w="clr-namespace:Loon.Views.Content.Write"
   xmlns:timelines="clr-namespace:Loon.ViewModels.Content.Timelines"
-  xmlns:viewModels="clr-namespace:Loon.ViewModels"
   d:DesignHeight="450"
   d:DesignWidth="300"
   Background="{DynamicResource ThemeBackgroundBrush}"

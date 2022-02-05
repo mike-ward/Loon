@@ -1,19 +1,16 @@
-﻿<Styles
+﻿<Style
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:converters="clr-namespace:Loon.Converters">
-
-  <Style>
-    <Style.Resources>
-      <converters:BooleanToDynamicResourceConverter x:Key="BooleanToDynamicResource" />
-      <converters:CountConverter x:Key="CountConverter" />
-      <converters:DoubleFormatConverter x:Key="DoubleFormat" />
-      <converters:IsHiddenImageConverter x:Key="IsHiddenImage" />
-      <converters:MediaHasVideoConverter x:Key="MediaHasVideo" />
-      <converters:MultiBoolConverter x:Key="MultiBool" />
-      <converters:TabItemWidthConverter x:Key="TabItemWidth" />
-      <converters:TimeAgoConverter x:Key="TimeAgo" />
-      <converters:TrimTextConverter x:Key="TrimText" />
-    </Style.Resources>
-  </Style>
-</Styles>
+  <Style.Resources>
+    <converters:BooleanToDynamicResourceConverter x:Key="BooleanToDynamicResource" />
+    <converters:CountConverter x:Key="CountConverter" />
+    <converters:DoubleFormatConverter x:Key="DoubleFormat" />
+    <converters:IsHiddenImageConverter x:Key="IsHiddenImage" />
+    <converters:MediaHasVideoConverter x:Key="MediaHasVideo" />
+    <converters:MultiBoolConverter x:Key="MultiBool" />
+    <converters:TabItemWidthConverter x:Key="TabItemWidth" />
+    <converters:TimeAgoConverter x:Key="TimeAgo" />
+    <converters:TrimTextConverter x:Key="TrimText" />
+  </Style.Resources>
+</Style>
