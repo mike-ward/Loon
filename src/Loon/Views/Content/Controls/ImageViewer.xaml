@@ -7,16 +7,18 @@
   xmlns:controls="clr-namespace:Loon.Views.Content.Controls"
   d:DesignHeight="300"
   d:DesignWidth="300"
-  Background="{DynamicResource ThemeBackgroundBrush}"
+  Background="Transparent"
   PointerPressed="HideWindow"
+  PointerWheelChanged="OnPointerWheelChanged"
   ShowInTaskbar="False"
-  SizeToContent="WidthAndHeight"
-  SystemDecorations="BorderOnly"
+  SystemDecorations="None"
   Topmost="True"
+  TransparencyLevelHint="Transparent"
+  TransparencyBackgroundFallback="{DynamicResource ThemeBackgroundBrush}"
   WindowStartupLocation="CenterScreen"
+  Width="{Binding Source.Size.Width, RelativeSource={RelativeSource Self}, FallbackValue=100}"
+  Height="{Binding Source.Size.Height, RelativeSource={RelativeSource Self}, FallbackValue=100}"
   mc:Ignorable="d">
 
-  <Image
-    Stretch="None"
-    Source="{Binding $parent[controls:ImageViewer].Source}" />
+  <Image Source="{Binding $parent[controls:ImageViewer].Source}" />
 </Window>
