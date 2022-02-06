@@ -168,6 +168,15 @@ namespace Loon.Services
             process?.Close();
             process = null;
 
+            // Click on an image already being viewed closes it.
+            if (imageViewer?.Source == image.Source)
+            {
+                imageViewer.Close();
+                imageViewer.Source = null;
+                imageViewer.Hide();
+                return;
+            }
+            
             var viewer   = GetImageViewer(); // call here to close now
             var videoUrl = VideoUrl((image.DataContext) as Media);
 
