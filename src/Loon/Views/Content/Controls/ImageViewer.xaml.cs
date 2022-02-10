@@ -32,29 +32,30 @@ namespace Loon.Views.Content.Controls
         // ReSharper disable once UnusedParameter.Local
         private void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
         {
-            Resize(e.Delta.Y > 0);
+            MoveAndResize(e.Delta.Y > 0);
+            e.Handled = true;
         }
 
-        private void Resize(bool delta)
+        private void MoveAndResize(bool larger)
         {
             var deltaWidth  = Width * 0.05;
             var deltaHeight = Height * 0.05;
             var deltaX      = (int)Math.Round(deltaWidth / 2);
             var deltaY      = (int)Math.Round(deltaHeight / 2);
 
-            var w = delta
+            var w = larger
                 ? +deltaWidth
                 : -deltaWidth;
 
-            var h = delta
+            var h = larger
                 ? +deltaHeight
                 : -deltaHeight;
 
-            var px = delta
+            var px = larger
                 ? -deltaX
                 : +deltaX;
 
-            var py = delta
+            var py = larger
                 ? -deltaY
                 : +deltaY;
 
