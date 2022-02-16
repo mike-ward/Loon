@@ -1,5 +1,4 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 
 namespace Loon
 {
@@ -10,25 +9,11 @@ namespace Loon
         // yet and stuff might break.
         public static void Main(string[] args)
         {
-            try
-            {
-                BuildAvaloniaApp()
-                    .StartWithClassicDesktopLifetime(args);
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.ToString());
-            }
-        }
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        // BuildAvaloniaApp() method require for Rider Previewer to work.
-        public static AppBuilder BuildAvaloniaApp()
-        {
-            return AppBuilder
+            AppBuilder
                 .Configure<App>()
                 .UsePlatformDetect()
-                .LogToTrace();
+                .LogToTrace()
+                .StartWithClassicDesktopLifetime(args);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Threading;
@@ -63,8 +62,8 @@ namespace Loon.Views.Content.Controls.TweetItem
                     }
                     catch (Exception ex)
                     {
-                        image.Source = EmptyBitmap;
                         TraceService.Message(ex.Message);
+                        image.Source = EmptyBitmap;
                     }
                 }
             }
@@ -78,7 +77,7 @@ namespace Loon.Views.Content.Controls.TweetItem
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            if (e.GetCurrentPoint(relativeTo: null).Properties.IsLeftButtonPressed &&
+            if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed &&
                 DataContext is TwitterStatus status)
             {
                 e.Handled = true;
@@ -86,7 +85,7 @@ namespace Loon.Views.Content.Controls.TweetItem
             }
             // Useful for debugging twitter oddities
             //
-            else if (e.GetCurrentPoint(relativeTo: null).Properties.IsRightButtonPressed &&
+            else if (e.GetCurrentPoint(null).Properties.IsRightButtonPressed &&
                      e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
                      DataContext is TwitterStatus status1)
             {

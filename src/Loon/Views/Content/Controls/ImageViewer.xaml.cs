@@ -59,7 +59,10 @@ namespace Loon.Views.Content.Controls
                 ? -deltaY
                 : +deltaY;
 
-            Position =  new PixelPoint(Position.X + px, Position.Y + py);
+            var position = new PixelPoint(Position.X + px, Position.Y + py);
+            if (position.X < 0 || position.Y < 0) return;
+
+            Position =  position;
             Width    += w;
             Height   += h;
         }

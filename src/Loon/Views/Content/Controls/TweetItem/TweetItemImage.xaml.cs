@@ -53,6 +53,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                     catch (Exception ex)
                     {
                         TraceService.Message(ex.Message);
+                        image.Source = null;
                     }
                 }
             }

@@ -11,19 +11,14 @@ namespace Loon.Models
 
         protected void SetProperty<T>([NotNullIfNotNull("newValue")] ref T field, T newValue, [CallerMemberName] string? propertyName = null)
         {
-            if (!EqualityComparer<T>.Default.Equals(field, newValue))
-            {
-                field = newValue;
-                OnPropertyChanged(propertyName);
-            }
+            if (EqualityComparer<T>.Default.Equals(field, newValue)) return;
+            field = newValue;
+            OnPropertyChanged(propertyName!);
         }
 
         protected void OnPropertyChanged(string? propertyName)
         {
-            if (propertyName is not null)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

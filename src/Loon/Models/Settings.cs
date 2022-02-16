@@ -13,8 +13,7 @@ namespace Loon.Models
     {
         private string Profile { get; } = "loon";
 
-        [JsonIgnore]
-        private bool isAuthenticated;
+        [JsonIgnore] private bool isAuthenticated;
 
         public bool IsAuthenticated
         {
@@ -163,7 +162,8 @@ namespace Loon.Models
             set => SetProperty(ref screenName, value);
         }
 
-        public WindowLocation Location { get; set; } = new() {
+        public WindowLocation Location { get; set; } = new()
+        {
             X      = 200,
             Y      = 200,
             Width  = 300,
