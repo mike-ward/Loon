@@ -7,7 +7,7 @@ namespace Twitter.Models
     public struct UserConnection
     {
         [JsonPropertyName("id_str")]
-        public string Id { get; init; }
+        public string Id { get; set; }
 
         [JsonPropertyName("connections")]
         public string[] Connections { get; set; }

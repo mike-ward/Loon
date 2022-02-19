@@ -6,16 +6,16 @@ namespace Twitter.Models
     public class Media
     {
         [JsonPropertyName("url")]
-        public string Url { get; init; } = string.Empty;
+        public string Url { get; set; } = string.Empty;
 
         [JsonPropertyName("display_url")]
-        public string DisplayUrl { get; init; } = string.Empty;
+        public string DisplayUrl { get;  set;  } = string.Empty;
 
         [JsonPropertyName("expanded_url")]
-        public string ExpandedUrl { get; init; } = string.Empty;
+        public string ExpandedUrl { get; set; } = string.Empty;
 
         [JsonPropertyName("media_url")]
-        public string MediaUrl { get; init; } = string.Empty;
+        public string MediaUrl { get; set; } = string.Empty;
 
         [JsonPropertyName("indices")]
         public int[] Indices { get; set; } = Array.Empty<int>();

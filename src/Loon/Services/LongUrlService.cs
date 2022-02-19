@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Twitter.Services;
 
 namespace Loon.Services
 {
     internal static class LongUrlService
     {
         private const           int                                  maxCacheSize = 100;
-        private static readonly ConcurrentDictionary<string, string> UrlCache     = new(concurrencyLevel: 1, capacity: maxCacheSize + 1, comparer: StringComparer.Ordinal);
+        private static readonly ConcurrentDictionary<string, string> UrlCache     = new(1, maxCacheSize + 1, StringComparer.Ordinal);
 
         static LongUrlService()
         {
@@ -33,7 +33,7 @@ namespace Loon.Services
                 using var tokenSource = new CancellationTokenSource(FiveSeconds);
 
                 var       request  = new HttpRequestMessage { Method = HttpMethod.Head, RequestUri = new Uri(link) };
-                using var response = await Twitter.Services.OAuthApiRequest.MyHttpClient.SendAsync(request, tokenSource.Token).ConfigureAwait(false);
+                using var response = await OAuthApiRequest.MyHttpClient.SendAsync(request, tokenSource.Token).ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
                 {

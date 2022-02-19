@@ -19,7 +19,7 @@ namespace Loon.Models
                 {
                     statusToUpdate.UpdateFromStatus(status);
                 }
-                else if (!timeline.AlreadyAdded.Contains(status.Id))
+                else if (timeline.AlreadyAdded.Contains(status.Id) is false)
                 {
                     timeline.AlreadyAdded.Add(status.Id);
                     status.UpdateAboutMeProperties(timeline.Settings.ScreenName);

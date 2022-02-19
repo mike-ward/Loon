@@ -32,7 +32,8 @@ namespace Loon.Services
             {
                 if (cancellationToken.IsCancellationRequested) yield break;
 
-                var control = nodeType switch {
+                var control = nodeType switch
+                {
                     FlowContentNodeType.Text    => Run(text),
                     FlowContentNodeType.Url     => Url(text),
                     FlowContentNodeType.Mention => Mention(text),
@@ -60,6 +61,7 @@ namespace Loon.Services
                     var text = twitterString.Substring(start, len);
                     yield return (FlowContentNodeType.Text, text);
                 }
+
                 yield return (item.FlowContentNodeType, item.Text);
                 start = item.End;
             }
@@ -70,55 +72,54 @@ namespace Loon.Services
 
         private static IEnumerable<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)> FlowControlItems(Entities entities)
         {
-            var urls = entities.Urls
-                    ?.Select(url =>
-                    (
-                        FlowContentNodeType: FlowContentNodeType.Url,
-                        Text: url.ExpandedUrl,
-                        Start: url.Indices[0],
-                        End: url.Indices[1]
-                    ))
-                ?? Enumerable
-                    .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
+            var urls = entities
+                          .Urls
+                         ?.Select(url =>
+                           (
+                               FlowContentNodeType: FlowContentNodeType.Url,
+                               Text: url.ExpandedUrl,
+                               Start: url.Indices[0],
+                               End: url.Indices[1]
+                           ))
+                    ?? Enumerable.Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
 
-            var mentions = entities.Mentions
-                    ?.Select(mention =>
-                    (
-                        FlowContentNodeType: FlowContentNodeType.Mention,
-                        Text: mention.ScreenName,
-                        Start: mention.Indices[0],
-                        End: mention.Indices[1]
-                    ))
-                ?? Enumerable
-                    .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
+            var mentions = entities
+                              .Mentions
+                             ?.Select(mention =>
+                               (
+                                   FlowContentNodeType: FlowContentNodeType.Mention,
+                                   Text: mention.ScreenName,
+                                   Start: mention.Indices[0],
+                                   End: mention.Indices[1]
+                               ))
+                        ?? Enumerable.Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
 
-            var hashTags = entities.HashTags
-                    ?.Select(hashtag =>
-                    (
-                        FlowContentNodeType: FlowContentNodeType.HashTag,
-                        hashtag.Text,
-                        Start: hashtag.Indices[0],
-                        End: hashtag.Indices[1]
-                    ))
-                ?? Enumerable
-                    .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
+            var hashTags = entities
+                              .HashTags
+                             ?.Select(hashtag =>
+                               (
+                                   FlowContentNodeType: FlowContentNodeType.HashTag,
+                                   hashtag.Text,
+                                   Start: hashtag.Indices[0],
+                                   End: hashtag.Indices[1]
+                               ))
+                        ?? Enumerable.Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
 
             var media = entities.Media
-                    ?.Select(mediaItem =>
-                    (
-                        FlowContentNodeType: FlowContentNodeType.Media,
-                        Text: mediaItem.Url,
-                        Start: mediaItem.Indices[0],
-                        End: mediaItem.Indices[1]
-                    ))
-                ?? Enumerable
-                    .Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
+                          ?.Select(mediaItem =>
+                            (
+                                FlowContentNodeType: FlowContentNodeType.Media,
+                                Text: mediaItem.Url,
+                                Start: mediaItem.Indices[0],
+                                End: mediaItem.Indices[1]
+                            ))
+                     ?? Enumerable.Empty<(FlowContentNodeType FlowContentNodeType, string Text, int Start, int End)>();
 
             return urls
-                .Concat(mentions)
-                .Concat(hashTags)
-                .Concat(media)
-                .OrderBy(o => o.Start);
+               .Concat(mentions)
+               .Concat(hashTags)
+               .Concat(media)
+               .OrderBy(o => o.Start);
         }
 
         private static TextBlock Run(string text)
@@ -155,9 +156,9 @@ namespace Loon.Services
         }
 
         private static Control LinkControl(
-            string text,
-            ICommand command,
-            object commandParameter,
+            string       text,
+            ICommand     command,
+            object       commandParameter,
             ContextMenu? contextMenu = null)
         {
             var button = new Button();
@@ -175,7 +176,8 @@ namespace Loon.Services
             if (command == App.Commands.OpenUrl)
             {
                 var settings = App.ServiceProvider.GetService<ISettings>();
-                var binding = new Binding {
+                var binding = new Binding
+                {
                     Source             = settings,
                     Path               = nameof(settings.ShortLinks),
                     Mode               = BindingMode.OneWay,
@@ -195,28 +197,33 @@ namespace Loon.Services
 
         private static ContextMenu ContextMenu(string link)
         {
-            var copyLinkAddress = new MenuItem {
+            var copyLinkAddress = new MenuItem
+            {
                 Header           = App.GetString("copy-link-address"),
                 Command          = App.Commands.CopyToClipboard,
                 CommandParameter = link
             };
 
-            var emailLinkAddress = new MenuItem {
+            var emailLinkAddress = new MenuItem
+            {
                 Header           = App.GetString("email-link"),
                 CommandParameter = link,
                 Icon             = new TextBlock { Classes = new Classes("symbol", "padleft"), Text = App.GetString("MailSymbol") }
             };
 
-            var shareLinkTwitter = new MenuItem {
+            var shareLinkTwitter = new MenuItem
+            {
                 Header           = App.GetString("share-link-twitter"),
                 CommandParameter = link,
                 Icon             = new TextBlock { Classes = new Classes("symbol1", "padleft"), Text = App.GetString("TwitterSymbol") }
             };
 
-            return new ContextMenu {
+            return new ContextMenu
+            {
                 HorizontalOffset = 15,
                 VerticalOffset   = 10,
-                Items = new[] {
+                Items = new[]
+                {
                     copyLinkAddress,
                     emailLinkAddress,
                     shareLinkTwitter

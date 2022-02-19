@@ -176,13 +176,14 @@ namespace Loon.Services
                 imageViewer.Hide();
                 return;
             }
-            
+
             var viewer   = GetImageViewer(); // call here to close now
             var videoUrl = VideoUrl((image.DataContext) as Media);
 
             if (videoUrl.IsNotNullOrWhiteSpace())
             {
-                var pi = new ProcessStartInfo {
+                var pi = new ProcessStartInfo
+                {
                     FileName        = "vlc",
                     Arguments       = $"--loop --quiet --no-osd {videoUrl}",
                     UseShellExecute = true,
@@ -206,8 +207,8 @@ namespace Loon.Services
             }
 
             return media.VideoInfo.Variants
-                    .Select(variant => variant.Url)
-                    .FirstOrDefault()
+                      .Select(variant => variant.Url)
+                      .FirstOrDefault()
                 ?? string.Empty;
         }
 
