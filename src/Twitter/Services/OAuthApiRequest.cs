@@ -8,13 +8,14 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Twitter.Extensions;
 using Twitter.Models;
 
 namespace Twitter.Services
 {
     public sealed class OAuthApiRequest
     {
-        public const  string     GET  = "GET";
+        private const string     GET  = "GET";
         public const  string     POST = "POST";
         public static HttpClient MyHttpClient { get; } = new();
 
@@ -35,17 +36,23 @@ namespace Twitter.Services
             AccessTokenSecret = accessTokenSecret;
         }
 
-        public ValueTask GetAsync(string url, IEnumerable<(string, string)> parameters) => RequestAsync(url, parameters, GET);
+        public ValueTask GetAsync(string url, IEnumerable<(string, string)> parameters)
+            => RequestAsync(url, parameters, GET);
 
-        public ValueTask<T> GetAsync<T>(string url, IEnumerable<(string, string)> parameters) where T : class => RequestAsync<T>(url, parameters, GET);
+        public ValueTask<T> GetAsync<T>(string url, IEnumerable<(string, string)> parameters) where T : class
+            => RequestAsync<T>(url, parameters, GET);
 
-        public ValueTask PostAsync(string url, IEnumerable<(string, string)> parameters) => RequestAsync(url, parameters, POST);
+        public ValueTask PostAsync(string url, IEnumerable<(string, string)> parameters)
+            => RequestAsync(url, parameters, POST);
 
-        public ValueTask<T> PostAsync<T>(string url, IEnumerable<(string, string)> parameters) where T : class => RequestAsync<T>(url, parameters, POST);
+        public ValueTask<T> PostAsync<T>(string url, IEnumerable<(string, string)> parameters) where T : class
+            => RequestAsync<T>(url, parameters, POST);
 
-        private async ValueTask RequestAsync(string url, IEnumerable<(string, string)> parameters, string method) => _ = await RequestAsync<object>(url, parameters, method).ConfigureAwait(false);
+        private ValueTask RequestAsync(string url, IEnumerable<(string, string)> parameters, string method)
+            => OAuthRequestAsync<object>(url, parameters, method).AsValueTask();
 
-        private ValueTask<T> RequestAsync<T>(string url, IEnumerable<(string, string)> parameters, string method) where T : class => OAuthRequestAsync<T>(url, parameters, method);
+        private ValueTask<T> RequestAsync<T>(string url, IEnumerable<(string, string)> parameters, string method) where T : class
+            => OAuthRequestAsync<T>(url, parameters, method);
 
         /// <summary>
         ///     Builds, signs and delivers an OAuth Request
@@ -54,10 +61,9 @@ namespace Twitter.Services
         /// <param name="url"></param>
         /// <param name="parameters"></param>
         /// <param name="method"></param>
-        /// <returns></returns>
         private async ValueTask<T> OAuthRequestAsync<T>(string url, IEnumerable<(string, string)> parameters, string method) where T : class
         {
-            var post             = string.Equals(method, POST, StringComparison.Ordinal);
+            var isPost           = string.Equals(method, POST, StringComparison.Ordinal);
             var nonce            = OAuth.Nonce();
             var timestamp        = OAuth.TimeStamp();
             var parray           = parameters.ToArray();
@@ -68,7 +74,7 @@ namespace Twitter.Services
             var request = new HttpRequestMessage();
             request.Headers.Add("Authorization", authorizeHeader);
 
-            if (post)
+            if (isPost)
             {
                 request.Method                      = HttpMethod.Post;
                 request.Content                     = new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes(string.Join("&", parameterStrings))));
@@ -83,19 +89,21 @@ namespace Twitter.Services
             request.RequestUri = new Uri(url);
             using var response = await MyHttpClient.SendAsync(request);
             var       stream   = await response.Content.ReadAsStreamAsync();
+            return await DeserializeResult<T>(stream) ?? throw new InvalidOperationException("JsonSerializer.DeserializeAsync<T>(stream) returned null");
+        }
 
-            var returnType       = typeof(T);
-            var userType         = typeof(User);
-            var statusCollection = typeof(IEnumerable<TwitterStatus>);
+        private static async ValueTask<T?> DeserializeResult<T>(Stream stream) where T : class
+        {
+            var typeT        = typeof(T);
+            var typeUser     = typeof(User);
+            var typeStatuses = typeof(IEnumerable<TwitterStatus>);
 
-            var result = returnType switch
+            return typeT switch
             {
-                _ when returnType == userType         => await JsonSerializer.DeserializeAsync(stream, userType, TwitterStatusContext.Default).ConfigureAwait(false) as T,
-                _ when returnType == statusCollection => await JsonSerializer.DeserializeAsync(stream, statusCollection, TwitterStatusContext.Default).ConfigureAwait(false) as T,
-                _                                     => await JsonSerializer.DeserializeAsync<T>(stream).ConfigureAwait(false)
+                _ when typeT == typeUser     => await JsonSerializer.DeserializeAsync(stream, typeUser, TwitterStatusContext.Default).ConfigureAwait(false) as T,
+                _ when typeT == typeStatuses => await JsonSerializer.DeserializeAsync(stream, typeStatuses, TwitterStatusContext.Default).ConfigureAwait(false) as T,
+                _                            => await JsonSerializer.DeserializeAsync<T>(stream).ConfigureAwait(false)
             };
-
-            return result ?? throw new InvalidOperationException("JsonSerializer.DeserializeAsync<T>(stream) return null");
         }
 
         /// <summary>
