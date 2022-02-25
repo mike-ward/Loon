@@ -1,9 +1,11 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Loon.Commands;
+using Loon.Interfaces;
 using Loon.Services;
 using Loon.Views;
 
@@ -13,6 +15,7 @@ namespace Loon
     {
         public static ServiceProvider ServiceProvider { get; } = new();
         public static AppCommands     Commands        { get; } = ServiceProvider.GetService<AppCommands>();
+        public static ISettings       Settings        { get; } = ServiceProvider.GetService<ISettings>();
         public static Window          MainWindow      => ((IClassicDesktopStyleApplicationLifetime)Current!.ApplicationLifetime!).MainWindow;
 
         public override void Initialize()

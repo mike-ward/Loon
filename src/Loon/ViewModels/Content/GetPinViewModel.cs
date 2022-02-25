@@ -20,7 +20,7 @@ namespace Loon.ViewModels.Content
             set => SetProperty(ref pin, value);
         }
 
-        private          bool      secondPage;
+        private bool secondPage;
 
         public bool SecondPage
         {
@@ -44,9 +44,15 @@ namespace Loon.ViewModels.Content
 
         public async ValueTask SignIn()
         {
-            if (requestToken is null) { throw new InvalidOperationException("requestToken is null"); }
+            if (requestToken is null)
+            {
+                throw new InvalidOperationException("requestToken is null");
+            }
 
-            if (Pin.IsNullOrWhiteSpace()) { throw new InvalidOperationException("Pin is null"); }
+            if (Pin.IsNullOrWhiteSpace())
+            {
+                throw new InvalidOperationException("Pin is null");
+            }
 
             var access = await twitterService.TwitterApi.AuthenticateWithPin(requestToken, Pin!).ConfigureAwait(false);
             GoBack();

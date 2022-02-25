@@ -1,7 +1,8 @@
 ﻿<Application
   x:Class="Loon.App"
   xmlns="https://github.com/avaloniaui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:l="clr-namespace:Loon">
 
   <Application.Styles>
     <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
@@ -18,4 +19,13 @@
     <StyleInclude Source="/Assets/ToolTip.xaml" />
     <StyleInclude Source="/Assets/VerifiedBadge.xaml" />
   </Application.Styles>
+  <TrayIcon.Icons>
+    <TrayIcons>
+      <TrayIcon
+        Icon="/app.ico"
+        ToolTipText="{StaticResource click-to-show}"
+        Command="{Binding ShowApp, Source={x:Static l:App.Commands}, Mode=OneTime}"
+        IsVisible="{Binding ShowInSystemTray, Source={x:Static l:App.Settings}, FallbackValue=False}" />
+    </TrayIcons>
+  </TrayIcon.Icons>
 </Application>

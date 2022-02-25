@@ -18,6 +18,7 @@ namespace Loon.Commands
         public SetUserProfileContextCommand SetUserProfileContext { get; }
         public SignoutCommand               Signout               { get; }
         public UpdateThemeCommand           UpdateTheme           { get; }
+        public ShowAppCommand               ShowApp               { get; }
 
         public AppCommands(ITwitterService twitterService, ISettings settings)
         {
@@ -35,6 +36,7 @@ namespace Loon.Commands
             SetUserProfileContext = new SetUserProfileContextCommand();
             Signout               = new SignoutCommand(settings);
             UpdateTheme           = new UpdateThemeCommand();
+            ShowApp               = new ShowAppCommand();
         }
     }
 }

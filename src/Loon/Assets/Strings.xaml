@@ -117,6 +117,7 @@
     <sys:String x:Key="settings-sure">Sure?</sys:String>
     <sys:String x:Key="show-short-links">Show short [link]s</sys:String>
     <sys:String x:Key="short-link-text">[link]</sys:String>
+    <sys:String x:Key="short-in-system-tray">Show in system tray</sys:String>
 
     <!--  <Tooltips  -->
 
@@ -142,6 +143,7 @@
     <sys:String x:Key="copy-uri-tooltip">Copy URL to clipboard</sys:String>
     <sys:String x:Key="copy-image-tooltip">Copy image to clipboard</sys:String>
     <sys:String x:Key="new-tweets-arrived-tooltip">New tweets arrived</sys:String>
+    <sys:String x:Key="click-to-show">Click to show</sys:String>
 
     <!--  Tips (in settings dialog)  -->
 
