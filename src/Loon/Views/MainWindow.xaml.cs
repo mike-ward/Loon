@@ -32,6 +32,7 @@ namespace Loon.Views
         {
             base.OnOpened(e);
             LinuxSetup();
+            MacOsSetup();
             ViewModel.SetWindowLocation(this);
         }
 
@@ -40,10 +41,23 @@ namespace Loon.Views
             if (OperatingSystem.IsLinux())
             {
                 // On Linux, can't extend into non-client areas
-                this.FindControl<TitleBar>(TitleBarName).IsVisible = false;
-                ExtendClientAreaToDecorationsHint                  = false;
-                ExtendClientAreaTitleBarHeightHint                 = 0;
+                HideCustomTitleBar();
             }
+        }
+
+        private void MacOsSetup()
+        {
+            if (OperatingSystem.IsMacOS())
+            {
+                HideCustomTitleBar();
+            }
+        }
+
+        private void HideCustomTitleBar()
+        {
+            this.FindControl<TitleBar>(TitleBarName).IsVisible = false;
+            ExtendClientAreaToDecorationsHint = false;
+            ExtendClientAreaTitleBarHeightHint = 0;
         }
     }
 }

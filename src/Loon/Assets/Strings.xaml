@@ -36,7 +36,7 @@
 
     <!--  SymbolFont  -->
 
-    <FontFamily x:Key="AppFont">Segoe UI,Open Sans,Inter,Arial</FontFamily>
+    <FontFamily x:Key="AppFont">Segoe UI,Open Sans,Inter,Microsoft Sans Serif,Arial</FontFamily>
     <FontFamily x:Key="SymbolFont">/Assets/Fonts/#Symbols</FontFamily>
     <FontFamily x:Key="SymbolFont1">/Assets/Fonts/#fontcustom</FontFamily>
 
