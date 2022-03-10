@@ -8,17 +8,31 @@
   d:DesignHeight="300"
   d:DesignWidth="300"
   Background="Transparent"
-  PointerPressed="HideWindow"
+  PointerReleased="HideWindow"
   PointerWheelChanged="OnPointerWheelChanged"
   ShowInTaskbar="False"
   SystemDecorations="None"
   Topmost="True"
   TransparencyLevelHint="Transparent"
   TransparencyBackgroundFallback="{DynamicResource ThemeBackgroundBrush}"
-  WindowStartupLocation="CenterScreen"
-  Width="{Binding Source.Size.Width, RelativeSource={RelativeSource Self}, FallbackValue=100}"
-  Height="{Binding Source.Size.Height, RelativeSource={RelativeSource Self}, FallbackValue=100}"
+  WindowState="Maximized"
   mc:Ignorable="d">
 
-  <Image Source="{Binding $parent[controls:ImageViewer].Source}" />
+  <Window.Styles>
+    <Style Selector="Image">
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Width" Duration="0:0:0.08" />
+          <DoubleTransition Property="Height" Duration="0:0:0.08" />
+        </Transitions>
+      </Setter>
+    </Style>
+  </Window.Styles>
+  
+  <Image Name="imageControl"
+         VerticalAlignment="Center"
+         HorizontalAlignment="Center"
+         Source="{Binding $parent[controls:ImageViewer].Source}"
+         Width="{Binding $parent[controls:ImageViewer].Source.Size.Width, FallbackValue=0}"
+         Height="{Binding $parent[controls:ImageViewer].Source.Size.Height, FallbackValue=0}" />
 </Window>

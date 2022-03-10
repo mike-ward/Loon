@@ -9,12 +9,14 @@ namespace Loon.Views.Content.Controls
 {
     public class ImageViewer : Window
     {
+        private Image imageControl { get; }
+
         public ImageViewer()
         {
             AvaloniaXamlLoader.Load(this);
+            imageControl = this.FindControl<Image>("imageControl");
         }
 
-        // ReSharper disable once MemberCanBePrivate.Global
         public static readonly StyledProperty<IImage?> SourceProperty = AvaloniaProperty.Register<ImageViewer, IImage?>(nameof(Source));
 
         public IImage? Source
@@ -23,48 +25,26 @@ namespace Loon.Views.Content.Controls
             set => SetValue(SourceProperty, value);
         }
 
-        public void HideWindow(object? sender, PointerPressedEventArgs e)
+        public void HideWindow(object? sender, PointerReleasedEventArgs e)
         {
             Close();
             Source = null;
         }
 
-        // ReSharper disable once UnusedParameter.Local
-        private void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
+        public void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
         {
-            MoveAndResize(e.Delta.Y > 0);
+            ResizeImage(e.Delta.Y > 0);
             e.Handled = true;
         }
 
-        private void MoveAndResize(bool larger)
+        private void ResizeImage(bool larger)
         {
-            var deltaWidth  = Width * 0.05;
-            var deltaHeight = Height * 0.05;
-            var deltaX      = (int)Math.Round(deltaWidth / 2);
-            var deltaY      = (int)Math.Round(deltaHeight / 2);
-
-            var w = larger
-                ? +deltaWidth
-                : -deltaWidth;
-
-            var h = larger
-                ? +deltaHeight
-                : -deltaHeight;
-
-            var px = larger
-                ? -deltaX
-                : +deltaX;
-
-            var py = larger
-                ? -deltaY
-                : +deltaY;
-
-            var position = new PixelPoint(Position.X + px, Position.Y + py);
-            if (position.X < 0 || position.Y < 0) return;
-
-            Position =  position;
-            Width    += w;
-            Height   += h;
+            var direction = larger
+                ? 1
+                : -1;
+            
+            imageControl.Width  += Width * 0.05 * direction;
+            imageControl.Height += Height * 0.05 * direction;
         }
     }
 }
