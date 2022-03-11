@@ -4,13 +4,15 @@ using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
 using Loon.Interfaces;
+using Loon.Models;
 using Microsoft.Win32;
 
 namespace Loon.Services
 {
-    public class SystemState : ISystemState, INotifyPropertyChanged
+    #if X86
+    #pragma warning disable CA1416
+    public class SystemState : INotifyPropertyChanged, ISystemState
     {
-        [SupportedOSPlatform("windows")]
         public bool IsRegisteredInStartup
         {
             get
@@ -38,20 +40,23 @@ namespace Loon.Services
             }
         }
 
-        private static string ApplicationName => ComputeMD5(AppContext.BaseDirectory);
-
-        [SupportedOSPlatform("windows")]
-        private static RegistryKey OpenStartupSubKey() => Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
-
-        private static string ComputeMD5(string input)
-        {
-            using var md5 = MD5.Create();
-
-            var inputBytes = Encoding.UTF8.GetBytes(input);
-            var hashBytes  = md5.ComputeHash(inputBytes);
-            return Convert.ToHexString(hashBytes);
-        }
-
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        private static string      ApplicationName          => ComputeMD5(AppContext.BaseDirectory);
+        private static string      ComputeMD5(string input) => Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(input)));
+        private static RegistryKey OpenStartupSubKey()      => Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
     }
+
+    #else
+    public class SystemState : NotifyPropertyChanged, ISystemState
+    {
+        private bool isRegisteredInStartup;
+
+        public bool IsRegisteredInStartup
+        {
+            get => isRegisteredInStartup;
+            set => SetProperty(ref isRegisteredInStartup, false);
+        }
+    }
+    #endif
 }

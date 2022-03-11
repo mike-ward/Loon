@@ -9,7 +9,7 @@ namespace Loon.Views.Content.AppSettings
     public class SettingsCheckboxes : UserControl
     {
         public ISystemState SystemState { get; init; }
-        public bool         IsWindows    { get; } = OperatingSystem.IsWindows();
+        public bool         IsWindows   { get; } = OperatingSystem.IsWindows();
 
         public SettingsCheckboxes()
         {

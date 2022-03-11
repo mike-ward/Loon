@@ -27,6 +27,18 @@
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1701;1702,VSTHRD200</NoWarn>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>1701;1702,VSTHRD200</NoWarn>
+    <DefineConstants>X86</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>1701;1702,VSTHRD200</NoWarn>
+    <DefineConstants>X86</DefineConstants>
+  </PropertyGroup>
   
   <ItemGroup>
     <None Remove="app.ico" />
