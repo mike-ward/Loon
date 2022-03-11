@@ -118,6 +118,7 @@
     <sys:String x:Key="show-short-links">Show short [link]s</sys:String>
     <sys:String x:Key="short-link-text">[link]</sys:String>
     <sys:String x:Key="short-in-system-tray">Show in system tray</sys:String>
+    <sys:String x:Key="run-at-startup">Run at startup</sys:String>
 
     <!--  <Tooltips  -->
 

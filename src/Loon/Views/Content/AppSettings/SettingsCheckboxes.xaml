@@ -6,7 +6,9 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:local="clr-namespace:Loon.Views.Content.AppSettings"
   xmlns:models="clr-namespace:Loon.Models"
+  xmlns:system="clr-namespace:System;assembly=System.Runtime"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
@@ -48,11 +50,17 @@
     <CheckBox IsChecked="{Binding ShortLinks}">
       <TextBlock Text="{StaticResource show-short-links}" />
     </CheckBox>
-    
+
     <CheckBox IsChecked="{Binding ShowInSystemTray}">
       <TextBlock Text="{StaticResource show-in-system-tray}" />
     </CheckBox>
-    
+
+    <CheckBox
+      IsChecked="{ReflectionBinding $parent[local:SettingsCheckboxes].SystemState.IsRegisteredInStartup, FallbackValue={x:Static system:Boolean.FalseString}}"
+      IsVisible="{ReflectionBinding $parent[local:SettingsCheckboxes].IsWindows, FallbackValue={x:Static system:Boolean.FalseString}}">
+      <TextBlock Text="{StaticResource run-at-startup}" />
+    </CheckBox>
+
     <CheckBox IsChecked="{Binding Donated}">
       <TextBlock Text="{StaticResource donated}" />
     </CheckBox>
