@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loon", "Loon\Loon.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter", "Twitter\Twitter.csproj", "{06B8791B-E82F-439F-BBF6-8409F68A1A89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loon.Desktop", "Loon.Desktop\Loon.Desktop.csproj", "{CA21D398-1FFC-4BEE-A4DE-2C28B0DD7583}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,14 @@ Global
 		{06B8791B-E82F-439F-BBF6-8409F68A1A89}.Release|Any CPU.Build.0 = Release|Any CPU
 		{06B8791B-E82F-439F-BBF6-8409F68A1A89}.Release|x86.ActiveCfg = Release|Any CPU
 		{06B8791B-E82F-439F-BBF6-8409F68A1A89}.Release|x86.Build.0 = Release|Any CPU
+		{CA21D398-1FFC-4BEE-A4DE-2C28B0DD7583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA21D398-1FFC-4BEE-A4DE-2C28B0DD7583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA21D398-1FFC-4BEE-A4DE-2C28B0DD7583}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CA21D398-1FFC-4BEE-A4DE-2C28B0DD7583}.Debug|x86.Build.0 = Debug|Any CPU
+		{CA21D398-1FFC-4BEE-A4DE-2C28B0DD7583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA21D398-1FFC-4BEE-A4DE-2C28B0DD7583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA21D398-1FFC-4BEE-A4DE-2C28B0DD7583}.Release|x86.ActiveCfg = Release|Any CPU
+		{CA21D398-1FFC-4BEE-A4DE-2C28B0DD7583}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

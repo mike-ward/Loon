@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <AnalysisLevel>latest</AnalysisLevel>
-    <Copyright>Copyright 2020, Mike Ward</Copyright>
+    <Copyright>© Copyright 2022, Mike Ward</Copyright>
     <Description>A gadget-like desktop twitter client.</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>Enable</Nullable>
@@ -16,14 +16,12 @@
     <Version>0.0.1</Version>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>1701;1702,VSTHRD200</NoWarn>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <NoWarn>1701;1702;VSTHRD200</NoWarn>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>1701;1702,VSTHRD200</NoWarn>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <NoWarn>1701;1702;VSTHRD200</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
