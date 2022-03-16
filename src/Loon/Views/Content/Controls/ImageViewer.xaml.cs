@@ -1,5 +1,4 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -42,7 +41,7 @@ namespace Loon.Views.Content.Controls
             var direction = larger
                 ? 1
                 : -1;
-            
+
             imageControl.Width  += Width * 0.05 * direction;
             imageControl.Height += Height * 0.05 * direction;
         }

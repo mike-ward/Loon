@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Loon.Interfaces;
 using Loon.Services;
@@ -39,7 +41,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                     try
                     {
                         status.OriginatingStatus.RelatedLinkInfo ??= await RelatedLinkInfo
-                            .GetRelatedLinkInfoAsync(status.OriginatingStatus, CancellationTokenSource.Token);
+                           .GetRelatedLinkInfoAsync(status.OriginatingStatus, CancellationTokenSource.Token);
                     }
                     catch (TaskCanceledException)
                     {
@@ -50,6 +52,17 @@ namespace Loon.Views.Content.Controls.TweetItem
             catch (Exception ex)
             {
                 TraceService.Message(ex.Message);
+            }
+        }
+
+        protected override void OnPointerPressed(PointerPressedEventArgs e)
+        {
+            base.OnPointerPressed(e);
+            if ((e.KeyModifiers & KeyModifiers.Alt) != 0 && DataContext is TwitterStatus status)
+            {
+                e.Handled = true;
+                var json = JsonSerializer.Serialize(status, new JsonSerializerOptions { WriteIndented = true });
+                App.Commands.CopyToClipboard.Execute(json);
             }
         }
     }

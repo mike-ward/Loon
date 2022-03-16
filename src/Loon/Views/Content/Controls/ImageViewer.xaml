@@ -7,7 +7,7 @@
   xmlns:controls="clr-namespace:Loon.Views.Content.Controls"
   d:DesignHeight="300"
   d:DesignWidth="300"
-  Background="Transparent"
+  Background="#80000000"
   PointerReleased="HideWindow"
   PointerWheelChanged="OnPointerWheelChanged"
   ShowInTaskbar="False"
