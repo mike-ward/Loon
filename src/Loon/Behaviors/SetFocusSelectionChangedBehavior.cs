@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -35,9 +33,7 @@ namespace Loon.Behaviors
 
             async void Handler(object? s, SelectionChangedEventArgs e)
             {
-                if (e.AddedItems is not IEnumerable<IControl> items) return;
-                if (items.FirstOrDefault() is not TabItem tab) return;
-
+                if (e.AddedItems.Count == 0 || e.AddedItems[0] is not TabItem tab) return;
                 var timeline = tab.Content as ILogical;
 
                 foreach (var descendant in timeline.GetLogicalDescendants())
