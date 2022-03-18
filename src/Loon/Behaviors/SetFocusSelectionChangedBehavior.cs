@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -27,29 +28,24 @@ namespace Loon.Behaviors
 
         private static string FocusType(IAvaloniaObject element, string name)
         {
-            if (element is IControl { Parent: TabControl tabControl })
-            {
-                tabControl.RemoveHandler(SelectingItemsControl.SelectionChangedEvent, Handler);
-                tabControl.AddHandler(SelectingItemsControl.SelectionChangedEvent, Handler);
-            }
-
+            if (element is not IControl { Parent: TabControl tabControl }) return name;
+            tabControl.RemoveHandler(SelectingItemsControl.SelectionChangedEvent, Handler);
+            tabControl.AddHandler(SelectingItemsControl.SelectionChangedEvent, Handler);
             return name;
 
             async void Handler(object? s, SelectionChangedEventArgs e)
             {
-                if (e.AddedItems.Cast<IControl>().FirstOrDefault() is TabItem tab)
-                {
-                    var timeline = tab.Content as ILogical;
+                if (e.AddedItems is not IEnumerable<IControl> items) return;
+                if (items.FirstOrDefault() is not TabItem tab) return;
 
-                    foreach (var descendant in timeline.GetLogicalDescendants())
-                    {
-                        if (descendant.FindNameScope().Find(name) is IInputElement control)
-                        {
-                            await Task.Delay(500).ConfigureAwait(true); // too soon and focus won't work
-                            control.Focus();
-                            break;
-                        }
-                    }
+                var timeline = tab.Content as ILogical;
+
+                foreach (var descendant in timeline.GetLogicalDescendants())
+                {
+                    if (descendant.FindNameScope().Find(name) is not IInputElement control) continue;
+                    await Task.Delay(500).ConfigureAwait(true); // too soon and focus won't work
+                    control.Focus();
+                    break;
                 }
             }
         }
