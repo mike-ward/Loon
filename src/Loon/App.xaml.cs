@@ -7,7 +7,9 @@ using Avalonia.Markup.Xaml;
 using Loon.Commands;
 using Loon.Interfaces;
 using Loon.Services;
+using Loon.ViewModels;
 using Loon.Views;
+using Loon.Views.Content;
 
 namespace Loon
 {
@@ -26,10 +28,15 @@ namespace Loon
         public override void OnFrameworkInitializationCompleted()
         {
             // Visual designer won't work otherwise
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime app)
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 RuntimeHelpers.RunClassConstructor(typeof(LongUrlService).TypeHandle);
-                app.MainWindow = ServiceProvider.GetService<MainWindow>();
+                desktop.MainWindow = ServiceProvider.GetService<MainWindow>();
+            }
+
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            {
+                singleViewPlatform.MainView = new AppView { DataContext = ServiceProvider.GetService<MainWindowViewModel>() };
             }
 
             base.OnFrameworkInitializationCompleted();
