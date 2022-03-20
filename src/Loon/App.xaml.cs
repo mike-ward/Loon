@@ -36,7 +36,9 @@ namespace Loon
 
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
-                singleViewPlatform.MainView = new AppView { DataContext = ServiceProvider.GetService<MainWindowViewModel>() };
+                Settings.Load();
+                DataContext                 = ServiceProvider.GetService<MainWindowViewModel>();
+                singleViewPlatform.MainView = new AppView();
             }
 
             base.OnFrameworkInitializationCompleted();

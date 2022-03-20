@@ -26,7 +26,7 @@
       Classes="inline"
       Command="{Binding SetUserProfileContext, Source={x:Static l:App.Commands}, Mode=OneTime}"
       CommandParameter="{Binding User}"
-      Content="{Binding User.ScreenName, StringFormat='@{0}'}" />
+      Content="{Binding User.Name}" />
 
     <TextBlock Text="{DynamicResource tweet-retweeted}" />
   </StackPanel>

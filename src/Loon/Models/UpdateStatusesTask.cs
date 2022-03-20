@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Twitter.Models;
@@ -19,9 +18,8 @@ namespace Loon.Models
                 {
                     statusToUpdate.UpdateFromStatus(status);
                 }
-                else if (timeline.AlreadyAdded.Contains(status.Id) is false)
+                else if (timeline.AlreadyAdded.Add(status.Id))
                 {
-                    timeline.AlreadyAdded.Add(status.Id);
                     status.UpdateAboutMeProperties(timeline.Settings.ScreenName);
 
                     if (timeline.IsScrolled)

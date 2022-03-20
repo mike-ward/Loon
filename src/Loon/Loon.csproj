@@ -31,12 +31,14 @@
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1701;1702,VSTHRD200</NoWarn>
     <DefineConstants>X86</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1701;1702,VSTHRD200</NoWarn>
     <DefineConstants>X86</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   
   <ItemGroup>

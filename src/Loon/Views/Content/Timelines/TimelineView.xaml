@@ -21,12 +21,6 @@
       Name="{x:Static l:TimelineView.ItemsControlName}"
       PointerWheelChanged="OnPointerWheelChanged">
 
-      <ItemsControl.ItemsPanel>
-        <ItemsPanelTemplate>
-          <VirtualizingStackPanel />
-        </ItemsPanelTemplate>
-      </ItemsControl.ItemsPanel>
-
       <ItemsControl.ItemTemplate>
         <DataTemplate>
           <ti:TweetItemView Margin="0 0 0 3" />
