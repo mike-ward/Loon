@@ -15,7 +15,7 @@ namespace Loon.Services
         public static PubSubService<object?>        SetUserProfileContext { get; } = new(); // waiting for discriminated unions
     }
 
-    internal class PubSubService<T>
+    internal  sealed class PubSubService<T>
     {
         private          int                                  nextId;
         private readonly ConcurrentDictionary<int, Action<T>> subscribers = new();

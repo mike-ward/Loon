@@ -4,7 +4,7 @@ using Avalonia.Data.Converters;
 
 namespace Loon.Converters
 {
-    internal class TrimTextConverter : IValueConverter
+    internal sealed class TrimTextConverter : IValueConverter
     {
         public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {

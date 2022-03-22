@@ -12,7 +12,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.UserProfile
 {
-    public class UserProfileTimeline : UserControl
+    public sealed class UserProfileTimeline : UserControl
     {
         public static readonly string UserTimelineName = "UserTimeline";
 

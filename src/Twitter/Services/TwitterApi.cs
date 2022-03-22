@@ -6,7 +6,7 @@ using Twitter.Models;
 namespace Twitter.Services
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded")]
-    public class TwitterApi
+    public sealed class TwitterApi
     {
         private          string          ConsumerKey    { get; }
         private          string          ConsumerSecret { get; }

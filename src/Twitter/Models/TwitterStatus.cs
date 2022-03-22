@@ -11,7 +11,7 @@ using Twitter.Services;
 namespace Twitter.Models
 {
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public class TwitterStatus : INotifyPropertyChanged
+    public sealed class TwitterStatus : INotifyPropertyChanged
     {
         private int              replyCount;
         private int              retweetCount;
@@ -250,7 +250,7 @@ namespace Twitter.Models
         //
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void SetProperty<T>(ref T item, T value, [CallerMemberName] string? propertyName = null)
+        private void SetProperty<T>(ref T item, T value, [CallerMemberName] string? propertyName = null)
         {
             if (!EqualityComparer<T>.Default.Equals(item, value))
             {
@@ -259,7 +259,7 @@ namespace Twitter.Models
             }
         }
 
-        protected void OnPropertyChanged(string? propertyName)
+        private void OnPropertyChanged(string? propertyName)
         {
             if (propertyName is not null && PropertyChanged is not null)
             {

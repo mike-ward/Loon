@@ -7,7 +7,7 @@ using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    internal class SearchTimelineViewModel : NotifyPropertyChanged
+    internal sealed class SearchTimelineViewModel : NotifyPropertyChanged
     {
         private readonly ITwitterService              twitterService;
         public           IAvaloniaList<TwitterStatus> StatusCollection { get; } = new AvaloniaList<TwitterStatus>();

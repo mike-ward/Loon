@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Twitter.Models
 {
-    public class User : INotifyPropertyChanged
+    public sealed class User : INotifyPropertyChanged
     {
         public static readonly User Empty = new();
 

@@ -8,7 +8,7 @@ using Loon.ViewModels.Content.Timelines;
 namespace Loon.Views.Content.Timelines
 {
     [SuppressMessage("ReSharper", "ConvertToConstant.Global")]
-    public class TimelineView : UserControl
+    public sealed class TimelineView : UserControl
     {
         public static readonly string ScrollViewerName = "ScrollViewer";
         public static readonly string ItemsControlName = "ItemsControl";

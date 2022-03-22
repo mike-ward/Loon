@@ -10,7 +10,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.UserProfile
 {
-    public class UserProfileBanner : UserControl
+    public sealed class UserProfileBanner : UserControl
     {
         public static readonly double BannerHeight = 150;
 

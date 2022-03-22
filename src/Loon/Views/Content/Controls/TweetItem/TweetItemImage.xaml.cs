@@ -13,7 +13,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
-    public class TweetItemImage : UserControl
+    public sealed class TweetItemImage : UserControl
     {
         private CancellationToken cancellationToken = CancellationToken.None;
 

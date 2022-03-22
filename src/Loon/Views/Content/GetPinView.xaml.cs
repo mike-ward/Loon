@@ -5,7 +5,7 @@ using Loon.ViewModels.Content;
 
 namespace Loon.Views.Content
 {
-    public class GetPinView : UserControl
+    public sealed class GetPinView : UserControl
     {
         public GetPinView()
         {

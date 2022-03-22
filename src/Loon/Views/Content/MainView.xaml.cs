@@ -9,7 +9,7 @@ using Loon.Views.Content.Timelines;
 
 namespace Loon.Views.Content
 {
-    public class MainView : UserControl
+    public sealed class MainView : UserControl
     {
         private int previousIndex;
 

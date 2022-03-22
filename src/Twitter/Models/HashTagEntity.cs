@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Twitter.Models
 {
-    public class HashTagEntity
+    public sealed class HashTagEntity
     {
         [JsonPropertyName("text")]
         public string Text { get; set; } = string.Empty;

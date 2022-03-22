@@ -2,7 +2,7 @@ using Loon.Services;
 
 namespace Loon.Commands
 {
-    public class OpenUrlCommand : BaseCommand
+    public sealed class OpenUrlCommand : BaseCommand
     {
         public override void Execute(object? parameter)
         {

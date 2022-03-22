@@ -4,7 +4,7 @@ using Loon.Services;
 
 namespace Loon.Views.Content.AppSettings
 {
-    public class SettingsDonate : UserControl
+    public sealed class SettingsDonate : UserControl
     {
         public SettingsDonate()
         {

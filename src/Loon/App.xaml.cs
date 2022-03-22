@@ -12,7 +12,7 @@ using Loon.Views.Content;
 
 namespace Loon
 {
-    public class App : Application
+    public sealed class App : Application
     {
         public static ServiceProvider ServiceProvider { get; } = new();
         public static AppCommands     Commands        { get; } = ServiceProvider.GetService<AppCommands>();

@@ -60,12 +60,12 @@ namespace Loon.Services
     // ReSharper disable UnusedAutoPropertyAccessor.Global
     // ReSharper disable ClassNeverInstantiated.Global
 
-    public class TranslatorResult
+    public sealed class TranslatorResult
     {
         public ResponseData? ResponseData { get; set; }
     }
 
-    public class ResponseData
+    public sealed class ResponseData
     {
         public string? TranslatedText { get; set; }
     }

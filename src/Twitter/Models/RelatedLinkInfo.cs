@@ -18,7 +18,7 @@ namespace Twitter.Models
     /// is displayed similar to quotes.
     /// </summary>
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public class RelatedLinkInfo
+    public sealed class RelatedLinkInfo
     {
         public string  Url         { get; private set; } = string.Empty;
         public string  Title       { get; private set; } = string.Empty;

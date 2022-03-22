@@ -7,7 +7,7 @@ using Loon.Views.Content.Controls;
 
 namespace Loon.Commands
 {
-    public class AddToHiddenImagesCommand : BaseCommand
+    public sealed class AddToHiddenImagesCommand : BaseCommand
     {
         private ISettings Settings { get; }
 

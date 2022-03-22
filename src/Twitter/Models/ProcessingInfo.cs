@@ -2,7 +2,7 @@
 
 namespace Twitter.Models
 {
-    public class ProcessingInfo
+    public sealed class ProcessingInfo
     {
         public static readonly ProcessingInfo Empty = new();
 

@@ -7,7 +7,7 @@ using Loon.ViewModels;
 
 namespace Loon.Views
 {
-    public class MainWindow : Window, IWindow
+    public sealed class MainWindow : Window, IWindow
     {
         // ReSharper disable once ConvertToConstant.Global (needed to bind in XAML)
         public static readonly string              TitleBarName = "TitleBar";

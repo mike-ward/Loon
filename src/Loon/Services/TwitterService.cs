@@ -3,7 +3,7 @@ using Twitter.Services;
 
 namespace Loon.Services
 {
-    internal class TwitterService : ITwitterService
+    internal  sealed class TwitterService : ITwitterService
     {
         public TwitterApi TwitterApi { get; }
 

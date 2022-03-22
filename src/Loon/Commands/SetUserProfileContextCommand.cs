@@ -2,7 +2,7 @@
 
 namespace Loon.Commands
 {
-    public class SetUserProfileContextCommand : BaseCommand
+    public sealed class SetUserProfileContextCommand : BaseCommand
     {
         public override void Execute(object? parameter)
         {

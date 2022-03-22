@@ -2,7 +2,7 @@
 
 namespace Twitter.Models
 {
-    public class Variant
+    public sealed class Variant
     {
         [JsonPropertyName("url")]
         public string? Url { get; set; }

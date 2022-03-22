@@ -5,7 +5,7 @@ using Loon.Services;
 
 namespace Loon.Views.Content.Controls
 {
-    public class Hyperlink : UserControl
+    public sealed class Hyperlink : UserControl
     {
         public Hyperlink()
         {

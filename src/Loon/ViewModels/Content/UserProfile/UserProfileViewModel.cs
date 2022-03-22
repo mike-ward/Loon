@@ -7,7 +7,7 @@ using Twitter.Models;
 
 namespace Loon.ViewModels.Content.UserProfile
 {
-    internal class UserProfileViewModel : NotifyPropertyChanged
+    internal sealed class UserProfileViewModel : NotifyPropertyChanged
     {
         private readonly ITwitterService twitterService;
 

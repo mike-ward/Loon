@@ -5,7 +5,7 @@ using Loon.ViewModels.Content.Timelines;
 
 namespace Loon.Views.Content.Timelines
 {
-    public class HomeTimelineView : UserControl
+    public sealed class HomeTimelineView : UserControl
     {
         public HomeTimelineView()
         {

@@ -6,7 +6,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.Controls
 {
-    public class MessageBox : Window
+    public sealed class MessageBox : Window
     {
         // ReSharper disable ConvertToConstant.Global
 

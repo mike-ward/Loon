@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Avalonia.Data.Converters;
 
 namespace Loon.Converters
 {
-    internal class CountConverter : IValueConverter
+    internal sealed class CountConverter : IValueConverter
     {
+        [SuppressMessage("ReSharper", "HeapView.BoxingAllocation")]
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is not int count)

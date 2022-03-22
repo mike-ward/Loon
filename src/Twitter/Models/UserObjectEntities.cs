@@ -2,7 +2,7 @@
 
 namespace Twitter.Models
 {
-    public class UserObjectEntities
+    public sealed class UserObjectEntities
     {
         [JsonPropertyName("url")]
         public UserObjectUrls? Url { get; set; }

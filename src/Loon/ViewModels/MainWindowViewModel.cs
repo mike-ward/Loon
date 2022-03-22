@@ -6,7 +6,7 @@ using Loon.Models;
 
 namespace Loon.ViewModels
 {
-    public class MainWindowViewModel : NotifyPropertyChanged
+    public sealed class MainWindowViewModel : NotifyPropertyChanged
     {
         private          ISettings       settings;
         private readonly ITwitterService twitterService;

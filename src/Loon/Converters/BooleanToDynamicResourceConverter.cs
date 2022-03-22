@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
@@ -7,7 +8,8 @@ using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace Loon.Converters
 {
-    internal class BooleanToDynamicResourceConverter : IValueConverter
+    [SuppressMessage("ReSharper", "HeapView.BoxingAllocation")]
+    internal sealed class BooleanToDynamicResourceConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {

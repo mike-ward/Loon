@@ -7,7 +7,7 @@ using Twitter.Services;
 
 namespace Loon.ViewModels.Content
 {
-    public class GetPinViewModel : NotifyPropertyChanged
+    public sealed class GetPinViewModel : NotifyPropertyChanged
     {
         private          OAuthTokens?    requestToken;
         private readonly ITwitterService twitterService;

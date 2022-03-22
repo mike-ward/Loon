@@ -2,7 +2,7 @@
 
 namespace Twitter.Models
 {
-    public class ExtendedTweet
+    public sealed class ExtendedTweet
     {
         [JsonPropertyName("full_text")]
         public string? FullText { get; set; }

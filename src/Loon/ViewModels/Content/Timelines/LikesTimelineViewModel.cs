@@ -10,7 +10,7 @@ using Twitter.Models;
 
 namespace Loon.ViewModels.Content.Timelines
 {
-    internal class LikesTimelineViewModel
+    internal sealed class LikesTimelineViewModel
     {
         private readonly Timeline        likesTimeline;
         private readonly ITwitterService twitterService;

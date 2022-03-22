@@ -4,7 +4,7 @@ using Loon.ViewModels.Content.Write;
 
 namespace Loon.Views.Content.Write
 {
-    public class WriteView : UserControl
+    public sealed class WriteView : UserControl
     {
         public WriteView()
         {

@@ -8,7 +8,7 @@ using Loon.ViewModels.Content.Timelines;
 
 namespace Loon.Views.Content.Timelines
 {
-    public class SearchTimelineView : UserControl
+    public sealed class SearchTimelineView : UserControl
     {
         // ReSharper disable once ConvertToConstant.Global (used in XAML)
         public static readonly string SearchTextBoxName = "SearchTextBox";

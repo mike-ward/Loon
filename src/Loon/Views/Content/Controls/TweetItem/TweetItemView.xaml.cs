@@ -12,7 +12,7 @@ using Twitter.Models;
 
 namespace Loon.Views.Content.Controls.TweetItem
 {
-    public class TweetItemView : UserControl, ICancellationTokeSourceProvider
+    public sealed class TweetItemView : UserControl, ICancellationTokeSourceProvider
     {
         public const string TweetItemImageName        = nameof(TweetItemImage);
         public const string TweetItemProfileImageName = nameof(TweetItemProfileImage);

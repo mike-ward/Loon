@@ -2,7 +2,7 @@
 
 namespace Twitter.Models
 {
-    public class VideoInfo
+    public sealed class VideoInfo
     {
         [JsonPropertyName("variants")]
         public Variant[]? Variants { get; set; }

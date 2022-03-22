@@ -2,7 +2,7 @@
 
 namespace Loon.Commands
 {
-    public class ShowAppCommand : BaseCommand
+    public sealed class ShowAppCommand : BaseCommand
     {
         public override void Execute(object? parameter)
         {

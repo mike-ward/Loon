@@ -1,6 +1,6 @@
 ﻿namespace Twitter.Services
 {
-    public class OAuthTokens
+    public sealed class OAuthTokens
     {
         public string? OAuthToken  { get; set; }
         public string? OAuthSecret { get; set; }

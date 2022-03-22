@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views
 {
-    public class TitleBar : UserControl
+    public sealed class TitleBar : UserControl
     {
         public TitleBar()
         {

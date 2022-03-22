@@ -2,7 +2,7 @@
 
 namespace Twitter.Models
 {
-    public class UploadMedia
+    public sealed class UploadMedia
     {
         [JsonPropertyName("media_id_string")]
         public string MediaId { get; set; } = string.Empty;

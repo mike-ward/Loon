@@ -5,7 +5,7 @@ using Loon.Views.Content.Controls;
 
 namespace Loon.Commands
 {
-    public class ClearImageCacheCommand : BaseCommand
+    public sealed class ClearImageCacheCommand : BaseCommand
     {
         [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         public override async void Execute(object? parameter)

@@ -2,7 +2,7 @@
 
 namespace Twitter.Models
 {
-    public class ProcessingError
+    public sealed class ProcessingError
     {
         public static readonly ProcessingError Empty = new();
 

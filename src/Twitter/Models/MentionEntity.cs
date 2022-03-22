@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Twitter.Models
 {
-    public class MentionEntity
+    public sealed class MentionEntity
     {
         [JsonPropertyName("id_str")]
         public string Id { get; set; } = string.Empty;

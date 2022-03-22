@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Twitter.Models
 {
-    public class UrlEntity
+    public sealed class UrlEntity
     {
         [JsonPropertyName("url")]
         public string Url { get; set; } = string.Empty;

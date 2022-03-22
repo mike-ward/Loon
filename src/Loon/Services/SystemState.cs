@@ -5,7 +5,7 @@ namespace Loon.Services
 {
     #if X86
     #pragma warning disable CA1416
-    public class SystemState : INotifyPropertyChanged, ISystemState
+    public sealed class SystemState : INotifyPropertyChanged, ISystemState
     {
         public bool IsRegisteredInStartup
         {
@@ -42,7 +42,7 @@ namespace Loon.Services
     }
 
     #else
-    public class SystemState : NotifyPropertyChanged, ISystemState
+    public sealed class SystemState : NotifyPropertyChanged, ISystemState
     {
         private bool isRegisteredInStartup;
 

@@ -4,7 +4,7 @@ using Loon.ViewModels.Content.Timelines;
 
 namespace Loon.Views.Content.Timelines
 {
-    public class LikesTimelineView : UserControl
+    public sealed class LikesTimelineView : UserControl
     {
         public LikesTimelineView()
         {

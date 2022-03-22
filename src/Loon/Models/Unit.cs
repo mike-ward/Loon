@@ -1,6 +1,6 @@
 namespace Loon.Models
 {
-    internal class Unit
+    internal sealed class Unit
     {
         private Unit()
         {

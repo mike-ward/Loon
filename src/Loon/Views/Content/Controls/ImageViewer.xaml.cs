@@ -6,7 +6,7 @@ using Avalonia.Media;
 
 namespace Loon.Views.Content.Controls
 {
-    public class ImageViewer : Window
+    public sealed class ImageViewer : Window
     {
         private Image imageControl { get; }
 

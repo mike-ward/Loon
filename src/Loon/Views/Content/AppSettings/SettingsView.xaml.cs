@@ -4,7 +4,7 @@ using Loon.Interfaces;
 
 namespace Loon.Views.Content.AppSettings
 {
-    public class SettingsView : UserControl
+    public sealed class SettingsView : UserControl
     {
         public SettingsView()
         {

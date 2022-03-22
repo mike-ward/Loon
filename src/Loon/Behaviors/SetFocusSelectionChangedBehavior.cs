@@ -8,7 +8,7 @@ using Avalonia.LogicalTree;
 
 namespace Loon.Behaviors
 {
-    public class SetFocusSelectionChangedBehavior : AvaloniaObject
+    public sealed class SetFocusSelectionChangedBehavior : AvaloniaObject
     {
         public static readonly AttachedProperty<string> NameProperty =
             AvaloniaProperty.RegisterAttached<SetFocusSelectionChangedBehavior, TabControl, string>

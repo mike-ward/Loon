@@ -9,7 +9,7 @@ using Loon.Interfaces;
 
 namespace Loon.Models
 {
-    internal sealed class Settings : NotifyPropertyChanged, ISettings
+    internal  sealed class Settings : NotifyPropertyChanged, ISettings
     {
         private string Profile { get; } = "loon";
 

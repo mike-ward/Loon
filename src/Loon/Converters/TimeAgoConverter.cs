@@ -4,7 +4,7 @@ using Avalonia.Data.Converters;
 
 namespace Loon.Converters
 {
-    internal class TimeAgoConverter : IValueConverter
+    internal sealed class TimeAgoConverter : IValueConverter
     {
         public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {

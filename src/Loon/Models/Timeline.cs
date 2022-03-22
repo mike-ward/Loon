@@ -14,7 +14,7 @@ using Twitter.Models;
 
 namespace Loon.Models
 {
-    public class Timeline : NotifyPropertyChanged
+    public sealed class Timeline : NotifyPropertyChanged
     {
         private          bool            inUpdate;
         private readonly DispatcherTimer updateTimer;

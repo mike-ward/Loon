@@ -9,7 +9,7 @@ namespace Loon.Views.Content.Layouts
     ///     Simple image panel designed specifically to display the 1-4 images
     ///     that twitter returns. Not generic.
     /// </summary>
-    internal class SimpleImagePanel : Panel
+    internal sealed class SimpleImagePanel : Panel
     {
         protected override Size MeasureOverride(Size availableSize)
         {

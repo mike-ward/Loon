@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml;
 
 namespace Loon.Views.Content.AppSettings
 {
-    public class SettingsSignOut : UserControl
+    public sealed class SettingsSignOut : UserControl
     {
         public SettingsSignOut()
         {
