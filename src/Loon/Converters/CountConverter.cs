@@ -8,11 +8,15 @@ namespace Loon.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is not int count) { return value; }
+            if (value is not int count)
+            {
+                return value;
+            }
 
             const double k = 1000;
 
-            return count switch {
+            return count switch
+            {
                 0        => " ",
                 < 999    => count.ToString(CultureInfo.InvariantCulture),
                 < 999999 => string.Format(CultureInfo.InvariantCulture, "{0:N1}K", count / k),

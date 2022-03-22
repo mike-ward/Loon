@@ -16,8 +16,8 @@ namespace Loon.Converters
             {
                 return Application.Current is not null
                     && Application.Current.TryFindResource(resource.ResourceKey, out var resourceValue)
-                        ? resourceValue
-                        : AvaloniaProperty.UnsetValue;
+                    ? resourceValue
+                    : AvaloniaProperty.UnsetValue;
             }
 
             return AvaloniaProperty.UnsetValue;

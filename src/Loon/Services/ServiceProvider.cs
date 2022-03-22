@@ -24,5 +24,7 @@ namespace Loon.Services
     [Transient(typeof(UserProfileViewModel))]
     [Singleton(typeof(ISettings), typeof(Settings))]
     [Singleton(typeof(ITwitterService), typeof(TwitterService))]
-    public partial class ServiceProvider { }
+    public partial class ServiceProvider
+    {
+    }
 }

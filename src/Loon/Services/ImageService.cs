@@ -10,6 +10,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
 using Loon.Extensions;
 using Loon.Views.Content.Controls;
 using Twitter.Models;
@@ -136,17 +137,13 @@ namespace Loon.Services
             }
         }
 
+        private static Process?     process;
         private static ImageViewer? imageViewer;
 
         private static ImageViewer GetImageViewer()
         {
-            imageViewer?.Close();
             imageViewer = new ImageViewer();
             imageViewer.Hide();
-
-            process?.Kill();
-            process?.Close();
-            process = null;
 
             return imageViewer;
         }
@@ -160,40 +157,49 @@ namespace Loon.Services
             }
         }
 
-        private static Process? process;
-
-        public static async Task OpenInViewer(Image image)
+        public static void OpenInViewer(Image image)
         {
-            process?.Kill();
-            process?.Close();
-            process = null;
+            KillImageViewer();
+            async void ActionOpenViewer() => await OpenInViewerWorker(image);
+            Dispatcher.UIThread.Post(ActionOpenViewer);
+        }
 
-            // Click on an image already being viewed closes it.
-            if (imageViewer?.Source == image.Source)
+        public static void KillImageViewer()
+        {
+            if (process is not null)
             {
-                imageViewer.Close();
-                imageViewer.Source = null;
-                imageViewer.Hide();
-                return;
+                process?.Kill();
+                process?.Close();
+                process = null;
             }
 
-            var viewer   = GetImageViewer(); // call here to close now
-            var videoUrl = VideoUrl((image.DataContext) as Media);
+            imageViewer?.Close();
+        }
+
+        private static async Task OpenInViewerWorker(Image image)
+        {
+            var videoUrl = VideoUrl(image.DataContext as Media);
 
             if (videoUrl.IsNotNullOrWhiteSpace())
             {
                 var pi = new ProcessStartInfo
                 {
-                    FileName        = "vlc",
-                    Arguments       = $"--loop --quiet --no-osd {videoUrl}",
-                    UseShellExecute = true,
-                    CreateNoWindow  = true
+                    FileName       = "vlc",
+                    Arguments      = $"--one-instance --quiet --no-osd --no-skins2-taskbar {videoUrl}",
+                    CreateNoWindow = true
                 };
-                process = Process.Start(pi);
-                if (process is null) await MessageBox.Show(App.GetString("install-vlc"), MessageBox.MessageBoxButtons.Ok);
+                try
+                {
+                    process = Process.Start(pi);
+                }
+                catch (InvalidOperationException)
+                {
+                    await MessageBox.Show(App.GetString("install-vlc"), MessageBox.MessageBoxButtons.Ok);
+                }
             }
             else if (image.Source is not null)
             {
+                var viewer = GetImageViewer(); // call here to close now
                 viewer.Source = image.Source;
                 viewer.Show(App.MainWindow);
             }

@@ -25,10 +25,12 @@
         <Version>2022.0.1</Version>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <NoWarn>1701;1702;VSTHRD200</NoWarn>
+        <NoWarn>1701;1702;VSTHRD200</NoWarn>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <NoWarn>1701;1702;VSTHRD200</NoWarn>
+        <NoWarn>1701;1702;VSTHRD200</NoWarn>
+        <Prefer32bit>false</Prefer32bit>
+        <PlatformTarget>AnyCPU</PlatformTarget>
     </PropertyGroup>
     <ItemGroup>
         <None Remove=".gitignore" />
@@ -41,6 +43,6 @@
         <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Loon\Loon.csproj" />
+        <ProjectReference Include="..\Loon\Loon.csproj" />
     </ItemGroup>
 </Project>

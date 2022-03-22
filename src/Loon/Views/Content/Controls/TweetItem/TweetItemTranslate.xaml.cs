@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Avalonia;
@@ -37,7 +36,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                             fromLang,
                             toLang,
                             (App.MainWindow.DataContext as MainWindowViewModel)?.Settings.TranslateApiKey)
-                        .ConfigureAwait(true);
+                       .ConfigureAwait(true);
                 }
             }
             catch (Exception ex)
@@ -66,10 +65,10 @@ namespace Loon.Views.Content.Controls.TweetItem
         private void SetVisibility()
         {
             IsVisible = DataContext is TwitterStatus status
-                && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
-                && status.Language.IsNotEqualToIgnoreCase("und")
-                && status.FullText.IsNotNullOrWhiteSpace()
-                && Tag is bool and false;
+                     && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+                     && status.Language.IsNotEqualToIgnoreCase("und")
+                     && status.FullText.IsNotNullOrWhiteSpace()
+                     && Tag is bool and false;
         }
     }
 }

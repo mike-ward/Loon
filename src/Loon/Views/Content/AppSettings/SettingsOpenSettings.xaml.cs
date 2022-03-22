@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Loon.Services;
 
 namespace Loon.Views.Content.AppSettings
 {
@@ -12,7 +13,7 @@ namespace Loon.Views.Content.AppSettings
 
         public void OpenSettings(string filename)
         {
-            Services.OpenUrlService.Open(filename);
+            OpenUrlService.Open(filename);
         }
     }
 }

@@ -13,7 +13,8 @@ namespace Loon.Commands
             var useLight = parameter is true;
 
             // This is slated to change in future release of Avalonia
-            var styles = new StyleInclude(new Uri("resm:Styles")) {
+            var styles = new StyleInclude(new Uri("resm:Styles"))
+            {
                 Source = useLight
                     ? new Uri("avares://Avalonia.Themes.Default/Accents/BaseLight.xaml")
                     : new Uri("avares://Avalonia.Themes.Default/Accents/BaseDark.xaml")
@@ -21,7 +22,8 @@ namespace Loon.Commands
 
             Application.Current!.Styles[1] = styles;
 
-            var overrides = new StyleInclude(new Uri("resm:Styles")) {
+            var overrides = new StyleInclude(new Uri("resm:Styles"))
+            {
                 Source = useLight
                     ? new Uri("avares://Loon/Assets/LightThemeOverrides.xaml")
                     : new Uri("avares://Loon/Assets/DarkThemeOverrides.xaml")

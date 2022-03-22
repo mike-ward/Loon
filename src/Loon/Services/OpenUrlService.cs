@@ -27,8 +27,8 @@ namespace Loon.Services
                     catch (Exception ex)
                     {
                         var unused = MessageBox
-                            .Show(ex.Message, MessageBox.MessageBoxButtons.Ok)
-                            .ConfigureAwait(false);
+                           .Show(ex.Message, MessageBox.MessageBoxButtons.Ok)
+                           .ConfigureAwait(false);
                     }
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))

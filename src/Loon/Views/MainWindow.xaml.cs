@@ -56,8 +56,8 @@ namespace Loon.Views
         private void HideCustomTitleBar()
         {
             this.FindControl<TitleBar>(TitleBarName).IsVisible = false;
-            ExtendClientAreaToDecorationsHint = false;
-            ExtendClientAreaTitleBarHeightHint = 0;
+            ExtendClientAreaToDecorationsHint                  = false;
+            ExtendClientAreaTitleBarHeightHint                 = 0;
         }
     }
 }

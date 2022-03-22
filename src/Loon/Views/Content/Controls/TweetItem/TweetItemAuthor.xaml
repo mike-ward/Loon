@@ -30,7 +30,7 @@
         IsVisible="{Binding User.Verified}" />
     </Grid>
 
-    <Grid 
+    <Grid
       ColumnDefinitions="Auto,Auto,Auto">
       <Button
         Grid.Column="0"

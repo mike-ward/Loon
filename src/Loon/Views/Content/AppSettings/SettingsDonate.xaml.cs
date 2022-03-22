@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Loon.Services;
 
 namespace Loon.Views.Content.AppSettings
 {
@@ -12,7 +13,7 @@ namespace Loon.Views.Content.AppSettings
 
         public void OnDonate(string par)
         {
-            Services.OpenUrlService.Open(par);
+            OpenUrlService.Open(par);
         }
     }
 }

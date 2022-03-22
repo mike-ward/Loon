@@ -73,7 +73,10 @@ namespace Loon.ViewModels.Content.Write
 
         public async ValueTask OnTweet()
         {
-            if (TweetText.Length == 0) { return; }
+            if (TweetText.Length == 0)
+            {
+                return;
+            }
 
             IsTweeting      = true;
             TweetButtonText = tweetingButtonTextConst;
@@ -88,20 +91,23 @@ namespace Loon.ViewModels.Content.Write
             catch (WebException ex)
             {
                 var stream = ex.Response?.GetResponseStream();
-                if (stream is null) { return; }
+                if (stream is null)
+                {
+                    return;
+                }
 
                 using var reader  = new StreamReader(stream);
                 var       message = await reader.ReadToEndAsync().ConfigureAwait(true);
 
                 await MessageBox
-                    .Show(message, MessageBox.MessageBoxButtons.Ok)
-                    .ConfigureAwait(true);
+                   .Show(message, MessageBox.MessageBoxButtons.Ok)
+                   .ConfigureAwait(true);
             }
             catch (Exception ex)
             {
                 await MessageBox
-                    .Show(ex.Message, MessageBox.MessageBoxButtons.Ok)
-                    .ConfigureAwait(true);
+                   .Show(ex.Message, MessageBox.MessageBoxButtons.Ok)
+                   .ConfigureAwait(true);
             }
         }
 

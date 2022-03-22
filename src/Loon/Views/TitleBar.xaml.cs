@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 
 namespace Loon.Views
@@ -10,7 +11,7 @@ namespace Loon.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        public void BeginMoveDrag(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+        public void BeginMoveDrag(object? sender, PointerPressedEventArgs e)
         {
             App.MainWindow.BeginMoveDrag(e);
         }

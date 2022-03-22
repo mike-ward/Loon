@@ -2,6 +2,7 @@
 using System.Globalization;
 using Avalonia.Data.Converters;
 using Loon.Extensions;
+using Loon.Services;
 using Twitter.Models;
 
 namespace Loon.Converters
@@ -10,7 +11,7 @@ namespace Loon.Converters
     {
         public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return Services.ImageService.VideoUrl(value as Media).IsNotNullOrWhiteSpace();
+            return ImageService.VideoUrl(value as Media).IsNotNullOrWhiteSpace();
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

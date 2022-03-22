@@ -28,7 +28,7 @@
       </Setter>
     </Style>
   </Window.Styles>
-  
+
   <Image Name="imageControl"
          VerticalAlignment="Center"
          HorizontalAlignment="Center"

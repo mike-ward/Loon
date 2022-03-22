@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -16,7 +17,7 @@ namespace Loon.Views.Content.UserProfile
             AvaloniaXamlLoader.Load(this);
         }
 
-        protected override void OnDataContextChanged(System.EventArgs e)
+        protected override void OnDataContextChanged(EventArgs e)
         {
             base.OnDataContextChanged(e);
             if (DataContext is User user &&

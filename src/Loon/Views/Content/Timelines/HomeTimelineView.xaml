@@ -13,7 +13,6 @@
     <TextBlock Name="Announce"
                Text="{StaticResource announce_timeline}"
                TextAlignment="Center"
-               Margin="0 20 0 0">
-    </TextBlock>
+               Margin="0 20 0 0" />
   </Grid>
 </UserControl>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
@@ -65,7 +64,7 @@ namespace Loon.Views.Content.Controls.TweetItem
 
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
-        private async void OpenInViewer(object? sender, PointerPressedEventArgs e)
+        private void OpenInViewer(object? sender, PointerPressedEventArgs e)
         {
             try
             {
@@ -78,11 +77,11 @@ namespace Loon.Views.Content.Controls.TweetItem
                     if ((e.KeyModifiers & KeyModifiers.Control) != 0)
                     {
                         var mediaUrl = (image.DataContext as Media)?.MediaUrl;
-                        App.Commands.AddToHiddenImages.Execute((mediaUrl, this.PointToScreen(new Point(5,10))));
+                        App.Commands.AddToHiddenImages.Execute((mediaUrl, this.PointToScreen(new Point(5, 10))));
                     }
                     else
                     {
-                        await ImageService.OpenInViewer(image);
+                        ImageService.OpenInViewer(image);
                     }
                 }
             }

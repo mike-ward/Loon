@@ -59,18 +59,18 @@ namespace Loon.Views.Content.Controls
             // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (buttons is MessageBoxButtons.Ok or MessageBoxButtons.OkCancel)
             {
-                AddButton("OK", MessageBoxResult.Ok, isDefaultButton: true);
+                AddButton("OK", MessageBoxResult.Ok, true);
             }
 
             if (buttons is MessageBoxButtons.YesNo or MessageBoxButtons.YesNoCancel)
             {
                 AddButton("Yes", MessageBoxResult.Yes);
-                AddButton("No", MessageBoxResult.No, isDefaultButton: true);
+                AddButton("No", MessageBoxResult.No, true);
             }
 
             if (buttons is MessageBoxButtons.OkCancel or MessageBoxButtons.YesNoCancel)
             {
-                AddButton("Cancel", MessageBoxResult.Cancel, isDefaultButton: true);
+                AddButton("Cancel", MessageBoxResult.Cancel, true);
             }
 
             await msgbox.ShowDialog(App.MainWindow);

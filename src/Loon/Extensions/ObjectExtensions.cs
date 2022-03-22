@@ -14,18 +14,18 @@ namespace Loon.Extensions
         public static void CopyPropertiesTo<T, TU>(this T source, TU dest)
         {
             var sourceProps = typeof(T)
-                .GetProperties()
-                .Where(x => x.CanRead);
+               .GetProperties()
+               .Where(x => x.CanRead);
 
             var destProps = typeof(TU)
-                .GetProperties()
-                .Where(x => x.CanWrite)
-                .ToArray();
+               .GetProperties()
+               .Where(x => x.CanWrite)
+               .ToArray();
 
             foreach (var sourceProp in sourceProps)
             {
                 Array.Find(destProps, x => x.Name.IsEqualTo(sourceProp.Name))
-                    ?.SetValue(dest, sourceProp.GetValue(source, null), null);
+                  ?.SetValue(dest, sourceProp.GetValue(source, null), null);
             }
         }
     }

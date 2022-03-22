@@ -18,7 +18,7 @@ namespace Loon.Views.Content
             AvaloniaXamlLoader.Load(this);
 
             this.FindControl<TextBox>("PinTextBox")
-                .AddHandler(
+               .AddHandler(
                     TextInputEvent,
                     (_, e) => e.Text = e.Text?.ToUpperInvariant(),
                     RoutingStrategies.Tunnel);

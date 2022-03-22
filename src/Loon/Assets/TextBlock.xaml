@@ -28,7 +28,7 @@
   <Style Selector="TextBlock.hyperlink">
     <Setter Property="TextWrapping" Value="Wrap" />
     <Setter Property="VerticalAlignment" Value="Bottom" />
-    <Setter Property="Foreground" Value="#da5"></Setter>
+    <Setter Property="Foreground" Value="#da5" />
   </Style>
 
   <Style Selector="TextBlock.busy">

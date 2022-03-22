@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Loon.Services;
 
 namespace Loon.Views.Content.Controls
 {
@@ -29,7 +30,7 @@ namespace Loon.Views.Content.Controls
 
         public void OnClick()
         {
-            Services.OpenUrlService.Open(Link);
+            OpenUrlService.Open(Link);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Loon.ViewModels.Content.Timelines
         {
             titterService = twitterService;
             var name = App.GetString("tab-home-name");
-            HomeTimeline = new Timeline(name: name, intervalInMinutes: 1.1, updateTasks: Tasks(), settings: settings);
+            HomeTimeline = new Timeline(name, 1.1, Tasks(), settings);
 
             // ReSharper disable once AsyncVoidLambda
             PubSubs.AddStatus.Subscribe(status =>

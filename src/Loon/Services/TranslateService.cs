@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Twitter.Services;
 
 namespace Loon.Services
 {
@@ -22,7 +23,7 @@ namespace Loon.Services
             {
                 var       parameters     = await BuildParameters(text, fromLanguage, toLanguage, translateApiKey);
                 var       requestUri     = new Uri(endpoint + "?" + parameters);
-                using var response       = await Twitter.Services.OAuthApiRequest.MyHttpClient.GetAsync(requestUri).ConfigureAwait(false);
+                using var response       = await OAuthApiRequest.MyHttpClient.GetAsync(requestUri).ConfigureAwait(false);
                 var       result         = await response.Content.ReadFromJsonAsync<TranslatorResult>().ConfigureAwait(false);
                 var       translatedText = result?.ResponseData?.TranslatedText ?? "no response";
                 var       html           = WebUtility.HtmlDecode(WebUtility.HtmlDecode(translatedText)); // Twice to handle sequences like: "&amp;mdash;"
@@ -36,7 +37,8 @@ namespace Loon.Services
 
         private static async ValueTask<string> BuildParameters(string? text, string fromLanguage, string toLanguage, string? translateApiKey)
         {
-            var pars = new List<KeyValuePair<string?, string?>> {
+            var pars = new List<KeyValuePair<string?, string?>>
+            {
                 new("q", text),
                 new("langpair", $"{fromLanguage}|{toLanguage}")
             };

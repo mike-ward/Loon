@@ -21,7 +21,7 @@ namespace Loon.ViewModels.Content.Timelines
         {
             this.twitterService = twitterService;
             var name = App.GetString("tab-likes-name");
-            likesTimeline = new Timeline(name: name, intervalInMinutes: 20, updateTasks: Tasks(), settings: settings);
+            likesTimeline = new Timeline(name, 20, Tasks(), settings);
             PubSubs.UpdateLikesTimeline.Subscribe(UpdateAsync);
         }
 

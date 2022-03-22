@@ -14,7 +14,8 @@ namespace Loon.Converters
             var timespan = DateTime.UtcNow - time;
             static string Format(string s, double t) => string.Format(CultureInfo.InvariantCulture, s, (int)t);
 
-            return timespan switch {
+            return timespan switch
+            {
                 { TotalSeconds: < 60 } => Format("{0}s", timespan.TotalSeconds),
                 { TotalMinutes: < 60 } => Format("{0}m", timespan.TotalMinutes),
                 { TotalHours  : < 24 } => Format("{0}h", timespan.TotalHours),

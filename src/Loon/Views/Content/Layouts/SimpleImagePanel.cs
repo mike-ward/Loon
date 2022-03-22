@@ -6,8 +6,8 @@ using Avalonia.Controls;
 namespace Loon.Views.Content.Layouts
 {
     /// <summary>
-    /// Simple image panel designed specifically to display the 1-4 images
-    /// that twitter returns. Not generic.
+    ///     Simple image panel designed specifically to display the 1-4 images
+    ///     that twitter returns. Not generic.
     /// </summary>
     internal class SimpleImagePanel : Panel
     {
@@ -46,7 +46,8 @@ namespace Loon.Views.Content.Layouts
                     Children[1].Measure(size);
                     Children[2].Measure(size);
                     Children[3].Measure(size);
-                    var desiredHeight = new[] {
+                    var desiredHeight = new[]
+                    {
                         Children[0].DesiredSize.Height,
                         Children[1].DesiredSize.Height,
                         Children[2].DesiredSize.Height,

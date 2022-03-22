@@ -133,7 +133,7 @@ namespace Loon.Models
                         updateTimer.Start();
                         await UpdateAsync().ConfigureAwait(false);
                     })
-                    .ConfigureAwait(false);
+                   .ConfigureAwait(false);
             }
         }
 

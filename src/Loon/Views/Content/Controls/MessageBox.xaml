@@ -24,7 +24,7 @@
         Name="{x:Static l:MessageBox.TitleName}"
         Padding="10 1 0 3"
         Background="{DynamicResource ThemeControlMidBrush}"
-        PointerPressed="OnPointerPressed"/>
+        PointerPressed="OnPointerPressed" />
 
       <Grid ColumnDefinitions="Auto,*"
             VerticalAlignment="Center"

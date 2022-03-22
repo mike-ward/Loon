@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Avalonia.Controls;
@@ -36,7 +35,8 @@ namespace Loon.Views.Content.UserProfile
                         {
                             CollapseHeightIfNoBanner(user);
 
-                            var uri = which switch {
+                            var uri = which switch
+                            {
                                 "profile" => user.ProfileImageUrlBigger,
                                 "banner"  => user.ProfileBannerUrlSmall,
                                 _         => null

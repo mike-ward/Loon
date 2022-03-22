@@ -1,6 +1,5 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Jab;
 using Loon.ViewModels.Content.UserProfile;
 
 namespace Loon.Views.Content.UserProfile
