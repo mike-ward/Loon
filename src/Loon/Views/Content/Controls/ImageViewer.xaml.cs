@@ -10,8 +10,14 @@ namespace Loon.Views.Content.Controls
     {
         private Image imageControl { get; }
 
-        public ImageViewer()
+        public ImageViewer() // not used, but required by XAML
         {
+            imageControl = null!;
+        }
+        
+        public ImageViewer(IImage image)
+        {
+            Source = image;
             AvaloniaXamlLoader.Load(this);
             imageControl = this.FindControl<Image>("imageControl");
         }

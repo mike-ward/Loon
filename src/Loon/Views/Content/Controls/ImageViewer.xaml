@@ -33,6 +33,6 @@
          VerticalAlignment="Center"
          HorizontalAlignment="Center"
          Source="{Binding $parent[controls:ImageViewer].Source}"
-         Width="{Binding $parent[controls:ImageViewer].Source.Size.Width, FallbackValue=0}"
-         Height="{Binding $parent[controls:ImageViewer].Source.Size.Height, FallbackValue=0}" />
+         Width="{Binding $parent[controls:ImageViewer].Source.Size.Width, FallbackValue=0, TargetNullValue=0}"
+         Height="{Binding $parent[controls:ImageViewer].Source.Size.Height, FallbackValue=0, TargetNullValue=0}" />
 </Window>

@@ -138,47 +138,37 @@ namespace Loon.Services
             }
         }
 
-        private static Process?     process;
+        // --------------------------------------------------------------------
+
         private static ImageViewer? imageViewer;
+        private static Process?     videoPlayerProcess;
         private static string?      previousVideoUrl;
-
-        private static ImageViewer GetImageViewer()
-        {
-            imageViewer = new ImageViewer();
-            imageViewer.Hide();
-
-            return imageViewer;
-        }
-
-        public static void CopyImageToClipboard(IImage? Source)
-        {
-            if (Source is not null && Application.Current?.Clipboard is not null)
-            {
-                // This space for rent
-                var unused = Application.Current.Clipboard.SetTextAsync("bitmap copying not implemented");
-            }
-        }
 
         public static void OpenInViewer(Image image)
         {
             KillImageViewer();
-            async void ActionOpenViewer() => await OpenInViewerWorker(image);
+            async void ActionOpenViewer() => await OpenInViewerTask(image);
             Dispatcher.UIThread.Post(ActionOpenViewer);
         }
 
         public static void KillImageViewer()
         {
-            if (process is not null)
-            {
-                process?.Kill();
-                process?.Close();
-                process = null;
-            }
-
+            videoPlayerProcess?.Kill();
+            videoPlayerProcess?.Close();
+            videoPlayerProcess = null;
             imageViewer?.Close();
         }
 
-        private static async Task OpenInViewerWorker(Image image)
+        public static string VideoUrl(Media? media)
+        {
+            return media
+              ?.VideoInfo
+              ?.Variants
+              ?.Select(variant => variant.Url)
+               .First() ?? string.Empty;
+        }
+
+        private static async Task OpenInViewerTask(Image image)
         {
             var videoUrl = VideoUrl(image.DataContext as Media);
 
@@ -187,49 +177,47 @@ namespace Loon.Services
                 if (videoUrl.IsEqualTo(previousVideoUrl))
                 {
                     previousVideoUrl = string.Empty;
-                    return;
                 }
-                var pi = new ProcessStartInfo
+                else
                 {
-                    FileName       = "vlc",
-                    Arguments      = $"--one-instance --quiet --no-osd --no-skins2-taskbar {videoUrl}",
-                    CreateNoWindow = true
-                };
-                try
-                {
-                    process          = Process.Start(pi);
-                    previousVideoUrl = videoUrl;
-                }
-                catch (Win32Exception)
-                {
-                    await MessageBox.Show(App.GetString("install-vlc"), MessageBox.MessageBoxButtons.Ok);
-                }
-                catch (InvalidOperationException)
-                {
-                    await MessageBox.Show(App.GetString("install-vlc"), MessageBox.MessageBoxButtons.Ok);
+                    videoPlayerProcess = await PlayVideo(videoUrl);
                 }
             }
             else if (image.Source is not null)
             {
                 previousVideoUrl = string.Empty;
-                var viewer = GetImageViewer(); // call here to close now
-                viewer.Source = image.Source;
-                viewer.Show(App.MainWindow);
+                imageViewer      = new ImageViewer(image.Source);
+                imageViewer.Show(App.MainWindow);
             }
         }
 
-        public static string VideoUrl(Media? media)
+        private static async Task<Process?> PlayVideo(string videoUrl)
         {
-            if (media?.VideoInfo?.Variants is null)
+            var pi = new ProcessStartInfo
             {
-                return string.Empty;
+                FileName       = "vlc",
+                Arguments      = $"--one-instance --quiet --no-osd --no-skins2-taskbar {videoUrl}",
+                CreateNoWindow = true
+            };
+            try
+            {
+                var process = Process.Start(pi);
+                previousVideoUrl = videoUrl;
+                return process;
+            }
+            catch (Win32Exception)
+            {
+                await MessageBox.Show(App.GetString("install-vlc"), MessageBox.MessageBoxButtons.Ok);
+            }
+            catch (InvalidOperationException)
+            {
+                await MessageBox.Show(App.GetString("install-vlc"), MessageBox.MessageBoxButtons.Ok);
             }
 
-            return media.VideoInfo.Variants
-                      .Select(variant => variant.Url)
-                      .FirstOrDefault()
-                ?? string.Empty;
+            return null;
         }
+
+        // --------------------------------------------------------------------
 
         public static void ClearImageCache()
         {
@@ -243,6 +231,15 @@ namespace Loon.Services
                 {
                     // don't care
                 }
+            }
+        }
+
+        public static void CopyImageToClipboard(IImage? Source)
+        {
+            if (Source is not null && Application.Current?.Clipboard is not null)
+            {
+                // This space for rent
+                var unused = Application.Current.Clipboard.SetTextAsync("bitmap copying not implemented");
             }
         }
     }
