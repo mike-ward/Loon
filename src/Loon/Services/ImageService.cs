@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -139,6 +140,7 @@ namespace Loon.Services
 
         private static Process?     process;
         private static ImageViewer? imageViewer;
+        private static string?      previousVideoUrl;
 
         private static ImageViewer GetImageViewer()
         {
@@ -182,6 +184,11 @@ namespace Loon.Services
 
             if (videoUrl.IsNotNullOrWhiteSpace())
             {
+                if (videoUrl.IsEqualTo(previousVideoUrl))
+                {
+                    previousVideoUrl = string.Empty;
+                    return;
+                }
                 var pi = new ProcessStartInfo
                 {
                     FileName       = "vlc",
@@ -190,7 +197,12 @@ namespace Loon.Services
                 };
                 try
                 {
-                    process = Process.Start(pi);
+                    process          = Process.Start(pi);
+                    previousVideoUrl = videoUrl;
+                }
+                catch (Win32Exception)
+                {
+                    await MessageBox.Show(App.GetString("install-vlc"), MessageBox.MessageBoxButtons.Ok);
                 }
                 catch (InvalidOperationException)
                 {
@@ -199,6 +211,7 @@ namespace Loon.Services
             }
             else if (image.Source is not null)
             {
+                previousVideoUrl = string.Empty;
                 var viewer = GetImageViewer(); // call here to close now
                 viewer.Source = image.Source;
                 viewer.Show(App.MainWindow);

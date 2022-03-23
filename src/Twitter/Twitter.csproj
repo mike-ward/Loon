@@ -19,20 +19,19 @@
         <NoWarn>1701;1702;VSTHRD200</NoWarn>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <NoWarn>1701;1702;VSTHRD200</NoWarn>
-        <Prefer32bit>false</Prefer32bit>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <NoWarn>1701;1702;VSTHRD200;IL2026</NoWarn>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <Prefer32Bit>false</Prefer32Bit>
-        <NoWarn>1701;1702,VSTHRD200</NoWarn>
+        <NoWarn>1701;1702;VSTHRD200</NoWarn>
         <DefineConstants>X86</DefineConstants>
         <PlatformTarget>x86</PlatformTarget>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <Prefer32Bit>false</Prefer32Bit>
-        <NoWarn>1701;1702,VSTHRD200</NoWarn>
+        <NoWarn>1701;1702;VSTHRD200;</NoWarn>
         <DefineConstants>X86</DefineConstants>
         <PlatformTarget>x86</PlatformTarget>
     </PropertyGroup>
