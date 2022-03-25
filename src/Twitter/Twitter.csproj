@@ -15,10 +15,10 @@
         <FileVersion>0.0.1</FileVersion>
         <Version>0.0.1</Version>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug|Any CPU' ">
         <NoWarn>1701;1702;VSTHRD200</NoWarn>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release|Any CPU' ">
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <NoWarn>1701;1702;VSTHRD200;IL2026</NoWarn>

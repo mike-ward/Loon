@@ -1,15 +1,16 @@
-﻿using System;
-using System.ComponentModel;
-using System.Security.Cryptography;
-using System.Text;
-using Loon.Interfaces;
-using Loon.Models;
-using Microsoft.Win32;
+﻿using Loon.Interfaces;
 
 namespace Loon.Services
 {
     #if X86
+    using System;
+    using System.ComponentModel;
+    using System.Security.Cryptography;
+    using System.Text;
+    using Microsoft.Win32;
+
     #pragma warning disable CA1416
+
     public sealed class SystemState : INotifyPropertyChanged, ISystemState
     {
         public bool IsRegisteredInStartup
@@ -47,6 +48,8 @@ namespace Loon.Services
     }
 
     #else
+    using Loon.Models;
+
     public sealed class SystemState : NotifyPropertyChanged, ISystemState
     {
         private bool isRegisteredInStartup;
