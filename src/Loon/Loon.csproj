@@ -290,7 +290,6 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="0.10.13" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.10.13" />
         <PackageReference Include="Avalonia.Diagnostics" Version="0.10.13" />
         <PackageReference Include="Jab" Version="0.6.4" />
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.1.46">

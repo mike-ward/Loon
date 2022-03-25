@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loon.Desktop", "Loon.Deskto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loon.Web", "Loon.Web\Loon.Web.csproj", "{B83584E7-D748-4852-AD95-82D14183C414}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loon.iOS", "Loon.iOS\Loon.iOS.csproj", "{92B058E2-C7D2-4F21-898E-30C159F9DD64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{B83584E7-D748-4852-AD95-82D14183C414}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{B83584E7-D748-4852-AD95-82D14183C414}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B83584E7-D748-4852-AD95-82D14183C414}.Release|x86.ActiveCfg = Release|Any CPU
+		{92B058E2-C7D2-4F21-898E-30C159F9DD64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B058E2-C7D2-4F21-898E-30C159F9DD64}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92B058E2-C7D2-4F21-898E-30C159F9DD64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B058E2-C7D2-4F21-898E-30C159F9DD64}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
