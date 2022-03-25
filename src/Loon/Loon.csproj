@@ -8,33 +8,19 @@
         <Nullable>enable</Nullable>
         <TargetFramework>net6.0</TargetFramework>
         <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <NoWarn>1701;1702;VSTHRD200</NoWarn>
+        <RuntimeIdentifiers>win-x86;linux-x64;osx-x64;browser-wasm</RuntimeIdentifiers>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x86'">$(DefineConstants);Windows32</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup>
         <AssemblyVersion>2022.0.1</AssemblyVersion>
         <FileVersion>2022.0.1</FileVersion>
         <Version>2022.0.1</Version>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Any CPU'">
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <NoWarn>1701;1702;VSTHRD200</NoWarn>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Any CPU'">
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <NoWarn>1701;1702;VSTHRD200</NoWarn>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <NoWarn>1701;1702,VSTHRD200</NoWarn>
-        <DefineConstants>X86</DefineConstants>
-        <PlatformTarget>x86</PlatformTarget>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <NoWarn>1701;1702,VSTHRD200</NoWarn>
-        <DefineConstants>X86</DefineConstants>
-        <PlatformTarget>x86</PlatformTarget>
     </PropertyGroup>
 
     <ItemGroup>

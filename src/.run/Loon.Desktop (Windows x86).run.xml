@@ -1,6 +1,6 @@
 ﻿<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Loon.Desktop (Windows x86)" type="DotNetFolderPublish" factoryName="Publish to folder">
-    <riderPublish configuration="Release" platform="x86" runtime="win-x86" self_contained="true" target_folder="$PROJECT_DIR$/Loon.Desktop/bin/Release/net6.0/publish" target_framework="net6.0" uuid_high="-3881588753491538962" uuid_low="-6566762653381986941" />
+  <configuration default="false" name="Loon.Desktop (Windows)" type="DotNetFolderPublish" factoryName="Publish to folder">
+    <riderPublish configuration="Release" platform="AnyCPU" runtime="win-x86" self_contained="true" target_folder="$PROJECT_DIR$/Loon.Desktop/bin/Release/net6.0/win-x86/publish" target_framework="net6.0" uuid_high="-3881588753491538962" uuid_low="-6566762653381986941" />
     <method v="2" />
   </configuration>
 </component>

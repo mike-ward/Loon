@@ -4,6 +4,7 @@
         <Nullable>enable</Nullable>
         <!--Temporal hack that fixes compilation in VS-->
         <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+        <RuntimeIdentifiers>browser-wasm</RuntimeIdentifiers>
     </PropertyGroup>
 
     <!-- In debug, make builds faster by reducing optimizations -->
@@ -13,7 +14,7 @@
         <RunAOTCompilation>false</RunAOTCompilation>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
         <Optimize>true</Optimize>
         <WasmNativeStrip>true</WasmNativeStrip>
         <EmccCompileOptimizationFlag>-O3</EmccCompileOptimizationFlag>

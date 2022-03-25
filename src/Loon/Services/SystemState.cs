@@ -2,7 +2,7 @@
 
 namespace Loon.Services
 {
-    #if X86
+    #if Windows32
     using System;
     using System.ComponentModel;
     using System.Security.Cryptography;
