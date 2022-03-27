@@ -10,7 +10,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <NoWarn>1701;1702;VSTHRD200</NoWarn>
-        <RuntimeIdentifiers>win-x86;linux-x64;osx-x64;browser-wasm</RuntimeIdentifiers>
+        <RuntimeIdentifiers>win-x86;linux-x64;osx-x64</RuntimeIdentifiers>
     </PropertyGroup>
 
     <PropertyGroup>
