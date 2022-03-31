@@ -12,7 +12,7 @@ namespace Loon.Models
             var current = new HashSet<TwitterStatus>(timeline.StatusCollection); // faster lookups
             var latest  = new List<TwitterStatus>();
 
-            foreach (var status in statuses.OrderBy(status => status.CreatedDate))
+            foreach (var status in statuses.OrderByDescending(status => status.CreatedDate))
             {
                 if (current.TryGetValue(status, out var statusToUpdate))
                 {
@@ -29,7 +29,7 @@ namespace Loon.Models
                     }
                     else
                     {
-                        latest.Insert(0, status);
+                        latest.Add(status);
                     }
                 }
             }

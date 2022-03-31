@@ -22,24 +22,18 @@ namespace Loon.Models
         public new bool Add(T item)
         {
             var added = base.Add(item);
-
-            if (added)
-            {
-                var eventArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new List<T> { item });
-                CollectionChanged?.Invoke(this, eventArgs);
-            }
-
+            if (!added) return added;
+            var eventArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new List<T> { item });
+            CollectionChanged?.Invoke(this, eventArgs);
             return added;
         }
 
         public new void Clear()
         {
-            if (Count > 0)
-            {
-                base.Clear();
-                var eventArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
-                CollectionChanged?.Invoke(this, eventArgs);
-            }
+            if (Count <= 0) return;
+            base.Clear();
+            var eventArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
+            CollectionChanged?.Invoke(this, eventArgs);
         }
     }
 }

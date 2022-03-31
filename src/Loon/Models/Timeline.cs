@@ -52,8 +52,8 @@ namespace Loon.Models
             {
                 Interval = TimeSpan.FromMinutes(intervalInMinutes)
             };
-            updateTimer.Tick += UpdateTimerTick;
 
+            updateTimer.Tick         += UpdateTimerTick;
             Settings.PropertyChanged += CheckAuthentication;
         }
 
@@ -106,16 +106,15 @@ namespace Loon.Models
         {
             try
             {
-                if (e.PropertyName.IsEqualTo(nameof(ISettings.IsAuthenticated)))
+                if (!e.PropertyName.IsEqualTo(nameof(ISettings.IsAuthenticated))) return;
+
+                if (Settings.IsAuthenticated)
                 {
-                    if (Settings.IsAuthenticated)
-                    {
-                        await Start().ConfigureAwait(false);
-                    }
-                    else
-                    {
-                        await Stop().ConfigureAwait(false);
-                    }
+                    await Start();
+                }
+                else
+                {
+                    await Stop();
                 }
             }
             catch (Exception ex)

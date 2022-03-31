@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -230,7 +231,7 @@ namespace Twitter.Models
         /// </summary>
         public void InvokeUpdateTimeStamp()
         {
-            PropertyChanged?.Invoke(OriginatingStatus, new PropertyChangedEventArgs(nameof(CreatedDate)));
+            PropertyChanged?.Invoke(OriginatingStatus, eventArgsCache.GetOrAdd(nameof(CreatedDate), name => new PropertyChangedEventArgs(name)));
         }
 
         // Overrides
@@ -252,19 +253,17 @@ namespace Twitter.Models
 
         private void SetProperty<T>(ref T item, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (!EqualityComparer<T>.Default.Equals(item, value))
-            {
-                item = value;
-                OnPropertyChanged(propertyName);
-            }
+            if (EqualityComparer<T>.Default.Equals(item, value)) return;
+            item = value;
+            OnPropertyChanged(propertyName);
         }
+
+        private static readonly ConcurrentDictionary<string, PropertyChangedEventArgs> eventArgsCache = new();
 
         private void OnPropertyChanged(string? propertyName)
         {
-            if (propertyName is not null && PropertyChanged is not null)
-            {
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, eventArgsCache.GetOrAdd(propertyName!, name => new PropertyChangedEventArgs(name)));
         }
+
     }
 }
