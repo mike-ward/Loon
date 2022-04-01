@@ -24,7 +24,7 @@ namespace Loon.Models
         public  AvaloniaList<TwitterStatus>            StatusCollection        { get; } = new();
         public  IEnumerable<Func<Timeline, ValueTask>> UpdateTasks             { get; }
         public  ISet<string>                           AlreadyAdded            { get; } = new HashSet<string>(StringComparer.Ordinal);
-        public  ISet<TwitterStatus>                    PendingStatusCollection { get; } = new HashSet<TwitterStatus>();
+        public  ISet<TwitterStatus>                    PendingStatusCollection { get; } = new SortedSet<TwitterStatus>(new TwitterStatusSortComparer());
         public  bool                                   IsScrolled              { get; set; }
         private string?                                exceptionMessage;
 

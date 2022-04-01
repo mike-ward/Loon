@@ -264,6 +264,5 @@ namespace Twitter.Models
         {
             PropertyChanged?.Invoke(this, eventArgsCache.GetOrAdd(propertyName!, name => new PropertyChangedEventArgs(name)));
         }
-
     }
 }
