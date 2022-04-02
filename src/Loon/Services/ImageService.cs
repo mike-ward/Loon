@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -21,7 +22,8 @@ namespace Loon.Services
 {
     internal static class ImageService
     {
-        private static readonly string TempPath = Path.GetTempPath();
+        private static readonly string                                              tempPath         = Path.GetTempPath();
+        private static readonly ConcurrentDictionary<string, WeakReference<IImage>> imageMemoryCache = new(StringComparer.OrdinalIgnoreCase);
 
         public static async ValueTask<IImage?> GetImageAsync(string uri, CancellationToken cancellationToken)
         {
@@ -33,30 +35,13 @@ namespace Loon.Services
                 {
                     if (retry > 0)
                     {
-                        if (cancellationToken.IsCancellationRequested) return default;
                         TraceService.Message($"retry image: {retry}");
                         await Task.Delay(500, cancellationToken).ConfigureAwait(false);
                     }
 
-                    if (cancellationToken.IsCancellationRequested) return default;
-
-                    return await FromCacheAsync(uri, cancellationToken).ConfigureAwait(false)
-                        ?? await ImageGetAsync(uri, cancellationToken).ConfigureAwait(false);
-                }
-                catch (FormatException ex)
-                {
-                    TraceService.Message(ex.Message);
-                    break;
-                }
-                catch (ArgumentException ex)
-                {
-                    TraceService.Message(ex.Message);
-                    break;
-                }
-                catch (FileNotFoundException ex)
-                {
-                    TraceService.Message(ex.Message);
-                    break;
+                    return FromMemoryCache(uri)
+                        ?? await FromFileCacheAsync(uri, cancellationToken).ConfigureAwait(false)
+                        ?? await FromHttpAsync(uri, cancellationToken).ConfigureAwait(false);
                 }
                 catch (TaskCanceledException)
                 {
@@ -71,40 +56,27 @@ namespace Loon.Services
             return default;
         }
 
-        private static async ValueTask<IImage?> FromCacheAsync(string uri, CancellationToken cancellationToken)
+        private static IImage? FromMemoryCache(string uri)
         {
-            try
-            {
-                if (cancellationToken.IsCancellationRequested) return default;
-                var path = CachePathFromUrl(uri);
-
-                return File.Exists(path)
-                    ? await GetBitmapAsync(path, cancellationToken).ConfigureAwait(false)
-                    : default;
-            }
-            catch (Exception ex)
-            {
-                TraceService.Message(ex.Message);
-                return default;
-            }
+            return imageMemoryCache.TryGetValue(uri, out var weakReference) && weakReference.TryGetTarget(out var image)
+                ? image
+                : default;
         }
 
-        private static string CachePathFromUrl(string uri)
-        {
-            var hash = MD5.HashData(Encoding.UTF8.GetBytes(uri));
-            return Path.Combine(TempPath, "loon-" + Convert.ToHexString(hash));
-        }
-
-        private static async ValueTask<IImage?> GetBitmapAsync(string url, CancellationToken cancellationToken)
+        private static async ValueTask<IImage?> FromFileCacheAsync(string uri, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested) return default;
-            var bytes = await File.ReadAllBytesAsync(url, cancellationToken).ConfigureAwait(false);
+            var path  = CachePathFromUrl(uri);
+            if (File.Exists(path) is false) return default;
+            var bytes = await File.ReadAllBytesAsync(path, cancellationToken).ConfigureAwait(false);
             if (cancellationToken.IsCancellationRequested) return default;
             await using var stream = new MemoryStream(bytes);
-            return new Bitmap(stream);
+            var             image  = new Bitmap(stream);
+            AddOrUpdateMemoryCache(uri, image);
+            return image;
         }
 
-        private static async ValueTask<IImage?> ImageGetAsync(string uri, CancellationToken cancellationToken)
+        private static async ValueTask<IImage?> FromHttpAsync(string uri, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested) return default;
             var response = await OAuthApiRequest.MyHttpClient.GetStreamAsync(uri, cancellationToken).ConfigureAwait(false);
@@ -116,14 +88,12 @@ namespace Loon.Services
 
             ms.Position = 0;
             var bitmap = new Bitmap(ms);
-            await Task.Factory.StartNew(() => ToCache(uri, bitmap, cancellationToken), cancellationToken, TaskCreationOptions.None, TaskScheduler.Default).ConfigureAwait(false);
-
-            return cancellationToken.IsCancellationRequested
-                ? default
-                : bitmap;
+            AddOrUpdateMemoryCache(uri, bitmap);
+            await Task.Run(() => ToFileCache(uri, bitmap, cancellationToken), cancellationToken).ConfigureAwait(false);
+            return bitmap;
         }
 
-        private static void ToCache(string uri, Bitmap image, CancellationToken cancellationToken)
+        private static void ToFileCache(string uri, Bitmap image, CancellationToken cancellationToken)
         {
             try
             {
@@ -136,6 +106,17 @@ namespace Loon.Services
             {
                 TraceService.Message(ex.Message);
             }
+        }
+
+        private static void AddOrUpdateMemoryCache(string uri, IImage image)
+        {
+            imageMemoryCache.AddOrUpdate(uri, new WeakReference<IImage>(image), (_, v) => v);
+        }
+
+        private static string CachePathFromUrl(string uri)
+        {
+            var hash = MD5.HashData(Encoding.UTF8.GetBytes(uri));
+            return Path.Combine(tempPath, "loon-" + Convert.ToHexString(hash));
         }
 
         // --------------------------------------------------------------------
@@ -221,7 +202,7 @@ namespace Loon.Services
 
         public static void ClearImageCache()
         {
-            foreach (var file in Directory.GetFiles(TempPath, "loon-*"))
+            foreach (var file in Directory.GetFiles(tempPath, "loon-*"))
             {
                 try
                 {
