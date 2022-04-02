@@ -14,7 +14,7 @@ namespace Loon.Commands
             {
                 if (await MessageBox.Show(App.GetString("settings-sure"), MessageBox.MessageBoxButtons.YesNo) == MessageBox.MessageBoxResult.Yes)
                 {
-                    ImageService.ClearImageCache();
+                    ImageFileCacheService.ClearCache();
                     Console.Beep();
                 }
             }

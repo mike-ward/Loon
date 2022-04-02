@@ -37,6 +37,7 @@ namespace Loon.ViewModels.Content.Timelines
 
         private IEnumerable<Func<Timeline, ValueTask>> Tasks()
         {
+            yield return _ => ImageMemoryCacheService.PruneCache();
             yield return timeline => GetAndUpdateStatusesAsync(timeline);
             yield return timeline => TruncateStatusCollectionTask.Execute(timeline);
             yield return timeline => UpdateTimeStampsTask.Execute(timeline);

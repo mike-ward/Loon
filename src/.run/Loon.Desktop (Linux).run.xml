@@ -1,6 +1,10 @@
 ﻿<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Loon.Desktop (Linux)" type="DotNetFolderPublish" factoryName="Publish to folder">
-    <riderPublish configuration="Release" include_native_libs_for_self_extract="true" platform="AnyCPU" produce_single_file="true" runtime="linux-x64" self_contained="true" target_folder="$PROJECT_DIR$/Loon/bin/Release/net6.0/Linux/publish" target_framework="net6.0" uuid_high="-3881588753491538962" uuid_low="-6566762653381986941" />
-    <method v="2" />
-  </configuration>
+    <configuration default="false" name="Loon.Desktop (Linux)" type="DotNetFolderPublish"
+                   factoryName="Publish to folder">
+        <riderPublish configuration="Release" include_native_libs_for_self_extract="true" platform="AnyCPU"
+                      produce_single_file="true" runtime="linux-x64" self_contained="true"
+                      target_folder="$PROJECT_DIR$/Loon/bin/Release/net6.0/Linux/publish" target_framework="net6.0"
+                      uuid_high="-3881588753491538962" uuid_low="-6566762653381986941"/>
+        <method v="2"/>
+    </configuration>
 </component>
