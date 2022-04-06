@@ -6,7 +6,7 @@ namespace Loon.Commands
     {
         public override void Execute(object? parameter)
         {
-            ImageService.KillImageViewer();
+            ImageViewerService.KillImageViewer();
             App.MainWindow.Close();
         }
     }

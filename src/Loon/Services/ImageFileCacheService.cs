@@ -20,6 +20,7 @@ namespace Loon.Services
             if (cancellationToken.IsCancellationRequested) return default;
             await using var stream = new MemoryStream(bytes);
             var             image  = new Bitmap(stream);
+            // for faster access next time
             ImageMemoryCacheService.ToCache(uri, image);
             return image;
         }

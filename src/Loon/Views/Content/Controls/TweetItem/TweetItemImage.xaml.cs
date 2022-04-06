@@ -81,7 +81,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                     }
                     else
                     {
-                        ImageService.OpenInViewer(image);
+                        ImageViewerService.OpenInViewer(image);
                     }
                 }
             }

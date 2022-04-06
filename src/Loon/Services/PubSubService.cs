@@ -15,7 +15,7 @@ namespace Loon.Services
         public static PubSubService<object?>        SetUserProfileContext { get; } = new(); // waiting for discriminated unions
     }
 
-    internal  sealed class PubSubService<T>
+    internal sealed class PubSubService<T>
     {
         private          int                                  nextId;
         private readonly ConcurrentDictionary<int, Action<T>> subscribers = new();
@@ -29,7 +29,7 @@ namespace Loon.Services
 
         public void Unsubscribe(int id)
         {
-            subscribers.TryRemove(id, out var _);
+            subscribers.TryRemove(id, out _);
         }
 
         public void Publish(T payload)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -17,7 +18,7 @@ namespace Loon.Models
             OnPropertyChanged(propertyName!);
         }
 
-        private static readonly ConcurrentDictionary<string, PropertyChangedEventArgs> eventArgsCache = new();
+        private static readonly ConcurrentDictionary<string, PropertyChangedEventArgs> eventArgsCache = new(StringComparer.Ordinal);
 
         protected void OnPropertyChanged(string? propertyName)
         {
