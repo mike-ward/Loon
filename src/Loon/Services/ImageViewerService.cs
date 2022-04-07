@@ -13,6 +13,7 @@ namespace Loon.Services
 {
     internal static class ImageViewerService
     {
+        private const  string       videoPlayerName = "mpv";
         private static ImageViewer? imageViewer;
         private static Process?     videoPlayerProcess;
         private static string?      previousVideoUrl;
@@ -29,6 +30,18 @@ namespace Loon.Services
             videoPlayerProcess?.Kill();
             videoPlayerProcess?.Close();
             videoPlayerProcess = null;
+            
+            // Scoop installs shims so videoPlayerProcess may
+            // may have spawned a process and terminated.
+            foreach (var process in Process.GetProcesses())
+            {
+                if (process.ProcessName.IsEqualTo(videoPlayerName))
+                {
+                    process.Kill();
+                    process.Close();
+                }
+            }
+
             imageViewer?.Close();
         }
 
@@ -68,8 +81,8 @@ namespace Loon.Services
         {
             var pi = new ProcessStartInfo
             {
-                FileName       = "vlc",
-                Arguments      = $"--one-instance --quiet --no-osd --no-skins2-taskbar {videoUrl}",
+                FileName       = videoPlayerName,
+                Arguments      = $"--ontop {videoUrl}",
                 CreateNoWindow = true
             };
             try
