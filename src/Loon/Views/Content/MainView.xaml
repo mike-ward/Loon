@@ -33,14 +33,14 @@
             TextAlignment="Center"
             Foreground="Green"
             Background="Transparent"
-            IsVisible="{Binding HomeTimeline.PendingStatusesAvailable, FallbackValue=False}">
+            IsVisible="{Binding DataContext.HomeTimeline.PendingStatusesAvailable, ElementName=HomeTimelineView}">
             <TextBlock.RenderTransform>
               <TranslateTransform Y="-1" />
             </TextBlock.RenderTransform>
           </TextBlock>
         </Grid>
       </TabItem.Header>
-      <t:HomeTimelineView />
+      <t:HomeTimelineView Name="HomeTimelineView" />
     </TabItem>
 
     <TabItem PointerPressed="TabItem_OnPointerPressed">
