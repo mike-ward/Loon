@@ -258,7 +258,7 @@ namespace Twitter.Models
             OnPropertyChanged(propertyName);
         }
 
-        private static readonly ConcurrentDictionary<string, PropertyChangedEventArgs> eventArgsCache = new();
+        private static readonly ConcurrentDictionary<string, PropertyChangedEventArgs> eventArgsCache = new(StringComparer.Ordinal);
 
         private void OnPropertyChanged(string? propertyName)
         {

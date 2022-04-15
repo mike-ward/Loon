@@ -8,7 +8,7 @@ namespace Loon.Services
     public static class ImageMemoryCacheService
     {
         // Poor man's memory cache for images.
-        private static readonly ConcurrentDictionary<string, WeakReference<IImage>> imageMemoryCache = new(StringComparer.OrdinalIgnoreCase);
+        private static readonly ConcurrentDictionary<string, WeakReference<IImage>> imageMemoryCache = new(StringComparer.Ordinal);
 
         public static IImage? FromCache(string uri)
         {

@@ -13,16 +13,21 @@ namespace Loon.Services
     {
         public static async ValueTask<IImage?> FromCacheAsync(string uri, CancellationToken cancellationToken)
         {
-            if (cancellationToken.IsCancellationRequested) return default;
             var path = CachePathFromUrl(uri);
             if (File.Exists(path) is false) return default;
-            var bytes = await File.ReadAllBytesAsync(path, cancellationToken).ConfigureAwait(false);
-            if (cancellationToken.IsCancellationRequested) return default;
-            await using var stream = new MemoryStream(bytes);
-            var             image  = new Bitmap(stream);
-            // for faster access next time
-            ImageMemoryCacheService.ToCache(uri, image);
-            return image;
+            try
+            {
+                var bytes = await File.ReadAllBytesAsync(path, cancellationToken).ConfigureAwait(false);
+                if (cancellationToken.IsCancellationRequested) return default;
+                await using var stream = new MemoryStream(bytes);
+                var             image  = new Bitmap(stream);
+                ImageMemoryCacheService.ToCache(uri, image); // for faster access next time
+                return image;
+            }
+            catch
+            {
+                return default;
+            }
         }
 
         public static async ValueTask ToCacheAsync(string uri, Bitmap image, CancellationToken cancellationToken)
@@ -32,7 +37,7 @@ namespace Loon.Services
                 if (cancellationToken.IsCancellationRequested) return;
                 await using var ms = new MemoryStream();
                 image.Save(ms);
-                await File.WriteAllBytesAsync(CachePathFromUrl(uri), ms.ToArray(), cancellationToken);
+                await File.WriteAllBytesAsync(CachePathFromUrl(uri), ms.ToArray(), cancellationToken).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
