@@ -60,14 +60,7 @@ namespace Loon.Models
         [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
         private async void UpdateTimerTick(object? sender, EventArgs e)
         {
-            try
-            {
-                await UpdateAsync().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                TraceService.Message(ex.Message);
-            }
+            await UpdateAsync().ConfigureAwait(false);
         }
 
         public async ValueTask UpdateAsync()
