@@ -9,7 +9,7 @@ namespace Twitter.Models
         public string Url { get; set; } = string.Empty;
 
         [JsonPropertyName("display_url")]
-        public string DisplayUrl { get;  set;  } = string.Empty;
+        public string DisplayUrl { get; set; } = string.Empty;
 
         [JsonPropertyName("expanded_url")]
         public string ExpandedUrl { get; set; } = string.Empty;

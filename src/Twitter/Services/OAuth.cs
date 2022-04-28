@@ -20,14 +20,14 @@ namespace Twitter.Services
         {
             var encoded = Uri.EscapeDataString(value);
             return Regex
-                .Replace(encoded, "(%[0-9a-f][0-9a-f])", c => c.Value.ToUpperInvariant(), RegexOptions.ExplicitCapture, TimeSpan.FromSeconds(1))
-                .Replace("(", "%28", StringComparison.Ordinal)
-                .Replace(")", "%29", StringComparison.Ordinal)
-                .Replace("$", "%24", StringComparison.Ordinal)
-                .Replace("!", "%21", StringComparison.Ordinal)
-                .Replace("*", "%2A", StringComparison.Ordinal)
-                .Replace("'", "%27", StringComparison.Ordinal)
-                .Replace("%7E", "~", StringComparison.Ordinal);
+               .Replace(encoded, "(%[0-9a-f][0-9a-f])", c => c.Value.ToUpperInvariant(), RegexOptions.ExplicitCapture, TimeSpan.FromSeconds(1))
+               .Replace("(", "%28", StringComparison.Ordinal)
+               .Replace(")", "%29", StringComparison.Ordinal)
+               .Replace("$", "%24", StringComparison.Ordinal)
+               .Replace("!", "%21", StringComparison.Ordinal)
+               .Replace("*", "%2A", StringComparison.Ordinal)
+               .Replace("'", "%27", StringComparison.Ordinal)
+               .Replace("%7E", "~", StringComparison.Ordinal);
         }
 
         public static string Nonce()
@@ -87,7 +87,7 @@ namespace Twitter.Services
         {
             return
                 Parameters(nonce, timestamp, consumerKey, accessToken, signature, parameters)
-                    .OrderBy(p => p.Item1, StringComparer.Ordinal);
+                   .OrderBy(p => p.Item1, StringComparer.Ordinal);
         }
 
         private static IEnumerable<(string, string)> Parameters(

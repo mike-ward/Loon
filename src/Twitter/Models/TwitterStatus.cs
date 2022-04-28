@@ -140,7 +140,7 @@ namespace Twitter.Models
         }
 
         /// <summary>
-        /// Originating status is what get's displayed
+        ///     Originating status is what get's displayed
         /// </summary>
         [JsonIgnore]
         public TwitterStatus OriginatingStatus => IsRetweet
@@ -148,7 +148,7 @@ namespace Twitter.Models
             : this;
 
         /// <summary>
-        /// Create a link to a twitter status
+        ///     Create a link to a twitter status
         /// </summary>
         [JsonIgnore]
         public string StatusLink => string.IsNullOrWhiteSpace(OverrideLink)
@@ -156,7 +156,7 @@ namespace Twitter.Models
             : OverrideLink;
 
         /// <summary>
-        /// Converts a serialized twitter date into a System.DateTime object and caches it.
+        ///     Converts a serialized twitter date into a System.DateTime object and caches it.
         /// </summary>
         [JsonIgnore]
         public DateTime CreatedDate
@@ -176,7 +176,7 @@ namespace Twitter.Models
         public object? FlowContent { get; set; }
 
         /// <summary>
-        /// Indicates if user is author of tweet
+        ///     Indicates if user is author of tweet
         /// </summary>
         [JsonIgnore]
         public bool IsMyTweet { get; set; }
@@ -186,7 +186,7 @@ namespace Twitter.Models
         public static DateTime ParseTwitterDate(string? s)
         {
             return string.IsNullOrWhiteSpace(s)
-                ? (default)
+                ? default
                 : DateTime.ParseExact(
                     s,
                     "ddd MMM dd HH:mm:ss zzz yyyy",
@@ -195,7 +195,7 @@ namespace Twitter.Models
         }
 
         /// <summary>
-        /// Update a status's counts from a newer status
+        ///     Update a status's counts from a newer status
         /// </summary>
         /// <param name="status"></param>
         public void UpdateFromStatus(TwitterStatus? status)
@@ -227,7 +227,7 @@ namespace Twitter.Models
         }
 
         /// <summary>
-        /// Tricks the UI into updating the time ago dates in the timeline
+        ///     Tricks the UI into updating the time ago dates in the timeline
         /// </summary>
         public void InvokeUpdateTimeStamp()
         {

@@ -14,10 +14,7 @@
   d:DesignWidth="300"
   mc:Ignorable="d">
 
-  <!--  Remove IsVisible binding when ItemsRepeater is fixed  -->
-  <Grid
-    ColumnDefinitions="Auto,*"
-    IsVisible="{Binding Id, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+  <Grid ColumnDefinitions="Auto,*">
 
     <!--  Column 1  -->
 

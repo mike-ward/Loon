@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Twitter.Services
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "None")]
+    [SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "None")]
     internal static class TwitterTokenRequest
     {
         public static async ValueTask<OAuthTokens> GetRequestTokenAsync(
@@ -16,7 +17,7 @@ namespace Twitter.Services
             var          timestamp           = OAuth.TimeStamp();
             var          parameters          = new[] { ("oauth_callback", "oob") };
             var          signature           = OAuth.Signature(OAuthApiRequest.POST, requestTokenUrl, nonce, timestamp, consumerKey, consumerSecret, "", "", parameters);
-            var          authorizationHeader = OAuth.AuthorizationHeader(nonce, timestamp, consumerKey, accessToken: null, signature, parameters);
+            var          authorizationHeader = OAuth.AuthorizationHeader(nonce, timestamp, consumerKey, null, signature, parameters);
 
             var request = new HttpRequestMessage(HttpMethod.Post, new Uri(requestTokenUrl));
             request.Headers.Add("Authorization", authorizationHeader);
@@ -33,7 +34,8 @@ namespace Twitter.Services
                 throw new InvalidOperationException("callback token not confirmed");
             }
 
-            return new OAuthTokens {
+            return new OAuthTokens
+            {
                 OAuthToken  = oauthToken,
                 OAuthSecret = oauthSecret
             };
@@ -60,7 +62,8 @@ namespace Twitter.Services
             var       content  = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var       tokens   = content.Split('&');
 
-            var oauthTokens = new OAuthTokens {
+            var oauthTokens = new OAuthTokens
+            {
                 OAuthToken  = Token(tokens[0]),
                 OAuthSecret = Token(tokens[1]),
                 UserId      = Token(tokens[2]),

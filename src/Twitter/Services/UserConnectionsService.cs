@@ -24,7 +24,7 @@ namespace Twitter.Services
             {
                 var ids         = UserConnectionsDirectory.Keys.Skip(lastIndex).Take(maxIds);
                 var connections = await twitterApi.GetFriendships(ids).ConfigureAwait(false);
-                lastIndex = (lastIndex + maxIds) < UserConnectionsDirectory.Count
+                lastIndex = lastIndex + maxIds < UserConnectionsDirectory.Count
                     ? lastIndex + maxIds
                     : 0;
 

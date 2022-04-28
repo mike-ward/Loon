@@ -1,4 +1,5 @@
 ﻿using Loon.Interfaces;
+using Loon.Models;
 
 namespace Loon.Services
 {
@@ -48,8 +49,6 @@ namespace Loon.Services
     }
 
     #else
-    using Loon.Models;
-
     public sealed class SystemState : NotifyPropertyChanged, ISystemState
     {
         private bool isRegisteredInStartup;

@@ -30,7 +30,7 @@ namespace Loon.Services
             videoPlayerProcess?.Kill();
             videoPlayerProcess?.Close();
             videoPlayerProcess = null;
-            
+
             // Scoop installs shims so videoPlayerProcess may
             // may have spawned a process and terminated.
             foreach (var process in Process.GetProcesses())

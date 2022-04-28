@@ -14,7 +14,7 @@ namespace Loon.Views.Content.Controls
         {
             imageControl = null!;
         }
-        
+
         public ImageViewer(IImage image)
         {
             Source = image;

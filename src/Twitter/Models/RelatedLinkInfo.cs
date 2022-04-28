@@ -13,9 +13,9 @@ using Twitter.Services;
 namespace Twitter.Models
 {
     /// <summary>
-    /// When links are included in a tweet and it's not a quote or retweet,
-    /// look for og/twitter meta tags in the links. This info, if present,
-    /// is displayed similar to quotes.
+    ///     When links are included in a tweet and it's not a quote or retweet,
+    ///     look for og/twitter meta tags in the links. This info, if present,
+    ///     is displayed similar to quotes.
     /// </summary>
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public sealed class RelatedLinkInfo
@@ -28,15 +28,19 @@ namespace Twitter.Models
         public string  Language    { get; private set; } = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
         public TwitterStatus ImageTwitterStatus =>
-            new() {
+            new()
+            {
                 Id       = Guid.NewGuid().ToString(),
                 Language = Language,
                 FullText = Description,
-                ExtendedEntities = new Entities {
+                ExtendedEntities = new Entities
+                {
                     Media = string.IsNullOrWhiteSpace(ImageUrl)
                         ? null
-                        : new[] {
-                            new Media {
+                        : new[]
+                        {
+                            new Media
+                            {
                                 Url         = ImageUrl,
                                 MediaUrl    = ImageUrl,
                                 DisplayUrl  = ImageUrl,

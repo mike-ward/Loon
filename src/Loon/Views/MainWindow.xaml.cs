@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Loon.Interfaces;
 using Loon.ViewModels;
-
 #if DEBUG
 using Avalonia;
 #endif
