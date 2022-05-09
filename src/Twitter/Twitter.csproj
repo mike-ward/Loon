@@ -20,8 +20,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="HtmlAgilityPack" Version="1.11.42"/>
-        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.1.46">
+        <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

@@ -13,9 +13,9 @@ namespace Loon.Models
     {
         private string Profile { get; } = "loon";
 
-        [JsonIgnore]
         private bool isAuthenticated;
 
+        [JsonIgnore]
         public bool IsAuthenticated
         {
             get => isAuthenticated;

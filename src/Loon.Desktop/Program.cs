@@ -11,11 +11,17 @@ namespace Loon.Desktop
         [STAThread]
         public static void Main(string[] args)
         {
-            AppBuilder
+            BuildAvaloniaApp()
+               .StartWithClassicDesktopLifetime(args);
+        }
+
+        // Previewer requires this method
+        private static AppBuilder BuildAvaloniaApp()
+        {
+            return AppBuilder
                .Configure<App>()
                .UsePlatformDetect()
-               .LogToTrace()
-               .StartWithClassicDesktopLifetime(args);
+               .LogToTrace();
         }
     }
 }

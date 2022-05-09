@@ -25,72 +25,72 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="app.ico"/>
-        <None Remove="App.xaml"/>
-        <None Remove="Assets\Accents.xaml"/>
-        <None Remove="Assets\Button.xaml"/>
-        <None Remove="Assets\Converters.xaml"/>
-        <None Remove="Assets\DarkThemeOverrides.xaml"/>
-        <None Remove="Assets\Fonts\foundation-icons.ttf"/>
-        <None Remove="Assets\Fonts\winjs-symbols.ttf"/>
-        <None Remove="Assets\LightThemeOverrides.xaml"/>
-        <None Remove="Assets\Logo\loon.ico"/>
-        <None Remove="Assets\ScrollBar.xaml"/>
-        <None Remove="Assets\seguisym.ttf"/>
-        <None Remove="Assets\Separator.xaml"/>
-        <None Remove="Assets\Strings.xaml"/>
-        <None Remove="Assets\TabItem.xaml"/>
-        <None Remove="Assets\TextBlock.xaml"/>
-        <None Remove="Assets\ToolTip.xaml"/>
-        <None Remove="Assets\VerifiedBadge.xaml"/>
-        <None Remove="Views\Content\AppSettings\BulletItem.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsAbout.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsCheckboxes.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsClearImageCache.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsDonate.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsFontSize.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsOpenSettings.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsSignOut.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsTips.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsTitle.xaml"/>
-        <None Remove="Views\Content\AppSettings\SettingsView.xaml"/>
-        <None Remove="Views\Content\AppView.xaml"/>
-        <None Remove="Views\Content\Controls\Hyperlink.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml"/>
-        <None Remove="Views\Content\GetPinView.xaml"/>
-        <None Remove="Views\Content\MainView.xaml"/>
-        <None Remove="Views\Content\Timelines\LikesTimelineView.xaml"/>
-        <None Remove="Views\Content\Timelines\TimelineView.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemActions.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemAuthor.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemImage.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemProfileImage.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemQuoted.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemRelated.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemRetweetedBy.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemText.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemTranslate.xaml"/>
-        <None Remove="Views\Content\Controls\TweetItem\TweetItemView.xaml"/>
-        <None Remove="Views\Content\UserProfile\UserProfileBackBar.xaml"/>
-        <None Remove="Views\Content\UserProfile\UserProfileBanner.xaml"/>
-        <None Remove="Views\Content\UserProfile\UserProfileFollowButton.xaml"/>
-        <None Remove="Views\Content\UserProfile\UserProfileInfo.xaml"/>
-        <None Remove="Views\Content\UserProfile\UserProfileMoreButton.xaml"/>
-        <None Remove="Views\Content\UserProfile\UserProfileName.xaml"/>
-        <None Remove="Views\Content\UserProfile\UserProfileTimeline.xaml"/>
-        <None Remove="Views\Content\UserProfile\UserProfileView.xaml"/>
-        <None Remove="Views\Content\Write\WriteEditSection.xaml"/>
-        <None Remove="Views\Content\Write\WriteView.xaml"/>
-        <None Remove="Views\MainWindow.xaml"/>
-        <None Remove="Views\MessageBox.xaml"/>
-        <None Remove="Views\TitleBar.xaml"/>
-        <None Remove="Assets\Windows\**"/>
+        <None Remove="app.ico" />
+        <None Remove="App.xaml" />
+        <None Remove="Assets\Accents.xaml" />
+        <None Remove="Assets\Button.xaml" />
+        <None Remove="Assets\Converters.xaml" />
+        <None Remove="Assets\DarkThemeOverrides.xaml" />
+        <None Remove="Assets\Fonts\foundation-icons.ttf" />
+        <None Remove="Assets\Fonts\winjs-symbols.ttf" />
+        <None Remove="Assets\LightThemeOverrides.xaml" />
+        <None Remove="Assets\Logo\loon.ico" />
+        <None Remove="Assets\ScrollBar.xaml" />
+        <None Remove="Assets\seguisym.ttf" />
+        <None Remove="Assets\Separator.xaml" />
+        <None Remove="Assets\Strings.xaml" />
+        <None Remove="Assets\TabItem.xaml" />
+        <None Remove="Assets\TextBlock.xaml" />
+        <None Remove="Assets\ToolTip.xaml" />
+        <None Remove="Assets\VerifiedBadge.xaml" />
+        <None Remove="Views\Content\AppSettings\BulletItem.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsAbout.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsCheckboxes.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsClearImageCache.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsDonate.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsFontSize.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsOpenSettings.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsSignOut.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsTips.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsTitle.xaml" />
+        <None Remove="Views\Content\AppSettings\SettingsView.xaml" />
+        <None Remove="Views\Content\AppView.xaml" />
+        <None Remove="Views\Content\Controls\Hyperlink.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemCompactView.xaml" />
+        <None Remove="Views\Content\GetPinView.xaml" />
+        <None Remove="Views\Content\MainView.xaml" />
+        <None Remove="Views\Content\Timelines\LikesTimelineView.xaml" />
+        <None Remove="Views\Content\Timelines\TimelineView.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemActions.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemAuthor.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemImage.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemProfileImage.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemQuoted.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemRelated.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemRetweetedBy.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemText.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemTranslate.xaml" />
+        <None Remove="Views\Content\Controls\TweetItem\TweetItemView.xaml" />
+        <None Remove="Views\Content\UserProfile\UserProfileBackBar.xaml" />
+        <None Remove="Views\Content\UserProfile\UserProfileBanner.xaml" />
+        <None Remove="Views\Content\UserProfile\UserProfileFollowButton.xaml" />
+        <None Remove="Views\Content\UserProfile\UserProfileInfo.xaml" />
+        <None Remove="Views\Content\UserProfile\UserProfileMoreButton.xaml" />
+        <None Remove="Views\Content\UserProfile\UserProfileName.xaml" />
+        <None Remove="Views\Content\UserProfile\UserProfileTimeline.xaml" />
+        <None Remove="Views\Content\UserProfile\UserProfileView.xaml" />
+        <None Remove="Views\Content\Write\WriteEditSection.xaml" />
+        <None Remove="Views\Content\Write\WriteView.xaml" />
+        <None Remove="Views\MainWindow.xaml" />
+        <None Remove="Views\MessageBox.xaml" />
+        <None Remove="Views\TitleBar.xaml" />
+        <None Remove="Assets\Windows\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="app.ico"/>
-        <AvaloniaResource Include="Assets\Fonts\foundation-icons.ttf"/>
-        <AvaloniaResource Include="Assets\Fonts\winjs-symbols.ttf"/>
+        <AvaloniaResource Include="app.ico" />
+        <AvaloniaResource Include="Assets\Fonts\foundation-icons.ttf" />
+        <AvaloniaResource Include="Assets\Fonts\winjs-symbols.ttf" />
     </ItemGroup>
 
     <ItemGroup>
@@ -268,25 +268,25 @@
         <AvaloniaXaml Include="Views\TitleBar.xaml">
             <Generator>MSBuild:Compile</Generator>
         </AvaloniaXaml>
-        <AvaloniaXaml Remove="Assets\Windows\**"/>
+        <AvaloniaXaml Remove="Assets\Windows\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="Assets\Logo\loon.ico"/>
+        <Content Include="Assets\Logo\loon.ico" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.10.13"/>
-        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.13"/>
-        <PackageReference Include="Jab" Version="0.6.4"/>
-        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.1.46">
+        <PackageReference Include="Avalonia" Version="0.10.14" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.14" />
+        <PackageReference Include="Jab" Version="0.6.4" />
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Twitter\Twitter.csproj"/>
+        <ProjectReference Include="..\Twitter\Twitter.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -425,10 +425,10 @@
         <Compile Update="Views\TitleBar.xaml.cs">
             <DependentUpon>TitleBar.xaml</DependentUpon>
         </Compile>
-        <Compile Remove="Assets\Windows\**"/>
+        <Compile Remove="Assets\Windows\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Remove="Assets\Windows\**"/>
+        <EmbeddedResource Remove="Assets\Windows\**" />
     </ItemGroup>
 </Project>
