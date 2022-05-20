@@ -278,7 +278,7 @@
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="0.10.14" />
         <PackageReference Include="Avalonia.Diagnostics" Version="0.10.14" />
-        <PackageReference Include="Jab" Version="0.6.4" />
+        <PackageReference Include="Jab" Version="0.7.0" />
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
