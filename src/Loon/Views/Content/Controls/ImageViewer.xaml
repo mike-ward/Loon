@@ -10,6 +10,7 @@
   Background="#80000000"
   PointerReleased="HideWindow"
   PointerWheelChanged="OnPointerWheelChanged"
+  KeyDown="OnKeyDown"
   ShowInTaskbar="False"
   SystemDecorations="None"
   Topmost="True"

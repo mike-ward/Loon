@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -48,8 +49,28 @@ namespace Loon.Views.Content.Controls
                 ? 1
                 : -1;
 
-            imageControl.Width  += Width * 0.05 * direction;
-            imageControl.Height += Height * 0.05 * direction;
+            var zoomFactor = 0.1 * direction;
+            var width      = imageControl.Width + Width * zoomFactor;
+            var height     = imageControl.Height + Height * zoomFactor;
+
+            if (width < 100 || height < 100) return;
+            imageControl.Width  = width;
+            imageControl.Height = height;
+        }
+
+        private void OnKeyDown(object? sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Down:
+                    ResizeImage(false);
+                    e.Handled = true;
+                    break;
+                case Key.Up:
+                    ResizeImage(true);
+                    e.Handled = true;
+                    break;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -26,18 +27,20 @@ namespace Loon
 
         public override void OnFrameworkInitializationCompleted()
         {
-            // Visual designer won't work otherwise
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            switch (ApplicationLifetime)
             {
-                RuntimeHelpers.RunClassConstructor(typeof(LongUrlService).TypeHandle);
-                desktop.MainWindow = ServiceProvider.GetService<MainWindow>();
-            }
-
-            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
-            {
-                Settings.Load();
-                DataContext                 = ServiceProvider.GetService<MainWindowViewModel>();
-                singleViewPlatform.MainView = new AppView();
+                case IClassicDesktopStyleApplicationLifetime desktop:
+                    // Visual designer won't work otherwise
+                    RuntimeHelpers.RunClassConstructor(typeof(LongUrlService).TypeHandle);
+                    desktop.MainWindow = ServiceProvider.GetService<MainWindow>();
+                    break;
+                case ISingleViewApplicationLifetime singleViewPlatform:
+                    Settings.Load();
+                    DataContext                 = ServiceProvider.GetService<MainWindowViewModel>();
+                    singleViewPlatform.MainView = new AppView();
+                    break;
+                default:
+                    throw new ApplicationException($"Unrecognized ApplicationLifeTime ({ApplicationLifetime})");
             }
 
             base.OnFrameworkInitializationCompleted();
