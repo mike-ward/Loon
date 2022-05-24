@@ -1,5 +1,7 @@
 ﻿<UserControl
   x:Class="Loon.Views.Content.Controls.TweetItem.TweetItemImage"
+  x:DataType="twitterModels:Entities"
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +9,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Loon.Models"
   xmlns:views="clr-namespace:Loon.Views"
-  xmlns:models1="clr-namespace:Twitter.Models;assembly=Twitter"
+  xmlns:twitterModels="clr-namespace:Twitter.Models;assembly=Twitter"
   d:DesignHeight="200"
   d:DesignWidth="300"
   mc:Ignorable="d">
@@ -15,7 +17,7 @@
   <ItemsControl Items="{Binding Media}">
 
     <ItemsControl.ItemTemplate>
-      <DataTemplate DataType="models1:Media">
+      <DataTemplate DataType="twitterModels:Media">
         <Grid PointerPressed="OpenInViewer">
 
           <Grid.IsVisible>
@@ -48,7 +50,7 @@
                 Converter="{StaticResource MultiBool}"
                 FallbackValue="False">
                 <Binding Converter="{StaticResource MediaHasVideo}" />
-                <Binding
+                <ReflectionBinding
                   Converter="{x:Static ObjectConverters.IsNotNull}"
                   ElementName="Image"
                   Path="Source" />
