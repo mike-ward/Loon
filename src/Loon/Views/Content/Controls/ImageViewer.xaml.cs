@@ -45,13 +45,12 @@ namespace Loon.Views.Content.Controls
 
         private void ResizeImage(bool larger)
         {
-            var direction = larger
-                ? 1
-                : -1;
+            var zoomFactor = larger
+                ? 0.1
+                : -0.1;
 
-            var zoomFactor = 0.1 * direction;
-            var width      = imageControl.Width + Width * zoomFactor;
-            var height     = imageControl.Height + Height * zoomFactor;
+            var width  = imageControl.Width + Width * zoomFactor;
+            var height = imageControl.Height + Height * zoomFactor;
 
             if (width < 100 || height < 100) return;
             imageControl.Width  = width;
