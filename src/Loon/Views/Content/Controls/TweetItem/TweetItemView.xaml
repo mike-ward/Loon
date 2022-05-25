@@ -10,9 +10,19 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Twitter.Models;assembly=Twitter"
   MinHeight="2"
+  IsVisible="False"
+  Opacity="0.0"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
+
+  <UserControl.Transitions>
+    <Transitions>
+      <DoubleTransition Property="Opacity"
+                        Delay="0:0:0.25"
+                        Duration="0:0:1" />
+    </Transitions>
+  </UserControl.Transitions>
 
   <Grid ColumnDefinitions="Auto,*">
 

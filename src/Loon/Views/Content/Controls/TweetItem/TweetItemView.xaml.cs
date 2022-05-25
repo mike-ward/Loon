@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -40,18 +41,40 @@ namespace Loon.Views.Content.Controls.TweetItem
                 {
                     try
                     {
-                        status.OriginatingStatus.RelatedLinkInfo ??= await RelatedLinkInfo
-                           .GetRelatedLinkInfoAsync(status.OriginatingStatus, CancellationTokenSource.Token);
+                        var relatedLinkInfo = status.OriginatingStatus.RelatedLinkInfo ??
+                                              await RelatedLinkInfo.GetRelatedLinkInfoAsync(status.OriginatingStatus, CancellationTokenSource.Token);
+
+                        // Cut down on janking by preloading stuff
+                        await PreloadImages(status.OriginatingStatus.ExtendedEntities?.Media);
+                        await PreloadImages(relatedLinkInfo?.ImageTwitterStatus.ExtendedEntities?.Media);
+                        await PreloadImages(status.OriginatingStatus.QuotedStatus?.ExtendedEntities?.Media);
+
+                        status.OriginatingStatus.RelatedLinkInfo = relatedLinkInfo;
                     }
                     catch (TaskCanceledException)
                     {
                         // expected
+                    }
+                    finally
+                    {
+                        IsVisible = true;
+                        Opacity = 1.0;
                     }
                 }
             }
             catch (Exception ex)
             {
                 TraceService.Message(ex.Message);
+            }
+        }
+        
+        private async ValueTask PreloadImages(Media[]? media)
+        {
+            if (media is null) return;
+
+            foreach (var item in media)
+            {
+                var unused = await ImageService.GetImageAsync(item.MediaUrl, CancellationTokenSource.Token);
             }
         }
 
