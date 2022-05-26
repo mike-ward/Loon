@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Layout;
 using Loon.Converters;
 using Loon.Extensions;
 using Loon.Interfaces;
@@ -126,7 +127,9 @@ namespace Loon.Services
         {
             var textBlock = new TextBlock();
             textBlock.Classes.Add("normal");
-            textBlock.Text = text.HtmlDecode();
+            textBlock.Text              = text.HtmlDecode();
+            textBlock.VerticalAlignment = VerticalAlignment.Top;
+            textBlock.HorizontalAlignment = HorizontalAlignment.Left;
             return textBlock;
         }
 
@@ -163,9 +166,11 @@ namespace Loon.Services
         {
             var button = new Button();
             button.Classes.Add("inline");
-            button.Command          = command;
-            button.CommandParameter = commandParameter;
-            button.ContextMenu      = contextMenu;
+            button.Command             = command;
+            button.CommandParameter    = commandParameter;
+            button.ContextMenu         = contextMenu;
+            button.VerticalAlignment   = VerticalAlignment.Top;
+            button.HorizontalAlignment = HorizontalAlignment.Left;
 
             var textBlock = new TextBlock();
             textBlock.Classes.Add("hyperlink");
