@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -37,45 +37,48 @@ namespace Loon.Views.Content.Controls.TweetItem
                 CancellationTokenSource.Dispose();
                 CancellationTokenSource = new CancellationTokenSource();
 
-                if (DataContext is TwitterStatus status)
+                if (DataContext is not TwitterStatus status) return;
+
+                try
                 {
-                    try
-                    {
-                        var relatedLinkInfo = status.OriginatingStatus.RelatedLinkInfo ??
-                                              await RelatedLinkInfo.GetRelatedLinkInfoAsync(status.OriginatingStatus, CancellationTokenSource.Token);
-
-                        // Cut down on janking by preloading stuff
-                        await PreloadImages(status.OriginatingStatus.ExtendedEntities?.Media);
-                        await PreloadImages(relatedLinkInfo?.ImageTwitterStatus.ExtendedEntities?.Media);
-                        await PreloadImages(status.OriginatingStatus.QuotedStatus?.ExtendedEntities?.Media);
-
-                        status.OriginatingStatus.RelatedLinkInfo = relatedLinkInfo;
-                    }
-                    catch (TaskCanceledException)
-                    {
-                        // expected
-                    }
-                    finally
-                    {
-                        IsVisible = true;
-                        Opacity = 1.0;
-                    }
+                    await Task.WhenAll(
+                        GetRelatedLinkInfoAsync(status),
+                        PreloadImagesAsync(status.OriginatingStatus.ExtendedEntities?.Media),
+                        PreloadImagesAsync(status.OriginatingStatus.QuotedStatus?.ExtendedEntities?.Media));
                 }
+                finally
+                {
+                    IsVisible = true;
+                    Opacity   = 1.0;
+                }
+            }
+            catch (TaskCanceledException)
+            {
+                // expected, nothing to do
             }
             catch (Exception ex)
             {
                 TraceService.Message(ex.Message);
             }
         }
-        
-        private async ValueTask PreloadImages(Media[]? media)
+
+        private async Task GetRelatedLinkInfoAsync(TwitterStatus status)
+        {
+            var relatedLinkInfo =
+                status.OriginatingStatus.RelatedLinkInfo ??
+                await RelatedLinkInfo.GetRelatedLinkInfoAsync(status.OriginatingStatus, CancellationTokenSource.Token);
+
+            await PreloadImagesAsync(relatedLinkInfo?.ImageTwitterStatus.ExtendedEntities?.Media);
+            status.OriginatingStatus.RelatedLinkInfo = relatedLinkInfo;
+        }
+
+        private async Task PreloadImagesAsync(Media[]? media)
         {
             if (media is null) return;
-
-            foreach (var item in media)
-            {
-                var unused = await ImageService.GetImageAsync(item.MediaUrl, CancellationTokenSource.Token);
-            }
+            
+            // Cut down on janking by preloading stuff
+            await Task.WhenAll(media.Select(
+                async m => await ImageService.GetImageAsync(m.MediaUrl, CancellationTokenSource.Token)));
         }
 
         protected override void OnPointerPressed(PointerPressedEventArgs e)
