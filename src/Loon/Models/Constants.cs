@@ -6,5 +6,7 @@
         public const double ImagePanelHeight = 190;
 
         public const int WebRequestTimeout = 15 * 1000;
+
+        public const int MaxNumberOfStatuses = 75;
     }
 }

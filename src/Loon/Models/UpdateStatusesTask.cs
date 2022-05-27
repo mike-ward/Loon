@@ -34,8 +34,20 @@ namespace Loon.Models
                 }
             }
 
-            timeline.StatusCollection.InsertRange(0, latest);
+            TruncatePendingStatuses(timeline);
+            timeline.StatusCollection.InsertRange(0, latest.Take(Constants.MaxNumberOfStatuses));
             return default;
+        }
+
+        private static void TruncatePendingStatuses(Timeline timeline)
+        {
+            var truncateCount = timeline.PendingStatusCollection.Count - Constants.MaxNumberOfStatuses;
+            if (truncateCount <= 0) return;
+
+            foreach (var item in timeline.PendingStatusCollection.TakeLast(truncateCount))
+            {
+                timeline.PendingStatusCollection.Remove(item);
+            }
         }
     }
 }
