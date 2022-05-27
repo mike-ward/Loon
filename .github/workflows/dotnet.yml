@@ -6,12 +6,12 @@ on:
   pull_request:
     branches: [ main ]
 env:
-  WINDOWS_PACKAGE_PATH: '/home/runner/work/Loon/Loon/src/Loon.Desktop/bin/Release/net6.0/win-x86/publish/'
+  WINDOWS_PACKAGE_PATH: 'src\Loon.Desktop\bin\Release\net6.0\win-x86\publish\'
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -22,13 +22,13 @@ jobs:
         include-prerelease: true
 
     - name: Restore dependencies
-      run: dotnet restore ./src/Loon.sln
+      run: dotnet restore .\src\Loon.sln
 
     - name: Build
-      run: dotnet build ./src/Loon.sln -c Release --no-restore
+      run: dotnet build .\src\Loon.sln -c Release --no-restore
 
     - name: Publish Windows
-      run: dotnet publish ./src/Loon.Desktop --runtime win-x86 --self-contained true -c=Release /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:PublishReadyToRun=true
+      run: dotnet publish .\src\Loon.Desktop --runtime win-x86 --self-contained true -c=Release /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:PublishReadyToRun=true
 
     - name: Build oon-win-x86.zip
       uses: actions/upload-artifact@v1.0.0
