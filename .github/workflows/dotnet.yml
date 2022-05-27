@@ -28,7 +28,7 @@ jobs:
       run: dotnet build ./src/Loon.sln -c Release --no-restore
 
     - name: Publish Windows
-      run: dotnet publish ./src/Loon.Desktop --runtime win-x86 --self-contained true -c=Release /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+      run: dotnet publish ./src/Loon.Desktop --runtime win-x86 --self-contained true -c=Release /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:PublishReadyToRun=true
 
     - name: Build oon-win-x86.zip
       uses: actions/upload-artifact@v1.0.0
