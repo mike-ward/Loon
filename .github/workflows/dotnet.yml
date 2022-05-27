@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 env:
-  WINDOWS_PACKAGE_PATH: '/a/Loon/Loon/Loon.Desktop/bin/Release/net6.0/win-x64/publish/'
+  WINDOWS_PACKAGE_PATH: '/home/runner/work/Loon/Loon/src/Loon.Desktop/bin/Release/net6.0/win-x86/publish/'
 
 jobs:
   build:
@@ -28,12 +28,12 @@ jobs:
       run: dotnet build ./src/Loon.sln -c Release --no-restore
 
     - name: Publish Windows
-      run: dotnet publish .\src\Loon.Desktop --runtime win-x86 --self-contained true -c=Release /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+      run: dotnet publish ./src/Loon.Desktop --runtime win-x86 --self-contained true -c=Release /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
 
-    - name: Build oon-Win-X86.zip
+    - name: Build oon-win-x86.zip
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: Loon-Win-X86.zip
+        name: Loon-win-x86.zip
         path: ${{ env.WINDOWS_PACKAGE_PATH }}
 
 
