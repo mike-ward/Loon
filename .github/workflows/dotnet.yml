@@ -7,6 +7,7 @@ on:
     branches: [ main ]
 env:
   WINDOWS_PACKAGE_PATH: 'src\Loon.Desktop\bin\Release\net6.0\win-x86\publish\'
+  LINUX_PACKAGE_PATH:   'src\Loon.Desktop\bin\Release\net6.0\linux-x64\publish\'
 
 jobs:
   build:
@@ -24,10 +25,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore .\src\Loon.sln
 
-    - name: Build
-      run: dotnet build .\src\Loon.sln -c Release --no-restore
-
-    - name: Publish Windows
+    - name: Publish for Windows
       run: dotnet publish .\src\Loon.Desktop --runtime win-x86 --self-contained true -c=Release /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:PublishReadyToRun=true
 
     - name: Build Loon-win-x86.zip
@@ -35,5 +33,14 @@ jobs:
       with:
         name: Loon-win-x86.zip
         path: ${{ env.WINDOWS_PACKAGE_PATH }}
+
+    - name: Publish for Linux
+      run: dotnet publish .\src\Loon.Desktop --runtime linux-x64 --self-contained true -c=Release /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true /p:PublishReadyToRun=true
+
+    - name: Build Loon-linux-x64.zip
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: Loon-linux-x64.zip
+        path: ${{ env.LINUX_PACKAGE_PATH }}
 
 
