@@ -24,6 +24,10 @@
         <Version>2022.0.1</Version>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;Windows32</DefineConstants>
+    </PropertyGroup>
+
     <ItemGroup>
         <None Remove="app.ico" />
         <None Remove="App.xaml" />

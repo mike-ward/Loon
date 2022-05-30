@@ -6,6 +6,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Loon.Extensions;
 using Loon.Interfaces;
+#if Windows32
+using Loon.Services;
+#endif
 
 namespace Loon.Models
 {
@@ -175,11 +178,6 @@ namespace Loon.Models
 
         public ObservableHashSet<string> HiddenImagesSet { get; set; } = new();
 
-        [JsonIgnore]
-        public string SettingsFilePath => Path.Combine(
-            AppContext.BaseDirectory,
-            $"{Profile}.settings.txt");
-
         public void Load()
         {
             try
@@ -200,8 +198,31 @@ namespace Loon.Models
 
         public void Save()
         {
+            var directory = new FileInfo(SettingsFilePath).Directory;
+            if (directory!.Exists is false) directory.Create();
+
             var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(SettingsFilePath, json);
+        }
+
+        private string? cachedSettingsFilePath;
+
+        [JsonIgnore]
+        public string SettingsFilePath
+        {
+            get
+            {
+                #if Windows32
+                return cachedSettingsFilePath ??= Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    $"Loon-{SystemState.ApplicationName}",
+                    $"{Profile}.settings.txt");
+                #else
+                return cachedSettingsFilePath ??= Path.Combine(
+                    AppContext.BaseDirectory,
+                    $"{Profile}.settings.txt");
+                #endif
+            }
         }
     }
 }

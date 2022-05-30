@@ -43,7 +43,7 @@ namespace Loon.Services
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private static string      ApplicationName          => ComputeMD5(AppContext.BaseDirectory);
+        public  static string      ApplicationName          => ComputeMD5(AppContext.BaseDirectory);
         private static string      ComputeMD5(string input) => Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(input)));
         private static RegistryKey OpenStartupSubKey()      => Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
     }
