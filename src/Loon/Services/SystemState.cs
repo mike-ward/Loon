@@ -1,12 +1,12 @@
-﻿using Loon.Interfaces;
+﻿using System;
+using System.Security.Cryptography;
+using System.Text;
+using Loon.Interfaces;
 
 namespace Loon.Services
 {
     #if Windows32
-    using System;
     using System.ComponentModel;
-    using System.Security.Cryptography;
-    using System.Text;
     using Microsoft.Win32;
 
 #pragma warning disable CA1416
@@ -49,7 +49,7 @@ namespace Loon.Services
 
     #else
     using Loon.Models;
-    
+
     public sealed class SystemState : NotifyPropertyChanged, ISystemState
     {
         private bool isRegisteredInStartup;
@@ -59,6 +59,9 @@ namespace Loon.Services
             get => isRegisteredInStartup;
             set => SetProperty(ref isRegisteredInStartup, false);
         }
+
+        public static  string      ApplicationNameHash      => ComputeMD5(AppContext.BaseDirectory);
+        private static string      ComputeMD5(string input) => Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(input)));
     }
     #endif
 }
