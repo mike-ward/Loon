@@ -6,9 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Loon.Extensions;
 using Loon.Interfaces;
-#if Windows32
 using Loon.Services;
-#endif
 
 namespace Loon.Models
 {
@@ -212,16 +210,10 @@ namespace Loon.Models
         {
             get
             {
-                #if Windows32
                 return cachedSettingsFilePath ??= Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    $"Loon-{SystemState.ApplicationName}",
+                    $"Loon-{SystemState.ApplicationNameHash}",
                     $"{Profile}.settings.txt");
-                #else
-                return cachedSettingsFilePath ??= Path.Combine(
-                    AppContext.BaseDirectory,
-                    $"{Profile}.settings.txt");
-                #endif
             }
         }
     }
