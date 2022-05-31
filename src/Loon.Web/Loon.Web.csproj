@@ -5,6 +5,9 @@
         <!--Temporal hack that fixes compilation in VS-->
         <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
         <RuntimeIdentifiers>browser-wasm</RuntimeIdentifiers>
+        <EmbedAllSources>true</EmbedAllSources>
+        <DebugType>embedded</DebugType>
+        <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
 
     <!-- In debug, make builds faster by reducing optimizations -->
