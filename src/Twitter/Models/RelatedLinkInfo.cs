@@ -103,9 +103,10 @@ namespace Twitter.Models
             using var reader = new StreamReader(await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false), Encoding.UTF8);
             if (cancellationToken.IsCancellationRequested) return null;
 
-            var htmlBuilder = new StringBuilder();
+            var       htmlBuilder = new StringBuilder();
+            const int tenMB       = 10_000_000; // not interested if head section is too big.
 
-            while (true)
+            while (htmlBuilder.Length < tenMB)
             {
                 if (cancellationToken.IsCancellationRequested) return null;
                 var line = await reader.ReadLineAsync().ConfigureAwait(false);
