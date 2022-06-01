@@ -6,9 +6,11 @@ namespace Twitter.Services
 {
     internal static class TwitterOptions
     {
+        public const  int              MaxTweets = 75;
+        
         public static (string, string) Id(string Id) => ("id", Id);
 
-        public static (string, string) Count(int count = 150) => ("count", count.ToString(CultureInfo.InvariantCulture));
+        public static (string, string) Count(int count = MaxTweets) => ("count", count.ToString(CultureInfo.InvariantCulture));
 
         public static (string, string) SinceId(ulong sinceId) => ("since_id", sinceId.ToString(CultureInfo.InvariantCulture));
 
@@ -48,7 +50,7 @@ namespace Twitter.Services
 
         public static (string, string) UserIds(IEnumerable<string> userIds) => ("user_id", string.Join(',', userIds));
 
-        public static (string, string)[] Default(int count = 75) => new[]
+        public static (string, string)[] Default(int count = MaxTweets) => new[]
         {
             Count(count),
             IncludeRetweets(),

@@ -180,6 +180,7 @@ namespace Loon.Models
         {
             try
             {
+                Console.WriteLine(SettingsFilePath);
                 var json     = File.ReadAllText(SettingsFilePath);
                 var settings = JsonSerializer.Deserialize<Settings>(json)!;
                 settings.CopyPropertiesTo(this);

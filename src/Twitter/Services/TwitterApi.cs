@@ -114,7 +114,7 @@ namespace Twitter.Services
                .GetAsync<Tweet>("https://api.twitter.com/1.1/search/tweets.json",
                     new[]
                     {
-                        TwitterOptions.Count(100),
+                        TwitterOptions.Count(TwitterOptions.MaxTweets),
                         TwitterOptions.Query(query),
                         TwitterOptions.IncludeEntities(),
                         TwitterOptions.ExtendedTweetMode()
@@ -257,12 +257,14 @@ namespace Twitter.Services
 
         public async ValueTask<IEnumerable<TwitterStatus>> GetUserTimeline(string screenName)
         {
+            const int MaxTweets = 20;
+            
             return await oAuthApiRequest
                .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/statuses/user_timeline.json",
                     new[]
                     {
                         TwitterOptions.ScreenName(screenName),
-                        TwitterOptions.Count(50),
+                        TwitterOptions.Count(MaxTweets),
                         TwitterOptions.IncludeEntities(),
                         TwitterOptions.IncludeRetweets(),
                         TwitterOptions.ExtendedTweetMode()

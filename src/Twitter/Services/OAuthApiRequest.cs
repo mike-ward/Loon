@@ -71,7 +71,7 @@ namespace Twitter.Services
             var authorizeHeader  = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
             var parameterStrings = parray.Select(p => $"{OAuth.UrlEncode(p.Item1)}={OAuth.UrlEncode(p.Item2)}");
 
-            var request = new HttpRequestMessage();
+            using var request = new HttpRequestMessage();
             request.Headers.Add("Authorization", authorizeHeader);
 
             if (isPost)
@@ -121,7 +121,7 @@ namespace Twitter.Services
             var          signature       = OAuth.Signature(POST, uploadUrl, nonce, timestamp, ConsumerKey!, ConsumerSecret!, AccessToken!, AccessTokenSecret!, null);
             var          authorizeHeader = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
 
-            var request = new HttpRequestMessage();
+            using var request = new HttpRequestMessage();
             request.Headers.Add("Authorization", authorizeHeader);
             request.Method = HttpMethod.Post;
 

@@ -19,7 +19,7 @@ namespace Twitter.Services
             var          signature           = OAuth.Signature(OAuthApiRequest.POST, requestTokenUrl, nonce, timestamp, consumerKey, consumerSecret, "", "", parameters);
             var          authorizationHeader = OAuth.AuthorizationHeader(nonce, timestamp, consumerKey, null, signature, parameters);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, new Uri(requestTokenUrl));
+            using var request = new HttpRequestMessage(HttpMethod.Post, new Uri(requestTokenUrl));
             request.Headers.Add("Authorization", authorizationHeader);
             using var response = await OAuthApiRequest.MyHttpClient.SendAsync(request).ConfigureAwait(false);
 
@@ -55,7 +55,7 @@ namespace Twitter.Services
             var          signature           = OAuth.Signature(OAuthApiRequest.POST, requestTokenUrl, nonce, timestamp, consumerKey, consumerSecret, accessToken, accessTokenSecret, parameters);
             var          authorizationHeader = OAuth.AuthorizationHeader(nonce, timestamp, consumerKey, accessToken, signature, parameters);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, new Uri(requestTokenUrl));
+            using var request = new HttpRequestMessage(HttpMethod.Post, new Uri(requestTokenUrl));
             request.Headers.Add("Authorization", authorizationHeader);
 
             using var response = await OAuthApiRequest.MyHttpClient.SendAsync(request).ConfigureAwait(false);
