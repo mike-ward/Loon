@@ -39,6 +39,7 @@ namespace Loon.ViewModels.Content.Timelines
         {
             yield return _ => ImageMemoryCacheService.PruneCache();
             yield return timeline => GetAndUpdateStatusesAsync(timeline);
+            yield return timeline => DonateNagStatusTask.Execute(timeline);
             yield return timeline => TruncateStatusCollectionTask.Execute(timeline);
             yield return timeline => UpdateTimeStampsTask.Execute(timeline);
             yield return timeline => GCTask.Execute(timeline);

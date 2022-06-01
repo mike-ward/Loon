@@ -9,7 +9,7 @@ namespace Loon.Models
     {
         public static ValueTask Execute(IEnumerable<TwitterStatus> statuses, Timeline timeline)
         {
-            var current = new HashSet<TwitterStatus>(timeline.StatusCollection); // faster lookups
+            var current = new HashSet<TwitterStatus>(timeline.StatusCollection.Where(status => status.Id != DonateNagStatus.DonateNagStatusId)); // faster lookups
             var latest  = new List<TwitterStatus>();
 
             foreach (var status in statuses.OrderByDescending(status => status.CreatedDate))

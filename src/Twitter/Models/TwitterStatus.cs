@@ -12,7 +12,7 @@ using Twitter.Services;
 namespace Twitter.Models
 {
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public sealed class TwitterStatus : INotifyPropertyChanged
+    public class TwitterStatus : INotifyPropertyChanged
     {
         private int              replyCount;
         private int              retweetCount;
@@ -182,14 +182,16 @@ namespace Twitter.Models
         public bool IsMyTweet { get; set; }
 
         public bool MentionsMe { get; set; }
-
+        
+        public const string TwitterDateTimeFormat = "ddd MMM dd HH:mm:ss zzz yyyy";
+            
         public static DateTime ParseTwitterDate(string? s)
         {
             return string.IsNullOrWhiteSpace(s)
                 ? default
                 : DateTime.ParseExact(
                     s,
-                    "ddd MMM dd HH:mm:ss zzz yyyy",
+                    TwitterDateTimeFormat,
                     CultureInfo.InvariantCulture,
                     DateTimeStyles.AdjustToUniversal);
         }
