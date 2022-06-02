@@ -72,12 +72,12 @@ namespace Loon.Views.Content.Controls.TweetItem
             status.OriginatingStatus.RelatedLinkInfo = relatedLinkInfo;
         }
 
-        private async Task PreloadImagesAsync(Media[]? media)
+        private Task PreloadImagesAsync(Media[]? media)
         {
-            if (media is null) return;
+            if (media is null) return Task.CompletedTask;
             
             // Cut down on janking by preloading stuff
-            await Task.WhenAll(media.Select(
+            return Task.WhenAll(media.Select(
                 async m => await ImageService.GetImageAsync(m.MediaUrl, CancellationTokenSource.Token)));
         }
 
