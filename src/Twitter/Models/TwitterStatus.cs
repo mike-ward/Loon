@@ -130,7 +130,7 @@ namespace Twitter.Models
         }
 
         [JsonIgnore]
-        public string? OverrideLink { get; set; }
+        protected string? OverrideLink { get; init; }
 
         [JsonIgnore]
         public RelatedLinkInfo? RelatedLinkInfo

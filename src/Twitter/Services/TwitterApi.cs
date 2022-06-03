@@ -114,7 +114,7 @@ namespace Twitter.Services
                .GetAsync<Tweet>("https://api.twitter.com/1.1/search/tweets.json",
                     new[]
                     {
-                        TwitterOptions.Count(TwitterOptions.MaxTweets),
+                        TwitterOptions.Count(),
                         TwitterOptions.Query(query),
                         TwitterOptions.IncludeEntities(),
                         TwitterOptions.ExtendedTweetMode()

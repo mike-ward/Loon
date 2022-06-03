@@ -20,12 +20,12 @@ namespace Twitter.Models
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public sealed class RelatedLinkInfo
     {
-        public string  Url         { get; private set; } = string.Empty;
-        public string  Title       { get; private set; } = string.Empty;
+        public string  Url         { get; private init; } = string.Empty;
+        public string  Title       { get; private set; }  = string.Empty;
         public string? ImageUrl    { get; private set; }
-        public string  Description { get; private set; } = string.Empty;
-        public string  SiteName    { get; private set; } = string.Empty;
-        public string  Language    { get; private set; } = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        public string  Description { get; private set; }  = string.Empty;
+        public string  SiteName    { get; private set; }  = string.Empty;
+        public string  Language    { get; private init; } = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
         public TwitterStatus ImageTwitterStatus =>
             new()
@@ -235,7 +235,7 @@ namespace Twitter.Models
         {
             if (source.Length > length)
             {
-                source = source.Substring(0, length);
+                source = source[..length];
             }
 
             return source;

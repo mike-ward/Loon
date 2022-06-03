@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Avalonia.Data.Converters;
+using Loon.Extensions;
 
 namespace Loon.Converters
 {
@@ -10,10 +11,7 @@ namespace Loon.Converters
         {
             var       text      = value as string ?? string.Empty;
             const int maxLength = 300;
-
-            return text.Length > maxLength
-                ? string.Concat(text.AsSpan(0, maxLength), "…")
-                : text;
+            return text.TruncateWithEllipsis(maxLength);
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

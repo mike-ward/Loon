@@ -9,7 +9,7 @@ namespace Twitter.Services
 {
     // Twitter has deprecated information about following and followed by
     // statuses in the Tweet object. It can still be had by looking up the user
-    // info using their API but of course its rate limited. This class creates a
+    // info using their API but of course it's rate limited. This class creates a
     // dictionary and keeps it updated as much as it can given the rate limits.
 
     internal static class UserConnectionsService
@@ -18,7 +18,7 @@ namespace Twitter.Services
         private static          int                                          lastIndex;
         private static readonly ConcurrentDictionary<string, UserConnection> UserConnectionsDirectory = new(StringComparer.Ordinal);
 
-        public static async Task UpdateUserConnectionsAsync(TwitterApi twitterApi)
+        private static async Task UpdateUserConnectionsAsync(TwitterApi twitterApi)
         {
             try
             {
