@@ -8,12 +8,11 @@ using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace Loon.Converters
 {
-    [SuppressMessage("ReSharper", "HeapView.BoxingAllocation")]
     internal sealed class BooleanToDynamicResourceConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is true &&
+            if (value is bool and true &&
                 parameter is DynamicResourceExtension { ResourceKey: { } } resource)
             {
                 return Application.Current is not null

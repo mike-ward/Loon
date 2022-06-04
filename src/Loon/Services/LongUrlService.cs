@@ -65,7 +65,7 @@ namespace Loon.Services
             try
             {
                 var control = e.Sender as TextBlock;
-                if (control?.Tag is string link && e.NewValue is true)
+                if (control?.Tag is string link && e.NewValue is bool and true)
                 {
                     var tip = await TryGetLongUrlAsync(link);
                     control.SetValue(ToolTip.TipProperty, tip);

@@ -34,5 +34,10 @@ namespace Loon.Services
 
             return default;
         }
+
+        public static void ClearCache()
+        {
+            imageMemoryCache.Clear();
+        }
     }
 }
