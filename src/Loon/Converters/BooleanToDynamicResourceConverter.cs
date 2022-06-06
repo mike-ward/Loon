@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
 using Avalonia.Markup.Xaml.MarkupExtensions;
+// ReSharper disable HeapView.BoxingAllocation
 
 namespace Loon.Converters
 {
@@ -12,7 +12,7 @@ namespace Loon.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is bool and true &&
+            if (value is true &&
                 parameter is DynamicResourceExtension { ResourceKey: { } } resource)
             {
                 return Application.Current is not null

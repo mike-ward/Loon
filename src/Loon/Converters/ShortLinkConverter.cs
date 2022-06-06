@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using Avalonia.Data.Converters;
+// ReSharper disable HeapView.BoxingAllocation
 
 namespace Loon.Converters
 {
@@ -8,7 +9,7 @@ namespace Loon.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return value is bool and true
+            return value is true
                 ? App.GetString("short-link-text")
                 : parameter;
         }

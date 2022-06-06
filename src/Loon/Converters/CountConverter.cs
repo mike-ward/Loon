@@ -14,15 +14,15 @@ namespace Loon.Converters
             }
 
             const string space = " ";
-            const double k     = 1000;
-            const double m     = k * k;
+            const double kb    = 1000;
+            const double mb    = kb * kb;
 
             return count switch
             {
                 0        => space,
                 < 999    => count.ToString(CultureInfo.InvariantCulture),
-                < 999999 => (count / k).ToString("#.#K", CultureInfo.InvariantCulture),      
-                _        => (count / m).ToString("#.#M", CultureInfo.InvariantCulture) 
+                < 999999 => (count / kb).ToString("#.#K", CultureInfo.InvariantCulture),
+                _        => (count / mb).ToString("#.#M", CultureInfo.InvariantCulture)
             };
         }
 
