@@ -110,12 +110,13 @@ namespace Twitter.Models
             {
                 if (cancellationToken.IsCancellationRequested) return null;
                 var line = await reader.ReadLineAsync().ConfigureAwait(false);
-                if (line is null || cancellationToken.IsCancellationRequested) return null;
-                htmlBuilder.AppendLine(line);
+                if (line is null) break;
+                var chunk = line[..tenMB];
+                htmlBuilder.AppendLine(chunk);
 
                 // No need to parse the whole document, only interested in head section
                 const string headCloseTag = "</head>";
-                if (line.Contains(headCloseTag, StringComparison.OrdinalIgnoreCase)) break;
+                if (chunk.Contains(headCloseTag, StringComparison.OrdinalIgnoreCase)) break;
             }
 
             var metaInfo = ParseForSocialTags(url, $"{htmlBuilder}</html>", cancellationToken);
@@ -142,7 +143,7 @@ namespace Twitter.Models
 
             var metaTags = document.DocumentNode.SelectNodes("//meta");
             if (cancellationToken.IsCancellationRequested) return null;
-            var metaInfo = new RelatedLinkInfo { Url = url, Language = Truncate(language, 2) };
+            var metaInfo = new RelatedLinkInfo { Url = url, Language = language[..2] };
 
             if (metaTags is not null)
             {
@@ -229,16 +230,6 @@ namespace Twitter.Models
         {
             // Twice to handle sequences like: "&amp;mdash;"
             return WebUtility.HtmlDecode(WebUtility.HtmlDecode(text)) ?? string.Empty;
-        }
-
-        private static string Truncate(string source, int length)
-        {
-            if (source.Length > length)
-            {
-                source = source[..length];
-            }
-
-            return source;
         }
     }
 }

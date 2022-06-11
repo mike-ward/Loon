@@ -57,10 +57,9 @@ namespace Loon.Models
             Settings.PropertyChanged += CheckAuthentication;
         }
 
-        [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
-        private async void UpdateTimerTick(object? sender, EventArgs e)
+        private void UpdateTimerTick(object? sender, EventArgs e)
         {
-            await UpdateAsync().ConfigureAwait(false);
+            var unused = UpdateAsync();
         }
 
         public async ValueTask UpdateAsync()
@@ -99,7 +98,7 @@ namespace Loon.Models
         {
             try
             {
-                if (!e.PropertyName.IsEqualTo(nameof(ISettings.IsAuthenticated))) return;
+                if (e.PropertyName.IsNotEqualTo(nameof(ISettings.IsAuthenticated))) return;
 
                 if (Settings.IsAuthenticated)
                 {

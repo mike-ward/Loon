@@ -253,7 +253,7 @@ namespace Twitter.Models
         //
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void SetProperty<T>(ref T item, T value, [CallerMemberName] string? propertyName = null)
+        private void SetProperty<T>([NotNullIfNotNull("value")]ref T item, T value, [CallerMemberName] string? propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(item, value)) return;
             item = value;
