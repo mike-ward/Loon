@@ -103,27 +103,14 @@ namespace Twitter.Models
             using var reader = new StreamReader(await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false), Encoding.UTF8);
             if (cancellationToken.IsCancellationRequested) return null;
 
-            var       htmlBuilder = new StringBuilder();
-            const int tenMB       = 10_000_000; // not interested if head section is too big.
+            var buffer   = new char[40_000]; // avoid LOH
+            var length   = await reader.ReadAsync(buffer, cancellationToken);
+            var html     = new string(buffer, 0, length) + "</html>";
+            var metaInfo = ParseForSocialTags(url, html, cancellationToken);
 
-            while (htmlBuilder.Length < tenMB)
-            {
-                if (cancellationToken.IsCancellationRequested) return null;
-                var line = await reader.ReadLineAsync().ConfigureAwait(false);
-                if (line is null) break;
-                var chunk = line[..tenMB];
-                htmlBuilder.AppendLine(chunk);
-
-                // No need to parse the whole document, only interested in head section
-                const string headCloseTag = "</head>";
-                if (chunk.Contains(headCloseTag, StringComparison.OrdinalIgnoreCase)) break;
-            }
-
-            var metaInfo = ParseForSocialTags(url, $"{htmlBuilder}</html>", cancellationToken);
-
-            return !string.IsNullOrEmpty(metaInfo?.Title) && !string.IsNullOrEmpty(metaInfo.Description)
-                ? metaInfo
-                : null;
+            return string.IsNullOrEmpty(metaInfo?.Title) || string.IsNullOrEmpty(metaInfo.Description)
+                ? null
+                : metaInfo;
         }
 
         private static RelatedLinkInfo? ParseForSocialTags(string url, string html, CancellationToken cancellationToken)
@@ -143,7 +130,7 @@ namespace Twitter.Models
 
             var metaTags = document.DocumentNode.SelectNodes("//meta");
             if (cancellationToken.IsCancellationRequested) return null;
-            var metaInfo = new RelatedLinkInfo { Url = url, Language = language[..2] };
+            var metaInfo = new RelatedLinkInfo { Url = url, Language = Truncate(language, 2) };
 
             if (metaTags is not null)
             {
@@ -230,6 +217,13 @@ namespace Twitter.Models
         {
             // Twice to handle sequences like: "&amp;mdash;"
             return WebUtility.HtmlDecode(WebUtility.HtmlDecode(text)) ?? string.Empty;
+        }
+
+        private static string Truncate(string text, int length)
+        {
+            return text.Length > length
+                ? text[..length]
+                : text;
         }
     }
 }
