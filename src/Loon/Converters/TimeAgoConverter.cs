@@ -11,7 +11,7 @@ namespace Loon.Converters
             var time = value is DateTime val
                 ? val
                 : default;
-            
+
             var timespan = DateTime.UtcNow - time;
 
             return timespan switch

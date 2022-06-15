@@ -127,8 +127,8 @@ namespace Loon.Services
         {
             var textBlock = new TextBlock();
             textBlock.Classes.Add("normal");
-            textBlock.Text              = text.HtmlDecode();
-            textBlock.VerticalAlignment = VerticalAlignment.Top;
+            textBlock.Text                = text.HtmlDecode();
+            textBlock.VerticalAlignment   = VerticalAlignment.Top;
             textBlock.HorizontalAlignment = HorizontalAlignment.Left;
             return textBlock;
         }

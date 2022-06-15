@@ -50,10 +50,10 @@ namespace Loon.Services
 
             ms.Position = 0;
             var bitmap = new Bitmap(ms);
-            
+
             ImageMemoryCacheService.ToCache(uri, bitmap);
             var unused = Task.Run(async () => await ImageFileCacheService.ToCacheAsync(uri, bitmap, cancellationToken), cancellationToken); // no need to wait
-            
+
             return bitmap;
         }
 

@@ -75,7 +75,7 @@ namespace Loon.Views.Content.Controls.TweetItem
         private Task PreloadImagesAsync(Media[]? media)
         {
             if (media is null) return Task.CompletedTask;
-            
+
             // Cut down on janking by preloading stuff
             return Task.WhenAll(media.Select(
                 async m => await ImageService.GetImageAsync(m.MediaUrl, CancellationTokenSource.Token)));

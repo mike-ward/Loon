@@ -12,7 +12,7 @@ namespace Loon.Models
         {
             Id           = DonateNagStatusId;
             FullText     = "Please consider donating to Loon.\nhttps://mike-ward.net/donate";
-            CreatedAt    = DateTime.UtcNow.ToString(TwitterStatus.TwitterDateTimeFormat);
+            CreatedAt    = DateTime.UtcNow.ToString(TwitterDateTimeFormat);
             OverrideLink = donateUrl;
             Language     = "en";
 

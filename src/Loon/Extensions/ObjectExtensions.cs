@@ -11,7 +11,7 @@ namespace Loon.Extensions
             return Convert.ToString(obj, CultureInfo.InvariantCulture) ?? "{null}";
         }
 
-        public static void CopyPropertiesTo<T, TU>(this T source, TU dest) 
+        public static void CopyPropertiesTo<T, TU>(this T source, TU dest)
             where T : class
             where TU : class
         {

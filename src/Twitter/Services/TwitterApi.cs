@@ -258,7 +258,7 @@ namespace Twitter.Services
         public async ValueTask<IEnumerable<TwitterStatus>> GetUserTimeline(string screenName)
         {
             const int MaxTweets = 20;
-            
+
             return await oAuthApiRequest
                .GetAsync<IEnumerable<TwitterStatus>>("https://api.twitter.com/1.1/statuses/user_timeline.json",
                     new[]

@@ -6,8 +6,8 @@ namespace Twitter.Services
 {
     internal static class TwitterOptions
     {
-        public const  int              MaxTweets = 75;
-        
+        public const int MaxTweets = 75;
+
         public static (string, string) Id(string Id) => ("id", Id);
 
         public static (string, string) Count(int count = MaxTweets) => ("count", count.ToString(CultureInfo.InvariantCulture));

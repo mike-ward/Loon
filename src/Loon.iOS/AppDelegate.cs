@@ -1,6 +1,3 @@
-using Avalonia.iOS;
-using Foundation;
-
 namespace Loon.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 

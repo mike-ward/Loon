@@ -182,9 +182,9 @@ namespace Twitter.Models
         public bool IsMyTweet { get; set; }
 
         public bool MentionsMe { get; set; }
-        
+
         public const string TwitterDateTimeFormat = "ddd MMM dd HH:mm:ss zzz yyyy";
-            
+
         public static DateTime ParseTwitterDate(string? s)
         {
             return string.IsNullOrWhiteSpace(s)
@@ -253,7 +253,7 @@ namespace Twitter.Models
         //
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void SetProperty<T>([NotNullIfNotNull("value")]ref T item, T value, [CallerMemberName] string? propertyName = null)
+        private void SetProperty<T>([NotNullIfNotNull("value")] ref T item, T value, [CallerMemberName] string? propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(item, value)) return;
             item = value;

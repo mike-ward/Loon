@@ -1,14 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
 using Loon.Interfaces;
+using Microsoft.Win32;
 
 namespace Loon.Services
 {
     #if Windows32
-    using System.ComponentModel;
-    using Microsoft.Win32;
-
 #pragma warning disable CA1416
 
     public sealed class SystemState : INotifyPropertyChanged, ISystemState

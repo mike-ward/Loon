@@ -1,5 +1,3 @@
-using UIKit;
-
 namespace Loon.iOS
 {
     public class Application

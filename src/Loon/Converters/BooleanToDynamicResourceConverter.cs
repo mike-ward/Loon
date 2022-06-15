@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
 using Avalonia.Markup.Xaml.MarkupExtensions;
+
 // ReSharper disable HeapView.BoxingAllocation
 
 namespace Loon.Converters

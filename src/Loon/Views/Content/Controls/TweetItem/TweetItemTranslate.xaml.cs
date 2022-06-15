@@ -50,8 +50,6 @@ namespace Loon.Views.Content.Controls.TweetItem
             SetVisibility();
         }
 
-#pragma warning disable 8631 // Nullability of type argument 'T' must match constraint type 'object' constraint in order to use it as parameter 'T'
-
         protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
         {
             base.OnPropertyChanged(change);
@@ -66,7 +64,8 @@ namespace Loon.Views.Content.Controls.TweetItem
         {
             IsVisible = DataContext is TwitterStatus status
                      && status.Language.IsNotEqualToIgnoreCase(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
-                     && status.Language.IsNotEqualToIgnoreCase("und")
+                     && status.Language.IsNotEqualToIgnoreCase("und") // language is undefined
+                     && status.Language.IsNotEqualToIgnoreCase("zxx") // indicates language is irrelevant
                      && status.FullText.IsNotNullOrWhiteSpace()
                      && Tag is bool and false;
         }
