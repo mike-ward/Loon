@@ -19,7 +19,6 @@
         <NeutralLanguage>en-US</NeutralLanguage>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <NoWarn>1701;1702;VSTHRD200</NoWarn>
-        <Prefer32bit>true</Prefer32bit>
         <AssemblyName>Loon</AssemblyName>
         <EmbedAllSources>true</EmbedAllSources>
         <DebugType>embedded</DebugType>
