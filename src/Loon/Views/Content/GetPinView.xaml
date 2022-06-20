@@ -65,7 +65,7 @@
           MaxWidth="100"
           Margin="20"
           Command="{ReflectionBinding GoBack, Mode=OneTime}"
-          Content="&#x25c0;" />
+          Content="◀" />
       </StackPanel>
     </Grid>
   </Grid>

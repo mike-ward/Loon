@@ -26,15 +26,22 @@
     </Transitions>
   </UserControl.Transitions>
 
-  <StackPanel
-    Margin="4 0 0 10">
-
+  <StackPanel Margin="4 0 0 10">
     <Grid ColumnDefinitions="Auto,*">
-      <l:TweetItemProfileImage
-        Margin="0 0 10 0"
-        DataContext="{Binding OriginatingStatus}"
-        Name="{x:Static l:TweetItemView.TweetItemProfileImageName}"
-        IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" />
+      <Grid>
+        <l:TweetItemProfileImage
+          Margin="0 0 10 0"
+          DataContext="{Binding OriginatingStatus}"
+          Name="{x:Static l:TweetItemView.TweetItemProfileImageName}"
+          IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" />
+
+        <TextBlock
+          Margin="0 0 4 0"
+          VerticalAlignment="Bottom"
+          Foreground="{StaticResource TwitterBlueBrush}"
+          IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" 
+          Text="▶" />
+      </Grid>
 
       <StackPanel Grid.Column="1" VerticalAlignment="Center">
         <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
