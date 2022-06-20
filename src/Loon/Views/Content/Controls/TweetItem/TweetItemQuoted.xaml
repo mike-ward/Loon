@@ -20,8 +20,29 @@
     BorderThickness="0.6 0">
 
     <StackPanel>
-      <l:TweetItemAuthor />
-      <l:TweetItemText />
+      <Grid ColumnDefinitions="Auto,*">
+        <Grid>
+          <l:TweetItemProfileImage
+            Margin="0 0 10 0"
+            DataContext="{Binding OriginatingStatus}"
+            Name="{x:Static l:TweetItemView.TweetItemProfileImageName}"
+            IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" />
+
+          <TextBlock
+            Margin="0 0 4 0"
+            VerticalAlignment="Bottom"
+            Foreground="{StaticResource TwitterBlueBrush}"
+            IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages}"
+            Text="▶" />
+        </Grid>
+
+        <l:TweetItemAuthor 
+          Grid.Column="1"
+          VerticalAlignment="Center"
+          DataContext="{Binding OriginatingStatus}" />
+      </Grid>
+      
+      <l:TweetItemText Margin="0 3 0 0" />
       <l:TweetItemTranslate />
 
       <l:TweetItemImage

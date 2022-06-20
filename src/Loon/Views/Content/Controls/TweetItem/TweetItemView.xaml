@@ -39,7 +39,7 @@
           Margin="0 0 4 0"
           VerticalAlignment="Bottom"
           Foreground="{StaticResource TwitterBlueBrush}"
-          IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" 
+          IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages}"
           Text="▶" />
       </Grid>
 
@@ -80,10 +80,6 @@
       <l:TweetItemActions
         DataContext="{Binding OriginatingStatus}"
         Margin="0 -5 0 0" />
-
-      <Separator
-        Margin="0 10 0 0"
-        IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages, FallbackValue=False}" />
     </StackPanel>
   </StackPanel>
 </UserControl>
