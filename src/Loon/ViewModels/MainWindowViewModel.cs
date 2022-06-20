@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using Avalonia;
-using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Models;
 
@@ -60,11 +59,6 @@ namespace Loon.ViewModels
             twitterService.TwitterApi.AuthenticationTokens(
                 Settings.AccessToken,
                 Settings.AccessTokenSecret);
-
-            if (e.PropertyName.IsEqualTo(nameof(ISettings.UseLightTheme)))
-            {
-                App.Commands.UpdateTheme.Execute(Settings.UseLightTheme);
-            }
         }
     }
 }

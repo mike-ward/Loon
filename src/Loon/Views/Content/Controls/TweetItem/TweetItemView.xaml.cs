@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -50,6 +51,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                 {
                     IsVisible = true;
                     Opacity   = 1.0;
+                    Padding   = new Thickness();
                 }
             }
             catch (TaskCanceledException)

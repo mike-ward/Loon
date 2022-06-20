@@ -43,10 +43,6 @@
       <TextBlock Text="{StaticResource always-on-top}" />
     </CheckBox>
 
-    <CheckBox IsChecked="{Binding UseLightTheme}">
-      <TextBlock Text="{StaticResource use-light-theme}" />
-    </CheckBox>
-
     <CheckBox IsChecked="{Binding ShortLinks}">
       <TextBlock Text="{StaticResource show-short-links}" />
     </CheckBox>

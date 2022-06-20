@@ -12,6 +12,7 @@
   MinHeight="2"
   IsVisible="False"
   Opacity="0.0"
+  Padding="0 -10 0 0"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
@@ -20,27 +21,28 @@
     <Transitions>
       <DoubleTransition Property="Opacity"
                         Duration="0:0:0.75" />
+      <ThicknessTransition Property="Padding"
+                           Duration="0:0:0.50" />
     </Transitions>
   </UserControl.Transitions>
 
-  <Grid ColumnDefinitions="Auto,*">
+  <StackPanel
+    Margin="4 0 0 10">
 
-    <!--  Column 1  -->
+    <Grid ColumnDefinitions="Auto,*">
+      <l:TweetItemProfileImage
+        Margin="0 0 10 0"
+        DataContext="{Binding OriginatingStatus}"
+        Name="{x:Static l:TweetItemView.TweetItemProfileImageName}"
+        IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" />
 
-    <l:TweetItemProfileImage
-      Name="{x:Static l:TweetItemView.TweetItemProfileImageName}"
-      VerticalAlignment="Top"
-      DataContext="{Binding OriginatingStatus}"
-      IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" />
+      <StackPanel Grid.Column="1" VerticalAlignment="Center">
+        <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
+        <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
+      </StackPanel>
+    </Grid>
 
-    <!--  Column 2  -->
-
-    <StackPanel
-      Grid.Column="1"
-      Margin="4 0 0 10">
-
-      <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
-      <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
+    <StackPanel Margin="5 3 3 3">
       <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
       <l:TweetItemTranslate DataContext="{Binding OriginatingStatus}" />
 
@@ -76,5 +78,5 @@
         Margin="0 10 0 0"
         IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages, FallbackValue=False}" />
     </StackPanel>
-  </Grid>
+  </StackPanel>
 </UserControl>

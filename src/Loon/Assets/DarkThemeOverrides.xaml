@@ -5,5 +5,6 @@
     <SolidColorBrush x:Key="ThemeTitleBarBrush">#FF505050</SolidColorBrush>
     <SolidColorBrush x:Key="ThemeAccentBrush4">#FF333333</SolidColorBrush>
     <SolidColorBrush x:Key="ThemeBackgroundBrush">#FF333333</SolidColorBrush>
+    <SolidColorBrush x:Key="LinkColor">#DDAA55</SolidColorBrush>
   </Style.Resources>
 </Style>
