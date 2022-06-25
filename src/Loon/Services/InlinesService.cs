@@ -29,6 +29,7 @@ namespace Loon.Services
                 link.TruncateWithEllipsis(25),
                 App.Commands.OpenUrl,
                 link,
+                LinkConverterBinding(link),
                 ContextMenu(link));
         }
 
@@ -52,6 +53,7 @@ namespace Loon.Services
             string       text,
             ICommand     command,
             object       commandParameter,
+            Binding?     binding     = null,
             ContextMenu? contextMenu = null)
         {
             var button = new Button();
@@ -68,17 +70,8 @@ namespace Loon.Services
             textBlock.SetValue(ToolTip.TipProperty, commandParameter);
             textBlock.SetValue(ToolTip.ShowDelayProperty, 400);
 
-            if (command == App.Commands.OpenUrl 
-             && text.StartsWith('#') is false) // don't convert hashtag links
+            if (binding is not null)
             {
-                var binding = new Binding
-                {
-                    Source             = App.Settings,
-                    Path               = nameof(App.Settings.ShortLinks),
-                    Mode               = BindingMode.OneWay,
-                    Converter          = LinkConverter,
-                    ConverterParameter = text.HtmlDecode()
-                };
                 textBlock.Bind(TextBlock.TextProperty, binding);
             }
             else
@@ -88,6 +81,18 @@ namespace Loon.Services
 
             button.Content = textBlock;
             return button;
+        }
+
+        private static Binding LinkConverterBinding(string text)
+        {
+            return new Binding
+            {
+                Source             = App.Settings,
+                Path               = nameof(App.Settings.ShortLinks),
+                Mode               = BindingMode.OneWay,
+                Converter          = LinkConverter,
+                ConverterParameter = text.HtmlDecode()
+            };
         }
 
         private static ContextMenu ContextMenu(string link)
