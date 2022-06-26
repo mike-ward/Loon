@@ -41,7 +41,7 @@ jobs:
       run:  copy .\src\Loon\Assets\Logo\loon.png ${{ env.LINUX_PACKAGE_PATH }}
       
     - name: Rename linux Loon to loon
-      run:  rename ${{ env.LINUX_PACKAGE_PATH }}Loon ${{ env.LINUX_PACKAGE_PATH }}loon
+      run:  Rename-Item ${{ env.LINUX_PACKAGE_PATH }}Loon loon
         
     - name: Build Loon-linux-x64.zip
       uses: actions/upload-artifact@v1.0.0
