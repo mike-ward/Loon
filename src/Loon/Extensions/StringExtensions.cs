@@ -42,12 +42,9 @@ namespace Loon.Extensions
 
         public static string TruncateWithEllipsis(this string source, int length)
         {
-            if (source.Length > length)
-            {
-                source = string.Concat(source.AsSpan(0, length), "…");
-            }
-
-            return source;
+            return source.Length > length
+                ? string.Concat(source.AsSpan(0, length), "…")
+                : source;
         }
 
         public static string HtmlDecode(this string text)

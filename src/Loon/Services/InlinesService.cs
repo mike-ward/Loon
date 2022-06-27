@@ -11,7 +11,7 @@ namespace Loon.Services
 {
     public static class InlinesService
     {
-        private static readonly IValueConverter LinkConverter = new ShortLinkConverter();
+        private static readonly IValueConverter ShortLinkConverter = new ShortLinkConverter();
 
         public static TextBlock Run(string text)
         {
@@ -25,11 +25,14 @@ namespace Loon.Services
 
         public static Control Url(string link)
         {
+            const int maxLength  = 25;
+            var       linkAsText = link.TruncateWithEllipsis(maxLength);
+
             return LinkControl(
-                link.TruncateWithEllipsis(25),
+                linkAsText,
                 App.Commands.OpenUrl,
                 link,
-                LinkConverterBinding(link),
+                ShortLinkConverterBinding(linkAsText),
                 ContextMenu(link));
         }
 
@@ -83,14 +86,14 @@ namespace Loon.Services
             return button;
         }
 
-        private static Binding LinkConverterBinding(string text)
+        private static Binding ShortLinkConverterBinding(string text)
         {
             return new Binding
             {
                 Source             = App.Settings,
                 Path               = nameof(App.Settings.ShortLinks),
                 Mode               = BindingMode.OneWay,
-                Converter          = LinkConverter,
+                Converter          = ShortLinkConverter,
                 ConverterParameter = text.HtmlDecode()
             };
         }
