@@ -2,9 +2,9 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <Style.Resources>
-    <SolidColorBrush x:Key="ThemeTitleBarBrush">#FF505050</SolidColorBrush>
-    <SolidColorBrush x:Key="ThemeAccentBrush4">#FF333333</SolidColorBrush>
-    <SolidColorBrush x:Key="ThemeBackgroundBrush">#FF23272B</SolidColorBrush>
+    <SolidColorBrush x:Key="ThemeTitleBarBrush">#FF3B3B3B</SolidColorBrush>
+    <SolidColorBrush x:Key="ThemeAccentBrush4">#FF404040</SolidColorBrush>
+    <SolidColorBrush x:Key="ThemeBackgroundBrush">#FF252526</SolidColorBrush>
     <SolidColorBrush x:Key="LinkColor">#DDAA55</SolidColorBrush>
   </Style.Resources>
 </Style>
