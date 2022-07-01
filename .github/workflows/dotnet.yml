@@ -31,7 +31,7 @@ jobs:
     - name: Build Loon-win-x86.zip
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: Loon-win-x86.zip
+        name: Loon-win-x86
         path: ${{ env.WINDOWS_PACKAGE_PATH }}
 
     - name: Publish for Linux
@@ -46,7 +46,7 @@ jobs:
     - name: Build Loon-linux-x64.zip
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: Loon-linux-x64.zip
+        name: Loon-linux-x64
         path: ${{ env.LINUX_PACKAGE_PATH }}
 
 
