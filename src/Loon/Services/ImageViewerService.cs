@@ -82,7 +82,7 @@ namespace Loon.Services
             var pi = new ProcessStartInfo
             {
                 FileName       = videoPlayerName,
-                Arguments      = $"--ontop {videoUrl}",
+                Arguments      = $"--ontop --force-window=immediate {videoUrl}",
                 CreateNoWindow = true
             };
             try
