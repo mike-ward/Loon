@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia.iOS" Version="0.10.15"/>
+        <PackageReference Include="Avalonia.iOS" Version="0.10.16"/>
     </ItemGroup>
 
     <ItemGroup>

@@ -26,60 +26,78 @@
     </Transitions>
   </UserControl.Transitions>
 
-  <StackPanel Margin="4 0 0 10">
-    <Grid ColumnDefinitions="Auto,*">
-      <Grid>
-        <l:TweetItemProfileImage
-          Margin="0 0 10 0"
-          DataContext="{Binding OriginatingStatus}"
-          Name="{x:Static l:TweetItemView.TweetItemProfileImageName}"
-          IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" />
+  <UserControl.Styles>
+    <Style Selector="Border:pointerover">
+      <Setter Property="Tag" Value="1" />
+    </Style>
+  </UserControl.Styles>
 
-        <TextBlock
-          Margin="0 0 4 0"
-          VerticalAlignment="Bottom"
-          Foreground="{StaticResource TwitterBlueBrush}"
-          IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages}"
-          Text="▶" />
+  <Border Background="{DynamicResource ThemeBackgroundBrush}">
+    <StackPanel Margin="4 0 0 0">
+      <Grid ColumnDefinitions="Auto,*">
+        <Grid>
+          <l:TweetItemProfileImage
+            Margin="0 0 10 0"
+            DataContext="{Binding OriginatingStatus}"
+            Name="{x:Static l:TweetItemView.TweetItemProfileImageName}"
+            IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" />
+
+          <TextBlock
+            Margin="0 0 4 0"
+            VerticalAlignment="Bottom"
+            Foreground="{StaticResource TwitterBlueBrush}"
+            IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages}"
+            Text="▶" />
+        </Grid>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+          <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
+          <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
+        </StackPanel>
       </Grid>
 
-      <StackPanel Grid.Column="1" VerticalAlignment="Center">
-        <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
-        <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
-      </StackPanel>
-    </Grid>
+      <Grid>
+        <StackPanel Margin="5 3 3 0">
+          <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
+          <l:TweetItemTranslate DataContext="{Binding OriginatingStatus}" />
 
-    <StackPanel Margin="5 3 3 3">
-      <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
-      <l:TweetItemTranslate DataContext="{Binding OriginatingStatus}" />
+          <l:TweetItemImage
+            Name="{x:Static l:TweetItemView.TweetItemImageName}"
+            Margin="0 5 5 5"
+            DataContext="{Binding OriginatingStatus.ExtendedEntities}"
+            IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideImages}" />
 
-      <l:TweetItemImage
-        Name="{x:Static l:TweetItemView.TweetItemImageName}"
-        Margin="0 5 5 5"
-        DataContext="{Binding OriginatingStatus.ExtendedEntities}"
-        IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideImages}" />
+          <l:TweetItemQuoted
+            Name="{x:Static l:TweetItemView.TweetItemQuotedName}"
+            DataContext="{Binding OriginatingStatus.QuotedStatus}"
+            IsVisible="{Binding ., Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
 
-      <l:TweetItemQuoted
-        Name="{x:Static l:TweetItemView.TweetItemQuotedName}"
-        DataContext="{Binding OriginatingStatus.QuotedStatus}"
-        IsVisible="{Binding ., Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
+          <l:TweetItemRelated
+            Name="{x:Static l:TweetItemView.TweetItemRelatedName}"
+            DataContext="{Binding OriginatingStatus.RelatedLinkInfo}">
+            <l:TweetItemImage.IsVisible>
+              <MultiBinding
+                Converter="{StaticResource MultiBool}"
+                FallbackValue="False">
+                <Binding Converter="{x:Static ObjectConverters.IsNotNull}" />
+                <ReflectionBinding Path="!$parent[m:MainWindow].ViewModel.Settings.HideExtendedContent" />
+              </MultiBinding>
+            </l:TweetItemImage.IsVisible>
+          </l:TweetItemRelated>
+        </StackPanel>
 
-      <l:TweetItemRelated
-        Name="{x:Static l:TweetItemView.TweetItemRelatedName}"
-        DataContext="{Binding OriginatingStatus.RelatedLinkInfo}">
-        <l:TweetItemImage.IsVisible>
-          <MultiBinding
-            Converter="{StaticResource MultiBool}"
-            FallbackValue="False">
-            <Binding Converter="{x:Static ObjectConverters.IsNotNull}" />
-            <ReflectionBinding Path="!$parent[m:MainWindow].ViewModel.Settings.HideExtendedContent" />
-          </MultiBinding>
-        </l:TweetItemImage.IsVisible>
-      </l:TweetItemRelated>
-
-      <l:TweetItemActions
-        DataContext="{Binding OriginatingStatus}"
-        Margin="0 -5 0 0" />
+        <l:TweetItemActions
+          Padding="20 15"
+          Margin="0 0 0 5"
+          CornerRadius="5"
+          BorderThickness="1"
+          VerticalAlignment="Bottom"
+          HorizontalAlignment="Center"
+          BorderBrush="{DynamicResource ThemeAccentBrush4}"
+          Background="{DynamicResource ThemeBackgroundAccentBrush}"
+          IsVisible="{ReflectionBinding $parent[Border].Tag, Converter={x:Static ObjectConverters.IsNotNull}}"
+          DataContext="{Binding OriginatingStatus}" />
+      </Grid>
     </StackPanel>
-  </StackPanel>
+  </Border>
 </UserControl>

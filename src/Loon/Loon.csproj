@@ -273,6 +273,7 @@
             <Generator>MSBuild:Compile</Generator>
         </AvaloniaXaml>
         <AvaloniaXaml Remove="Assets\Windows\**" />
+        <None Remove="Assets\TweetItem.xaml" />
     </ItemGroup>
 
     <ItemGroup>
