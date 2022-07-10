@@ -5,7 +5,7 @@
     <SolidColorBrush x:Key="ThemeTitleBarBrush">#FF3B3B3B</SolidColorBrush>
     <SolidColorBrush x:Key="ThemeAccentBrush4">#FF404041</SolidColorBrush>
     <SolidColorBrush x:Key="ThemeBackgroundBrush">#FF252526</SolidColorBrush>
-    <SolidColorBrush x:Key="ThemeBackgroundAccentBrush">#FF303031</SolidColorBrush>
+    <SolidColorBrush x:Key="ThemeBackgroundAccentBrush">#FF333334</SolidColorBrush>
     <SolidColorBrush x:Key="LinkColor">#DDAA55</SolidColorBrush>
   </Style.Resources>
 </Style>
