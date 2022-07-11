@@ -108,14 +108,6 @@ namespace Loon.Models
             set => SetProperty(ref hideProfileImages, value);
         }
 
-        private bool hideScreenName;
-
-        public bool HideScreenName
-        {
-            get => hideScreenName;
-            set => SetProperty(ref hideScreenName, value);
-        }
-
         private bool hideTranslate;
 
         public bool HideTranslate
@@ -153,7 +145,10 @@ namespace Loon.Models
         public double FontSize
         {
             get => fontSize;
-            set => SetProperty(ref fontSize, value);
+            set
+            {
+                if (value is > 5 and < 25) SetProperty(ref fontSize, value);
+            }
         }
 
         private string? screenName;

@@ -11,7 +11,7 @@ namespace Loon.Views.Content
 {
     public sealed class MainView : UserControl
     {
-        private int previousIndex;
+        private int previousIndex; // technically, I should use a view model here but I'm lazy
 
         // ReSharper disable once ConvertToConstant.Global
         // Referenced in XAML, can't be constant
@@ -22,12 +22,6 @@ namespace Loon.Views.Content
             AvaloniaXamlLoader.Load(this);
             PubSubs.OpenWriteTab.Subscribe(OpenWriteTabHandler);
             PubSubs.OpenPreviousTab.Subscribe(OpenPreviousTabHandler);
-        }
-
-        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
-        {
-            base.OnAttachedToVisualTree(e);
-            Focus();
         }
 
         public void OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
@@ -67,29 +61,6 @@ namespace Loon.Views.Content
             var timelineView = content as TimelineView ?? content.FindAncestorOfType<TimelineView>();
             var scrollViewer = timelineView?.FindDescendantOfType<ScrollViewer>();
             scrollViewer?.ScrollToHome();
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-            if (e.KeyModifiers != KeyModifiers.Alt) return;
-            const double delta = 0.1;
-
-            // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
-            switch (e.Key)
-            {
-                case Key.Add:
-                case Key.OemPlus:
-                    App.Settings.FontSize += delta;
-                    e.Handled             =  true;
-                    break;
-
-                case Key.Subtract:
-                case Key.OemMinus:
-                    App.Settings.FontSize -= delta;
-                    e.Handled             =  true;
-                    break;
-            }
         }
     }
 }

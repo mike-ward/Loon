@@ -13,7 +13,6 @@ namespace Loon.Interfaces
         bool                      HideProfileImages     { get; }
         bool                      HideImages            { get; }
         bool                      HideExtendedContent   { get; }
-        bool                      HideScreenName        { get; }
         bool                      HidePossiblySensitive { get; }
         bool                      HideTranslate         { get; }
         bool                      ShowInSystemTray      { get; set; }

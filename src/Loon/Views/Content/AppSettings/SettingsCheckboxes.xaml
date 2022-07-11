@@ -27,10 +27,6 @@
       <TextBlock Text="{StaticResource hide-extended-content}" />
     </CheckBox>
 
-    <CheckBox IsChecked="{Binding HideScreenName}">
-      <TextBlock Text="{StaticResource hide-screen-name}" />
-    </CheckBox>
-
     <CheckBox IsChecked="{Binding HideTranslate}">
       <TextBlock Text="{StaticResource hide-translate-link}" />
     </CheckBox>
