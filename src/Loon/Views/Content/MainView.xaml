@@ -10,9 +10,10 @@
   xmlns:t="clr-namespace:Loon.Views.Content.Timelines"
   xmlns:w="clr-namespace:Loon.Views.Content.Write"
   xmlns:timelines="clr-namespace:Loon.ViewModels.Content.Timelines"
+  Background="{DynamicResource ThemeBackgroundBrush}"
+  Focusable="True"
   d:DesignHeight="450"
   d:DesignWidth="300"
-  Background="{DynamicResource ThemeBackgroundBrush}"
   mc:Ignorable="d">
 
   <TabControl

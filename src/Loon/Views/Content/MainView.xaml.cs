@@ -24,6 +24,12 @@ namespace Loon.Views.Content
             PubSubs.OpenPreviousTab.Subscribe(OpenPreviousTabHandler);
         }
 
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnAttachedToVisualTree(e);
+            Focus();
+        }
+
         public void OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
         {
             if (e.Property.Name.IsEqualTo(nameof(TabControl.SelectedIndex)) &&
@@ -54,16 +60,36 @@ namespace Loon.Views.Content
             }
         }
 
-        // ReSharper disable once UnusedParameter.Local
-        private void TabItem_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+        private void TabItem_OnPointerPressed(object? sender, PointerPressedEventArgs _)
         {
-            var tabItem = sender as TabItem;
-            var content = (tabItem?.Content as UserControl)?.Content as IVisual;
-            var timelineView = content is TimelineView view
-                ? view
-                : content.FindAncestorOfType<TimelineView>();
+            var tabItem      = sender as TabItem;
+            var content      = (tabItem?.Content as UserControl)?.Content as IVisual;
+            var timelineView = content as TimelineView ?? content.FindAncestorOfType<TimelineView>();
             var scrollViewer = timelineView?.FindDescendantOfType<ScrollViewer>();
             scrollViewer?.ScrollToHome();
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            if (e.KeyModifiers != KeyModifiers.Alt) return;
+            const double delta = 0.1;
+
+            // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
+            switch (e.Key)
+            {
+                case Key.Add:
+                case Key.OemPlus:
+                    App.Settings.FontSize += delta;
+                    e.Handled             =  true;
+                    break;
+
+                case Key.Subtract:
+                case Key.OemMinus:
+                    App.Settings.FontSize -= delta;
+                    e.Handled             =  true;
+                    break;
+            }
         }
     }
 }
