@@ -7,7 +7,7 @@
         <NeutralLanguage>en-US</NeutralLanguage>
         <Nullable>Enable</Nullable>
         <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <NoWarn>1701;1702;VSTHRD200</NoWarn>
         <RuntimeIdentifiers>win-x86;linux-x64;osx-x64</RuntimeIdentifiers>
@@ -23,7 +23,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="HtmlAgilityPack" Version="1.11.43"/>
+        <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
