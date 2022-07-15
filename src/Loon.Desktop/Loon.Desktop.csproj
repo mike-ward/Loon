@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
+        <Title>Loon</Title>
+        <Authors>Mike Ward</Authors>
+        <Description>A gadget-like desktop twitter client.</Description>
+        <Copyright>© Copyright 2022, Mike Ward, All rights reserved</Copyright>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
@@ -7,14 +11,10 @@
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationIcon>app.ico</ApplicationIcon>
         <IsPackable>false</IsPackable>
-        <Title>Loon</Title>
-        <Authors>Mike Ward</Authors>
-        <Description>A gadget-like desktop twitter client.</Description>
-        <Copyright>© Copyright 2022, Mike Ward, All rights reserved</Copyright>
         <PackageProjectUrl>https://github.com/mike-ward/Loon</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/mike-ward/Loon/blob/main/LICENSE.txt</PackageLicenseUrl>
         <PackageIconUrl>https://github.com/mike-ward/Loon/blob/main/src/Loon/app.ico</PackageIconUrl>
-        <RepositoryUrl>https://github.com/mike-ward/</RepositoryUrl>
+        <RepositoryUrl>https://github.com/mike-ward/Loon</RepositoryUrl>
         <Company>Mike Ward</Company>
         <NeutralLanguage>en-US</NeutralLanguage>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
