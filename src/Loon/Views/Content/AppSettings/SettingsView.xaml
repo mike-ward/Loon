@@ -6,7 +6,7 @@
   xmlns:l="clr-namespace:Loon.Views.Content.AppSettings"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   d:DesignHeight="850"
-  d:DesignWidth="210"
+  d:DesignWidth="300"
   mc:Ignorable="d">
 
   <UserControl.Styles>
@@ -17,7 +17,8 @@
 
   <ScrollViewer>
     <StackPanel
-      Width="210"
+      Margin="30,0"
+      MinWidth="210"
       Spacing="12">
 
       <l:SettingsTitle />

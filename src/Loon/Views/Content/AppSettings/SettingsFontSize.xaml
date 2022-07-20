@@ -7,28 +7,25 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Loon.Models"
-  d:DesignHeight="450"
+  d:DesignHeight="100"
   d:DesignWidth="210"
   mc:Ignorable="d">
 
-  <StackPanel Spacing="5">
-    <TextBlock Text="{StaticResource font-size-title}" />
-
+  <StackPanel Spacing="10">
     <Separator />
-
-    <DockPanel VerticalAlignment="Center">
-
+    <StackPanel
+      Spacing="10"
+      Orientation="Horizontal"
+      HorizontalAlignment="Center">
       <TextBlock
-        Width="32"
-        DockPanel.Dock="Right"
-        Text="{Binding FontSize, Converter={StaticResource DoubleFormat}, ConverterParameter=N1, }"
-        TextAlignment="Right" />
-
-      <Slider
-        Maximum="40"
+        Text="{StaticResource font-size-title}"
+        VerticalAlignment="Center" />
+      <NumericUpDown
+        MinWidth="100"
         Minimum="10"
-        TickFrequency="0.1"
-        Value="{Binding FontSize, Mode=TwoWay}" />
-    </DockPanel>
+        Maximum="50"
+        Increment="0.1"
+        Value="{Binding FontSize, Converter={StaticResource RoundTo}}" />
+    </StackPanel>
   </StackPanel>
 </UserControl>
