@@ -3,6 +3,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:converters="clr-namespace:Loon.Converters">
   <Style.Resources>
+    <converters:AddToDoubleConverter x:Key="AddToDouble" />
     <converters:BooleanToDynamicResourceConverter x:Key="BooleanToDynamicResource" />
     <converters:CountConverter x:Key="CountConverter" />
     <converters:DoubleFormatConverter x:Key="DoubleFormat" />
