@@ -25,7 +25,7 @@
         TextAlignment="Right" />
 
       <Slider
-        Maximum="18"
+        Maximum="40"
         Minimum="10"
         TickFrequency="0.1"
         Value="{Binding FontSize, Mode=TwoWay}" />

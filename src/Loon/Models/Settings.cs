@@ -147,7 +147,7 @@ namespace Loon.Models
             get => fontSize;
             set
             {
-                if (value is > 5 and < 25) SetProperty(ref fontSize, value);
+                if (value is > 5 and < 40) SetProperty(ref fontSize, value);
             }
         }
 

@@ -24,9 +24,10 @@
     <TabItem PointerPressed="TabItem_OnPointerPressed"
              x:DataType="timelines:HomeTimelineViewModel">
       <TabItem.Header>
-        <Grid>
+        <Grid >
           <TextBlock
             Text="{StaticResource HomeSymbol}"
+            FontSize="{ReflectionBinding $parent[l:MainView].FontSize}"
             ToolTip.Tip="{StaticResource tab-home-name}" />
           <TextBlock
             Text="⬤"
@@ -49,7 +50,7 @@
         <TextBlock
           Padding="0 3 0 0"
           Classes="symbol1"
-          FontSize="19"
+          FontSize="{ReflectionBinding $parent[l:MainView].FontSize}"
           Text="{StaticResource LikeSymbol}"
           ToolTip.Tip="{StaticResource tab-likes-name}" />
       </TabItem.Header>
@@ -62,6 +63,7 @@
       <TabItem.Header>
         <TextBlock
           Text="{StaticResource SearchSymbol}"
+          FontSize="{ReflectionBinding $parent[l:MainView].FontSize}"
           ToolTip.Tip="{StaticResource tab-search-name}" />
       </TabItem.Header>
       <t:SearchTimelineView />
@@ -71,6 +73,7 @@
       <TabItem.Header>
         <TextBlock
           Text="{StaticResource SettingsSymbol}"
+          FontSize="{ReflectionBinding $parent[l:MainView].FontSize}"
           ToolTip.Tip="{StaticResource tab-settings-name}" />
       </TabItem.Header>
       <s:SettingsView />
@@ -82,6 +85,7 @@
       <TabItem.Header>
         <TextBlock
           Text="{StaticResource WriteSymbol}"
+          FontSize="{ReflectionBinding $parent[l:MainView].FontSize}"
           ToolTip.Tip="{StaticResource tab-pen-name}" />
       </TabItem.Header>
       <w:WriteView />
