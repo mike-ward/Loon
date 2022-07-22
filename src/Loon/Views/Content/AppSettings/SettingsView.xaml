@@ -23,10 +23,13 @@
 
       <l:SettingsTitle />
       <l:SettingsCheckboxes />
+      
+      <Separator/>
       <l:SettingsFontSize />
+      <Separator/>
+      <l:SettingsZoom />
 
       <Separator />
-
       <l:SettingsSignOut />
       <l:SettingsDonate />
       <l:SettingsOpenSettings />
@@ -34,11 +37,9 @@
       <l:SettingsClearHiddenImageCache />
 
       <Separator />
-
       <l:SettingsAbout HorizontalAlignment="Center" />
 
       <Separator />
-
       <l:SettingsTips />
     </StackPanel>
   </ScrollViewer>

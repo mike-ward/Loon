@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Avalonia;
 using Loon.Models;
 
 namespace Loon.Interfaces
@@ -22,6 +23,12 @@ namespace Loon.Interfaces
         bool                      ShortLinks            { get; set; }
         bool                      ImagesAsLinks         { get; set; }
         bool                      Donated               { get; }
+        string                    Zoom                  { get; set; }
+        double                    ZoomFontSize          { get; }
+        double                    ZoomProfileImageSize  { get; }
+        Rect                      ZoomProfileImageRect  { get; }
+        double                    ZoomImagePanelHeight  { get; }
+        double                    ZoomImagePanelWidth   { get; }
         WindowLocation            Location              { get; set; }
         ObservableHashSet<string> HiddenImagesSet       { get; set; }
 

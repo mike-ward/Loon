@@ -7,7 +7,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:lt="clr-namespace:Loon.Views.Content.Layouts"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:models="clr-namespace:Loon.Models"
+  xmlns:ln="clr-namespace:Loon"
   xmlns:views="clr-namespace:Loon.Views"
   xmlns:twitterModels="clr-namespace:Twitter.Models;assembly=Twitter"
   d:DesignHeight="200"
@@ -73,8 +73,8 @@
     <ItemsControl.ItemsPanel>
       <ItemsPanelTemplate>
         <lt:SimpleImagePanel
-          MaxWidth="{x:Static models:Constants.ImagePanelWidth}"
-          MaxHeight="{x:Static models:Constants.ImagePanelHeight}" />
+          MaxWidth="{ReflectionBinding ZoomImagePanelWidth, Source={x:Static ln:App.Settings }}"
+          MaxHeight="{ReflectionBinding ZoomImagePanelHeight, Source={x:Static ln:App.Settings }}" />
       </ItemsPanelTemplate>
     </ItemsControl.ItemsPanel>
   </ItemsControl>

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Avalonia;
 using Loon.Extensions;
 using Loon.Interfaces;
 using Loon.Services;
@@ -23,7 +24,7 @@ namespace Loon.Models
             set => SetProperty(ref isAuthenticated, value);
         }
 
-        private bool GetCheckAuthenticated()
+        private bool IsAuthenticatedInternal()
         {
             return AccessToken.IsNotNullOrWhiteSpace() && AccessTokenSecret.IsNotNullOrWhiteSpace();
         }
@@ -36,7 +37,7 @@ namespace Loon.Models
             set
             {
                 SetProperty(ref accessToken, value);
-                IsAuthenticated = GetCheckAuthenticated();
+                IsAuthenticated = IsAuthenticatedInternal();
             }
         }
 
@@ -48,7 +49,7 @@ namespace Loon.Models
             set
             {
                 SetProperty(ref accessTokenSecret, value);
-                IsAuthenticated = GetCheckAuthenticated();
+                IsAuthenticated = IsAuthenticatedInternal();
             }
         }
 
@@ -147,9 +148,62 @@ namespace Loon.Models
             get => fontSize;
             set
             {
-                if (value is > 5 and < 40) SetProperty(ref fontSize, value);
+                if (value is <= 5 or >= 40) return;
+                SetProperty(ref fontSize, value);
+                UpdateZoomProperties();
             }
         }
+
+        // Zoom stuff
+        // ----------------------------------------
+
+        public const string Zoom100Percent = "100";
+        public const string Zoom150Percent = "150";
+        public const string Zoom200Percent = "200";
+
+        private string zoom = Zoom100Percent;
+
+        public string Zoom
+        {
+            get => zoom;
+            set
+            {
+                SetProperty(ref zoom, value);
+                UpdateZoomProperties();
+            }
+        }
+
+        private void UpdateZoomProperties()
+        {
+            OnPropertyChanged(nameof(ZoomFontSize));
+            OnPropertyChanged(nameof(ZoomProfileImageSize));
+            OnPropertyChanged(nameof(ZoomProfileImageRect));
+            OnPropertyChanged(nameof(ZoomImagePanelHeight));
+            OnPropertyChanged(nameof(ZoomImagePanelWidth));
+            OnPropertyChanged(nameof(ZoomIs100Percent));
+            OnPropertyChanged(nameof(ZoomIs150Percent));
+            OnPropertyChanged(nameof(ZoomIs200Percent));
+        }
+
+        public bool ZoomIs100Percent => Zoom.IsEqualTo(Zoom100Percent);
+        public bool ZoomIs150Percent => Zoom.IsEqualTo(Zoom150Percent);
+        public bool ZoomIs200Percent => Zoom.IsEqualTo(Zoom200Percent);
+
+        private double ZoomFactor => Zoom switch
+        {
+            Zoom150Percent => 1.5,
+            Zoom200Percent => 2.0,
+            _              => 1.0
+        };
+
+        public double ZoomFontSize         => FontSize * ZoomFactor;
+        public double ZoomProfileImageSize => Constants.ImageProfileSize * ZoomFactor;
+        public Rect   ZoomProfileImageRect => new(0, 0, ZoomProfileImageSize, ZoomProfileImageSize);
+        public double ZoomImagePanelHeight => Constants.ImagePanelHeight * ZoomFactor;
+        public double ZoomImagePanelWidth  => Constants.ImagePanelWidth * ZoomFactor;
+
+        // ----------------------------------------
+        // End Zoom stuff
 
         private string? screenName;
 

@@ -11,21 +11,18 @@
   d:DesignWidth="210"
   mc:Ignorable="d">
 
-  <StackPanel Spacing="10">
-    <Separator />
-    <StackPanel
-      Spacing="10"
-      Orientation="Horizontal"
-      HorizontalAlignment="Center">
-      <TextBlock
-        Text="{StaticResource font-size-title}"
-        VerticalAlignment="Center" />
-      <NumericUpDown
-        MinWidth="100"
-        Minimum="10"
-        Maximum="50"
-        Increment="0.1"
-        Value="{Binding FontSize, Converter={StaticResource RoundTo}}" />
-    </StackPanel>
+  <StackPanel
+    Spacing="10"
+    Orientation="Horizontal"
+    HorizontalAlignment="Center">
+    <TextBlock
+      Text="{StaticResource font-size-title}"
+      VerticalAlignment="Center" />
+    <NumericUpDown
+      MinWidth="100"
+      Minimum="10"
+      Maximum="50"
+      Increment="0.1"
+      Value="{Binding FontSize, Converter={StaticResource RoundTo}}" />
   </StackPanel>
 </UserControl>

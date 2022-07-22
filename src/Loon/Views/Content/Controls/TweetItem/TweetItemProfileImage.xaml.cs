@@ -77,22 +77,9 @@ namespace Loon.Views.Content.Controls.TweetItem
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed &&
-                DataContext is TwitterStatus status)
-            {
-                e.Handled = true;
-                App.Commands.SetUserProfileContext.Execute(status.User);
-            }
-            // Useful for debugging twitter oddities
-            //
-            else if (e.GetCurrentPoint(null).Properties.IsRightButtonPressed &&
-                     e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
-                     DataContext is TwitterStatus status1)
-            {
-                e.Handled = true;
-                var json = JsonSerializer.Serialize(status1, new JsonSerializerOptions { WriteIndented = true });
-                _ = Application.Current!.Clipboard!.SetTextAsync(json);
-            }
+            if (!e.GetCurrentPoint(null).Properties.IsLeftButtonPressed || DataContext is not TwitterStatus status) return;
+            e.Handled = true;
+            App.Commands.SetUserProfileContext.Execute(status.User);
         }
     }
 }

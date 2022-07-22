@@ -15,7 +15,7 @@
   ExtendClientAreaTitleBarHeightHint="1"
   ExtendClientAreaToDecorationsHint="True"
   FontFamily="{StaticResource AppFont}"
-  FontSize="{Binding Settings.FontSize, FallbackValue=12}"
+  FontSize="{Binding Settings.ZoomFontSize, FallbackValue=12}"
   ShowInTaskbar="{Binding !Settings.ShowInSystemTray, FallbackValue=True}"
   Topmost="{Binding Settings.AlwaysOnTop, FallbackValue=False}"
   UseLayoutRounding="true"

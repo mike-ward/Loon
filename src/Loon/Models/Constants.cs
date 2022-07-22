@@ -2,6 +2,7 @@
 {
     internal static class Constants
     {
+        public const double ImageProfileSize = 34;
         public const double ImagePanelWidth  = 300;
         public const double ImagePanelHeight = 190;
 
