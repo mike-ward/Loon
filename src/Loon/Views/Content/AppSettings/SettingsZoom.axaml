@@ -1,25 +1,27 @@
 ﻿<UserControl
+  x:Class="Loon.Views.Content.AppSettings.SettingsZoom"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Loon.Models"
-  xmlns:converters="clr-namespace:Loon.Converters"
   x:DataType="models:Settings"
   x:CompileBindings="True"
-  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-  x:Class="Loon.Views.Content.AppSettings.SettingsZoom">
-  <StackPanel Orientation="Horizontal"
-              Spacing="10">
-    <TextBlock>Zoom</TextBlock>
+  mc:Ignorable="d" 
+  d:DesignWidth="300" 
+  d:DesignHeight="30"
+  HorizontalAlignment="Center">
+  <WrapPanel >
     <RadioButton
       Content="100%"
       GroupName="zoom"
+      Margin="0 0 10 0"
       Checked="OnCheckedZoom100"
       IsChecked="{Binding ZoomIs100Percent}" />
     <RadioButton
       Content="150%"
       GroupName="zoom"
+      Margin="0 0 10 0"
       Checked="OnCheckedZoom150"
       IsChecked="{Binding ZoomIs150Percent}" />
     <RadioButton
@@ -27,5 +29,5 @@
       GroupName="zoom"
       Checked="OnCheckedZoom200"
       IsChecked="{Binding ZoomIs200Percent}" />
-  </StackPanel>
+  </WrapPanel>
 </UserControl>

@@ -26,7 +26,6 @@
       
       <Separator/>
       <l:SettingsFontSize />
-      <Separator/>
       <l:SettingsZoom />
 
       <Separator />

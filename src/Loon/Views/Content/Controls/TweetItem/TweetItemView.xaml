@@ -69,11 +69,13 @@
 
           <l:TweetItemQuoted
             Name="{x:Static l:TweetItemView.TweetItemQuotedName}"
+            Margin="3 0"
             DataContext="{Binding OriginatingStatus.QuotedStatus}"
             IsVisible="{Binding ., Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=False}" />
 
           <l:TweetItemRelated
             Name="{x:Static l:TweetItemView.TweetItemRelatedName}"
+            Margin="3 0"
             DataContext="{Binding OriginatingStatus.RelatedLinkInfo}">
             <l:TweetItemImage.IsVisible>
               <MultiBinding

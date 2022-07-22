@@ -7,21 +7,15 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Loon.Models"
-  d:DesignHeight="100"
+  d:DesignHeight="40"
   d:DesignWidth="210"
   mc:Ignorable="d">
 
-  <StackPanel
-    Spacing="10"
-    Orientation="Horizontal">
-    <TextBlock
-      Text="{StaticResource font-size-title}"
-      VerticalAlignment="Center" />
-    <NumericUpDown
-      MinWidth="100"
-      Minimum="10"
-      Maximum="50"
-      Increment="0.1"
-      Value="{Binding FontSize, Converter={StaticResource RoundTo}}" />
-  </StackPanel>
+  <NumericUpDown
+    Width="100"
+    Minimum="10"
+    Maximum="50"
+    Increment="0.1"
+    ToolTip.Tip="{StaticResource font-size-title}"
+    Value="{Binding FontSize, Converter={StaticResource RoundTo}}" />
 </UserControl>
