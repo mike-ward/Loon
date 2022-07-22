@@ -13,8 +13,7 @@
 
   <StackPanel
     Spacing="10"
-    Orientation="Horizontal"
-    HorizontalAlignment="Center">
+    Orientation="Horizontal">
     <TextBlock
       Text="{StaticResource font-size-title}"
       VerticalAlignment="Center" />

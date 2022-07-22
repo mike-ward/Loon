@@ -149,12 +149,12 @@
 
     <!--  Tips (in settings dialog)  -->
 
-    <sys:String x:Key="tips">Shortcuts</sys:String>
+    <sys:String x:Key="tips">Usage tips</sys:String>
     <sys:String x:Key="tips-ctrl-n">New tweet (Ctrl+N)</sys:String>
     <sys:String x:Key="tips-scroll">Right-click scrolls to top</sys:String>
     <sys:String x:Key="tips-open">Click timestamp to open in Twitter</sys:String>
-    <sys:String x:Key="tips-font-size">Font size (Alt+Plus/Minus)</sys:String>
-    <sys:String x:Key="tips-hide-image">Alt+click image to hide</sys:String>
+    <sys:String x:Key="tips-font-size">Change font size (Alt+Plus/Minus)</sys:String>
+    <sys:String x:Key="tips-hide-image">Ctrl+click on image to hide</sys:String>
 
     <sys:String x:Key="whats-happening">What's happening?</sys:String>
     <sys:String x:Key="tweet-button-text">Tweet</sys:String>
