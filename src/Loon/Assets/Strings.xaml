@@ -121,7 +121,7 @@
     <sys:String x:Key="short-in-system-tray">Show in system tray</sys:String>
     <sys:String x:Key="run-at-startup">Run at startup</sys:String>
 
-    <!--  <Tooltips  -->
+    <!--  Tooltips  -->
 
     <sys:String x:Key="home-tooltip">Home</sys:String>
     <sys:String x:Key="likes-tooltip">Likes</sys:String>
@@ -154,8 +154,7 @@
     <sys:String x:Key="tips-scroll">Right-click scrolls to top</sys:String>
     <sys:String x:Key="tips-open">Click timestamp to open in Twitter</sys:String>
     <sys:String x:Key="tips-font-size">Font size (Alt+Plus/Minus)</sys:String>
-
-    <!--  Write Tab  -->
+    <sys:String x:Key="tips-hide-image">Alt+click image to hide</sys:String>
 
     <sys:String x:Key="whats-happening">What's happening?</sys:String>
     <sys:String x:Key="tweet-button-text">Tweet</sys:String>

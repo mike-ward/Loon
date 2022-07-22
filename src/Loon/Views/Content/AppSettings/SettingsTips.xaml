@@ -19,5 +19,6 @@
     <l:BulletItem BulletText="{StaticResource tips-open}" />
     <l:BulletItem BulletText="{StaticResource tips-font-size}" />
     <l:BulletItem BulletText="{StaticResource tips-ctrl-n}" />
+    <l:BulletItem BulletText="{StaticResource tips-hide-image}" />
   </StackPanel>
 </UserControl>
