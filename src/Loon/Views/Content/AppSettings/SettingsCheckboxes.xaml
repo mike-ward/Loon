@@ -31,6 +31,10 @@
       <TextBlock Text="{StaticResource hide-translate-link}" />
     </CheckBox>
 
+    <CheckBox IsChecked="{Binding HideNameInTitleBar}">
+      <TextBlock Text="{StaticResource hide-name-in-title-bar}" />
+    </CheckBox>
+
     <CheckBox IsChecked="{Binding HidePossiblySensitive}">
       <TextBlock Text="{StaticResource hide-possibly-sensitive}" />
     </CheckBox>

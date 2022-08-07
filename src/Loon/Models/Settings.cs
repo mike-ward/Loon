@@ -100,6 +100,14 @@ namespace Loon.Models
             set => SetProperty(ref hidePossiblySensitive, value);
         }
 
+        private bool hideNameInTitleBar;
+
+        public bool HideNameInTitleBar
+        {
+            get => hideNameInTitleBar;
+            set => SetProperty(ref hideNameInTitleBar, value);
+        }
+
         private bool hideProfileImages;
 
         public bool HideProfileImages
@@ -122,14 +130,6 @@ namespace Loon.Models
         {
             get => showInSystemTray;
             set => SetProperty(ref showInSystemTray, value);
-        }
-
-        private bool useLightTheme;
-
-        public bool UseLightTheme
-        {
-            get => useLightTheme;
-            set => SetProperty(ref useLightTheme, value);
         }
 
         private bool shortLinks;
@@ -228,9 +228,8 @@ namespace Loon.Models
         {
             try
             {
-                var path = SettingsFilePath;
-                Console.WriteLine(path);
-                var json     = File.ReadAllText(path);
+                Console.WriteLine(SettingsFilePath);
+                var json     = File.ReadAllText(SettingsFilePath);
                 var settings = JsonSerializer.Deserialize<Settings>(json)!;
                 settings.CopyPropertiesTo(this);
 
@@ -246,12 +245,11 @@ namespace Loon.Models
 
         public void Save()
         {
-            var path = SettingsFilePath;
-            var directory = new FileInfo(path).Directory;
+            var directory = new FileInfo(SettingsFilePath).Directory;
             if (directory!.Exists is false) directory.Create();
 
             var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(path, json);
+            File.WriteAllText(SettingsFilePath, json);
         }
 
         private string? cachedSettingsFilePath;

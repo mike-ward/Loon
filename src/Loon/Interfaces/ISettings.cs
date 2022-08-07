@@ -16,10 +16,10 @@ namespace Loon.Interfaces
         bool                      HideExtendedContent   { get; }
         bool                      HidePossiblySensitive { get; }
         bool                      HideTranslate         { get; }
+        bool                      HideNameInTitleBar    { get; }
         bool                      ShowInSystemTray      { get; set; }
         bool                      AlwaysOnTop           { get; set; }
         double                    FontSize              { get; set; }
-        bool                      UseLightTheme         { get; }
         bool                      ShortLinks            { get; set; }
         bool                      ImagesAsLinks         { get; set; }
         bool                      Donated               { get; }

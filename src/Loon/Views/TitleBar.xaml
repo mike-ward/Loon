@@ -25,7 +25,7 @@
   </UserControl.Styles>
 
   <Grid
-    ColumnDefinitions="Auto,Auto,*">
+    ColumnDefinitions="Auto,Auto,Auto,*">
 
     <Image
       Grid.Column="0"
@@ -37,8 +37,21 @@
       Grid.Column="1"
       Text="Loon" />
 
-    <StackPanel
+    <TextBlock
       Grid.Column="2"
+      Text="{Binding ScreenName, Source={x:Static l:App.Settings}, StringFormat=' - {0}'}">
+
+      <TextBlock.IsVisible>
+        <MultiBinding Converter="{x:Static BoolConverters.And}">
+          <Binding Path="!HideNameInTitleBar" Source="{x:Static l:App.Settings}" />
+          <Binding Path="ScreenName" Source="{x:Static l:App.Settings}"
+                   Converter="{x:Static StringConverters.IsNotNullOrEmpty}" />
+        </MultiBinding>
+      </TextBlock.IsVisible>
+    </TextBlock>
+
+    <StackPanel
+      Grid.Column="3"
       Margin="0 0 7 0"
       HorizontalAlignment="Right"
       Orientation="Horizontal">
