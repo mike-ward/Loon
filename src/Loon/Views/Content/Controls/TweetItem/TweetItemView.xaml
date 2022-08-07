@@ -26,16 +26,10 @@
     </Transitions>
   </UserControl.Transitions>
 
-  <UserControl.Styles>
-    <Style Selector="Border:pointerover">
-      <Setter Property="Tag" Value="1" />
-    </Style>
-  </UserControl.Styles>
-
   <Border Background="{DynamicResource ThemeBackgroundBrush}">
     <StackPanel Margin="4 0 0 0">
       <Grid ColumnDefinitions="Auto,*">
-        <Grid>
+        <Grid Name="ProfileImage" >
           <l:TweetItemProfileImage
             Margin="0 0 10 0"
             DataContext="{Binding OriginatingStatus}"
@@ -48,6 +42,27 @@
             Foreground="{StaticResource TwitterBlueBrush}"
             IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages}"
             Text="▶" />
+
+          <Grid.Styles>
+            <Style Selector="Grid:pointerover">
+              <Setter Property="Tag" Value="1" />
+            </Style>
+          </Grid.Styles> 
+        
+          <l:TweetItemActions
+            Grid.Column="0"
+            Opacity="0"
+            Margin="0 0 0 5"
+            CornerRadius="5"
+            BorderThickness="5"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            BorderBrush="{DynamicResource ThemeAccentBrush4}"
+            Background="{DynamicResource ThemeBackgroundAccentBrush}"
+            IsVisible="{ReflectionBinding #ProfileImage.Tag, Converter={x:Static ObjectConverters.IsNotNull}}"
+            PropertyChanged="TweetItemActionsOnPropertyChanged"
+            DataContext="{Binding OriginatingStatus}">
+          </l:TweetItemActions>
         </Grid>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
@@ -87,31 +102,6 @@
             </l:TweetItemImage.IsVisible>
           </l:TweetItemRelated>
         </StackPanel>
-
-        <l:TweetItemActions
-          Opacity="0"
-          Margin="0 0 0 5"
-          CornerRadius="5"
-          BorderThickness="5"
-          VerticalAlignment="Bottom"
-          HorizontalAlignment="Center"
-          BorderBrush="{DynamicResource ThemeAccentBrush4}"
-          Background="{DynamicResource ThemeBackgroundAccentBrush}"
-          IsVisible="{ReflectionBinding $parent[Border].Tag, Converter={x:Static ObjectConverters.IsNotNull}}"
-          PropertyChanged="TweetItemActionsOnPropertyChanged"
-          DataContext="{Binding OriginatingStatus}">
-
-          <l:TweetItemActions.Transitions>
-            <Transitions>
-              <DoubleTransition Property="Opacity"
-                                Delay="0:0:1"
-                                Duration="0:0:0.1" />
-              <ThicknessTransition Property="Padding"
-                                   Delay="0:0:1"
-                                   Duration="0:0:0.1" />
-            </Transitions>
-          </l:TweetItemActions.Transitions>
-        </l:TweetItemActions>
       </Grid>
     </StackPanel>
   </Border>
