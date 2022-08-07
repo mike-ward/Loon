@@ -7,7 +7,6 @@ using System.Text.Json.Serialization;
 using Avalonia;
 using Loon.Extensions;
 using Loon.Interfaces;
-using Loon.Services;
 
 namespace Loon.Models
 {
@@ -229,8 +228,9 @@ namespace Loon.Models
         {
             try
             {
-                Console.WriteLine(SettingsFilePath);
-                var json     = File.ReadAllText(SettingsFilePath);
+                var path = SettingsFilePath;
+                Console.WriteLine(path);
+                var json     = File.ReadAllText(path);
                 var settings = JsonSerializer.Deserialize<Settings>(json)!;
                 settings.CopyPropertiesTo(this);
 
@@ -246,11 +246,12 @@ namespace Loon.Models
 
         public void Save()
         {
-            var directory = new FileInfo(SettingsFilePath).Directory;
+            var path = SettingsFilePath;
+            var directory = new FileInfo(path).Directory;
             if (directory!.Exists is false) directory.Create();
 
             var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(SettingsFilePath, json);
+            File.WriteAllText(path, json);
         }
 
         private string? cachedSettingsFilePath;
@@ -262,7 +263,6 @@ namespace Loon.Models
             {
                 return cachedSettingsFilePath ??= Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    $"Loon-{SystemState.ApplicationNameHash}",
                     $"{Profile}.settings.txt");
             }
         }
