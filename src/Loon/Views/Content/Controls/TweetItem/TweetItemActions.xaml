@@ -8,7 +8,7 @@
   xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Twitter.Models;assembly=Twitter"
-  d:DesignHeight="50"
+  d:DesignHeight="20"
   d:DesignWidth="200"
   mc:Ignorable="d">
 
@@ -32,7 +32,7 @@
       Command="{Binding Retweet, Source={x:Static l:App.Commands}, Mode=OneTime}"
       CommandParameter="{Binding}"
       ToolTip.Tip="{StaticResource retweet-tooltip}">
-      <StackPanel Orientation="Horizontal">
+      <StackPanel Orientation="Horizontal" Spacing="5">
         <!-- ReSharper disable Xaml.DynamicResourceError -->
         <TextBlock
           VerticalAlignment="Center"
@@ -41,7 +41,6 @@
           Text="{DynamicResource RetweetSymbol}" />
         <!-- ReSharper restore Xaml.DynamicResourceError -->
         <TextBlock
-          Classes="padleft"
           Text="{Binding RetweetCount, Converter={StaticResource CountConverter}}" />
       </StackPanel>
     </Button>
@@ -51,7 +50,7 @@
       Command="{Binding LikesAddRemove, Source={x:Static l:App.Commands}, Mode=OneTime}"
       CommandParameter="{Binding}"
       ToolTip.Tip="{StaticResource like-tooltip}">
-      <StackPanel Orientation="Horizontal">
+      <StackPanel Orientation="Horizontal" Spacing="5">
         <!-- ReSharper disable Xaml.DynamicResourceError -->
         <TextBlock
           Classes="symbol1"
@@ -59,7 +58,6 @@
           Text="{DynamicResource LikeSymbol}" />
         <!-- ReSharper restore Xaml.DynamicResourceError -->
         <TextBlock
-          Classes="padleft"
           Text="{Binding FavoriteCount, Converter={StaticResource CountConverter}}" />
       </StackPanel>
     </Button>
@@ -77,14 +75,13 @@
       Command="{Binding FollowAddRemove, Source={x:Static l:App.Commands}, Mode=OneTime}"
       CommandParameter="{Binding User}"
       ToolTip.Tip="{StaticResource follow-tooltip}">
-      <StackPanel Orientation="Horizontal">
+      <StackPanel Orientation="Horizontal" Spacing="5">
         <!-- ReSharper disable once Xaml.DynamicResourceError -->
         <TextBlock
           Classes="symbol1"
           Foreground="{Binding User.IsFollowing, Converter={StaticResource BooleanToDynamicResource}, ConverterParameter={DynamicResource TwitterBlueBrush}}"
           Text="{DynamicResource AddFriendSymbol}" />
         <TextBlock
-          Classes="padleft"
           Text="{Binding User.Followers, Converter={StaticResource CountConverter}}" />
       </StackPanel>
     </Button>

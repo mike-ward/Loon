@@ -93,23 +93,5 @@ namespace Loon.Views.Content.Controls.TweetItem
                 App.Commands.CopyToClipboard.Execute(json);
             }
         }
-
-        private void TweetItemActionsOnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
-        {
-            if (e.Property == IsVisibleProperty
-             && sender is UserControl userControl)
-            {
-                if (userControl.IsVisible)
-                {
-                    userControl.Opacity = 1.0;
-                    userControl.Padding = new Thickness(20, 15);
-                }
-                else
-                {
-                    userControl.Opacity = 0;
-                    userControl.Padding = new Thickness(20, 0);
-                }
-            }
-        }
     }
 }

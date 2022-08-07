@@ -29,7 +29,13 @@
   <Border Background="{DynamicResource ThemeBackgroundBrush}">
     <StackPanel Margin="4 0 0 0">
       <Grid ColumnDefinitions="Auto,*">
-        <Grid Name="ProfileImage" >
+        <Grid Name="ProfileImage">
+          <Grid.Styles>
+            <Style Selector="Grid:pointerover">
+              <Setter Property="Tag" Value="1" />
+            </Style>
+          </Grid.Styles>
+
           <l:TweetItemProfileImage
             Margin="0 0 10 0"
             DataContext="{Binding OriginatingStatus}"
@@ -40,32 +46,34 @@
             Margin="0 0 4 0"
             VerticalAlignment="Bottom"
             Foreground="{StaticResource TwitterBlueBrush}"
-            IsVisible="{ReflectionBinding $parent[m:MainWindow].ViewModel.Settings.HideProfileImages}"
-            Text="▶" />
+            Text="▶" >
+            
+            <TextBlock.IsVisible>
+              <MultiBinding Converter="{x:Static BoolConverters.And}">
+                <ReflectionBinding Path="#ProfileImage.Tag" Converter="{x:Static ObjectConverters.IsNull}" />
+                <ReflectionBinding Path="$parent[m:MainWindow].ViewModel.Settings.HideProfileImages" />
+              </MultiBinding>
+            </TextBlock.IsVisible>
+          </TextBlock>
 
-          <Grid.Styles>
-            <Style Selector="Grid:pointerover">
-              <Setter Property="Tag" Value="1" />
-            </Style>
-          </Grid.Styles> 
-        
           <l:TweetItemActions
             Grid.Column="0"
-            Opacity="0"
-            Margin="0 0 0 5"
+            Padding="15 8"
+            Margin="0 0 05 0"
             CornerRadius="5"
-            BorderThickness="5"
+            BorderThickness="2"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             BorderBrush="{DynamicResource ThemeAccentBrush4}"
             Background="{DynamicResource ThemeBackgroundAccentBrush}"
             IsVisible="{ReflectionBinding #ProfileImage.Tag, Converter={x:Static ObjectConverters.IsNotNull}}"
-            PropertyChanged="TweetItemActionsOnPropertyChanged"
-            DataContext="{Binding OriginatingStatus}">
-          </l:TweetItemActions>
+            DataContext="{Binding OriginatingStatus}" />
         </Grid>
 
-        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+        <StackPanel
+          Grid.Column="1"
+          IsVisible="{ReflectionBinding #ProfileImage.Tag, Converter={x:Static ObjectConverters.IsNull}}"
+          VerticalAlignment="Center">
           <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
           <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
         </StackPanel>
