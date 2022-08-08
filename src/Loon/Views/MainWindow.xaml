@@ -9,7 +9,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:vw="clr-namespace:Loon.Views"
   xmlns:viewModels="clr-namespace:Loon.ViewModels"
-  Title="{StaticResource title}"
+  Title="{Binding Settings.ScreenName, Converter={StaticResource TitleBarName}}"
   d:DesignHeight="600"
   d:DesignWidth="300"
   ExtendClientAreaTitleBarHeightHint="1"

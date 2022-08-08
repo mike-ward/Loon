@@ -12,6 +12,7 @@
     <converters:MultiBoolConverter x:Key="MultiBool" />
     <converters:RoundToConverter x:Key="RoundTo" />
     <converters:TabItemWidthConverter x:Key="TabItemWidth" />
+    <converters:TitleBarNameConverter x:Key="TitleBarName" />
     <converters:TimeAgoConverter x:Key="TimeAgo" />
     <converters:TrimTextConverter x:Key="TrimText" />
   </Style.Resources>
