@@ -105,7 +105,11 @@ namespace Loon.Models
         public bool HideNameInTitleBar
         {
             get => hideNameInTitleBar;
-            set => SetProperty(ref hideNameInTitleBar, value);
+            set
+            {
+                SetProperty(ref hideNameInTitleBar, value);
+                OnPropertyChanged(nameof(ScreenName));
+            }
         }
 
         private bool hideProfileImages;

@@ -25,7 +25,7 @@
   </UserControl.Styles>
 
   <Grid
-    ColumnDefinitions="Auto,Auto,Auto,*">
+    ColumnDefinitions="Auto,Auto,*">
 
     <Image
       Grid.Column="0"
@@ -35,15 +35,11 @@
 
     <TextBlock
       Grid.Column="1"
-      Text="Loon" />
-
-    <TextBlock
-      Grid.Column="2"
       Text="{Binding ScreenName, Source={x:Static l:App.Settings}, Converter={StaticResource TitleBarName}}">
     </TextBlock>
 
     <StackPanel
-      Grid.Column="3"
+      Grid.Column="2"
       Margin="0 0 7 0"
       HorizontalAlignment="Right"
       Orientation="Horizontal">
