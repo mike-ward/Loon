@@ -144,7 +144,7 @@ namespace Loon.Models
             set => SetProperty(ref shortLinks, value);
         }
 
-        private double fontSize = 12;
+        private double fontSize = 14;
 
         public double FontSize
         {
