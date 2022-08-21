@@ -43,7 +43,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                     {
                         var imageSource = await ImageService.GetImageAsync(media.MediaUrl, token);
                         if (token.IsCancellationRequested) return;
-                        image.Source ??= imageSource;
+                        image.Source ??= imageSource!;
                     }
                     catch (TaskCanceledException)
                     {
@@ -52,7 +52,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                     catch (Exception ex)
                     {
                         TraceService.Message(ex.Message);
-                        image.Source = null;
+                        image.Source = null!;
                     }
                 }
             }

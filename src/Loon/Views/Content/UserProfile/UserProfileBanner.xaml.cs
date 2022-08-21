@@ -28,7 +28,7 @@ namespace Loon.Views.Content.UserProfile
                 {
                     try
                     {
-                        image.Source = null;
+                        image.Source = null!;
 
                         if (image.DataContext is User user &&
                             image.Tag is string which)
@@ -44,7 +44,7 @@ namespace Loon.Views.Content.UserProfile
 
                             if (uri.IsNotNullOrWhiteSpace())
                             {
-                                image.Source = await ImageService.GetImageAsync(uri!, CancellationToken.None).ConfigureAwait(true);
+                                image.Source = await ImageService.GetImageAsync(uri!, CancellationToken.None).ConfigureAwait(true) ?? null!;
                             }
                         }
                     }

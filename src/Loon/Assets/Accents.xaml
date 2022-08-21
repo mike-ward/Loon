@@ -1,9 +1,11 @@
 ﻿<Style xmlns="https://github.com/avaloniaui"
-       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:system="clr-namespace:System;assembly=System.Runtime">
   <Style.Resources>
     <SolidColorBrush x:Key="TwitterBlueBrush">#1DA1F2</SolidColorBrush>
     <SolidColorBrush x:Key="RedHoverBrush">DarkRed</SolidColorBrush>
     <SolidColorBrush x:Key="LikeBrush">FireBrick</SolidColorBrush>
     <SolidColorBrush x:Key="RetweetBrush">Green</SolidColorBrush>
+    
   </Style.Resources>
 </Style>

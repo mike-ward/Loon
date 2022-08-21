@@ -34,14 +34,16 @@ namespace Loon.Behaviors
             async void Handler(object? s, SelectionChangedEventArgs e)
             {
                 if (e.AddedItems.Count == 0 || e.AddedItems[0] is not TabItem tab) return;
-                var timeline = tab.Content as ILogical;
+                if (tab.Content is not ILogical timeline) return;
 
                 foreach (var descendant in timeline.GetLogicalDescendants())
                 {
-                    if (descendant.FindNameScope().Find(name) is not IInputElement control) continue;
-                    await Task.Delay(500).ConfigureAwait(true); // too soon and focus won't work
-                    control.Focus();
-                    break;
+                    if (descendant.FindNameScope() is { } ctl && ctl.Find(name) is InputElement control)
+                    {
+                        await Task.Delay(500).ConfigureAwait(true); // too soon and focus won't work
+                        control.Focus();
+                        break;
+                    }
                 }
             }
         }

@@ -15,11 +15,14 @@
   mc:Ignorable="d">
 
   <Grid>
-    <v:GetPinView IsVisible="{Binding !Settings.IsAuthenticated, FallbackValue=True}"
-                  x:DataType="content:GetPinViewModel" />
-    <v:MainView IsVisible="{Binding Settings.IsAuthenticated, FallbackValue=False}"
-                x:DataType="viewModels:MainWindowViewModel" />
-    <p:UserProfileView IsVisible="{Binding UserProfileContext, Converter={x:Static ObjectConverters.IsNotNull}}"
-                       x:DataType="userProfile:UserProfileViewModel" />
+    <v:GetPinView
+      IsVisible="{Binding !Settings.IsAuthenticated, FallbackValue=True}"
+      x:DataType="content:GetPinViewModel" />
+    <v:NavTabs
+      IsVisible="{Binding Settings.IsAuthenticated, FallbackValue=False}"
+      x:DataType="viewModels:MainWindowViewModel" />
+    <p:UserProfileView
+      IsVisible="{Binding UserProfileContext, Converter={x:Static ObjectConverters.IsNotNull}}"
+      x:DataType="userProfile:UserProfileViewModel" />
   </Grid>
 </UserControl>

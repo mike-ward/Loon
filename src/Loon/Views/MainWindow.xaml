@@ -24,7 +24,6 @@
   <Border
     BorderBrush="{DynamicResource ThemeBorderLowBrush}"
     BorderThickness="0.6">
-
     <Grid RowDefinitions="Auto,*">
       <vw:TitleBar Name="{x:Static vw:MainWindow.TitleBarName}" />
       <co:AppView Grid.Row="1" />

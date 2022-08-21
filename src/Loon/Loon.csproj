@@ -188,9 +188,7 @@
         <AvaloniaXaml Include="Views\Content\Controls\ImageViewer.xaml">
             <Generator>MSBuild:Compile</Generator>
         </AvaloniaXaml>
-        <AvaloniaXaml Include="Views\Content\MainView.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </AvaloniaXaml>
+        <AvaloniaXaml Include="Views\Content\NavTabs.xaml" />
         <AvaloniaXaml Include="Views\Content\Timelines\HomeTimelineView.xaml">
             <Generator>MSBuild:Compile</Generator>
         </AvaloniaXaml>
@@ -274,6 +272,7 @@
         </AvaloniaXaml>
         <AvaloniaXaml Remove="Assets\Windows\**" />
         <None Remove="Assets\TweetItem.xaml" />
+        <None Remove="Views\Content\Controls\NavTab.xaml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -281,9 +280,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.10.18" />
-        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.18" />
-        <PackageReference Include="Jab" Version="0.8.3" />
+        <PackageReference Include="Avalonia" Version="11.0.0-preview1" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.0.0-preview1" />
+        <PackageReference Include="Avalonia.Themes.Simple" Version="11.0.0-preview1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0-preview.7.22375.6" />
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.3.44">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -345,9 +345,6 @@
         </Compile>
         <Compile Update="Views\Content\Controls\ImageViewer.xaml.cs">
             <DependentUpon>ImageViewer.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Content\MainView.xaml.cs">
-            <DependentUpon>MainView.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Content\Timelines\HomeTimelineView.xaml.cs">
             <DependentUpon>HomeTimelineView.xaml</DependentUpon>

@@ -2,21 +2,24 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+  <Design.PreviewWith>
+    <Border Height="400" Width="200">
+      <ScrollBar Orientation="Vertical" Width="8" Height="400" />
+    </Border>
+  </Design.PreviewWith>
+
   <Style Selector="ScrollBar">
     <Setter Property="Cursor" Value="Arrow" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Border
-          Background="Transparent"
-          UseLayoutRounding="False">
+        <Border>
           <Track
             IsDirectionReversed="True"
             Maximum="{TemplateBinding Maximum}"
             Minimum="{TemplateBinding Minimum}"
             Orientation="{TemplateBinding Orientation}"
             ViewportSize="{TemplateBinding ViewportSize}"
-            Value="{TemplateBinding Value,
-                                    Mode=TwoWay}">
+            Value="{TemplateBinding Value, Mode=TwoWay}">
             <Track.DecreaseButton>
               <RepeatButton
                 Name="PART_PageUpButton"
@@ -36,19 +39,16 @@
     </Setter>
   </Style>
   <Style Selector="ScrollBar:horizontal">
-    <Setter Property="Height" Value="{DynamicResource ScrollBarThickness}" />
+    <Setter Property="Height" Value="{StaticResource ScrollBarThickness}" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Border
-          Background="{DynamicResource ThemeControlMidBrush}"
-          UseLayoutRounding="False">
+        <Border>
           <Track
             Maximum="{TemplateBinding Maximum}"
             Minimum="{TemplateBinding Minimum}"
             Orientation="{TemplateBinding Orientation}"
             ViewportSize="{TemplateBinding ViewportSize}"
-            Value="{TemplateBinding Value,
-                                    Mode=TwoWay}">
+            Value="{TemplateBinding Value, Mode=TwoWay}">
             <Track.DecreaseButton>
               <RepeatButton
                 Name="PART_PageUpButton"
@@ -68,52 +68,48 @@
     </Setter>
   </Style>
   <Style Selector="ScrollBar /template/ Thumb#thumb">
-    <Setter Property="Background" Value="{DynamicResource ThemeControlMidHighBrush}" />
     <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate>
+      <ControlTemplate>
+        <Border Background="{StaticResource ThemeBackgroundBrush}">
           <Border
             Background="{TemplateBinding Background}"
-            CornerRadius="10" />
-        </ControlTemplate>
-      </Setter.Value>
+            CornerRadius="40" />
+        </Border>
+      </ControlTemplate>
     </Setter>
   </Style>
   <Style Selector="ScrollBar /template/ Thumb#thumb:pointerover">
-    <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}" />
+    <Setter Property="Background" Value="{StaticResource ThemeControlHighBrush}" />
   </Style>
   <Style Selector="ScrollBar /template/ Thumb#thumb:pressed">
-    <Setter Property="Background" Value="{DynamicResource ThemeControlVeryHighBrush}" />
+    <Setter Property="Background" Value="{StaticResource ThemeControlVeryHighBrush}" />
   </Style>
   <Style Selector="ScrollBar:horizontal /template/ Thumb#thumb">
-    <Setter Property="MinWidth" Value="{DynamicResource ScrollBarThickness}" />
-    <Setter Property="Height" Value="{DynamicResource ScrollBarThumbThickness}" />
+    <Setter Property="Height" Value="{StaticResource ScrollBarThumbThickness}" />
   </Style>
   <Style Selector="ScrollBar:vertical">
-    <Setter Property="Width" Value="10" />
+    <Setter Property="Width" Value="{StaticResource ScrollBarThumbThickness}" />
   </Style>
   <Style Selector="ScrollBar:vertical /template/ Thumb#thumb">
     <Setter Property="MinHeight" Value="30" />
-    <Setter Property="Width" Value="{DynamicResource ScrollBarThumbThickness}" />
   </Style>
   <Style Selector="ScrollBar /template/ RepeatButton.repeat">
-    <Setter Property="Padding" Value="1" />
-    <Setter Property="Background" Value="Transparent" />
-    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Background" Value="{StaticResource ThemeBackgroundBrush}" />
   </Style>
   <Style Selector="ScrollBar /template/ RepeatButton.repeattrack">
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="Transparent" />
+        <Border Background="{StaticResource ThemeBackgroundBrush}" />
       </ControlTemplate>
     </Setter>
   </Style>
 
   <Style Selector="ScrollBar /template/ RepeatButton &gt; Path">
-    <Setter Property="Fill" Value="{DynamicResource ThemeForegroundLowBrush}" />
+    <Setter Property="Fill" Value="{StaticResource ThemeBorderMidColor}" />
   </Style>
 
   <Style Selector="ScrollBar /template/ RepeatButton:pointerover &gt; Path">
-    <Setter Property="Fill" Value="{DynamicResource ThemeAccentBrush}" />
+    <Setter Property="Fill" Value="{StaticResource ThemeForegroundBrush}" />
   </Style>
 </Styles>

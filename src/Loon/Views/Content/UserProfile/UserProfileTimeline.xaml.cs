@@ -19,7 +19,7 @@ namespace Loon.Views.Content.UserProfile
         public UserProfileTimeline()
         {
             AvaloniaXamlLoader.Load(this);
-            this.FindControl<TimelineView>(UserTimelineName).DataContext = App.ServiceProvider.GetService<UserProfileTimelineViewModel>();
+            this.FindControl<TimelineView>(UserTimelineName)!.DataContext = App.ServiceProvider.GetService<UserProfileTimelineViewModel>();
         }
 
         [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]

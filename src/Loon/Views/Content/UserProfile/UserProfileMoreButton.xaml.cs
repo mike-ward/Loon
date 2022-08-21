@@ -14,7 +14,7 @@ namespace Loon.Views.Content.UserProfile
         public void OpenMenu()
         {
             var btn = this.FindDescendantOfType<Button>();
-            btn.ContextMenu?.Open(btn);
+            btn?.ContextMenu?.Open(btn);
         }
     }
 }

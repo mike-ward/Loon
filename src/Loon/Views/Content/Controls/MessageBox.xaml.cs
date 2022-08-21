@@ -51,8 +51,8 @@ namespace Loon.Views.Content.Controls
                 msgbox.Position              = pixelPoint.Value;
             }
 
-            msgbox.FindControl<TextBlock>(TitleName).Text = App.GetString("title");
-            msgbox.FindControl<TextBlock>(TextName).Text  = text;
+            msgbox.FindControl<TextBlock>(TitleName)!.Text = App.GetString("title");
+            msgbox.FindControl<TextBlock>(TextName)!.Text  = text;
 
             var buttonPanel = msgbox.FindControl<StackPanel>(ButtonsName);
 
@@ -87,7 +87,7 @@ namespace Loon.Views.Content.Controls
                     msgbox.Close();
                 };
 
-                buttonPanel.Children.Add(btn);
+                buttonPanel?.Children.Add(btn);
 
                 if (isDefaultButton)
                 {

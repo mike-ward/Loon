@@ -8,7 +8,7 @@ namespace Loon.Views.Content.Controls
 {
     public sealed class ImageViewer : Window
     {
-        private Image imageControl { get; }
+        private Image? imageControl { get; }
 
         public ImageViewer() // not used, but required by XAML
         {
@@ -48,7 +48,7 @@ namespace Loon.Views.Content.Controls
                 ? 0.1
                 : -0.1;
 
-            var width  = imageControl.Width + Width * zoomFactor;
+            var width  = imageControl!.Width + Width * zoomFactor;
             var height = imageControl.Height + Height * zoomFactor;
 
             if (width < 100 || height < 100) return;

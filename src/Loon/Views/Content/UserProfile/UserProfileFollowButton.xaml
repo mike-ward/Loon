@@ -19,8 +19,8 @@
       Padding="15 4 15 6"
       Background="{StaticResource TwitterBlueBrush}"
       CornerRadius="15"
-      PointerEnter="OnPointerEnter"
-      PointerLeave="OnPointerLeave">
+      PointerEntered="OnPointerEnter"
+      PointerExited="OnPointerLeave">
       <TextBlock
         Name="{x:Static u:UserProfileFollowButton.TextBlockName}"
         FontWeight="Bold"

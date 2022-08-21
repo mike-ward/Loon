@@ -46,7 +46,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                 {
                     try
                     {
-                        image.Source = null;
+                        image.Source = null!;
 
                         var imageSource =
                             status.User.ProfileImageUrlBigger is { Length: > 0 } uri
@@ -54,7 +54,7 @@ namespace Loon.Views.Content.Controls.TweetItem
                                 : EmptyBitmap;
 
                         if (token.IsCancellationRequested) return;
-                        image.Source = imageSource;
+                        image.Source = imageSource!;
                     }
                     catch (TaskCanceledException)
                     {

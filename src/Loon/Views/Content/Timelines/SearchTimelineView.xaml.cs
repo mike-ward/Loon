@@ -28,7 +28,10 @@ namespace Loon.Views.Content.Timelines
                     sender is TextBox textBox &&
                     DataContext is SearchTimelineViewModel vm)
                 {
-                    await vm.OnSearch(textBox.Text).ConfigureAwait(false);
+                    if (textBox.Text is not null)
+                    {
+                        await vm.OnSearch(textBox.Text).ConfigureAwait(false);
+                    }
                 }
             }
             catch (Exception ex)

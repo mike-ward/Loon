@@ -1,0 +1,91 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:Loon.Views"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+             x:Class="Loon.Views.Content.NavTabs">
+
+  <Grid RowDefinitions="Auto Auto *">
+    <Grid
+      Grid.Row="0"
+      Name="Tabs"
+      ColumnDefinitions="* * * * *"
+      Margin="0 3 0 3">
+
+      <Grid.Styles>
+        <Style Selector="Border">
+          <Setter Property="Background" Value="{StaticResource ThemeBackgroundBrush}" />
+        </Style>
+
+        <Style Selector="Border:pointerover">
+          <Setter Property="Background" Value="{StaticResource ThemeBorderLowBrush}" />
+        </Style>
+
+        <Style Selector="TextBlock.tab">
+          <Setter Property="Foreground" Value="{StaticResource ThemeBorderMidColor}" />
+          <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="TextBlock.selected">
+          <Setter Property="Foreground" Value="{StaticResource ThemeForegroundBrush}" />
+        </Style>
+      </Grid.Styles>
+
+      <Border
+        Grid.Column="0"
+        PointerPressed="HomePressed">
+        <TextBlock
+          Name="HomeTab"
+          Classes="symbol tab"
+          Text="{StaticResource HomeSymbol}" />
+      </Border>
+
+      <Border
+        Grid.Column="1"
+        PointerPressed="LikePressed">
+        <TextBlock
+          Name="LikesTab"
+          Classes="symbol1 tab"
+          Padding="0 2 0 0"
+          Text="{StaticResource LikeSymbol}"
+          FontSize="{Binding $parent[c:MainWindow].FontSize, Converter={StaticResource AddToDouble}, ConverterParameter=4.0}" />
+      </Border>
+
+      <Border
+        Grid.Column="2"
+        PointerPressed="SearchPressed">
+        <TextBlock
+          Name="SearchTab"
+          Classes="symbol tab"
+          Text="{StaticResource SearchSymbol}" />
+      </Border>
+
+      <Border
+        Grid.Column="3"
+        PointerPressed="SettingsPressed">
+        <TextBlock
+          Name="SettingsTab"
+          Classes="symbol tab"
+          Text="{StaticResource SettingsSymbol}" />
+      </Border>
+
+      <Border
+        Grid.Column="4"
+        PointerPressed="WritePressed">
+        <TextBlock
+          Name="WriteTab"
+          Classes="symbol tab"
+          Text="{StaticResource WriteSymbol}" />
+      </Border>
+    </Grid>
+
+    <Separator
+      Grid.Row="1"
+      Margin="0 0 0 4" />
+
+    <Grid
+      Grid.Row="2"
+      Name="Content" />
+  </Grid>
+</UserControl>

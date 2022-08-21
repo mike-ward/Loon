@@ -17,7 +17,7 @@ namespace Loon
         public static ServiceProvider ServiceProvider { get; } = new();
         public static AppCommands     Commands        { get; } = ServiceProvider.GetService<AppCommands>();
         public static ISettings       Settings        { get; } = ServiceProvider.GetService<ISettings>();
-        public static Window          MainWindow      => ((IClassicDesktopStyleApplicationLifetime)Current!.ApplicationLifetime!).MainWindow;
+        public static Window          MainWindow      => ((IClassicDesktopStyleApplicationLifetime)Current!.ApplicationLifetime!).MainWindow!;
 
         public override void Initialize()
         {

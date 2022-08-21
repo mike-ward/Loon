@@ -3,7 +3,8 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <Style Selector="Separator">
+    <Setter Property="UseLayoutRounding" Value="False" />
     <Setter Property="BorderThickness" Value="0.6" />
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource ThemeBorderLowBrush}" />
   </Style>
 </Styles>

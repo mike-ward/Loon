@@ -17,6 +17,7 @@ namespace Loon.Views.Content.Controls.TweetItem
         public TweetItemTranslate()
         {
             AvaloniaXamlLoader.Load(this);
+            PropertyChanged += OnPropertyChanged;
         }
 
         [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
@@ -50,11 +51,11 @@ namespace Loon.Views.Content.Controls.TweetItem
             SetVisibility();
         }
 
-        protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
+        private void OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
         {
-            base.OnPropertyChanged(change);
+            base.OnPropertyChanged(e);
 
-            if (change.Property.Name.IsEqualTo(nameof(Tag)))
+            if (e.Property.Name.IsEqualTo(nameof(Tag)))
             {
                 SetVisibility();
             }

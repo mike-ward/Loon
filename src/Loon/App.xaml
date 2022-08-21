@@ -5,8 +5,7 @@
   xmlns:l="clr-namespace:Loon">
 
   <Application.Styles>
-    <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
-    <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
+    <SimpleTheme />
     <StyleInclude Source="/Assets/DarkThemeOverrides.xaml" />
     <StyleInclude Source="/Assets/Accents.xaml" />
     <StyleInclude Source="/Assets/Strings.xaml" />
