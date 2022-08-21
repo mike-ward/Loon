@@ -9,6 +9,7 @@
   xmlns:m="clr-namespace:Loon.Views"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Twitter.Models;assembly=Twitter"
+  xmlns:c="clr-namespace:Loon.Models"
   MinHeight="2"
   IsVisible="False"
   Opacity="0.0"
@@ -19,10 +20,8 @@
 
   <UserControl.Transitions>
     <Transitions>
-      <DoubleTransition Property="Opacity"
-                        Duration="0:0:0.75" />
-      <ThicknessTransition Property="Padding"
-                           Duration="0:0:0.50" />
+      <DoubleTransition Property="Opacity" Duration="0:0:0.75" />
+      <ThicknessTransition Property="Padding" Duration="0:0:0.50" />
     </Transitions>
   </UserControl.Transitions>
 
@@ -43,11 +42,11 @@
             IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" />
 
           <TextBlock
+            Text="▶"
             Margin="0 0 4 0"
             VerticalAlignment="Bottom"
-            Foreground="{StaticResource TwitterBlueBrush}"
-            Text="▶" >
-            
+            Foreground="{StaticResource TwitterBlueBrush}">
+
             <TextBlock.IsVisible>
               <MultiBinding Converter="{x:Static BoolConverters.And}">
                 <ReflectionBinding Path="#ProfileImage.Tag" Converter="{x:Static ObjectConverters.IsNull}" />
@@ -58,22 +57,21 @@
 
           <l:TweetItemActions
             Grid.Column="0"
-            Padding="15 8"
-            Margin="0 0 05 0"
+            Padding="15 0"
+            Margin="0 0 5 0"
             CornerRadius="5"
             BorderThickness="2"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            BorderBrush="{DynamicResource ThemeAccentBrush4}"
-            Background="{DynamicResource ThemeBackgroundAccentBrush}"
-            IsVisible="{ReflectionBinding #ProfileImage.Tag, Converter={x:Static ObjectConverters.IsNotNull}}"
-            DataContext="{Binding OriginatingStatus}" />
+            DataContext="{Binding OriginatingStatus}"
+            Height="{x:Static c:Constants.ImageProfileSize}"
+            BorderBrush="{StaticResource ThemeAccentBrush4}"
+            Background="{StaticResource ThemeBackgroundAccentBrush}"
+            IsVisible="{ReflectionBinding #ProfileImage.Tag, Converter={x:Static ObjectConverters.IsNotNull}}" />
         </Grid>
 
         <StackPanel
           Grid.Column="1"
-          IsVisible="{ReflectionBinding #ProfileImage.Tag, Converter={x:Static ObjectConverters.IsNull}}"
-          VerticalAlignment="Center">
+          VerticalAlignment="Center"
+          IsVisible="{ReflectionBinding #ProfileImage.Tag, Converter={x:Static ObjectConverters.IsNull}}">
           <l:TweetItemRetweetedBy IsVisible="{Binding IsRetweet}" />
           <l:TweetItemAuthor DataContext="{Binding OriginatingStatus}" />
         </StackPanel>

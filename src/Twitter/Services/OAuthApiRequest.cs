@@ -63,33 +63,46 @@ namespace Twitter.Services
         /// <param name="method"></param>
         private async ValueTask<T> OAuthRequestAsync<T>(string url, IEnumerable<(string, string)> parameters, string method) where T : class
         {
-            var isPost           = string.Equals(method, POST, StringComparison.Ordinal);
-            var nonce            = OAuth.Nonce();
-            var timestamp        = OAuth.TimeStamp();
-            var parray           = parameters.ToArray();
-            var signature        = OAuth.Signature(method, url, nonce, timestamp, ConsumerKey!, ConsumerSecret!, AccessToken!, AccessTokenSecret!, parray);
-            var authorizeHeader  = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
-            var parameterStrings = parray.Select(p => $"{OAuth.UrlEncode(p.Item1)}={OAuth.UrlEncode(p.Item2)}");
+            var retries = 3;
 
-            using var request = new HttpRequestMessage();
-            request.Headers.Add("Authorization", authorizeHeader);
-
-            if (isPost)
+            for (;;)
             {
-                request.Method                      = HttpMethod.Post;
-                request.Content                     = new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes(string.Join("&", parameterStrings))));
-                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
-            }
-            else
-            {
-                request.Method =  HttpMethod.Get;
-                url            += $"?{string.Join("&", parameterStrings)}";
-            }
+                try
+                {
+                    var isPost           = string.Equals(method, POST, StringComparison.Ordinal);
+                    var nonce            = OAuth.Nonce();
+                    var timestamp        = OAuth.TimeStamp();
+                    var parray           = parameters.ToArray();
+                    var signature        = OAuth.Signature(method, url, nonce, timestamp, ConsumerKey!, ConsumerSecret!, AccessToken!, AccessTokenSecret!, parray);
+                    var authorizeHeader  = OAuth.AuthorizationHeader(nonce, timestamp, ConsumerKey!, AccessToken, signature);
+                    var parameterStrings = parray.Select(p => $"{OAuth.UrlEncode(p.Item1)}={OAuth.UrlEncode(p.Item2)}");
 
-            request.RequestUri = new Uri(url);
-            using var response = await MyHttpClient.SendAsync(request);
-            var       stream   = await response.Content.ReadAsStreamAsync();
-            return await DeserializeResult<T>(stream) ?? throw new InvalidOperationException("JsonSerializer.DeserializeAsync<T>(stream) returned null");
+                    using var request = new HttpRequestMessage();
+                    request.Headers.Add("Authorization", authorizeHeader);
+
+                    if (isPost)
+                    {
+                        request.Method                      = HttpMethod.Post;
+                        request.Content                     = new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes(string.Join("&", parameterStrings))));
+                        request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+                    }
+                    else
+                    {
+                        request.Method =  HttpMethod.Get;
+                        url            += $"?{string.Join("&", parameterStrings)}";
+                    }
+
+                    request.RequestUri = new Uri(url);
+                    using var response = await MyHttpClient.SendAsync(request);
+                    var       stream   = await response.Content.ReadAsStreamAsync();
+                    return await DeserializeResult<T>(stream) ?? throw new InvalidOperationException("JsonSerializer.DeserializeAsync<T>(stream) returned null");
+                }
+                catch
+                {
+                    if (--retries <= 0) throw;
+                    await Task.Delay(500);
+                }
+            }
         }
 
         private static async ValueTask<T?> DeserializeResult<T>(Stream stream) where T : class

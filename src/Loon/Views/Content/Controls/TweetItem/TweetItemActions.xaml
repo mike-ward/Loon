@@ -8,14 +8,15 @@
   xmlns:l="clr-namespace:Loon"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:models="clr-namespace:Twitter.Models;assembly=Twitter"
-  d:DesignHeight="20"
+  d:DesignHeight="34"
   d:DesignWidth="200"
   mc:Ignorable="d">
 
   <StackPanel
-    Orientation="Horizontal"
     Spacing="15"
-    UseLayoutRounding="false">
+    Orientation="Horizontal"
+    UseLayoutRounding="false"
+    VerticalAlignment="Center">
 
     <Button
       Classes="inline"
