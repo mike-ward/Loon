@@ -1,6 +1,9 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Text;
+using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Documents;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Layout;
@@ -13,17 +16,37 @@ namespace Loon.Services
     {
         private static readonly IValueConverter ShortLinkConverter = new ShortLinkConverter();
 
-        public static TextBlock Run(string text)
+        public static IEnumerable<Inline> Runs(string text)
         {
-            var textBlock = new TextBlock();
-            textBlock.Classes.Add("normal");
-            textBlock.Text                = text.HtmlDecode();
-            textBlock.VerticalAlignment   = VerticalAlignment.Top;
-            textBlock.HorizontalAlignment = HorizontalAlignment.Left;
-            return textBlock;
+            var builder = new StringBuilder();
+
+            foreach (var c in text)
+            {
+                if (c != '\n')
+                {
+                    builder.Append(c);
+                    continue;
+                }
+
+                var t = builder.ToString();
+                if (t.Length > 0) yield return Run(t);
+                yield return new LineBreak();
+                builder.Clear();
+            }
+
+            var remaining = builder.ToString();
+            if (remaining.Length > 0) yield return Run(remaining);
         }
 
-        public static Control Url(string link)
+        private static Run Run(string text)
+        {
+            var run = new Run();
+            run.Classes.Add("normal");
+            run.Text = text.HtmlDecode();
+            return run;
+        }
+
+        public static InlineUIContainer Url(string link)
         {
             const int maxLength  = 25;
             var       linkAsText = link.TruncateWithEllipsis(maxLength);
@@ -36,7 +59,7 @@ namespace Loon.Services
                 ContextMenu(link));
         }
 
-        public static Control Mention(string screenName)
+        public static InlineUIContainer Mention(string screenName)
         {
             return LinkControl(
                 "@" + screenName,
@@ -44,7 +67,7 @@ namespace Loon.Services
                 screenName);
         }
 
-        public static Control Hashtag(string text)
+        public static InlineUIContainer Hashtag(string text)
         {
             return LinkControl(
                 "#" + text,
@@ -52,7 +75,7 @@ namespace Loon.Services
                 $"https://twitter.com/hashtag/{text}");
         }
 
-        private static Control LinkControl(
+        private static InlineUIContainer LinkControl(
             string       text,
             ICommand     command,
             object       commandParameter,
@@ -83,7 +106,7 @@ namespace Loon.Services
             }
 
             button.Content = textBlock;
-            return button;
+            return new InlineUIContainer(button);
         }
 
         private static Binding ShortLinkConverterBinding(string text)

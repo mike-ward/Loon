@@ -8,5 +8,7 @@
   d:DesignWidth="300"
   mc:Ignorable="d">
 
-  <WrapPanel Name="Container" />
+  <RichTextBlock 
+    Name="Container"
+    TextWrapping="WrapWithOverflow" />
 </UserControl>

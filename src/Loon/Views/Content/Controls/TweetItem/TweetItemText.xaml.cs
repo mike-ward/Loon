@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using Avalonia.Controls;
+using Avalonia.Controls.Documents;
 using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
 using Loon.Interfaces;
@@ -25,9 +27,11 @@ namespace Loon.Views.Content.Controls.TweetItem
             var token = this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>()?.CancellationTokenSource.Token ?? CancellationToken.None;
             if (token.IsCancellationRequested) return;
 
-            var panel = this.FindControl<Panel>("Container");
-            panel?.Children.Clear();
-            panel?.Children.AddRange(FlowContentService.FlowContentInlines(status, token));
+            var inlineCollection = new InlineCollection();
+            inlineCollection.AddRange(FlowContentService.FlowContentInlines(status, token));
+            
+            var richTextBlock = this.FindControl<RichTextBlock>("Container")!;
+            richTextBlock.Inlines = inlineCollection;
         }
     }
 }

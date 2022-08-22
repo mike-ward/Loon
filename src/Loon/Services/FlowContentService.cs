@@ -2,7 +2,7 @@
 using System.Data;
 using System.Linq;
 using System.Threading;
-using Avalonia.Controls;
+using Avalonia.Controls.Documents;
 using Loon.Models;
 using Twitter.Models;
 
@@ -11,7 +11,7 @@ namespace Loon.Services
     internal static class FlowContentService
     {
         // Best I can do until Avalonia supports Inlines
-        public static IEnumerable<Control> FlowContentInlines(TwitterStatus twitterStatus, CancellationToken cancellationToken)
+        public static IEnumerable<Inline> FlowContentInlines(TwitterStatus twitterStatus, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested) yield break;
 
@@ -26,18 +26,25 @@ namespace Loon.Services
             {
                 if (cancellationToken.IsCancellationRequested) yield break;
 
-                var control = nodeType switch
+                switch (nodeType)
                 {
-                    FlowContentNodeType.Text    => InlinesService.Run(text),
-                    FlowContentNodeType.Url     => InlinesService.Url(text),
-                    FlowContentNodeType.Mention => InlinesService.Mention(text),
-                    FlowContentNodeType.HashTag => InlinesService.Hashtag(text),
-                    FlowContentNodeType.Media   => null, // images handled elsewhere
-                    _                           => throw new ConstraintException("invalid FlowContentNodeType")
-                };
-
-                if (control is null) continue;
-                yield return control;
+                    case FlowContentNodeType.Text:
+                        foreach (var inline in InlinesService.Runs(text)) yield return inline;
+                        continue;
+                    case FlowContentNodeType.Url:
+                        yield return InlinesService.Url(text);
+                        break;
+                    case FlowContentNodeType.Mention:
+                        yield return InlinesService.Mention(text);
+                        break;
+                    case FlowContentNodeType.HashTag:
+                        yield return InlinesService.Hashtag(text);
+                        break;
+                    case FlowContentNodeType.Media:
+                        continue;
+                    default:
+                        throw new ConstraintException("invalid FlowContentNodeType");
+                }
             }
         }
 
