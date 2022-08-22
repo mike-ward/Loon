@@ -13,7 +13,6 @@
   MinHeight="2"
   IsVisible="False"
   Opacity="0.0"
-  Padding="0 -10 0 0"
   d:DesignHeight="450"
   d:DesignWidth="300"
   mc:Ignorable="d">
@@ -26,7 +25,7 @@
   </UserControl.Transitions>
 
   <Border Background="{DynamicResource ThemeBackgroundBrush}">
-    <StackPanel Margin="4 0 0 0">
+    <StackPanel>
       <Grid ColumnDefinitions="Auto,*">
         <Grid Name="ProfileImage">
           <Grid.Styles>
@@ -36,7 +35,7 @@
           </Grid.Styles>
 
           <l:TweetItemProfileImage
-            Margin="0 0 10 0"
+            Margin="0 0 6 0"
             DataContext="{Binding OriginatingStatus}"
             Name="{x:Static l:TweetItemView.TweetItemProfileImageName}"
             IsVisible="{ReflectionBinding !$parent[m:MainWindow].ViewModel.Settings.HideProfileImages}" />

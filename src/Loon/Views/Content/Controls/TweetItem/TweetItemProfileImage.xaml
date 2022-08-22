@@ -11,9 +11,9 @@
   mc:Ignorable="d">
 
   <Image
+    Cursor="Hand"
     Width="{Binding ZoomProfileImageSize, Source={x:Static ln:App.Settings}}"
     Height="{Binding ZoomProfileImageSize, Source={x:Static ln:App.Settings}}"
-    Cursor="Hand"
     DataContextChanged="UpdateImage"
     PointerPressed="OnPointerPressed">
     <Image.Clip>
