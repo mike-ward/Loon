@@ -17,5 +17,5 @@
     Maximum="50"
     Increment="0.1"
     ToolTip.Tip="{StaticResource font-size-title}"
-    Value="{Binding FontSize, Converter={StaticResource RoundTo}}" />
+    Value="{Binding FontSize}" />
 </UserControl>
