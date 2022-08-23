@@ -14,19 +14,24 @@ using Twitter.Models;
 
 namespace Loon.Models
 {
+    public delegate ValueTask UpdateTaskFunc(Timeline timeline);
+
     public sealed class Timeline : NotifyPropertyChanged
     {
         private          bool            inUpdate;
         private readonly DispatcherTimer updateTimer;
 
-        public  string                                 TimelineName            { get; }
-        public  ISettings                              Settings                { get; }
-        public  AvaloniaList<TwitterStatus>            StatusCollection        { get; } = new();
-        public  IEnumerable<Func<Timeline, ValueTask>> UpdateTasks             { get; }
-        public  ISet<string>                           AlreadyAdded            { get; } = new HashSet<string>(StringComparer.Ordinal);
-        public  ISet<TwitterStatus>                    PendingStatusCollection { get; } = new SortedSet<TwitterStatus>(new TwitterStatusSortComparer());
-        public  bool                                   IsScrolled              { get; set; }
-        private string?                                exceptionMessage;
+        public string                      TimelineName     { get; }
+        public ISettings                   Settings         { get; }
+        public AvaloniaList<TwitterStatus> StatusCollection { get; } = new();
+        public IEnumerable<UpdateTaskFunc> UpdateTasks      { get; }
+        public ISet<string>                AlreadyAdded     { get; } = new HashSet<string>(StringComparer.Ordinal);
+
+        public ISet<TwitterStatus> PendingStatusCollection { get; } =
+            new SortedSet<TwitterStatus>(new TwitterStatusSortComparer());
+
+        public  bool    IsScrolled { get; set; }
+        private string? exceptionMessage;
 
         public string? ExceptionMessage
         {
@@ -42,7 +47,8 @@ namespace Loon.Models
             set => SetProperty(ref pendingStatusAvailable, value);
         }
 
-        public Timeline(string name, double intervalInMinutes, IEnumerable<Func<Timeline, ValueTask>> updateTasks, ISettings settings)
+        public Timeline(string name, double intervalInMinutes, IEnumerable<UpdateTaskFunc> updateTasks,
+            ISettings settings)
         {
             TimelineName = name;
             UpdateTasks  = updateTasks;
@@ -77,10 +83,7 @@ namespace Loon.Models
 
                 TraceService.Message($"{TimelineName}: Updating");
 
-                foreach (var updateTask in UpdateTasks)
-                {
-                    await updateTask(this).ConfigureAwait(true);
-                }
+                foreach (var updateTask in UpdateTasks) await updateTask(this).ConfigureAwait(true);
             }
             catch (Exception ex)
             {
@@ -101,13 +104,9 @@ namespace Loon.Models
                 if (e.PropertyName.IsNotEqualTo(nameof(ISettings.IsAuthenticated))) return;
 
                 if (Settings.IsAuthenticated)
-                {
                     await Start();
-                }
                 else
-                {
                     await Stop();
-                }
             }
             catch (Exception ex)
             {
@@ -118,14 +117,12 @@ namespace Loon.Models
         private async Task Start()
         {
             if (!updateTimer.IsEnabled)
-            {
                 await Dispatcher.UIThread.InvokeAsync(async () =>
                     {
                         updateTimer.Start();
                         await UpdateAsync().ConfigureAwait(false);
                     })
-                   .ConfigureAwait(false);
-            }
+                    .ConfigureAwait(false);
         }
 
         private Task Stop()

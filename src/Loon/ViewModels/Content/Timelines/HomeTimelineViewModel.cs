@@ -35,14 +35,14 @@ namespace Loon.ViewModels.Content.Timelines
             });
         }
 
-        private IEnumerable<Func<Timeline, ValueTask>> Tasks()
+        private IEnumerable<UpdateTaskFunc> Tasks()
         {
             yield return _ => ImageMemoryCacheService.PruneCache();
-            yield return timeline => GetAndUpdateStatusesAsync(timeline);
-            yield return timeline => DonateNagStatusTask.Execute(timeline);
-            yield return timeline => TruncateStatusCollectionTask.Execute(timeline);
-            yield return timeline => UpdateTimeStampsTask.Execute(timeline);
-            yield return timeline => GCTask.Execute(timeline);
+            yield return GetAndUpdateStatusesAsync;
+            yield return DonateNagStatusTask.Execute;
+            yield return TruncateStatusCollectionTask.Execute;
+            yield return UpdateTimeStampsTask.Execute;
+            yield return GCTask.Execute;
         }
 
         private async ValueTask GetAndUpdateStatusesAsync(Timeline timeline)

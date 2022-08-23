@@ -110,9 +110,6 @@
         <AvaloniaXaml Include="Assets\VerifiedBadge.xaml">
             <Generator>MSBuild:Compile</Generator>
         </AvaloniaXaml>
-        <AvaloniaXaml Include="Assets\TabItem.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </AvaloniaXaml>
         <AvaloniaXaml Include="Assets\ToolTip.xaml">
             <Generator>MSBuild:Compile</Generator>
         </AvaloniaXaml>

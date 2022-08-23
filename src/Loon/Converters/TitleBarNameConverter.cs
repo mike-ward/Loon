@@ -4,24 +4,25 @@ using Avalonia.Data.Converters;
 using Loon.Interfaces;
 using Loon.Models;
 
-namespace Loon.Converters;
-
-internal sealed class TitleBarNameConverter : IValueConverter
+namespace Loon.Converters
 {
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    internal sealed class TitleBarNameConverter : IValueConverter
     {
-        var title = App.GetString("title");
-        if (value is string screenName 
-            && string.IsNullOrWhiteSpace(screenName) is false 
-            && App.Settings.HideNameInTitleBar is false)
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            title = $"{title} - {screenName}";
+            var title = App.GetString("title");
+            if (value is string screenName 
+                && string.IsNullOrWhiteSpace(screenName) is false 
+                && App.Settings.HideNameInTitleBar is false)
+            {
+                title = $"{title} - {screenName}";
+            }
+            return title;
         }
-        return title;
-    }
 
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-    {
-        return value;
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            return value;
+        }
     }
 }

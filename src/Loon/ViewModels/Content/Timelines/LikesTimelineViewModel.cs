@@ -38,11 +38,11 @@ namespace Loon.ViewModels.Content.Timelines
             }
         }
 
-        private IEnumerable<Func<Timeline, ValueTask>> Tasks()
+        private IEnumerable<UpdateTaskFunc> Tasks()
         {
-            yield return timeline => GetAndUpdateStatusesAsync(timeline);
-            yield return timeline => TruncateStatusCollectionTask.Execute(timeline);
-            yield return timeline => UpdateTimeStampsTask.Execute(timeline);
+            yield return GetAndUpdateStatusesAsync;
+            yield return TruncateStatusCollectionTask.Execute;
+            yield return UpdateTimeStampsTask.Execute;
         }
 
         private async ValueTask GetAndUpdateStatusesAsync(Timeline timeline)
