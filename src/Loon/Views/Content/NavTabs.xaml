@@ -4,6 +4,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:c="clr-namespace:Loon.Views"
+  xmlns:content="clr-namespace:Loon.Views.Content"
   mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
   x:Class="Loon.Views.Content.NavTabs">
 
@@ -35,27 +36,45 @@
 
       <Border
         Grid.Column="0"
-        PointerPressed="HomePressed">
-        <TextBlock
-          Name="HomeTab"
-          Classes="symbol tab"
-          Text="{StaticResource HomeSymbol}" />
+        PointerPressed="HomePressed"
+        ToolTip.Tip="{StaticResource tab-home-name}">
+        <Grid>
+          <TextBlock
+            Name="HomeTab"
+            Classes="symbol tab"
+            Text="{StaticResource HomeSymbol}" />
+          <TextBlock
+            Name="PendingIndicator"
+            Text="⬤"
+            FontSize="8"
+            Foreground="Green"
+            TextAlignment="Center"
+            Background="Transparent"
+            VerticalAlignment="Center">
+            <TextBlock.RenderTransform>
+              <TranslateTransform Y="-1" />
+            </TextBlock.RenderTransform>
+          </TextBlock>
+        </Grid>
       </Border>
 
       <Border
         Grid.Column="1"
-        PointerPressed="LikePressed">
+        PointerPressed="LikePressed"
+        ToolTip.Tip="{StaticResource tab-likes-name}">
         <TextBlock
           Name="LikesTab"
           Classes="symbol1 tab"
           Padding="0 2 0 0"
           Text="{StaticResource LikeSymbol}"
+
           FontSize="{Binding $parent[c:MainWindow].FontSize, Converter={StaticResource AddToDouble}, ConverterParameter=4.0}" />
       </Border>
 
       <Border
         Grid.Column="2"
-        PointerPressed="SearchPressed">
+        PointerPressed="SearchPressed"
+        ToolTip.Tip="{StaticResource tab-search-name}">
         <TextBlock
           Name="SearchTab"
           Classes="symbol tab"
@@ -64,7 +83,8 @@
 
       <Border
         Grid.Column="3"
-        PointerPressed="SettingsPressed">
+        PointerPressed="SettingsPressed"
+        ToolTip.Tip="{StaticResource tab-settings-name}">
         <TextBlock
           Name="SettingsTab"
           Classes="symbol tab"
@@ -73,7 +93,8 @@
 
       <Border
         Grid.Column="4"
-        PointerPressed="WritePressed">
+        PointerPressed="WritePressed"
+        ToolTip.Tip="{StaticResource tab-pen-name}">
         <TextBlock
           Name="WriteTab"
           Classes="symbol tab"
