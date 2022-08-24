@@ -1,19 +1,16 @@
 ﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Loon.Interfaces;
 using Loon.ViewModels;
-#if DEBUG
-using Avalonia;
-#endif
 
 namespace Loon.Views
 {
     public sealed class MainWindow : Window, IWindow
     {
-        // ReSharper disable once ConvertToConstant.Global (needed to bind in XAML)
-        public static readonly string              TitleBarName = "TitleBar";
-        private                MainWindowViewModel ViewModel => (MainWindowViewModel)DataContext!;
+        private MainWindowViewModel ViewModel => (MainWindowViewModel)DataContext!;
 
         public MainWindow()
         {
@@ -24,6 +21,8 @@ namespace Loon.Views
         protected override void OnInitialized()
         {
             base.OnInitialized();
+
+            IfWindowsSetup();
             ViewModel.Load(this);
 
             #if DEBUG
@@ -34,33 +33,24 @@ namespace Loon.Views
         protected override void OnOpened(EventArgs e)
         {
             base.OnOpened(e);
-            LinuxSetup();
-            MacOsSetup();
             ViewModel.SetWindowLocation(this);
         }
 
-        private void LinuxSetup()
+        private void IfWindowsSetup()
         {
-            if (OperatingSystem.IsLinux())
+            if (OperatingSystem.IsWindows())
             {
-                // On Linux, can't extend into non-client areas
-                HideCustomTitleBar();
-            }
-        }
+                var border = (Border)Content!;
+                border.BorderBrush       = Application.Current!.FindResource("ThemeBorderLowBrush") as SolidColorBrush ?? Brushes.Black;
+                border.UseLayoutRounding = false;
+                border.BorderThickness   = new Thickness(0.25);
 
-        private void MacOsSetup()
-        {
-            if (OperatingSystem.IsMacOS())
-            {
-                HideCustomTitleBar();
+                var grid     = (Grid)border.Child!;
+                var titleBar = (TitleBar)grid.Children[0];
+                titleBar.IsVisible                 = true;
+                ExtendClientAreaToDecorationsHint  = true;
+                ExtendClientAreaTitleBarHeightHint = 1;
             }
-        }
-
-        private void HideCustomTitleBar()
-        {
-            if (this.FindControl<TitleBar>(TitleBarName) is { } titlebar) titlebar.IsVisible = false;
-            ExtendClientAreaToDecorationsHint  = false;
-            ExtendClientAreaTitleBarHeightHint = 0;
         }
     }
 }

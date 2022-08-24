@@ -12,8 +12,6 @@
   Title="{Binding Settings.ScreenName, Converter={StaticResource TitleBarName}}"
   d:DesignHeight="600"
   d:DesignWidth="300"
-  ExtendClientAreaTitleBarHeightHint="1"
-  ExtendClientAreaToDecorationsHint="True"
   FontFamily="{StaticResource AppFont}"
   FontSize="{Binding Settings.ZoomFontSize, FallbackValue=12}"
   ShowInTaskbar="{Binding !Settings.ShowInSystemTray, FallbackValue=True}"
@@ -21,9 +19,10 @@
   UseLayoutRounding="true"
   mc:Ignorable="d">
 
-  <Grid RowDefinitions="Auto,*"
-        Margin="3 0">
-    <vw:TitleBar Name="{x:Static vw:MainWindow.TitleBarName}" />
-    <co:AppView Grid.Row="1" />
-  </Grid>
+  <Border>
+    <Grid RowDefinitions="Auto,*">
+      <vw:TitleBar IsVisible="False" />
+      <co:AppView Grid.Row="1" Margin="3 0"/>
+    </Grid>
+  </Border>
 </Window>
