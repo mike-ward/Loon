@@ -1,40 +1,34 @@
 ﻿using Loon.Interfaces;
+// ReSharper disable MemberCanBeMadeStatic.Global
 
 namespace Loon.Commands
 {
     public sealed class AppCommands
     {
-        public AddToHiddenImagesCommand     AddToHiddenImages     { get; }
-        public ClearHiddenImageCacheCommand ClearHiddenImageCache { get; }
-        public ClearImageCacheCommand       ClearImageCache       { get; }
-        public CloseAppCommand              CloseApp              { get; }
-        public CopyToClipboardCommand       CopyToClipboard       { get; }
-        public FollowAddRemoveCommand       FollowAddRemove       { get; }
-        public OpenWriteTabCommand          OpenWriteTab          { get; }
-        public LikesAddRemoveCommand        LikesAddRemove        { get; }
-        public MinimizeAppCommand           MinimizeApp           { get; }
-        public OpenUrlCommand               OpenUrl               { get; }
-        public RetweetCommand               Retweet               { get; }
-        public SetUserProfileContextCommand SetUserProfileContext { get; }
-        public SignoutCommand               Signout               { get; }
-        public ShowAppCommand               ShowApp               { get; }
+        private readonly ITwitterService twitterService;
+        private readonly ISettings       settings;
+
+        // Return new objects to keep callers from getting rooted.
+        
+        public AddToHiddenImagesCommand     AddToHiddenImages     => new(settings);
+        public ClearHiddenImageCacheCommand ClearHiddenImageCache => new(settings);
+        public ClearImageCacheCommand       ClearImageCache       => new();
+        public CloseAppCommand              CloseApp              => new();
+        public CopyToClipboardCommand       CopyToClipboard       => new();
+        public FollowAddRemoveCommand       FollowAddRemove       => new(twitterService);
+        public OpenWriteTabCommand          OpenWriteTab          => new();
+        public LikesAddRemoveCommand        LikesAddRemove        => new(twitterService);
+        public MinimizeAppCommand           MinimizeApp           => new();
+        public OpenUrlCommand               OpenUrl               => new();
+        public RetweetCommand               Retweet               => new(settings, twitterService);
+        public SetUserProfileContextCommand SetUserProfileContext => new();
+        public SignoutCommand               Signout               => new(settings);
+        public ShowAppCommand               ShowApp               => new();
 
         public AppCommands(ITwitterService twitterService, ISettings settings)
         {
-            AddToHiddenImages     = new AddToHiddenImagesCommand(settings);
-            ClearHiddenImageCache = new ClearHiddenImageCacheCommand(settings);
-            ClearImageCache       = new ClearImageCacheCommand();
-            CloseApp              = new CloseAppCommand();
-            CopyToClipboard       = new CopyToClipboardCommand();
-            FollowAddRemove       = new FollowAddRemoveCommand(twitterService);
-            OpenWriteTab          = new OpenWriteTabCommand();
-            LikesAddRemove        = new LikesAddRemoveCommand(twitterService);
-            MinimizeApp           = new MinimizeAppCommand();
-            OpenUrl               = new OpenUrlCommand();
-            Retweet               = new RetweetCommand(settings, twitterService);
-            SetUserProfileContext = new SetUserProfileContextCommand();
-            Signout               = new SignoutCommand(settings);
-            ShowApp               = new ShowAppCommand();
+            this.twitterService = twitterService;
+            this.settings       = settings;
         }
     }
 }
