@@ -3,70 +3,11 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <Design.PreviewWith>
-    <Border Height="400" Width="200">
-      <ScrollBar Orientation="Vertical" Width="8" Height="400" />
+    <Border Height="200" Width="200">
+      <ScrollBar Orientation="Vertical" Width="10" Height="100" />
     </Border>
   </Design.PreviewWith>
 
-  <Style Selector="ScrollBar">
-    <Setter Property="Cursor" Value="Arrow" />
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Border>
-          <Track
-            IsDirectionReversed="True"
-            Maximum="{TemplateBinding Maximum}"
-            Minimum="{TemplateBinding Minimum}"
-            Orientation="{TemplateBinding Orientation}"
-            ViewportSize="{TemplateBinding ViewportSize}"
-            Value="{TemplateBinding Value, Mode=TwoWay}">
-            <Track.DecreaseButton>
-              <RepeatButton
-                Name="PART_PageUpButton"
-                Classes="repeattrack"
-                Focusable="False" />
-            </Track.DecreaseButton>
-            <Track.IncreaseButton>
-              <RepeatButton
-                Name="PART_PageDownButton"
-                Classes="repeattrack"
-                Focusable="False" />
-            </Track.IncreaseButton>
-            <Thumb Name="thumb" />
-          </Track>
-        </Border>
-      </ControlTemplate>
-    </Setter>
-  </Style>
-  <Style Selector="ScrollBar:horizontal">
-    <Setter Property="Height" Value="{StaticResource ScrollBarThickness}" />
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Border>
-          <Track
-            Maximum="{TemplateBinding Maximum}"
-            Minimum="{TemplateBinding Minimum}"
-            Orientation="{TemplateBinding Orientation}"
-            ViewportSize="{TemplateBinding ViewportSize}"
-            Value="{TemplateBinding Value, Mode=TwoWay}">
-            <Track.DecreaseButton>
-              <RepeatButton
-                Name="PART_PageUpButton"
-                Classes="repeattrack"
-                Focusable="False" />
-            </Track.DecreaseButton>
-            <Track.IncreaseButton>
-              <RepeatButton
-                Name="PART_PageDownButton"
-                Classes="repeattrack"
-                Focusable="False" />
-            </Track.IncreaseButton>
-            <Thumb Name="thumb" />
-          </Track>
-        </Border>
-      </ControlTemplate>
-    </Setter>
-  </Style>
   <Style Selector="ScrollBar /template/ Thumb#thumb">
     <Setter Property="Template">
       <ControlTemplate>
@@ -78,25 +19,39 @@
       </ControlTemplate>
     </Setter>
   </Style>
+  
   <Style Selector="ScrollBar /template/ Thumb#thumb:pointerover">
     <Setter Property="Background" Value="{StaticResource ThemeControlHighBrush}" />
   </Style>
+  
   <Style Selector="ScrollBar /template/ Thumb#thumb:pressed">
     <Setter Property="Background" Value="{StaticResource ThemeControlVeryHighBrush}" />
   </Style>
+  
   <Style Selector="ScrollBar:horizontal /template/ Thumb#thumb">
     <Setter Property="Height" Value="{StaticResource ScrollBarThumbThickness}" />
   </Style>
+  
   <Style Selector="ScrollBar:vertical">
     <Setter Property="Width" Value="{StaticResource ScrollBarThumbThickness}" />
   </Style>
+  
   <Style Selector="ScrollBar:vertical /template/ Thumb#thumb">
     <Setter Property="MinHeight" Value="30" />
   </Style>
+  
+  <Style Selector="ScrollBar /template/ RepeatButton#PART_LineUpButton">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+
+  <Style Selector="ScrollBar /template/ RepeatButton#PART_LineDownButton">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+
   <Style Selector="ScrollBar /template/ RepeatButton.repeat">
-    <Setter Property="Padding" Value="0" />
     <Setter Property="Background" Value="{StaticResource ThemeBackgroundBrush}" />
   </Style>
+  
   <Style Selector="ScrollBar /template/ RepeatButton.repeattrack">
     <Setter Property="Template">
       <ControlTemplate>
@@ -105,11 +60,20 @@
     </Setter>
   </Style>
 
-  <Style Selector="ScrollBar /template/ RepeatButton &gt; Path">
+  <Style Selector="ScrollBar /template/ RepeatButton > Path">
     <Setter Property="Fill" Value="{StaticResource ThemeBorderMidColor}" />
   </Style>
 
-  <Style Selector="ScrollBar /template/ RepeatButton:pointerover &gt; Path">
-    <Setter Property="Fill" Value="{StaticResource ThemeForegroundBrush}" />
+  <Style Selector="ScrollBar /template/ RepeatButton:pointerover > Path">
+    <Setter Property="Fill" Value="{StaticResource ThemeBackgroundBrush}" />
   </Style>
+  
+  <Style Selector="ScrollBar:vertical /template/ Border">
+    <Setter Property="Background" Value="{StaticResource ThemeBackgroundBrush}" />
+  </Style>
+  
+  <Style Selector="ScrollBar:horizontal /template/ Border">
+    <Setter Property="Background" Value="{StaticResource ThemeBackgroundBrush}" />
+  </Style>
+  
 </Styles>
