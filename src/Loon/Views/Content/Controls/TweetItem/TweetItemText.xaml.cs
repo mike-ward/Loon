@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Controls.Documents;
@@ -27,11 +27,25 @@ namespace Loon.Views.Content.Controls.TweetItem
             var token = this.FindLogicalAncestorOfType<ICancellationTokeSourceProvider>()?.CancellationTokenSource.Token ?? CancellationToken.None;
             if (token.IsCancellationRequested) return;
 
+            var inlines          = FlowContentService.FlowContentInlines(status, token);
+            var filteredInlines  = RemoveConsecutiveLineFeeds(inlines);
             var inlineCollection = new InlineCollection();
-            inlineCollection.AddRange(FlowContentService.FlowContentInlines(status, token));
-            
-            var richTextBlock = this.FindControl<RichTextBlock>("Container")!;
+            inlineCollection.AddRange(filteredInlines);
+
+            var richTextBlock = (RichTextBlock)Content!;
             richTextBlock.Inlines = inlineCollection;
+        }
+
+        private static IEnumerable<Inline> RemoveConsecutiveLineFeeds(IEnumerable<Inline> lines)
+        {
+            Inline previous = new Run();
+
+            foreach (var line in lines)
+            {
+                if (line is LineBreak && previous is LineBreak) continue;
+                previous = line;
+                yield return line;
+            }
         }
     }
 }
