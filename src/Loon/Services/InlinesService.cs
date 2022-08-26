@@ -6,7 +6,8 @@ using Avalonia.Controls;
 using Avalonia.Controls.Documents;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
-using Avalonia.Layout;
+using Avalonia.Input;
+using Avalonia.Media;
 using Loon.Converters;
 using Loon.Extensions;
 
@@ -40,10 +41,7 @@ namespace Loon.Services
 
         private static Run Run(string text)
         {
-            var run = new Run();
-            run.Classes.Add("normal");
-            run.Text = text.HtmlDecode();
-            return run;
+            return new Run(text.HtmlDecode());
         }
 
         public static InlineUIContainer Url(string link)
@@ -82,19 +80,13 @@ namespace Loon.Services
             Binding?     binding     = null,
             ContextMenu? contextMenu = null)
         {
-            var button = new Button();
-            button.Classes.Add("inline");
-            button.Command             = command;
-            button.CommandParameter    = commandParameter;
-            button.ContextMenu         = contextMenu;
-            button.VerticalAlignment   = VerticalAlignment.Top;
-            button.HorizontalAlignment = HorizontalAlignment.Left;
-
-            var textBlock = new TextBlock();
-            textBlock.Classes.Add("hyperlink");
-            textBlock.Tag = commandParameter; // LongUrlService needs this
-            textBlock.SetValue(ToolTip.TipProperty, commandParameter);
-            textBlock.SetValue(ToolTip.ShowDelayProperty, 400);
+            var textBlock = new TextBlock
+            {
+                Foreground  = (IBrush)Application.Current!.FindResource("LinkColor")!,
+                Tag         = commandParameter, // LongUrlService needs this
+                Cursor      = new Cursor(StandardCursorType.Hand),
+                ContextMenu = contextMenu
+            };
 
             if (binding is not null)
             {
@@ -105,8 +97,19 @@ namespace Loon.Services
                 textBlock.Text = text.HtmlDecode();
             }
 
-            button.Content = textBlock;
-            return new InlineUIContainer(button);
+            textBlock.SetValue(ToolTip.TipProperty, commandParameter);
+            textBlock.SetValue(ToolTip.ShowDelayProperty, 400);
+
+            textBlock.PointerReleased += (_, args) =>
+            {
+                if (args.InitialPressMouseButton == MouseButton.Left)
+                {
+                    args.Handled = true;
+                    command.Execute(commandParameter);
+                }
+            };
+
+            return new InlineUIContainer(textBlock);
         }
 
         private static Binding ShortLinkConverterBinding(string text)

@@ -5,7 +5,7 @@
   xmlns:l="clr-namespace:Loon">
 
   <Application.Styles>
-    <SimpleTheme />
+    <SimpleTheme Mode="Dark" />
     <StyleInclude Source="/Assets/DarkThemeOverrides.xaml" />
     <StyleInclude Source="/Assets/Accents.xaml" />
     <StyleInclude Source="/Assets/Strings.xaml" />
