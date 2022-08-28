@@ -20,6 +20,12 @@
       Name="{x:Static l:TimelineView.ItemsControlName}"
       PointerWheelChanged="OnPointerWheelChanged">
 
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel Spacing="5" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+
       <ItemsControl.ItemTemplate>
         <DataTemplate>
           <ti:TweetItemView />

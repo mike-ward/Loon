@@ -270,6 +270,10 @@
         <AvaloniaXaml Remove="Assets\Windows\**" />
         <None Remove="Assets\TweetItem.xaml" />
         <None Remove="Views\Content\Controls\NavTab.xaml" />
+        <None Remove="Assets\Border.xaml" />
+        <AvaloniaXaml Include="Assets\Border.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </AvaloniaXaml>
     </ItemGroup>
 
     <ItemGroup>

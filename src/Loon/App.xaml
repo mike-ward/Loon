@@ -16,6 +16,7 @@
     <StyleInclude Source="/Assets/TextBlock.xaml" />
     <StyleInclude Source="/Assets/ToolTip.xaml" />
     <StyleInclude Source="/Assets/VerifiedBadge.xaml" />
+    <StyleInclude Source="/Assets/Border.xaml" />
   </Application.Styles>
   <TrayIcon.Icons>
     <TrayIcons>

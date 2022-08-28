@@ -23,7 +23,7 @@
       IsVisible="{Binding TranslatedText, Converter={x:Static StringConverters.IsNullOrEmpty}}" />
 
     <Separator
-      Margin="30 10 40 5"
+      Margin="30 10 40 0"
       IsVisible="{Binding TranslatedText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
 
     <TextBlock

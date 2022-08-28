@@ -14,12 +14,7 @@
   d:DesignWidth="300"
   mc:Ignorable="d">
 
-  <Border
-    Margin="0 5"
-    Padding="10 0"
-    BorderBrush="{DynamicResource ThemeBorderLowBrush}"
-    BorderThickness="0.6 0">
-
+  <Border Classes="related">
     <StackPanel
       Margin="5 0"
       Spacing="5">

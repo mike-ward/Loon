@@ -30,9 +30,9 @@ namespace Loon.Services
                 }
 
                 var t = builder.ToString();
+                builder.Clear();
                 if (t.Length > 0) yield return Run(t);
                 yield return new LineBreak();
-                builder.Clear();
             }
 
             var remaining = builder.ToString();

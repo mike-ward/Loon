@@ -8,5 +8,5 @@
   d:DesignWidth="300"
   mc:Ignorable="d">
 
-  <RichTextBlock TextWrapping="WrapWithOverflow" />
+  <StackPanel Spacing="5" />
 </UserControl>

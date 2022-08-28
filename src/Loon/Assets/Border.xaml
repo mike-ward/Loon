@@ -1,0 +1,15 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <!-- Add Controls for Previewer Here -->
+    </Border>
+  </Design.PreviewWith>
+
+  <Style Selector="Border.related">
+    <Setter Property="BorderBrush" Value="{StaticResource ThemeBorderLowBrush}" />
+    <Setter Property="BorderThickness" Value="0.6 0" />
+    <Setter Property="Padding" Value="5" />
+    <Setter Property="UseLayoutRounding" Value="False" />
+  </Style>
+</Styles>
