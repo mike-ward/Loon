@@ -77,7 +77,7 @@
       </Grid>
 
       <Grid>
-        <StackPanel Margin="5 3 3 0">
+        <StackPanel Margin="0 3 3 0">
           <l:TweetItemText DataContext="{Binding OriginatingStatus}" />
           <l:TweetItemTranslate DataContext="{Binding OriginatingStatus}" />
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Controls.Documents;
@@ -29,39 +30,53 @@ namespace Loon.Views.Content.Controls.TweetItem
             if (token.IsCancellationRequested) return;
 
             var inlines    = FlowContentService.FlowContentInlines(status, token);
-            var blocks     = ToCollections(inlines);
+            var paragraphs = ToParagraphs(inlines);
             var stackPanel = (StackPanel)Content!;
             stackPanel.Children.Clear();
 
-            foreach (var block in blocks)
+            foreach (var paragraph in paragraphs)
             {
                 stackPanel.Children.Add(new RichTextBlock
                 {
-                    Inlines      = block,
+                    Inlines      = paragraph,
                     TextWrapping = TextWrapping.WrapWithOverflow
                 });
             }
         }
 
-        private static IEnumerable<InlineCollection> ToCollections(IEnumerable<Inline> inlines)
+        private static IEnumerable<InlineCollection> ToParagraphs(IEnumerable<Inline> inlinesArg)
         {
-            var inlineCollections = new List<InlineCollection>();
-            var inlineCollection  = new InlineCollection();
+            var inlines = inlinesArg.ToArray();
+            var start   = 0;
+            var end     = inlines.Length;
 
-            foreach (var inline in inlines)
+            for (var i = 0; i < end; ++i)
             {
-                if (inline is LineBreak && inlineCollection.Count > 0)
+                if (inlines[i] is LineBreak)
                 {
-                    inlineCollections.Add(inlineCollection);
-                    inlineCollection = new InlineCollection();
-                }
+                    // paragraph is two or more consecutive line breaks
+                    var lineBreaks = 1;
+                    while (++i < end && inlines[i] is LineBreak)
+                    {
+                        lineBreaks += 1;
+                    }
 
-                if (inline is LineBreak) continue;
-                inlineCollection.Add(inline);
+                    if (lineBreaks > 1)
+                    {
+                        var inlineCollection = new InlineCollection();
+                        inlineCollection.AddRange(inlines[start..(i - lineBreaks)]);
+                        yield return inlineCollection;
+                        start = i;
+                    }
+                }
             }
 
-            if (inlineCollection.Count > 0) inlineCollections.Add(inlineCollection);
-            return inlineCollections;
+            if (start < end)
+            {
+                var inlineCollection = new InlineCollection();
+                inlineCollection.AddRange(inlines[start..end]);
+                yield return inlineCollection;
+            }
         }
     }
 }
