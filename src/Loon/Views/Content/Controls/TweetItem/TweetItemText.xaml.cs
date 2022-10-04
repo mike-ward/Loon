@@ -54,14 +54,13 @@ namespace Loon.Views.Content.Controls.TweetItem
             {
                 if (inlines[i] is LineBreak)
                 {
-                    // paragraph is two or more consecutive line breaks
                     var lineBreaks = 1;
                     while (++i < end && inlines[i] is LineBreak)
                     {
                         lineBreaks += 1;
                     }
 
-                    if (lineBreaks > 1)
+                    if (lineBreaks > 1) // paragraph is two or more consecutive line breaks
                     {
                         var inlineCollection = new InlineCollection();
                         inlineCollection.AddRange(inlines[start..(i - lineBreaks)]);

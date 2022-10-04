@@ -4,7 +4,8 @@
   <Style Selector="Border.related">
     <Setter Property="Padding" Value="5" />
     <Setter Property="BorderBrush" Value="{StaticResource ThemeBorderLowBrush}" />
-    <Setter Property="BorderThickness" Value="4 0 0 0" />
+    <Setter Property="BorderThickness" Value="0.6" />
+    <Setter Property="CornerRadius" Value="10" />
     <Setter Property="UseLayoutRounding" Value="False" />
   </Style>
 </Styles>
