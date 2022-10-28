@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "dotnet_launch_settings",
+            "name": "Loon",
+            "projectPath": "",
+            "exePath": "",
+            "profileName": "",
+            "commandName": "",
+            "commandLineArgs": [],
+        },
+
+    ]
+}
