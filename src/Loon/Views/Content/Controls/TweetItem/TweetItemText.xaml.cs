@@ -36,7 +36,7 @@ namespace Loon.Views.Content.Controls.TweetItem
 
             foreach (var paragraph in paragraphs)
             {
-                stackPanel.Children.Add(new RichTextBlock
+                stackPanel.Children.Add(new TextBlock
                 {
                     Inlines      = paragraph,
                     TextWrapping = TextWrapping.WrapWithOverflow

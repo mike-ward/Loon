@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -31,6 +32,7 @@ namespace Loon.Behaviors
             tabControl.AddHandler(SelectingItemsControl.SelectionChangedEvent, Handler);
             return name;
 
+            [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
             async void Handler(object? s, SelectionChangedEventArgs e)
             {
                 if (e.AddedItems.Count == 0 || e.AddedItems[0] is not TabItem tab) return;

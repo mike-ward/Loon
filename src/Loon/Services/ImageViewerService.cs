@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -21,6 +22,7 @@ namespace Loon.Services
         public static void OpenInViewer(Image image)
         {
             KillImageViewer();
+            [SuppressMessage("Usage", "VSTHRD100", MessageId = "Avoid async void methods")]
             async void ActionOpenViewer() => await OpenInViewerTask(image);
             Dispatcher.UIThread.Post(ActionOpenViewer);
         }
